@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Rihanna Experts</string>
+    <string name="phoneormail">Email Or Phone Number</string>
+    <string name="yourpass">Your password</string>
+    <string name="signin">Sign In</string>
+    <string name="plesesignin">Sign In to your Account</string>
+    <string name="welvcome">Welcome to you</string>
+    <string name="forgetpass">Forget Password ?</string>
+    <string name="remeberlogin">Remember Login</string>
+    <string name="youdonthavaccount">You do not have account , Create it Now </string>
+    <string name="signup">Register New Account</string>
+    <string name="next">Next</string>
+    <string name="personalinfo">Personal Info</string>
+    <string name="registernewaccount">Register New Account</string>
+    <string name="fristname">First Name</string>
+    <string name="lastname">Last Name</string>
+    <string name="emailhintinputlogin">Email</string>
+    <string name="passwordhintinputlogin">Password</string>
+    <string name="phonehintinputlogin">Phone Number</string>
+    <string name="repasswordhintinputlogin">Re-Password</string>
+</resources>

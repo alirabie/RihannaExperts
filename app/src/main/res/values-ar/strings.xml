@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">ريحانة للخبيرات</string>
+    <string name="forgetpass">هل نسيت كلمة المرور ؟</string>
+    <string name="phoneormail">البريد الالكترونى او رقم الجوال</string>
+    <string name="plesesignin">قم بتسجيل الدخول لحسابك</string>
+    <string name="remeberlogin">تذكر الدخول</string>
+    <string name="signin">تسجيل الدخول</string>
+    <string name="welvcome">اهلا وسهلا بك</string>
+    <string name="youdonthavaccount">ليس لديك حساب قم بإنشائه الان</string>
+    <string name="yourpass">كلمة المرور الخاصة بك</string>
+    <string name="signup">تسجيل حساب جديد</string>
+    <string name="next">التالى</string>
+    <string name="personalinfo">البيانات الشخصية</string>
+    <string name="registernewaccount">قم بتسجيل حساب جديد</string>
+    <string name="fristname">الاسم الاول</string>
+    <string name="lastname">الاسم الثانى</string>
+    <string name="emailhintinputlogin">البريد الالكترونى</string>
+    <string name="passwordhintinputlogin">كلمة المرور</string>
+    <string name="phonehintinputlogin">رقم الجوال</string>
+    <string name="repasswordhintinputlogin">إعادة كلمة المرور</string>
+</resources>
