@@ -1,22 +1,22 @@
 package experts.rihanna.appsmatic.com.rihannaexperts.Fragments;
 
 import android.content.Context;
-import android.net.Uri;
+import android.content.DialogInterface;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.util.Log;
+import android.support.v7.app.AlertDialog;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import experts.rihanna.appsmatic.com.rihannaexperts.R;
+import experts.rihanna.appsmatic.com.rihannaexperts.Utils;
 
 public class RegPersonalInfo extends Fragment {
 
@@ -36,13 +36,33 @@ public class RegPersonalInfo extends Fragment {
 
 
 
-
-
        //Go to next step Expert Address
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+
+
+                //Check GPS status
+                final LocationManager locationManager = (LocationManager)getActivity().getSystemService(Context.LOCATION_SERVICE);
+                if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                    builder.setMessage("GPS OFF")
+                            .setCancelable(false)
+                            .setPositiveButton("Turn On", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+
+                                    //Turn On GPS
+                                    Utils.turnLocationOn(getContext());
+
+                                }
+                            }).setIcon(android.R.drawable.alert_light_frame);
+                    AlertDialog alert = builder.create();
+                    alert.show();
+                }
+
+
+                //Go address info fragment
                 Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.alpha);
                 next.clearAnimation();
                 next.setAnimation(anim);
@@ -51,6 +71,8 @@ public class RegPersonalInfo extends Fragment {
                 fragmentTransaction.replace(R.id.register_fm_contanier, new RegAddressInfo());
                 fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
                 fragmentTransaction.commit();
+
+
             }
         });
 

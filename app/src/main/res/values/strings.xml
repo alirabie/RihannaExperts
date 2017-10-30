@@ -18,7 +18,12 @@
     <string name="phonehintinputlogin">Phone Number</string>
     <string name="passwordhintinputlogin">Password</string>
     <string name="repasswordhintinputlogin">Re-Password</string>
+    <string name="addressinfo">Address / Location</string>
+    <string name="buldingnum">Building Number Or Street</string>
+    <string name="negborhoodordistrict">Neighbourhood Or District</string>
+    <string name="locationdetict">Detect Location</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

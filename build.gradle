@@ -1,3 +1,5 @@
+import java.security.MessageDigest
+
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
@@ -11,8 +13,11 @@ buildscript {
         // in the individual module build.gradle files
     }
 }
-
+def hashString(String s){
+    MessageDigest.getInstance("SHA1").digest(s.bytes).encodeHex().toString()
+}
 allprojects {
+    buildDir = "C:/AB/${hashString(projectDir.getAbsolutePath())}"
     repositories {
         jcenter()
     }

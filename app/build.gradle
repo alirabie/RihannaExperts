@@ -10,7 +10,15 @@ android {
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
+        generatedDensities = []
     }
+
+    // This is handled for you by the 2.0+ Gradle Plugin
+    aaptOptions {
+        additionalParameters "--no-version-vectors"
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -27,9 +35,11 @@ dependencies {
     compile 'com.weiwangcn.betterspinner:library:1.1.0'
     compile 'com.squareup.picasso:picasso:2.3.2'
     compile 'de.hdodenhof:circleimageview:1.2.1'
+    compile 'com.google.android.gms:play-services:+'
     compile 'com.android.support:recyclerview-v7:25.1.1'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+
 }
 
 dependencies {
@@ -48,6 +58,10 @@ dependencies {
 }
 dependencies {
     compile 'com.android.support:support-v4:25.+'
+}
+dependencies {
+    compile 'com.google.android.gms:play-services:4.2.42'
+    compile 'com.android.support:appcompat-v7:25.+'
 }
 dependencies {
     compile 'com.android.support:support-v4:25.+'

@@ -11,8 +11,8 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
-
 import experts.rihanna.appsmatic.com.rihannaexperts.R;
+
 
 public class SignIn extends AppCompatActivity {
 
@@ -47,7 +47,7 @@ public class SignIn extends AppCompatActivity {
                 startActivity(new Intent(SignIn.this,SignUp.class));
             }
         });
-//*
+
 
     }
 }

@@ -170,7 +170,7 @@
                 android:textAlignment="viewStart"
                 android:hint="@string/emailhintinputlogin"
                 android:layout_weight="1"
-                android:textSize="15dp" />
+                android:textSize="20dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -202,7 +202,7 @@
                 android:textAlignment="viewStart"
                 android:hint="@string/phonehintinputlogin"
                 android:layout_weight="1"
-                android:textSize="15dp"
+                android:textSize="20dp"
                 android:inputType="phone" />
         </LinearLayout>
 
@@ -232,7 +232,7 @@
                 android:padding="6dp"
                 android:hint="@string/passwordhintinputlogin"
                 android:layout_weight="1"
-                android:textSize="15dp"
+                android:textSize="20dp"
                 android:inputType="textPassword"
                 android:gravity="center|start"
                 android:textAlignment="viewStart" />
@@ -266,7 +266,7 @@
                 android:gravity="center|start"
                 android:hint="@string/repasswordhintinputlogin"
                 android:layout_weight="1"
-                android:textSize="15dp"
+                android:textSize="20dp"
                 android:inputType="textPassword"
                 android:textAlignment="viewStart" />
 

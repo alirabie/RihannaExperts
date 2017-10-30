@@ -18,4 +18,8 @@
     <string name="passwordhintinputlogin">كلمة المرور</string>
     <string name="phonehintinputlogin">رقم الجوال</string>
     <string name="repasswordhintinputlogin">إعادة كلمة المرور</string>
+    <string name="addressinfo">العنوان أو الموقع</string>
+    <string name="buldingnum">رقم المبنى أو أسم الشارع</string>
+    <string name="negborhoodordistrict">الحى أو المنطقة</string>
+    <string name="locationdetict">حدد الموقع</string>
 </resources>
