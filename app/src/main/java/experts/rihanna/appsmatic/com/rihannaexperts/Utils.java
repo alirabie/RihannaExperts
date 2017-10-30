@@ -20,7 +20,7 @@ import com.google.android.gms.location.LocationSettingsStatusCodes;
 /**
  * Created by Eng Ali on 10/30/2017.
  */
-public class Utils {
+public class Utils extends Activity {
 
     //Turn GPS ON Method
     public static void turnLocationOn(final Context ctx){
@@ -67,6 +67,7 @@ public class Utils {
 
 
     }
+
 
     //Check Google Service
     public static boolean isGooglePlayServicesAvailable(Activity activity) {

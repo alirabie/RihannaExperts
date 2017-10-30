@@ -15,6 +15,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
+import experts.rihanna.appsmatic.com.rihannaexperts.Activities.SignUp;
 import experts.rihanna.appsmatic.com.rihannaexperts.R;
 import experts.rihanna.appsmatic.com.rihannaexperts.Utils;
 
@@ -40,39 +41,11 @@ public class RegPersonalInfo extends Fragment {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-
-                //Check GPS status
-                final LocationManager locationManager = (LocationManager)getActivity().getSystemService(Context.LOCATION_SERVICE);
-                if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                    builder.setMessage("GPS OFF")
-                            .setCancelable(false)
-                            .setPositiveButton("Turn On", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-
-                                    //Turn On GPS
-                                    Utils.turnLocationOn(getContext());
-
-                                }
-                            }).setIcon(android.R.drawable.alert_light_frame);
-                    AlertDialog alert = builder.create();
-                    alert.show();
-                }
-
-
-                //Go address info fragment
-                Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.alpha);
-                next.clearAnimation();
-                next.setAnimation(anim);
                 android.support.v4.app.FragmentManager fragmentManager = ((FragmentActivity) getContext()).getSupportFragmentManager();
                 android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.register_fm_contanier, new RegAddressInfo());
                 fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
                 fragmentTransaction.commit();
-
-
             }
         });
 
