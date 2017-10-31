@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/next"
-        android:id="@+id/next"
+        android:id="@+id/delete2"
         android:layout_marginBottom="86dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"

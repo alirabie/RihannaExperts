@@ -22,4 +22,17 @@
     <string name="buldingnum">رقم المبنى أو أسم الشارع</string>
     <string name="negborhoodordistrict">الحى أو المنطقة</string>
     <string name="locationdetict">حدد الموقع</string>
+    <string name="experincs">الخبرة العملية</string>
+    <string name="aboutexpert">عن خبيرة التجميل</string>
+    <string name="expertyears">عدد سنوات الخبرة</string>
+    <string name="certificates">الشهادات المعتمدة</string>
+    <string name="add">أضف</string>
+    <string name="clicktoadd">أنقر للإضافة</string>
+    <string name="cert">الشهادة</string>
+    <string name="certyear">سنة الإصدار</string>
+    <string name="grantor">جهة الاصدار</string>
+    <string name="specialty">التخصص</string>
+    <string name="certtitle"></string>
+    <string name="save">حفظ</string>
+    <string name="delete">حذف</string>
 </resources>

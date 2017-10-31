@@ -246,7 +246,7 @@
             android:gravity="center"
             android:layoutDirection="ltr"
             android:id="@+id/linearLayout4"
-            android:layout_above="@+id/next"
+            android:layout_above="@+id/delete2"
             android:layout_alignEnd="@+id/linearLayout2"
             android:layout_marginTop="10dp">
 
@@ -277,7 +277,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/next"
-            android:id="@+id/next"
+            android:id="@+id/delete2"
             android:padding="10dp"
             android:background="@color/colorPrimary"
             android:gravity="center"

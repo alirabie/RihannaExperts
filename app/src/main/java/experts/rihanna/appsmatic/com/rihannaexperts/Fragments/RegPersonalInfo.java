@@ -1,23 +1,15 @@
 package experts.rihanna.appsmatic.com.rihannaexperts.Fragments;
 
-import android.content.Context;
-import android.content.DialogInterface;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AlertDialog;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
-import experts.rihanna.appsmatic.com.rihannaexperts.Activities.SignUp;
 import experts.rihanna.appsmatic.com.rihannaexperts.R;
-import experts.rihanna.appsmatic.com.rihannaexperts.Utils;
 
 public class RegPersonalInfo extends Fragment {
 
@@ -33,7 +25,7 @@ public class RegPersonalInfo extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        next=(TextView)view.findViewById(R.id.next);
+        next=(TextView)view.findViewById(R.id.delete2);
 
 
 
