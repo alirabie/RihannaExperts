@@ -35,4 +35,5 @@
     <string name="certtitle"></string>
     <string name="save">حفظ</string>
     <string name="delete">حذف</string>
+    <string name="hometitle">الصفحة الرئيسية</string>
 </resources>

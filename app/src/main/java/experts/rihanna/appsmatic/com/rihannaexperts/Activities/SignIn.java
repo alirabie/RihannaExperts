@@ -48,6 +48,13 @@ public class SignIn extends AppCompatActivity {
             }
         });
 
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SignIn.this,Home.class));
+            }
+        });
+
 
     }
 }

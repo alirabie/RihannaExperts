@@ -34,10 +34,16 @@
     <string name="certyear">Year of Grants</string>
     <string name="save">Save</string>
     <string name="delete">Delete</string>
-
+    <string name="hometitle">Main Page</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="title_activity_maps" translatable="false">Map</string>
+    <string name="title_activity_home">Home</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings" translatable="false">Settings</string>
 </resources>
