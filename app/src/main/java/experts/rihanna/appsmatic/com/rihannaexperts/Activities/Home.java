@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.MainFrag;
 import experts.rihanna.appsmatic.com.rihannaexperts.R;
 
 public class Home extends AppCompatActivity  {
@@ -56,9 +57,15 @@ public class Home extends AppCompatActivity  {
 
 
 
+        //set main fragment on app start
+        MainFrag mainFrag=new MainFrag();
+        android.support.v4.app.FragmentManager fragmentManager = (Home.this).getSupportFragmentManager();
+        android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragmentcontener, mainFrag);
+        fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+        fragmentTransaction.commit();
         //set title
         tittle.setText(getResources().getString(R.string.hometitle));
-
 
 
         //Setup Side Menu Items
@@ -121,7 +128,14 @@ public class Home extends AppCompatActivity  {
                 Animation anim = AnimationUtils.loadAnimation(Home.this, R.anim.alpha);
                 homeSide.clearAnimation();
                 homeSide.setAnimation(anim);
-
+                MainFrag mainFrag=new MainFrag();
+                android.support.v4.app.FragmentManager fragmentManager = (Home.this).getSupportFragmentManager();
+                android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentcontener, mainFrag);
+                fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+                fragmentTransaction.commit();
+                //set title
+                tittle.setText(getResources().getString(R.string.hometitle));
                 drawer.closeDrawer(GravityCompat.START);
             }
         });

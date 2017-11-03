@@ -1,4 +1,4 @@
-package experts.rihanna.appsmatic.com.rihannaexperts.Fragments;
+package experts.rihanna.appsmatic.com.rihannaexperts.Fragments.RegistrationFragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

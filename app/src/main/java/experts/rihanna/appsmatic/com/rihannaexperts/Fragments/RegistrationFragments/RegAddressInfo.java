@@ -1,4 +1,4 @@
-package experts.rihanna.appsmatic.com.rihannaexperts.Fragments;
+package experts.rihanna.appsmatic.com.rihannaexperts.Fragments.RegistrationFragments;
 
 import android.location.Address;
 import android.location.Geocoder;

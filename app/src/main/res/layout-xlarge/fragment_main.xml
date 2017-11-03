@@ -1,0 +1,83 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.MainFrag"
+    android:orientation="vertical">
+
+    <!-- TODO: Update blank fragment layout -->
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#f072b2">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/work_table_btn"
+                android:src="@drawable/tab2"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/order_mange_btn" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/order_mange_btn"
+                android:src="@drawable/tab1"
+                android:layout_alignParentStart="true"
+                android:background="#f284bc" />
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#f4a0cb" >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/sale_mange_btn"
+                android:src="@drawable/tab4"
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/my_account_main_btn" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/my_account_main_btn"
+                android:src="@drawable/tab3"
+                android:layout_alignParentStart="true"
+                android:background="#ed55a2" />
+        </FrameLayout>
+    </LinearLayout>
+</LinearLayout>
