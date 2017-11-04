@@ -24,6 +24,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.MainFrag;
+import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.OrdersFrag;
 import experts.rihanna.appsmatic.com.rihannaexperts.R;
 
 public class Home extends AppCompatActivity  {
@@ -209,6 +210,14 @@ public class Home extends AppCompatActivity  {
                 ordersListSide.clearAnimation();
                 ordersListSide.setAnimation(anim);
 
+                OrdersFrag ordersFrag=new OrdersFrag();
+                android.support.v4.app.FragmentManager fragmentManager = (Home.this).getSupportFragmentManager();
+                android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentcontener, ordersFrag);
+                fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+                fragmentTransaction.commit();
+                //set title
+                tittle.setText(getResources().getString(R.string.mangeorders));
 
                 drawer.closeDrawer(GravityCompat.START);
 

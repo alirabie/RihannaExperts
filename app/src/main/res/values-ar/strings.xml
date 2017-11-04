@@ -36,4 +36,8 @@
     <string name="save">حفظ</string>
     <string name="delete">حذف</string>
     <string name="hometitle">الصفحة الرئيسية</string>
+    <string name="noorders">لا توجد طلبات</string>
+    <string name="mangeorders">إدارة الطلبات</string>
+    <string name="order">الطلب</string>
+    <string name="outservice">طلب خدمة خارجية</string>
 </resources>

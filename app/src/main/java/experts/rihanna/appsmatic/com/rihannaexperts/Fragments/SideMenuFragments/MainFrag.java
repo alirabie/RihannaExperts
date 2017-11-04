@@ -11,6 +11,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
+import experts.rihanna.appsmatic.com.rihannaexperts.Activities.Home;
 import experts.rihanna.appsmatic.com.rihannaexperts.R;
 
 
@@ -48,6 +49,15 @@ public class MainFrag extends Fragment {
                 Animation anim1 = AnimationUtils.loadAnimation(getContext(), R.anim.alpha);
                 orderAdmin.clearAnimation();
                 orderAdmin.setAnimation(anim1);
+
+                OrdersFrag mainFrag=new OrdersFrag();
+                android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentcontener, mainFrag);
+                fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+                fragmentTransaction.commit();
+                //set title
+                Home.tittle.setText(getResources().getString(R.string.mangeorders));
 
             }
         });

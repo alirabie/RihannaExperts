@@ -35,4 +35,8 @@
     <string name="save">Save</string>
     <string name="delete">Delete</string>
     <string name="hometitle">Main Page</string>
+    <string name="noorders">No Orders</string>
+    <string name="mangeorders">Mange Orders</string>
+    <string name="order">Order</string>
+    <string name="outservice">Outdoor Service</string>
 </resources>
