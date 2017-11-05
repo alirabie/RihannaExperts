@@ -55,7 +55,7 @@ public class RegAddressInfo extends Fragment implements OnMapReadyCallback {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        next=(TextView)view.findViewById(R.id.delete2);
+        next=(TextView)view.findViewById(R.id.reject_btn);
         location=(EditText)view.findViewById(R.id.reg_loc_location);
         mapView=(MapView)view.findViewById(R.id.map);
         mapView.onCreate(savedInstanceState);

@@ -1,51 +1,31 @@
-package experts.rihanna.appsmatic.com.rihannaexperts.Fragments.RegistrationFragments;
+package experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments;
 
+import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
+import experts.rihanna.appsmatic.com.rihannaexperts.Activities.Home;
 import experts.rihanna.appsmatic.com.rihannaexperts.R;
 
-public class RegPersonalInfo extends Fragment {
 
-    private TextView next;
+public class AccountMangeFrag extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_personal_info, container, false);
+        return inflater.inflate(R.layout.fragment_account_mange, container, false);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        next=(TextView)view.findViewById(R.id.reject_btn);
-
-
-
-       //Go to next step Expert Address
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                android.support.v4.app.FragmentManager fragmentManager = ((FragmentActivity) getContext()).getSupportFragmentManager();
-                android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.register_fm_contanier, new RegAddressInfo());
-                fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
-                fragmentTransaction.commit();
-            }
-        });
-
-
-
-
     }
-
 
     @Override
     public void onResume() {
@@ -63,11 +43,23 @@ public class RegPersonalInfo extends Fragment {
 
                 if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
                     // handle back button's click listener
-                    getActivity().finish();
+                    MainFrag mainFrag = new MainFrag();
+                    android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.fragmentcontener, mainFrag);
+                    fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+                    fragmentTransaction.commit();
+                    //set title
+                    Home.tittle.setText(getResources().getString(R.string.hometitle));
                     return true;
                 }
                 return false;
             }
         });
+
+
+
+
     }
+
 }

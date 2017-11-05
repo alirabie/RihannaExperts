@@ -60,7 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/linearLayout8"
         android:layout_alignParentEnd="true"
-        android:layout_above="@+id/delete2"
+        android:layout_above="@+id/reject_btn"
         android:id="@+id/cert_list_contenner">
 
         <android.support.v7.widget.RecyclerView
@@ -111,7 +111,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/next"
-        android:id="@+id/delete2"
+        android:id="@+id/reject_btn"
         android:padding="10dp"
         android:background="@color/colorPrimary"
         android:gravity="center"

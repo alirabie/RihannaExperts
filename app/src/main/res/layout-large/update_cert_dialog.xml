@@ -121,7 +121,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/delete"
-                android:id="@+id/delete2"
+                android:id="@+id/reject_btn"
                 android:padding="10dp"
                 android:background="@color/colorPrimary"
                 android:gravity="center"

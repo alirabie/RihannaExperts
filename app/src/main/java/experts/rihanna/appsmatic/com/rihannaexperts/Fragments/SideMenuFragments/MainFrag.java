@@ -1,7 +1,5 @@
 package experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -71,6 +69,15 @@ public class MainFrag extends Fragment {
                 workTimeAdmin.clearAnimation();
                 workTimeAdmin.setAnimation(anim2);
 
+                DatesTableFrag datesTableFrag=new DatesTableFrag();
+                android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentcontener,datesTableFrag);
+                fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+                fragmentTransaction.commit();
+                //set title
+                Home.tittle.setText(getResources().getString(R.string.datestable));
+
             }
         });
 
@@ -83,6 +90,15 @@ public class MainFrag extends Fragment {
                 accountAdmin.clearAnimation();
                 accountAdmin.setAnimation(anim3);
 
+                AccountMangeFrag accountMange =new AccountMangeFrag();
+                android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentcontener,accountMange);
+                fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+                fragmentTransaction.commit();
+                //set title
+                Home.tittle.setText(getResources().getString(R.string.accountmange));
+
             }
         });
 
@@ -94,6 +110,16 @@ public class MainFrag extends Fragment {
                 Animation anim4 = AnimationUtils.loadAnimation(getContext(), R.anim.alpha);
                 saleAdmin.clearAnimation();
                 saleAdmin.setAnimation(anim4);
+
+                SaleMangeFrag saleMangeFrag=new SaleMangeFrag();
+                android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentcontener, saleMangeFrag);
+                fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+                fragmentTransaction.commit();
+                //set title
+                Home.tittle.setText(getResources().getString(R.string.mangeoffers));
+
 
             }
         });

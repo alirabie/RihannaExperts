@@ -39,4 +39,15 @@
     <string name="mangeorders">Mange Orders</string>
     <string name="order">Order</string>
     <string name="outservice">Outdoor Service</string>
+    <string name="accept">Accept</string>
+    <string name="dicline">Reject</string>
+    <string name="orderaccepted">Request confirmed</string>
+    <string name="showonmap">Show Location On Map</string>
+    <string name="customerinfo">Customer Info</string>
+    <string name="time">The appointment</string>
+    <string name="rateus">Please rate our services</string>
+    <string name="daydates">Today appointments</string>
+    <string name="mangeoffers">Mange Offers</string>
+    <string name="datestable">Schedule</string>
+    <string name="accountmange">Mange My Account</string>
 </resources>

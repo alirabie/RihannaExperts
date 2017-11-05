@@ -23,8 +23,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.DatesTableFrag;
+import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.DayDatesFrag;
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.MainFrag;
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.OrdersFrag;
+import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.SaleMangeFrag;
 import experts.rihanna.appsmatic.com.rihannaexperts.R;
 
 public class Home extends AppCompatActivity  {
@@ -149,6 +152,8 @@ public class Home extends AppCompatActivity  {
                 profileSide.clearAnimation();
                 profileSide.setAnimation(anim);
 
+
+
                 drawer.closeDrawer(GravityCompat.START);
             }
         });
@@ -160,8 +165,14 @@ public class Home extends AppCompatActivity  {
                 Animation anim = AnimationUtils.loadAnimation(Home.this, R.anim.alpha);
                 latestOffersSide.clearAnimation();
                 latestOffersSide.setAnimation(anim);
-
-
+                SaleMangeFrag saleMangeFrag=new SaleMangeFrag();
+                android.support.v4.app.FragmentManager fragmentManager = (Home.this).getSupportFragmentManager();
+                android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentcontener,saleMangeFrag);
+                fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+                fragmentTransaction.commit();
+                //set title
+                tittle.setText(getResources().getString(R.string.mangeoffers));
                 drawer.closeDrawer(GravityCompat.START);
 
             }
@@ -175,6 +186,16 @@ public class Home extends AppCompatActivity  {
                 Animation anim = AnimationUtils.loadAnimation(Home.this, R.anim.alpha);
                 schaduleTable.clearAnimation();
                 schaduleTable.setAnimation(anim);
+
+                DatesTableFrag datesTableFrag=new DatesTableFrag();
+                android.support.v4.app.FragmentManager fragmentManager = (Home.this).getSupportFragmentManager();
+                android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentcontener,datesTableFrag);
+                fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+                fragmentTransaction.commit();
+                //set title
+                tittle.setText(getResources().getString(R.string.datestable));
+                drawer.closeDrawer(GravityCompat.START);
 
 
                 drawer.closeDrawer(GravityCompat.START);
@@ -190,6 +211,14 @@ public class Home extends AppCompatActivity  {
                 Animation anim = AnimationUtils.loadAnimation(Home.this, R.anim.alpha);
                 dayTimes.clearAnimation();
                 dayTimes.setAnimation(anim);
+                DayDatesFrag dayDatesFrag=new DayDatesFrag();
+                android.support.v4.app.FragmentManager fragmentManager = (Home.this).getSupportFragmentManager();
+                android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentcontener,dayDatesFrag);
+                fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+                fragmentTransaction.commit();
+                //set title
+                tittle.setText(getResources().getString(R.string.daydates));
 
 
                 drawer.closeDrawer(GravityCompat.START);

@@ -40,4 +40,15 @@
     <string name="mangeorders">إدارة الطلبات</string>
     <string name="order">الطلب</string>
     <string name="outservice">طلب خدمة خارجية</string>
+    <string name="accept">قبول</string>
+    <string name="dicline">رفض</string>
+    <string name="orderaccepted">تم تأكيد الطلب</string>
+    <string name="showonmap">إظهار الموقع على الخريطة</string>
+    <string name="customerinfo">بيانات العميلة</string>
+    <string name="time">الموعد</string>
+    <string name="rateus">نرجوا تقييم خدمتنا</string>
+    <string name="daydates">مواعيد اليوم</string>
+    <string name="mangeoffers">إدارة العروض والتخفيضات</string>
+    <string name="datestable">جدول المواعيد</string>
+    <string name="accountmange">إدارة حسابى</string>
 </resources>
