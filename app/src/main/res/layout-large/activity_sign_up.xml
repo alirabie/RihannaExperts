@@ -22,16 +22,35 @@
                 android:layout_height="match_parent"
                 android:text="@string/signup"
                 android:gravity="center"
-                android:textSize="25dp"
+                android:textSize="20dp"
                 android:textColor="#ffffff" />
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
 
+
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/view"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:id="@+id/register_fm_contanier"></FrameLayout>
+        android:id="@+id/register_fm_contanier"
+        android:layout_below="@+id/view"
+        android:layout_alignParentEnd="true"
+        android:layout_above="@+id/have_account_btn">
+
+    </FrameLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/haveaccount"
+        android:id="@+id/have_account_btn"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:gravity="center"
+        android:padding="15dp"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20dp" />
 
 </RelativeLayout>

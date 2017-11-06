@@ -1,13 +1,29 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.SideMenuFragments.AccountMangeFrag">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.astuetz.PagerSlidingTabStrip
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:id="@+id/update_expert_info_tabs"
+        app:pstsShouldExpand="true"
+        app:pstsTextAllCaps="true"
+        android:fillViewport="true"
+        android:textSize="9sp"
+
+        android:textAlignment="center"
+        app:pstsIndicatorColor="#ffff"
+        android:background="@color/colorPrimary" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager_presentcards"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="@android:color/white"
+        android:layout_below="@+id/update_expert_info_tabs" />
 
-</FrameLayout>
+
+</RelativeLayout>

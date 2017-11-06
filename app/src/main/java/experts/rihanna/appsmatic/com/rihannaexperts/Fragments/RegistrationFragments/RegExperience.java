@@ -37,7 +37,7 @@ public class RegExperience extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        next=(TextView)view.findViewById(R.id.reject_btn);
+        next=(TextView)view.findViewById(R.id.next_btn);
         addCertBtn=(LinearLayout)view.findViewById(R.id.add_cert_btn);
 
         years=new ArrayList<>();

@@ -62,4 +62,14 @@
     <string name="userhintinputlogin">الاسم الاول</string>
     <string name="comptext">نص الشكوى</string>
     <string name="aboutapp">عن تطبيق ريحانة</string>
+    <string name="haveaccount">لديك حساب قم بتسجيل الدخول</string>
+    <string name="codeinput">رمز تفعيل رقم الجوال</string>
+    <string name="sendcode">أرسل رمز التفعيل</string>
+    <string name="skip">تخطى</string>
+    <string name="finish">إنهاء التسجيل</string>
+    <string name="services">الخدمات</string>
+    <string name="mangemyaccount">إدارة حسابى</string>
+    <string name="exp">الخبرات</string>
+    <string name="info">الخبيرة</string>
+    <string name="address">العنوان</string>
 </resources>

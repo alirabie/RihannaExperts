@@ -25,7 +25,7 @@ public class RegPersonalInfo extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        next=(TextView)view.findViewById(R.id.reject_btn);
+        next=(TextView)view.findViewById(R.id.next_btn);
 
 
 

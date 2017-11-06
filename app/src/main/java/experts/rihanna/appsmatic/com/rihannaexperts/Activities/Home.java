@@ -24,6 +24,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.AboutAppFrag;
+import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.AccountMangeFrag;
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.DatesTableFrag;
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.DayDatesFrag;
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.MainFrag;
@@ -144,8 +145,14 @@ public class Home extends AppCompatActivity  {
                 profileSide.clearAnimation();
                 profileSide.setAnimation(anim);
 
-
-
+                AccountMangeFrag accountMangeFrag=new AccountMangeFrag();
+                android.support.v4.app.FragmentManager fragmentManager = (Home.this).getSupportFragmentManager();
+                android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentcontener, accountMangeFrag);
+                fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+                fragmentTransaction.commit();
+                //set title
+                tittle.setText(getResources().getString(R.string.accountmange));
                 drawer.closeDrawer(GravityCompat.START);
             }
         });

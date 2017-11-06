@@ -29,7 +29,13 @@ public class RegServices extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        next=(TextView)view.findViewById(R.id.reject_btn);
+        next=(TextView)view.findViewById(R.id.next_btn);
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
 
 

@@ -61,6 +61,16 @@
     <string name="comptext">Complaints Text ...</string>
     <string name="send">Send</string>
     <string name="aboutapp">About Rihanna App</string>
+    <string name="haveaccount">Have Account - Login</string>
+    <string name="sendcode">Send Code</string>
+    <string name="codeinput">Mobile Verification Code</string>
+    <string name="skip">Skip</string>
+    <string name="finish">Finish Registration</string>
+    <string name="services">Services</string>
+    <string name="mangemyaccount">Mange My Account</string>
+    <string name="exp">Experiences</string>
+    <string name="info">Expert</string>
+    <string name="address">Address</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

@@ -1,7 +1,9 @@
-package experts.rihanna.appsmatic.com.rihannaexperts.Fragments.RegistrationFragments;
+package experts.rihanna.appsmatic.com.rihannaexperts.Fragments.UpdateExpertsFragments;
 
+import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -13,7 +15,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.TextView;
-
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -27,10 +28,15 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
+import experts.rihanna.appsmatic.com.rihannaexperts.Activities.Home;
+import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.RegistrationFragments.RegExperience;
+import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.AccountMangeFrag;
+import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.MainFrag;
 import experts.rihanna.appsmatic.com.rihannaexperts.GPS.GPSTracker;
 import experts.rihanna.appsmatic.com.rihannaexperts.R;
 
-public class RegAddressInfo extends Fragment implements OnMapReadyCallback {
+
+public class UpdateAddressFrag extends Fragment implements OnMapReadyCallback {
 
     private TextView next;
     private GoogleMap mMap;
@@ -44,12 +50,11 @@ public class RegAddressInfo extends Fragment implements OnMapReadyCallback {
     private Geocoder geocoder;
     private EditText location;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_address_info, container, false);
+        return inflater.inflate(R.layout.fragment_update_address, container, false);
     }
 
     @Override
@@ -75,58 +80,11 @@ public class RegAddressInfo extends Fragment implements OnMapReadyCallback {
                 next.clearAnimation();
                 next.setAnimation(anim);
 
-                android.support.v4.app.FragmentManager fragmentManager = ((FragmentActivity) getContext()).getSupportFragmentManager();
-                android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.register_fm_contanier, new RegExperience());
-                fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
-                fragmentTransaction.commit();
+
             }
         });
 
-
-
-
-
     }
-
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-        if(getView() == null){
-            return;
-        }
-
-        getView().setFocusableInTouchMode(true);
-        getView().requestFocus();
-        getView().setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-
-                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
-                    // handle back button's click listener
-                    Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.alpha);
-                    next.clearAnimation();
-                    next.setAnimation(anim);
-                    android.support.v4.app.FragmentManager fragmentManager = ((FragmentActivity) getContext()).getSupportFragmentManager();
-                    android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.register_fm_contanier, new RegPersonalInfo());
-                    fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
-                    fragmentTransaction.commit();
-                    return true;
-                }
-                return false;
-            }
-        });
-
-
-
-
-    }
-
-
-
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -158,7 +116,7 @@ public class RegAddressInfo extends Fragment implements OnMapReadyCallback {
                     e.printStackTrace();
                 }
 
-                if(addresses!=null) {
+                if (addresses != null) {
                     if (!addresses.isEmpty()) {
                         cityName = addresses.get(0).getAddressLine(0);
                         stateName = addresses.get(0).getAddressLine(1);
@@ -173,4 +131,5 @@ public class RegAddressInfo extends Fragment implements OnMapReadyCallback {
         });
 
     }
+
 }

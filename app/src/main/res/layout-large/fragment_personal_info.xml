@@ -246,7 +246,7 @@
             android:gravity="center"
             android:layoutDirection="ltr"
             android:id="@+id/linearLayout4"
-            android:layout_above="@+id/reject_btn"
+            android:layout_above="@+id/next_btn"
             android:layout_alignEnd="@+id/linearLayout2"
             android:layout_marginTop="10dp">
 
@@ -271,13 +271,56 @@
                 android:textAlignment="viewStart" />
 
         </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center"
+            android:layoutDirection="ltr"
+            android:id="@+id/linearLayout17"
+            android:layout_above="@+id/next_btn"
+            android:layout_alignEnd="@+id/linearLayout2"
+            android:layout_marginTop="10dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/send_ver_code_btn"
+                android:text="@string/sendcode"
+                android:gravity="center"
+                android:padding="8dp"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:textSize="20dp" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#e3e3e3">
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:ems="10"
+                    android:id="@+id/ver_code_input"
+                    android:background="#ffffff"
+                    android:padding="10dp"
+                    android:gravity="center|start"
+                    android:hint="@string/codeinput"
+                    android:layout_weight="1"
+                    android:textSize="20dp"
+                    android:textAlignment="center"
+                    android:layout_margin="2dp"
+                    android:inputType="text" />
+            </FrameLayout>
+
+        </LinearLayout>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/next"
-            android:id="@+id/reject_btn"
+            android:id="@+id/next_btn"
             android:padding="10dp"
             android:background="@color/colorPrimary"
             android:gravity="center"

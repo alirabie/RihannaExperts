@@ -60,7 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/linearLayout8"
         android:layout_alignParentEnd="true"
-        android:layout_above="@+id/reject_btn"
+        android:layout_above="@+id/next_btn"
         android:id="@+id/cert_list_contenner">
 
         <android.support.v7.widget.RecyclerView
@@ -106,23 +106,46 @@
 
     </FrameLayout>
 
-    <TextView
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/next"
-        android:id="@+id/reject_btn"
-        android:padding="10dp"
-        android:background="@color/colorPrimary"
-        android:gravity="center"
-        android:textColor="#ffffff"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="10dp"
-        android:textSize="30dp"
-        android:textIsSelectable="false"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp" />
+        android:layout_alignParentEnd="true">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/skip"
+            android:id="@+id/skip_btn"
+            android:padding="10dp"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:layout_below="@+id/linearLayout6"
+            android:layout_centerHorizontal="true"
+            android:textSize="25dp"
+            android:layout_weight="1"
+            android:layout_margin="10dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/next"
+            android:id="@+id/next_btn"
+            android:padding="10dp"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:layout_below="@+id/linearLayout6"
+            android:layout_centerHorizontal="true"
+            android:textSize="25dp"
+            android:layout_weight="1"
+            android:layout_margin="10dp" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:orientation="vertical"

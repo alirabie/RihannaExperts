@@ -16,17 +16,28 @@
         android:src="@drawable/count4"
         android:padding="10dp" />
 
-    <TextView
-        android:layout_width="300dp"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/next"
-        android:id="@+id/reject_btn"
-        android:layout_marginBottom="86dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:padding="10dp"
-        android:background="@color/colorPrimary"
-        android:gravity="center"
-        android:textColor="#ffffff" />
+        android:layout_alignParentEnd="true">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/finish"
+            android:id="@+id/next_btn"
+            android:padding="10dp"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:layout_below="@+id/linearLayout6"
+            android:layout_centerHorizontal="true"
+            android:textSize="15dp"
+            android:layout_weight="1"
+            android:layout_margin="10dp" />
+
+    </LinearLayout>
 </RelativeLayout>

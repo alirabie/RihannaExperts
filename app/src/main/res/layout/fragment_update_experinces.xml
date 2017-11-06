@@ -7,61 +7,13 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/count3"
-        android:padding="10dp" />
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:id="@+id/linearLayout"
-        android:padding="5dp"
-        android:layout_below="@+id/imageView"
-        android:layout_centerHorizontal="true">
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_weight="1"
-            android:background="@color/colorPrimary"></LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/experincs"
-            android:id="@+id/textView"
-            android:layout_weight=".8"
-            android:gravity="center"
-            android:textColor="@color/colorPrimary"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:textSize="20dp" />
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_weight="1"
-            android:background="@color/colorPrimary"></LinearLayout>
-    </LinearLayout>
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/linearLayout8"
+        android:id="@+id/cert_list_contenner"
+        android:layout_above="@+id/linearLayout18"
         android:layout_alignParentEnd="true"
-        android:layout_above="@+id/next_btn"
-        android:id="@+id/cert_list_contenner">
+        android:layout_below="@+id/linearLayout8">
 
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
@@ -92,8 +44,8 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/clicktoadd"
                 android:id="@+id/textView8"
-                android:textSize="20dp"
-                android:padding="10dp"
+                android:textSize="15dp"
+                android:padding="5dp"
                 android:background="#eaeaea"
                 android:textColor="#606060" />
 
@@ -111,29 +63,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/skip"
-            android:id="@+id/skip_btn"
-            android:padding="10dp"
-            android:background="@color/colorPrimary"
-            android:gravity="center"
-            android:textColor="#ffffff"
-            android:layout_below="@+id/linearLayout6"
-            android:layout_centerHorizontal="true"
-            android:textSize="20dp"
-            android:layout_weight="1"
-            android:layout_margin="10dp" />
+        android:layout_alignParentEnd="true"
+        android:id="@+id/linearLayout18">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/next"
+            android:text="@string/save"
             android:id="@+id/next_btn"
             android:padding="10dp"
             android:background="@color/colorPrimary"
@@ -141,7 +78,7 @@
             android:textColor="#ffffff"
             android:layout_below="@+id/linearLayout6"
             android:layout_centerHorizontal="true"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:layout_weight="1"
             android:layout_margin="10dp" />
 
@@ -153,14 +90,14 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_below="@+id/linearLayout"
-        android:layout_centerHorizontal="true"
         android:id="@+id/linearLayout7"
-        android:layout_marginTop="10dp">
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="30dp">
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="100dp"
             android:background="#d8d8d8">
 
             <EditText
@@ -175,7 +112,7 @@
                 android:gravity="top"
                 android:padding="5dp"
                 android:hint="@string/aboutexpert"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
         </FrameLayout>
 
         <FrameLayout
@@ -185,13 +122,13 @@
             android:layout_marginTop="10dp">
             <com.weiwangcn.betterspinner.library.BetterSpinner
                 android:layout_width="match_parent"
-                android:layout_height="55dp"
+                android:layout_height="40dp"
                 android:layout_margin="2dp"
                 android:background="#ffffff"
                 android:padding="5dp"
                 android:hint="@string/expertyears"
                 android:id="@+id/exper_years_count"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
         </FrameLayout>
     </LinearLayout>
 
@@ -201,7 +138,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/linearLayout7"
         android:layout_alignParentEnd="true"
-        android:padding="10dp"
+        android:padding="5dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:id="@+id/linearLayout8">
@@ -212,7 +149,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/certificates"
             android:id="@+id/textView5"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:textStyle="bold" />
@@ -230,7 +167,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/add"
                 android:id="@+id/textView6"
-                android:textSize="20dp"
+                android:textSize="15dp"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:textColor="@color/colorPrimary" />
@@ -241,7 +178,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="+"
                 android:id="@+id/textView7"
-                android:textSize="30dp"
+                android:textSize="25dp"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:padding="2dp"

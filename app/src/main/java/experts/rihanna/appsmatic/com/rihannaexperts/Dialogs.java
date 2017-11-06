@@ -147,7 +147,7 @@ public class Dialogs {
         certName=(EditText)dialogBuildercard.findViewById(R.id.cert_name_input);
         granter=(EditText)dialogBuildercard.findViewById(R.id.granter_input);
         saveBtn=(TextView)dialogBuildercard.findViewById(R.id.save2);
-        delete=(TextView)dialogBuildercard.findViewById(R.id.reject_btn);
+        delete=(TextView)dialogBuildercard.findViewById(R.id.next_btn);
         close=(TextView)dialogBuildercard.findViewById(R.id.close);
 
         certYear=(BetterSpinner)dialogBuildercard.findViewById(R.id.year_of_grant_input);

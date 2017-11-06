@@ -30,9 +30,26 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:id="@+id/register_fm_contanier"
-        android:layout_below="@+id/view"></FrameLayout>
+        android:layout_below="@+id/view"
+        android:layout_alignParentEnd="true"
+        android:layout_above="@+id/have_account_btn">
+
+    </FrameLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/haveaccount"
+        android:id="@+id/have_account_btn"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:gravity="center"
+        android:padding="10dp"
+        android:textColor="@color/colorPrimary" />
 
 </RelativeLayout>

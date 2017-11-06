@@ -7,73 +7,23 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/count2"
-        android:padding="10dp" />
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:id="@+id/linearLayout"
-        android:padding="5dp"
-        android:layout_below="@+id/imageView"
-        android:layout_centerHorizontal="true">
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_weight="1"
-            android:background="@color/colorPrimary"></LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/addressinfo"
-            android:id="@+id/textView"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textColor="@color/colorPrimary"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:textSize="20dp" />
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_weight="1"
-            android:background="@color/colorPrimary"></LinearLayout>
-    </LinearLayout>
-
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:padding="5dp"
         android:id="@+id/linearLayout6"
-        android:layout_below="@+id/linearLayout"
-        android:layout_alignParentEnd="true"
         android:weightSum="1"
-        android:layout_alignParentBottom="true">
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true">
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="35dp"
             android:background="@drawable/inputstreet"
             android:textAlignment="viewStart"
             android:layoutDirection="ltr"
@@ -98,13 +48,13 @@
                 android:textAlignment="viewStart"
                 android:hint="@string/buldingnum"
                 android:layout_weight="1"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
         </LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="35dp"
             android:background="@drawable/inputregion"
             android:gravity="center"
             android:layoutDirection="ltr"
@@ -130,14 +80,14 @@
                 android:textAlignment="viewStart"
                 android:hint="@string/negborhoodordistrict"
                 android:layout_weight="1"
-                android:textSize="20dp"
+                android:textSize="15dp"
                 android:inputType="phone" />
         </LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="35dp"
             android:background="@drawable/inputcity"
             android:gravity="center"
             android:layoutDirection="ltr"
@@ -159,7 +109,7 @@
                 android:background="#00ffffff"
                 android:padding="6dp"
                 android:layout_weight="1"
-                android:textSize="20dp"
+                android:textSize="15dp"
                 android:gravity="center|start"
                 android:textAlignment="viewStart"
                 android:inputType="textImeMultiLine" />
@@ -184,12 +134,12 @@
                 android:text="@string/locationdetict"
                 android:id="@+id/textView4"
                 android:gravity="center"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
         </LinearLayout>
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="180dp"
             android:padding="2dp"
             android:background="#b8b8b8"
             android:layout_above="@+id/date_time_next_btn"
@@ -212,25 +162,9 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/skip"
-                android:id="@+id/skip_btn"
-                android:padding="10dp"
-                android:background="@color/colorPrimary"
-                android:gravity="center"
-                android:textColor="#ffffff"
-                android:layout_below="@+id/linearLayout6"
-                android:layout_centerHorizontal="true"
-                android:textSize="20dp"
-                android:layout_weight="1"
-                android:layout_margin="10dp" />
-
-            <TextView
-                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/next"
+                android:text="@string/save"
                 android:id="@+id/next_btn"
                 android:padding="10dp"
                 android:background="@color/colorPrimary"
@@ -238,11 +172,12 @@
                 android:textColor="#ffffff"
                 android:layout_below="@+id/linearLayout6"
                 android:layout_centerHorizontal="true"
-                android:textSize="20dp"
+                android:textSize="15dp"
                 android:layout_weight="1"
                 android:layout_margin="10dp" />
 
         </LinearLayout>
+
     </LinearLayout>
 
 </RelativeLayout>
