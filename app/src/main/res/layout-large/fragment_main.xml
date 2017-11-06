@@ -27,6 +27,19 @@
                 android:src="@drawable/tab2"
                 android:layout_alignParentTop="true"
                 android:layout_toEndOf="@+id/order_mange_btn" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/textView16"
+                android:layout_gravity="center_horizontal|bottom"
+                android:padding="10dp"
+                android:gravity="center"
+                android:layout_marginBottom="100dp"
+                android:textColor="#000000"
+                android:text="@string/mangeworkflow"
+                android:textSize="25dp" />
         </FrameLayout>
 
         <FrameLayout
@@ -41,6 +54,19 @@
                 android:src="@drawable/tab1"
                 android:layout_alignParentStart="true"
                 android:background="#f284bc" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/mangeorders"
+                android:id="@+id/textView17"
+                android:layout_gravity="center_horizontal|bottom"
+                android:padding="10dp"
+                android:gravity="center"
+                android:layout_marginBottom="100dp"
+                android:textColor="#000000"
+                android:textSize="25dp" />
         </FrameLayout>
 
     </LinearLayout>
@@ -64,6 +90,19 @@
                 android:src="@drawable/tab4"
                 android:layout_alignParentTop="true"
                 android:layout_toEndOf="@+id/my_account_main_btn" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/textView18"
+                android:layout_gravity="center_horizontal|bottom"
+                android:padding="10dp"
+                android:gravity="center"
+                android:layout_marginBottom="100dp"
+                android:textColor="#000000"
+                android:text="@string/mangeservicesand"
+                android:textSize="25dp" />
         </FrameLayout>
 
         <FrameLayout
@@ -78,6 +117,19 @@
                 android:src="@drawable/tab3"
                 android:layout_alignParentStart="true"
                 android:background="#ed55a2" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/accountmange"
+                android:id="@+id/textView19"
+                android:layout_gravity="center_horizontal|bottom"
+                android:padding="10dp"
+                android:gravity="center"
+                android:layout_marginBottom="100dp"
+                android:textColor="#000000"
+                android:textSize="25dp" />
         </FrameLayout>
     </LinearLayout>
 </LinearLayout>

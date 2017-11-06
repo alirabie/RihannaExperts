@@ -51,4 +51,15 @@
     <string name="mangeoffers">إدارة العروض والتخفيضات</string>
     <string name="datestable">جدول المواعيد</string>
     <string name="accountmange">إدارة حسابى</string>
+    <string name="mangeservicesand">إدارة العروض والخدمات</string>
+    <string name="mangeworkflow">إدارة جدول العمل</string>
+    <string name="applang">لغة التطبيق</string>
+    <string name="settings">الاعدادات</string>
+    <string name="complains">للشكاوى</string>
+    <string name="polcies">السياسات</string>
+    <string name="send">إرسال</string>
+    <string name="subwayes">طرق الاشتراك</string>
+    <string name="userhintinputlogin">الاسم الاول</string>
+    <string name="comptext">نص الشكوى</string>
+    <string name="aboutapp">عن تطبيق ريحانة</string>
 </resources>

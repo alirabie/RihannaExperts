@@ -50,4 +50,15 @@
     <string name="mangeoffers">Mange Offers</string>
     <string name="datestable">Schedule</string>
     <string name="accountmange">Mange My Account</string>
+    <string name="mangeservicesand"><![CDATA[My Services & Offers]]></string>
+    <string name="mangeworkflow">Work Schedule</string>
+    <string name="applang">Application Language</string>
+    <string name="settings">Settings</string>
+    <string name="complains">Complaints</string>
+    <string name="polcies">Policies</string>
+    <string name="send">Send</string>
+    <string name="subwayes">Ways to subscribe</string>
+    <string name="userhintinputlogin">First Name</string>
+    <string name="comptext">Complaints Text ...</string>
+    <string name="aboutapp">About Rihanna App</string>
 </resources>

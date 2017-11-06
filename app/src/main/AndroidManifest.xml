@@ -54,7 +54,7 @@
             android:name=".Activities.Home"
             android:label=""
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Activities.OrderInfo"></activity>
+        <activity android:name=".Activities.OrderInfo" />
     </application>
 
 </manifest>

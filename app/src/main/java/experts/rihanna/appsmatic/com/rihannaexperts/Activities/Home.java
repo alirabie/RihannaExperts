@@ -23,11 +23,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.AboutAppFrag;
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.DatesTableFrag;
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.DayDatesFrag;
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.MainFrag;
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.OrdersFrag;
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.SaleMangeFrag;
+import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.SettingsFrag;
+import experts.rihanna.appsmatic.com.rihannaexperts.Prefs.SaveSharedPreference;
 import experts.rihanna.appsmatic.com.rihannaexperts.R;
 
 public class Home extends AppCompatActivity  {
@@ -83,7 +86,7 @@ public class Home extends AppCompatActivity  {
         abutAppSide=(ImageView)findViewById(R.id.aboutapp_side_buttons);
         exitLoginSide=(ImageView)findViewById(R.id.logout_side_button);
 
-/*
+
         //check language
         if(SaveSharedPreference.getLangId(this).equals("ar")){
             homeSide.setImageResource(R.drawable.home);
@@ -94,14 +97,10 @@ public class Home extends AppCompatActivity  {
             ordersListSide.setImageResource(R.drawable.orders);
             settingsSide.setImageResource(R.drawable.settings);
             abutAppSide.setImageResource(R.drawable.about);
+            exitLoginSide.setImageResource(R.drawable.logout);
 
-            if(SaveSharedPreference.getCustomerInfo(Home.this)==null){
-                exitLoginSide.setImageResource(R.drawable.signin);
-            }else {
-                exitLoginSide.setImageResource(R.drawable.logout);
-            }
 
-        }else{
+        }else {
             homeSide.setImageResource(R.drawable.home_en);
             profileSide.setImageResource(R.drawable.profile_en);
             latestOffersSide.setImageResource(R.drawable.sale_en);
@@ -110,15 +109,8 @@ public class Home extends AppCompatActivity  {
             dayTimes.setImageResource(R.drawable.date_en);
             settingsSide.setImageResource(R.drawable.settings_en);
             abutAppSide.setImageResource(R.drawable.aboutus_en);
-
-            if(SaveSharedPreference.getCustomerInfo(Home.this)==null){
-                exitLoginSide.setImageResource(R.drawable.signin_en);
-            }else {
-                exitLoginSide.setImageResource(R.drawable.signout_en);
-            }
-
+            exitLoginSide.setImageResource(R.drawable.signout_en);
         }
-*/
 
 
 
@@ -261,7 +253,14 @@ public class Home extends AppCompatActivity  {
                 Animation anim = AnimationUtils.loadAnimation(Home.this, R.anim.alpha);
                 settingsSide.clearAnimation();
                 settingsSide.setAnimation(anim);
-
+                SettingsFrag settingsFrag =new SettingsFrag();
+                android.support.v4.app.FragmentManager fragmentManager = (Home.this).getSupportFragmentManager();
+                android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentcontener,settingsFrag);
+                fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+                fragmentTransaction.commit();
+                //set title
+                tittle.setText(getResources().getString(R.string.settings));
 
                 drawer.closeDrawer(GravityCompat.START);
             }
@@ -276,6 +275,15 @@ public class Home extends AppCompatActivity  {
                 abutAppSide.clearAnimation();
                 abutAppSide.setAnimation(anim);
 
+
+                AboutAppFrag aboutAppFrag =new AboutAppFrag();
+                android.support.v4.app.FragmentManager fragmentManager = (Home.this).getSupportFragmentManager();
+                android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragmentcontener, aboutAppFrag);
+                fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+                fragmentTransaction.commit();
+                //set title
+                tittle.setText(getResources().getString(R.string.aboutapp));
 
                 drawer.closeDrawer(GravityCompat.START);
             }
