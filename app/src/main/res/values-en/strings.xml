@@ -77,4 +77,12 @@
     <string name="noservices">No Services</string>
     <string name="setschadule">Work Times</string>
     <string name="showschadule">Preview Schedule</string>
+    <string name="areyousurexiteapp">Exit From App ?</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="resetpassword">Reset Password</string>
+    <string name="verifiycode">Verification Code</string>
+    <string name="worktimes">Working Times</string>
+    <string name="to">To</string>
+    <string name="from">From</string>
 </resources>

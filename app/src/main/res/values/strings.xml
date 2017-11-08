@@ -77,6 +77,14 @@
     <string name="noservices">No Services</string>
     <string name="showschadule">Preview Schedule</string>
     <string name="setschadule">Work Times</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="areyousurexiteapp">Exit From App ?</string>
+    <string name="resetpassword">Reset Password</string>
+    <string name="verifiycode">Verification Code</string>
+    <string name="worktimes">Working Times</string>
+    <string name="from">From</string>
+    <string name="to">To</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
@@ -88,4 +96,5 @@
 
     <string name="action_settings" translatable="false">Settings</string>
     <string name="title_activity_about_app_frag" translatable="false">AboutAppFrag</string>
+    <string name="title_activity_recover_password" translatable="false">RecoverPassword</string>
 </resources>

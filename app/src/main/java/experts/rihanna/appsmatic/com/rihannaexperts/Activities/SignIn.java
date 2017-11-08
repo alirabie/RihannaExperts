@@ -53,7 +53,21 @@ public class SignIn extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SignIn.this,Home.class));
+                Animation anim = AnimationUtils.loadAnimation(SignIn.this, R.anim.alpha);
+                login.clearAnimation();
+                login.setAnimation(anim);
+                startActivity(new Intent(SignIn.this, Home.class));
+                SignIn.this.finish();
+            }
+        });
+
+        forgetPassBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Animation anim = AnimationUtils.loadAnimation(SignIn.this, R.anim.alpha);
+                forgetPassBtn.clearAnimation();
+                forgetPassBtn.setAnimation(anim);
+                startActivity(new Intent(SignIn.this,RecoverPassword.class));
             }
         });
 

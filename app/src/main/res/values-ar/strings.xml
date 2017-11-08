@@ -32,7 +32,6 @@
     <string name="certyear">سنة الإصدار</string>
     <string name="grantor">جهة الاصدار</string>
     <string name="specialty">التخصص</string>
-    <string name="certtitle"></string>
     <string name="save">حفظ</string>
     <string name="delete">حذف</string>
     <string name="hometitle">الصفحة الرئيسية</string>
@@ -78,4 +77,12 @@
     <string name="noservices">لا توجد خدمات</string>
     <string name="setschadule">أوقات العمل</string>
     <string name="showschadule">جدول الطلبات</string>
+    <string name="areyousurexiteapp">خروج من التطبيق ؟</string>
+    <string name="no">لا</string>
+    <string name="yes">نعم</string>
+    <string name="resetpassword">إعادة تعيين كلمة المرور</string>
+    <string name="verifiycode">رمز التاكيد</string>
+    <string name="worktimes">ساعات العمل</string>
+    <string name="to">الى</string>
+    <string name="from">من</string>
 </resources>

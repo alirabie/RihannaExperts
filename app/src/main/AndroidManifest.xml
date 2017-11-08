@@ -55,6 +55,10 @@
             android:label=""
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activities.OrderInfo" />
+        <activity
+            android:name=".Activities.RecoverPassword"
+            android:label="@string/title_activity_recover_password"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -41,11 +41,7 @@ public class SignUp extends AppCompatActivity {
             window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimary));
         }
 
-        //Check location permissions for Marshmallow
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 2);
-        }
+
 
         android.support.v4.app.FragmentManager fragmentManager = (SignUp.this).getSupportFragmentManager();
         android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -57,23 +53,7 @@ public class SignUp extends AppCompatActivity {
 
 
 
-        //Check GPS status
-        final LocationManager locationManager = (LocationManager)this.getSystemService(Context.LOCATION_SERVICE);
-        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(SignUp.this);
-            builder.setMessage("GPS OFF")
-                    .setCancelable(false)
-                    .setPositiveButton("Turn On", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
 
-                            //Turn On GPS
-                            Utils.turnLocationOn(SignUp.this);
-
-                        }
-                    }).setIcon(android.R.drawable.alert_light_frame);
-            AlertDialog alert = builder.create();
-            alert.show();
-        }
 
 
 

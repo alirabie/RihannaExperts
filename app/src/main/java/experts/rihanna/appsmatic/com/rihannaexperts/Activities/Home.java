@@ -5,6 +5,7 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
@@ -21,6 +22,9 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.gitonway.lee.niftymodaldialogeffects.lib.Effectstype;
+import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
 
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.AboutAppFrag;
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.AccountMangeFrag;
@@ -40,6 +44,7 @@ public class Home extends AppCompatActivity  {
     DrawerLayout drawer;
     private ImageView homeSide,profileSide,latestOffersSide,schaduleTable,dayTimes,ordersListSide,settingsSide,abutAppSide, exitLoginSide;
     public static TextView tittle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
@@ -345,13 +350,38 @@ public class Home extends AppCompatActivity  {
     }
 
 
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            final NiftyDialogBuilder dialogBuilder = NiftyDialogBuilder.getInstance(Home.this);
+            dialogBuilder
+                    .withTitle(getResources().getString(R.string.app_name))
+                    .withDialogColor(R.color.colorPrimary)
+                    .withTitleColor("#FFFFFF")
+                    .withIcon(getResources().getDrawable(R.drawable.logo))
+                    .withDuration(700)                                          //def
+                    .withEffect(Effectstype.RotateBottom)
+                    .withMessage(getResources().getString(R.string.areyousurexiteapp))
+                    .withButton1Text(getResources().getString(R.string.yes))
+                    .withButton2Text(getResources().getString(R.string.no))
+                    .setButton1Click(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialogBuilder.dismiss();
+                            Home.this.finish();
+                        }
+                    })
+                    .setButton2Click(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialogBuilder.dismiss();
+                        }
+                    })
+                    .show();
         }
     }
 
@@ -376,6 +406,7 @@ public class Home extends AppCompatActivity  {
 
         return super.onOptionsItemSelected(item);
     }
+
 
 
 
