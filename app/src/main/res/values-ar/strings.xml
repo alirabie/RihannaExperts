@@ -72,4 +72,7 @@
     <string name="exp">الخبرات</string>
     <string name="info">الخبيرة</string>
     <string name="address">العنوان</string>
+    <string name="outdoraddress">العناوين الخارجية</string>
+    <string name="expaddress">العنوان</string>
+    <string name="practexp">الخبرات العملية</string>
 </resources>

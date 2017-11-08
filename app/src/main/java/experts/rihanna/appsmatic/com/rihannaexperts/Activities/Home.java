@@ -1,5 +1,7 @@
 package experts.rihanna.appsmatic.com.rihannaexperts.Activities;
 
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
@@ -44,6 +46,7 @@ public class Home extends AppCompatActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         Window window = this.getWindow();
@@ -305,12 +308,10 @@ public class Home extends AppCompatActivity  {
                 Animation anim = AnimationUtils.loadAnimation(Home.this, R.anim.alpha);
                 exitLoginSide.clearAnimation();
                 exitLoginSide.setAnimation(anim);
+                drawer.closeDrawer(GravityCompat.START);
+                startActivity(new Intent(Home.this, SignIn.class));
+                Home.this.finish();
 
-
-
-
-
-                    drawer.closeDrawer(GravityCompat.START);
             }
         });
 

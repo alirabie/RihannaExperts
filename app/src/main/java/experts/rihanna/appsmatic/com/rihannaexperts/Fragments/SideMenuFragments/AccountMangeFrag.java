@@ -1,12 +1,8 @@
 package experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments;
 
-import android.app.Activity;
-import android.content.Context;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -17,12 +13,9 @@ import com.astuetz.PagerSlidingTabStrip;
 
 import experts.rihanna.appsmatic.com.rihannaexperts.Activities.Home;
 import experts.rihanna.appsmatic.com.rihannaexperts.Adaptors.CustomFragmentPagerAdapter;
-import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.RegistrationFragments.RegAddressInfo;
-import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.RegistrationFragments.RegExperience;
-import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.RegistrationFragments.RegPersonalInfo;
-import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.RegistrationFragments.RegServices;
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.UpdateExpertsFragments.UpdateAddressFrag;
-import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.UpdateExpertsFragments.UpdateExperincesFrag;
+import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.UpdateExpertsFragments.ExperincesFragments.PracticalExFrag;
+import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.UpdateExpertsFragments.UpdateExp;
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.UpdateExpertsFragments.UpdateInfoFrag;
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.UpdateExpertsFragments.UpdateServicesFrag;
 import experts.rihanna.appsmatic.com.rihannaexperts.R;
@@ -33,10 +26,7 @@ public class AccountMangeFrag extends Fragment {
     ViewPager p;
     PagerSlidingTabStrip tabsStrip;
     CustomFragmentPagerAdapter adapter;
-    UpdateAddressFrag updateAddressFrag;
-    UpdateExperincesFrag updateExperincesFrag;
-    UpdateInfoFrag updateInfoFrag;
-    UpdateServicesFrag updateServicesFrag;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -54,7 +44,7 @@ public class AccountMangeFrag extends Fragment {
         adapter = new CustomFragmentPagerAdapter(getChildFragmentManager());
         adapter.addFragment(new UpdateInfoFrag(),getResources().getString(R.string.info));
         adapter.addFragment(new UpdateAddressFrag(), getResources().getString(R.string.address));
-        adapter.addFragment(new UpdateExperincesFrag(), getResources().getString(R.string.exp));
+        adapter.addFragment(new UpdateExp(), getResources().getString(R.string.exp));
         adapter.addFragment(new UpdateServicesFrag(), getResources().getString(R.string.services));
 
         p=(ViewPager)view.findViewById(R.id.viewpager_presentcards);

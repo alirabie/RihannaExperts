@@ -1,12 +1,14 @@
 package experts.rihanna.appsmatic.com.rihannaexperts.Fragments.UpdateExpertsFragments;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewPager;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +18,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.astuetz.PagerSlidingTabStrip;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -29,26 +32,24 @@ import java.util.List;
 import java.util.Locale;
 
 import experts.rihanna.appsmatic.com.rihannaexperts.Activities.Home;
+import experts.rihanna.appsmatic.com.rihannaexperts.Adaptors.CustomFragmentPagerAdapter;
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.RegistrationFragments.RegExperience;
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.AccountMangeFrag;
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.MainFrag;
+import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.UpdateExpertsFragments.AddressFraments.UpdateExpertAddressFrag;
+import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.UpdateExpertsFragments.AddressFraments.UpdateOutdoorServicesFrag;
 import experts.rihanna.appsmatic.com.rihannaexperts.GPS.GPSTracker;
 import experts.rihanna.appsmatic.com.rihannaexperts.R;
 
 
-public class UpdateAddressFrag extends Fragment implements OnMapReadyCallback {
+public class UpdateAddressFrag extends Fragment {
 
-    private TextView next;
-    private GoogleMap mMap;
-    private Double lat,lang;
-    private Marker marker;
-    private MapView mapView;
-    private GPSTracker gpsTracker;
-    private String cityName;
-    private String stateName;
-    private String countryName;
-    private Geocoder geocoder;
-    private EditText location;
+
+
+    ViewPager p;
+    PagerSlidingTabStrip tabsStrip;
+    CustomFragmentPagerAdapter adapter;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,76 +61,23 @@ public class UpdateAddressFrag extends Fragment implements OnMapReadyCallback {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        next=(TextView)view.findViewById(R.id.next_btn);
-        location=(EditText)view.findViewById(R.id.reg_loc_location);
-        mapView=(MapView)view.findViewById(R.id.map);
-        mapView.onCreate(savedInstanceState);
-        mapView.onResume();
-        mapView.getMapAsync(this);
-        geocoder = new Geocoder(getContext(), Locale.getDefault());
-        gpsTracker=new GPSTracker(getContext().getApplicationContext());
+
+        adapter = new CustomFragmentPagerAdapter(getChildFragmentManager());
+
+        adapter.addFragment(new UpdateExpertAddressFrag(),getResources().getString(R.string.expaddress));
+        adapter.addFragment(new UpdateOutdoorServicesFrag(), getResources().getString(R.string.outdoraddress));
 
 
+        p=(ViewPager)view.findViewById(R.id.viewpager_presentcards);
+        tabsStrip = (PagerSlidingTabStrip)view.findViewById(R.id.update_expert_info_tabs);
+        tabsStrip.setTextColor(Color.WHITE);
 
-        //Go to next step Expert Services
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.alpha);
-                next.clearAnimation();
-                next.setAnimation(anim);
-
-
-            }
-        });
+        p.setAdapter(adapter);
+        tabsStrip.setViewPager(p);
+        adapter.notifyDataSetChanged();
 
     }
 
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-        lat=gpsTracker.getLatitude();
-        lang=gpsTracker.getLongitude();
-        LatLng currentLocation=new LatLng(lat,lang);
-        marker=mMap.addMarker(new MarkerOptions().position(currentLocation).title("Location"));
-        float zoomLevel = (float) 16.0; //This goes up to 21
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, zoomLevel));
-        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-            @Override
-            public void onMapClick(LatLng latLng) {
-                if (marker != null) {
-                    marker.remove();
-                }
-                marker = mMap.addMarker(new MarkerOptions()
-                        .position(
-                                new LatLng(latLng.latitude, latLng.longitude))
-                        .draggable(true).visible(true).title("Location det"));
-                lat = latLng.latitude;
-                lang = latLng.longitude;
 
-                List<Address> addresses = null;
-
-                try {
-                    addresses = geocoder.getFromLocation(lat, lang, 1);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                if (addresses != null) {
-                    if (!addresses.isEmpty()) {
-                        cityName = addresses.get(0).getAddressLine(0);
-                        stateName = addresses.get(0).getAddressLine(1);
-                        countryName = addresses.get(0).getAddressLine(2);
-                    }
-                }
-
-
-                location.setText(cityName + "," + stateName + "," + countryName);
-
-            }
-        });
-
-    }
 
 }

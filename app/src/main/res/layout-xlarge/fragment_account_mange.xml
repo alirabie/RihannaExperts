@@ -7,7 +7,7 @@
 
     <com.astuetz.PagerSlidingTabStrip
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="60dp"
         android:id="@+id/update_expert_info_tabs"
         app:pstsShouldExpand="true"
         app:pstsTextAllCaps="true"

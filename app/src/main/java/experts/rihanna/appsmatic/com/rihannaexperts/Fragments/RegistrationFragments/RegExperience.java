@@ -25,7 +25,8 @@ public class RegExperience extends Fragment {
     private TextView next;
     private BetterSpinner yearsCount;
     private List<String> years;
-    private LinearLayout addCertBtn;
+    private TextView skip;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,14 +39,15 @@ public class RegExperience extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         next=(TextView)view.findViewById(R.id.next_btn);
-        addCertBtn=(LinearLayout)view.findViewById(R.id.add_cert_btn);
+        skip=(TextView)view.findViewById(R.id.skip_btn);
+
 
         years=new ArrayList<>();
         for(int i=1;i<=10;i++){
             years.add(i+"");
         }
         yearsCount=(BetterSpinner)view.findViewById(R.id.exper_years_count);
-        yearsCount.setAdapter(new ArrayAdapter<>(getContext(),android.R.layout.simple_spinner_dropdown_item,years));
+        yearsCount.setAdapter(new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, years));
 
 
         //Go to next step Expert Experiences and certificates
@@ -59,7 +61,7 @@ public class RegExperience extends Fragment {
 
                 android.support.v4.app.FragmentManager fragmentManager = ((FragmentActivity) getContext()).getSupportFragmentManager();
                 android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.register_fm_contanier, new RegServices());
+                fragmentTransaction.replace(R.id.register_fm_contanier, new RegCertificates());
                 fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
                 fragmentTransaction.commit();
             }
@@ -67,20 +69,25 @@ public class RegExperience extends Fragment {
 
 
 
-
-        //Add cert button action
-        addCertBtn.setOnClickListener(new View.OnClickListener() {
+        skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.alpha);
-                addCertBtn.clearAnimation();
-                addCertBtn.setAnimation(anim);
 
-                 Dialogs.fireAddCertDialog(getContext(),addCertBtn,1);
-                //Dialogs.fireUpdateCertDialog(getContext(),addCertBtn,1,2);
+
+                //if skip this step
+                Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.alpha);
+                skip.clearAnimation();
+                skip.setAnimation(anim);
+                android.support.v4.app.FragmentManager fragmentManager = ((FragmentActivity) getContext()).getSupportFragmentManager();
+                android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.register_fm_contanier, new RegCertificates());
+                fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+                fragmentTransaction.commit();
 
             }
         });
+
+
 
 
 

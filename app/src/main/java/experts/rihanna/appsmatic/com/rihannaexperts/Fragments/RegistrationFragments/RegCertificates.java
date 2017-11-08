@@ -9,33 +9,97 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import experts.rihanna.appsmatic.com.rihannaexperts.Dialogs;
 import experts.rihanna.appsmatic.com.rihannaexperts.R;
 
 
-public class RegServices extends Fragment {
+public class RegCertificates extends Fragment {
 
 
+    private LinearLayout addCertBtn;
     private TextView next;
+    private TextView skip;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_reg_services, container, false);
+        return inflater.inflate(R.layout.fragment_reg_certificates, container, false);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        addCertBtn=(LinearLayout)view.findViewById(R.id.add_cert_button);
         next=(TextView)view.findViewById(R.id.next_btn);
-        next.setOnClickListener(new View.OnClickListener() {
+        skip=(TextView)view.findViewById(R.id.skip_btn);
+
+
+
+        //Add cert button action
+        addCertBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.alpha);
+                addCertBtn.clearAnimation();
+                addCertBtn.setAnimation(anim);
+
+                Dialogs.fireAddCertDialog(getContext(), addCertBtn, 1);
+                //Dialogs.fireUpdateCertDialog(getContext(),addCertBtn,1,2);
 
             }
         });
+
+
+
+
+
+
+
+
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.alpha);
+                next.clearAnimation();
+                next.setAnimation(anim);
+
+                //if data sent
+                getActivity().finish();
+            }
+        });
+
+
+
+        skip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.alpha);
+                skip.clearAnimation();
+                skip.setAnimation(anim);
+
+                //if skip this step
+               getActivity().finish();
+
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

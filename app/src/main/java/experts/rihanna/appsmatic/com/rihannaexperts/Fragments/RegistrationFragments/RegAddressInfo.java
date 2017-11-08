@@ -33,6 +33,7 @@ import experts.rihanna.appsmatic.com.rihannaexperts.R;
 public class RegAddressInfo extends Fragment implements OnMapReadyCallback {
 
     private TextView next;
+    private TextView skip;
     private GoogleMap mMap;
     private Double lat,lang;
     private Marker marker;
@@ -56,6 +57,7 @@ public class RegAddressInfo extends Fragment implements OnMapReadyCallback {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         next=(TextView)view.findViewById(R.id.next_btn);
+        skip=(TextView)view.findViewById(R.id.skip_btn);
         location=(EditText)view.findViewById(R.id.reg_loc_location);
         mapView=(MapView)view.findViewById(R.id.map);
         mapView.onCreate(savedInstanceState);
@@ -71,10 +73,11 @@ public class RegAddressInfo extends Fragment implements OnMapReadyCallback {
             @Override
             public void onClick(View v) {
 
+
+                //if data sent to server
                 Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.alpha);
                 next.clearAnimation();
                 next.setAnimation(anim);
-
                 android.support.v4.app.FragmentManager fragmentManager = ((FragmentActivity) getContext()).getSupportFragmentManager();
                 android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.register_fm_contanier, new RegExperience());
@@ -84,6 +87,24 @@ public class RegAddressInfo extends Fragment implements OnMapReadyCallback {
         });
 
 
+
+        skip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                //if skip this step
+                Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.alpha);
+                skip.clearAnimation();
+                skip.setAnimation(anim);
+                android.support.v4.app.FragmentManager fragmentManager = ((FragmentActivity) getContext()).getSupportFragmentManager();
+                android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.register_fm_contanier, new RegExperience());
+                fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+                fragmentTransaction.commit();
+
+            }
+        });
 
 
 

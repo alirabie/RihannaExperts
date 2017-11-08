@@ -71,6 +71,9 @@
     <string name="exp">Experiences</string>
     <string name="info">Expert</string>
     <string name="address">Address</string>
+    <string name="expaddress">Address</string>
+    <string name="outdoraddress">Outdoor Address</string>
+    <string name="practexp">Practical Experiences</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
