@@ -1,4 +1,4 @@
-package experts.rihanna.appsmatic.com.rihannaexperts;
+package experts.rihanna.appsmatic.com.rihannaexperts.Helpers;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -18,6 +18,8 @@ import com.weiwangcn.betterspinner.library.BetterSpinner;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+import experts.rihanna.appsmatic.com.rihannaexperts.R;
 
 /**
  * Created by Eng Ali on 10/31/2017.

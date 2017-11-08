@@ -1,4 +1,4 @@
-package experts.rihanna.appsmatic.com.rihannaexperts;
+package experts.rihanna.appsmatic.com.rihannaexperts.Helpers;
 
 import android.app.Activity;
 import android.content.Context;

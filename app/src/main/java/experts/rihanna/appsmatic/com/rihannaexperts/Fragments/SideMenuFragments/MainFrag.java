@@ -69,10 +69,10 @@ public class MainFrag extends Fragment {
                 workTimeAdmin.clearAnimation();
                 workTimeAdmin.setAnimation(anim2);
 
-                DatesTableFrag datesTableFrag=new DatesTableFrag();
+                ScheduleMangeFrag scheduleMangeFrag =new ScheduleMangeFrag();
                 android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragmentcontener,datesTableFrag);
+                fragmentTransaction.replace(R.id.fragmentcontener, scheduleMangeFrag);
                 fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
                 fragmentTransaction.commit();
                 //set title

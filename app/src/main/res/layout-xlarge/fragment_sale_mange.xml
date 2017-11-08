@@ -5,9 +5,19 @@
     tools:context="experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.SaleMangeFrag">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <!-- TODO: Update blank fragment layout -->
+    <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/offers_sevecices_frag_list">
+    </android.support.v7.widget.RecyclerView>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/noservices"
+        android:id="@+id/empty_services_flag_frag"
+        android:layout_gravity="center"
+        android:textSize="45dp" />
 </FrameLayout>

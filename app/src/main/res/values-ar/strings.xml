@@ -75,4 +75,7 @@
     <string name="outdoraddress">العناوين الخارجية</string>
     <string name="expaddress">العنوان</string>
     <string name="practexp">الخبرات العملية</string>
+    <string name="noservices">لا توجد خدمات</string>
+    <string name="setschadule">أوقات العمل</string>
+    <string name="showschadule">جدول الطلبات</string>
 </resources>

@@ -12,7 +12,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import experts.rihanna.appsmatic.com.rihannaexperts.Dialogs;
+import experts.rihanna.appsmatic.com.rihannaexperts.Helpers.Dialogs;
 import experts.rihanna.appsmatic.com.rihannaexperts.R;
 
 

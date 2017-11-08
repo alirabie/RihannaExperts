@@ -1,7 +1,5 @@
 package experts.rihanna.appsmatic.com.rihannaexperts.Fragments.UpdateExpertsFragments.ExperincesFragments;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -11,7 +9,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 
-import experts.rihanna.appsmatic.com.rihannaexperts.Dialogs;
+import experts.rihanna.appsmatic.com.rihannaexperts.Helpers.Dialogs;
 import experts.rihanna.appsmatic.com.rihannaexperts.R;
 
 

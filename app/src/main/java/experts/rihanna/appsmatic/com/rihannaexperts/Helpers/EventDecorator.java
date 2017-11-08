@@ -1,4 +1,4 @@
-package experts.rihanna.appsmatic.com.rihannaexperts;
+package experts.rihanna.appsmatic.com.rihannaexperts.Helpers;
 
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.DayViewDecorator;
@@ -32,6 +32,6 @@ public class EventDecorator implements DayViewDecorator {
 
     @Override
     public void decorate(DayViewFacade view) {
-        view.addSpan(new DotSpan(15, color));
+        view.addSpan(new DotSpan(6, color));
     }
 }

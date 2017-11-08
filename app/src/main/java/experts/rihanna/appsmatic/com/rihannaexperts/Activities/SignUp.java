@@ -21,7 +21,7 @@ import android.widget.TextView;
 
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.RegistrationFragments.RegPersonalInfo;
 import experts.rihanna.appsmatic.com.rihannaexperts.R;
-import experts.rihanna.appsmatic.com.rihannaexperts.Utils;
+import experts.rihanna.appsmatic.com.rihannaexperts.Helpers.Utils;
 
 public class SignUp extends AppCompatActivity {
 

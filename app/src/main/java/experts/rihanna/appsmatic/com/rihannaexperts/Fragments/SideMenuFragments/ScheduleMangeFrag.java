@@ -1,34 +1,34 @@
 package experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments;
 
-import android.content.Context;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.CalendarContract;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.astuetz.PagerSlidingTabStrip;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
-import com.prolificinteractive.materialcalendarview.DayViewDecorator;
-import com.prolificinteractive.materialcalendarview.DayViewFacade;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
-import com.prolificinteractive.materialcalendarview.spans.DotSpan;
-
-import java.util.Calendar;
-import java.util.HashSet;
 
 import experts.rihanna.appsmatic.com.rihannaexperts.Activities.Home;
-import experts.rihanna.appsmatic.com.rihannaexperts.EventDecorator;
+import experts.rihanna.appsmatic.com.rihannaexperts.Adaptors.CustomFragmentPagerAdapter;
+import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.ScheduleMangeFragments.PreviewScheduleFrag;
+import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.ScheduleMangeFragments.SetScheduleFrag;
+import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.UpdateExpertsFragments.ExperincesFragments.PracticalExFrag;
+import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.UpdateExpertsFragments.ExperincesFragments.UpdateCertificateFrag;
+import experts.rihanna.appsmatic.com.rihannaexperts.Helpers.EventDecorator;
 import experts.rihanna.appsmatic.com.rihannaexperts.R;
 
-public class DatesTableFrag extends Fragment {
+public class ScheduleMangeFrag extends Fragment {
 
-    MaterialCalendarView materialCalendarView;
+    ViewPager p;
+    PagerSlidingTabStrip tabsStrip;
+    CustomFragmentPagerAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,38 +42,20 @@ public class DatesTableFrag extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        adapter = new CustomFragmentPagerAdapter(getChildFragmentManager());
 
 
-
-        materialCalendarView=(MaterialCalendarView)view.findViewById(R.id.calendarView);
-
-
-
-        //Set today selection
-        materialCalendarView.setDateSelected(CalendarDay.today(), true);
-
-        //Set Work Day On Calender
-        materialCalendarView.addDecorator(new EventDecorator(Color.RED,20,11,2017));
-        materialCalendarView.addDecorator(new EventDecorator(Color.RED,23,11,2017));
-        materialCalendarView.addDecorator(new EventDecorator(Color.RED,25,10,2017));
-        materialCalendarView.addDecorator(new EventDecorator(Color.RED,8,10,2017));
+        adapter.addFragment(new PreviewScheduleFrag(),getResources().getString(R.string.showschadule));
+        adapter.addFragment(new SetScheduleFrag(), getResources().getString(R.string.setschadule));
 
 
+        p=(ViewPager)view.findViewById(R.id.viewpager_presentcards);
+        tabsStrip = (PagerSlidingTabStrip)view.findViewById(R.id.update_expert_info_tabs);
+        tabsStrip.setTextColor(Color.WHITE);
 
-        //On Day Selected
-        materialCalendarView.setOnDateChangedListener(new OnDateSelectedListener() {
-            @Override
-            public void onDateSelected(MaterialCalendarView widget, CalendarDay date, boolean selected) {
-
-
-                Toast.makeText(getContext(), "Day : " + date.getDay() + " Month : " + (date.getMonth() + 1) + " year : " + date.getYear(), Toast.LENGTH_SHORT).show();
-
-
-            }
-        });
-
-
-
+        p.setAdapter(adapter);
+        tabsStrip.setViewPager(p);
+        adapter.notifyDataSetChanged();
 
 
 

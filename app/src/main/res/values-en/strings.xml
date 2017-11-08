@@ -74,4 +74,7 @@
     <string name="outdoraddress">Outdoor Address</string>
     <string name="expaddress">Address</string>
     <string name="practexp">Practical Experiences</string>
+    <string name="noservices">No Services</string>
+    <string name="setschadule">Work Times</string>
+    <string name="showschadule">Preview Schedule</string>
 </resources>

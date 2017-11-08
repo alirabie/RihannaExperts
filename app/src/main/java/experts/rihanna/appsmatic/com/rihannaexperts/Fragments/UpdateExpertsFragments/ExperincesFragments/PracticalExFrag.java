@@ -5,10 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.weiwangcn.betterspinner.library.BetterSpinner;
@@ -16,7 +13,6 @@ import com.weiwangcn.betterspinner.library.BetterSpinner;
 import java.util.ArrayList;
 import java.util.List;
 
-import experts.rihanna.appsmatic.com.rihannaexperts.Dialogs;
 import experts.rihanna.appsmatic.com.rihannaexperts.R;
 
 
