@@ -85,4 +85,12 @@
     <string name="worktimes">ساعات العمل</string>
     <string name="to">الى</string>
     <string name="from">من</string>
+    <string name="certnameerr">من فضلك ادخل اسم الشهادة</string>
+    <string name="certyearerr">من فضلك ادخل سنة المنح</string>
+    <string name="grantererr">من فضلك ادخل الجهة المانحة للشهادة</string>
+    <string name="spiciltyerr">من فضلك ادخل التخصص</string>
+    <string name="addcertsucsess">تم اضافة الشهادة بنجاح</string>
+    <string name="loading">تحميل</string>
+    <string name="certupdated">تم تحديث الشهادة</string>
+    <string name="removecert">تم حذف الشهادة</string>
 </resources>

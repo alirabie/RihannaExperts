@@ -32,13 +32,13 @@ public class SaveSharedPreference {
 
 
 
-    public static void setCustomerId(Context context,String id){
+    public static void setExpertId(Context context,String id){
         SharedPreferences.Editor editor = getSharedPreferences(context).edit();
         editor.putString(CUSTOMER_ID, id);
         editor.commit();
     }
 
-    public static String getCustomerId(Context context){
+    public static String getExpertId(Context context){
         return getSharedPreferences(context).getString(CUSTOMER_ID, "");
     }
 

@@ -41,6 +41,11 @@ public class Splash extends AppCompatActivity {
             window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimary));
         }
 
+
+
+        //Initial expert id
+        SaveSharedPreference.setExpertId(getApplicationContext(),"2");
+
         //Check location permissions for Marshmallow
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);

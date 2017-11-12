@@ -1,9 +1,13 @@
 package experts.rihanna.appsmatic.com.rihannaexperts.Helpers;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.IntentSender;
+import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -17,10 +21,23 @@ import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResult;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
 
+import java.io.IOException;
+
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.Get.CertificatesList;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.ExpertsApi;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.Generator;
+import experts.rihanna.appsmatic.com.rihannaexperts.Adaptors.CertificatesAdb;
+import experts.rihanna.appsmatic.com.rihannaexperts.R;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 /**
  * Created by Eng Ali on 10/30/2017.
  */
 public class Utils extends Activity {
+
+
 
     //Turn GPS ON Method
     public static void turnLocationOn(final Context ctx){
@@ -81,6 +98,53 @@ public class Utils extends Activity {
         }
         return true;
     }
+
+
+    //Get Certificates
+    public static CertificatesList getExpertCertificates(final Context context,String expertId){
+        final CertificatesList[] certificatesList = new CertificatesList[1];
+        //Loading Dialog
+        final ProgressDialog mProgressDialog = new ProgressDialog(context);
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.setMessage(context.getResources().getString(R.string.loading));
+        mProgressDialog.show();
+        //Get Data from server
+        Generator.createService(ExpertsApi.class).getExpertCertificates(expertId).enqueue(new Callback<CertificatesList>() {
+            @Override
+            public void onResponse(Call<CertificatesList> call, Response<CertificatesList> response) {
+                if (mProgressDialog.isShowing())
+                    mProgressDialog.dismiss();
+                if(response.isSuccessful()){
+                    if(response.body().getCertificates()!=null){
+                        certificatesList[0] =response.body();
+                    }else {
+                        Toast.makeText(context, "Null from get certificates", Toast.LENGTH_SHORT).show();
+                    }
+
+                }else {
+                    try {
+                        Toast.makeText(context,"Not success from get certificates "+response.errorBody().string(),Toast.LENGTH_SHORT).show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<CertificatesList> call, Throwable t) {
+                if (mProgressDialog.isShowing())
+                    mProgressDialog.dismiss();
+
+                Toast.makeText(context,"Connection error from get certificates "+t.getMessage(),Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+        return certificatesList[0];
+
+    }
+
 
 
 
