@@ -93,4 +93,14 @@
     <string name="loading">Loading</string>
     <string name="certupdated">Certificate has been updated</string>
     <string name="removecert">Certificate has been deleted</string>
+    <string name="activcodeerr">Activation Code required</string>
+    <string name="emailerr">Email required</string>
+    <string name="emailnotmatcherr">Invalid Email</string>
+    <string name="fnameerr">First Name required</string>
+    <string name="lnameerr">Last Name required</string>
+    <string name="passworderr">Password required</string>
+    <string name="passwordnotmatch">Passwords Not Matches</string>
+    <string name="phonenotmatcherr">Invalid Phone Number (e.g : 14155552671)</string>
+    <string name="phonenumerr">Phone Number required</string>
+    <string name="repasserr">Re Password required</string>
 </resources>

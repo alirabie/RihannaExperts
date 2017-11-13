@@ -24,6 +24,7 @@ public class UpdateCertificateFrag extends Fragment {
     private LinearLayout addCertBtn;
     private RecyclerView certificateList;
     private LinearLayout emptyFlag;
+    final int UPDATE_MODE=1;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,15 +47,13 @@ public class UpdateCertificateFrag extends Fragment {
                 emptyFlag.setVisibility(View.VISIBLE);
             } else {
                 emptyFlag.setVisibility(View.INVISIBLE);
-                certificateList.setAdapter(new CertificatesAdb(Utils.getExpertCertificates(getActivity(), SaveSharedPreference.getExpertId(getActivity())), getActivity()));
+                certificateList.setAdapter(new CertificatesAdb(Utils.getExpertCertificates(getActivity(), SaveSharedPreference.getExpertId(getActivity())), getActivity(),UPDATE_MODE));
                 certificateList.setLayoutManager(new LinearLayoutManager(getActivity()));
             }
 
         }else {
             Toast.makeText(getActivity(), "Null from get certificates", Toast.LENGTH_SHORT).show();
         }
-
-
 
 
 
@@ -66,7 +65,7 @@ public class UpdateCertificateFrag extends Fragment {
                 Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.alpha);
                 addCertBtn.clearAnimation();
                 addCertBtn.setAnimation(anim);
-                Dialogs.fireAddCertDialog(getContext(), addCertBtn, Integer.parseInt(SaveSharedPreference.getExpertId(getActivity())));
+                Dialogs.fireAddCertDialog(getContext(), addCertBtn, Integer.parseInt(SaveSharedPreference.getExpertId(getActivity())),UPDATE_MODE);
                 //Dialogs.fireUpdateCertDialog(getContext(),addCertBtn,1,2);
 
             }

@@ -25,9 +25,13 @@ public class CertificatesAdb extends RecyclerView.Adapter<CertificatesAdb.vh0> {
     private CertificatesList certificatesList;
     private Context context;
 
-    public CertificatesAdb(CertificatesList certificatesList, Context context) {
+    //This var is a flag to determine the operation update or register to control fragments refresh
+    private int operationMode;
+
+    public CertificatesAdb(CertificatesList certificatesList, Context context, int operationMode) {
         this.certificatesList = certificatesList;
         this.context = context;
+        this.operationMode = operationMode;
     }
 
     @Override
@@ -59,7 +63,7 @@ public class CertificatesAdb extends RecyclerView.Adapter<CertificatesAdb.vh0> {
                 editecert.setAuthorizedBy(certificatesList.getCertificates().get(position).getAuthorizedBy());
                 editecert.setYearAcquired(certificatesList.getCertificates().get(position).getYearAcquired() + "");
                 editecert.setExpertId(certificatesList.getCertificates().get(position).getExpertId());
-                Dialogs.fireUpdateCertDialog(context,holder.editBtn,editecert);
+                Dialogs.fireUpdateCertDialog(context,holder.editBtn,editecert,operationMode);
 
             }
         });

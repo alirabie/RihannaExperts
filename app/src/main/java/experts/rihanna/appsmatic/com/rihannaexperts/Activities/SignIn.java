@@ -11,13 +11,19 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.EditText;
 import android.widget.TextView;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import experts.rihanna.appsmatic.com.rihannaexperts.R;
 
 
 public class SignIn extends AppCompatActivity {
 
     private TextView forgetPassBtn, createNewAccount, login;
+    private EditText emailInput,passwordInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +42,30 @@ public class SignIn extends AppCompatActivity {
         //Setup items
         forgetPassBtn = (TextView) findViewById(R.id.forgetpassbtn);
         createNewAccount = (TextView) findViewById(R.id.create_account_btn);
+        emailInput=(EditText)findViewById(R.id.email_input_login);
+        passwordInput=(EditText)findViewById(R.id.password_input_login);
         login = (TextView) findViewById(R.id.login_btn);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         //Create new account action button
@@ -56,8 +85,32 @@ public class SignIn extends AppCompatActivity {
                 Animation anim = AnimationUtils.loadAnimation(SignIn.this, R.anim.alpha);
                 login.clearAnimation();
                 login.setAnimation(anim);
-                startActivity(new Intent(SignIn.this, Home.class));
-                SignIn.this.finish();
+
+                Pattern p = Pattern.compile("^(.+)@(.+)$");
+                Matcher m = p.matcher(emailInput.getText().toString());
+
+                if(emailInput.getText().toString().isEmpty()){
+                    emailInput.setError(getResources().getString(R.string.emailerr));
+                }else if(passwordInput.getText().toString().isEmpty()){
+                    passwordInput.setError(getResources().getString(R.string.passworderr));
+                }else if(!m.matches()){
+                    emailInput.setError(getResources().getString(R.string.emailnotmatcherr));
+                }else {
+
+                    //send data to server
+
+
+                    startActivity(new Intent(SignIn.this, Home.class));
+                    SignIn.this.finish();
+
+                }
+
+
+
+
+
+
+
             }
         });
 

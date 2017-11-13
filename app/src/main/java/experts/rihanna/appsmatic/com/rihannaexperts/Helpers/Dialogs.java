@@ -35,6 +35,7 @@ import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.
 import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.ExpertsApi;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.Generator;
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.RegistrationFragments.RegCertificates;
+import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.UpdateExpertsFragments.ExperincesFragments.UpdateCertificateFrag;
 import experts.rihanna.appsmatic.com.rihannaexperts.Prefs.SaveSharedPreference;
 import experts.rihanna.appsmatic.com.rihannaexperts.R;
 import retrofit2.Call;
@@ -48,7 +49,9 @@ public class Dialogs {
     static String categoriyId="";
     static String year="";
 
-    public static void fireAddCertDialog(final Context context,View view, final int exId){
+
+    //Add certificate
+    public static void fireAddCertDialog(final Context context,View view, final int exId, final int flag){
 
          final EditText certName;
          final EditText granter;
@@ -193,13 +196,28 @@ public class Dialogs {
                             if(response.isSuccessful()){
                                 if(response.body().getErrorMessage()!=null){
                                     Toast.makeText(context,context.getResources().getString(R.string.addcertsucsess)+response.body().getStatus(),Toast.LENGTH_SHORT).show();
+                                   //in case of flag 0 that is mean is in register mode and sing up UI and in case of 1 that is mean in update mode update UI
+                                   switch (flag){
+                                       case 0:
+                                           //refresh fragment in sign up mode
+                                           android.support.v4.app.FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
+                                           android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                           fragmentTransaction.replace(R.id.register_fm_contanier, new RegCertificates());
+                                           fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+                                           fragmentTransaction.commit();
+                                           break;
+                                       case 1:
+                                           //refresh fragment in update mode
+                                           android.support.v4.app.FragmentManager fragmentManager2 = ((FragmentActivity) context).getSupportFragmentManager();
+                                           android.support.v4.app.FragmentTransaction fragmentTransaction2 = fragmentManager2.beginTransaction();
+                                           fragmentTransaction2.replace(R.id.viewpager_presentcards, new UpdateCertificateFrag());
+                                           fragmentTransaction2.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+                                           fragmentTransaction2.commit();
+                                           break;
+                                   }
+
+                                    //Close dialog
                                     dialogBuildercard.dismiss();
-                                    //refresh fragment   viewpager_presentcards
-                                    android.support.v4.app.FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
-                                    android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                                    fragmentTransaction.replace(R.id.register_fm_contanier, new RegCertificates());
-                                    fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
-                                    fragmentTransaction.commit();
 
                                 }else {
                                     Toast.makeText(context,response.body().getErrorMessage(),Toast.LENGTH_SHORT).show();
@@ -247,7 +265,10 @@ public class Dialogs {
 
 
     }
-    public static void fireUpdateCertDialog(final Context context,View view, final experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.Update.Certificate certificate){
+
+
+    //update certificate
+    public static void fireUpdateCertDialog(final Context context,View view, final experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.Update.Certificate certificate, final int flag){
 
 
         final EditText certName;
@@ -394,12 +415,25 @@ public class Dialogs {
                                 if (response.body().getCertificates() != null) {
                                     Toast.makeText(context,context.getResources().getString(R.string.certupdated), Toast.LENGTH_SHORT).show();
 
-                                    //refresh fragment
-                                    android.support.v4.app.FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
-                                    android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                                    fragmentTransaction.replace(R.id.register_fm_contanier, new RegCertificates());
-                                    fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
-                                    fragmentTransaction.commit();
+                                    //in case of flag 0 that is mean is in register mode and sing up UI and in case of 1 that is mean in update mode update UI
+                                    switch (flag){
+                                        case 0:
+                                            //refresh fragment in sign up mode
+                                            android.support.v4.app.FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
+                                            android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                            fragmentTransaction.replace(R.id.register_fm_contanier, new RegCertificates());
+                                            fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+                                            fragmentTransaction.commit();
+                                            break;
+                                        case 1:
+                                            //refresh fragment in update mode
+                                            android.support.v4.app.FragmentManager fragmentManager2 = ((FragmentActivity) context).getSupportFragmentManager();
+                                            android.support.v4.app.FragmentTransaction fragmentTransaction2 = fragmentManager2.beginTransaction();
+                                            fragmentTransaction2.replace(R.id.viewpager_presentcards, new UpdateCertificateFrag());
+                                            fragmentTransaction2.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+                                            fragmentTransaction2.commit();
+                                            break;
+                                    }
 
                                     dialogBuildercard.dismiss();
                                 } else {
@@ -471,12 +505,25 @@ public class Dialogs {
                         if(response.isSuccessful()){
                             if(response.body().getErrorMessage()!=null){
                                 Toast.makeText(context,context.getResources().getString(R.string.removecert)+response.body().getStatus(),Toast.LENGTH_SHORT).show();
-                                //refresh fragment
-                                android.support.v4.app.FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
-                                android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                                fragmentTransaction.replace(R.id.register_fm_contanier, new RegCertificates());
-                                fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
-                                fragmentTransaction.commit();
+                                //in case of flag 0 that is mean is in register mode and sing up UI and in case of 1 that is mean in update mode update UI
+                                switch (flag){
+                                    case 0:
+                                        //refresh fragment in sign up mode
+                                        android.support.v4.app.FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
+                                        android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                        fragmentTransaction.replace(R.id.register_fm_contanier, new RegCertificates());
+                                        fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+                                        fragmentTransaction.commit();
+                                        break;
+                                    case 1:
+                                        //refresh fragment in update mode
+                                        android.support.v4.app.FragmentManager fragmentManager2 = ((FragmentActivity) context).getSupportFragmentManager();
+                                        android.support.v4.app.FragmentTransaction fragmentTransaction2 = fragmentManager2.beginTransaction();
+                                        fragmentTransaction2.replace(R.id.viewpager_presentcards, new UpdateCertificateFrag());
+                                        fragmentTransaction2.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+                                        fragmentTransaction2.commit();
+                                        break;
+                                }
 
                                 dialogBuildercard.dismiss();
 

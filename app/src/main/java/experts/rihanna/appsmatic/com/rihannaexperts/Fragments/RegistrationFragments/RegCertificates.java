@@ -39,6 +39,7 @@ public class RegCertificates extends Fragment {
     private TextView skip;
     private LinearLayout emptyFlag;
     String expertId="2";
+    final int REGISTERATION_MODE=0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,7 +63,7 @@ public class RegCertificates extends Fragment {
                 emptyFlag.setVisibility(View.VISIBLE);
             } else {
                 emptyFlag.setVisibility(View.INVISIBLE);
-                certificateList.setAdapter(new CertificatesAdb(Utils.getExpertCertificates(getActivity(), expertId), getActivity()));
+                certificateList.setAdapter(new CertificatesAdb(Utils.getExpertCertificates(getActivity(), expertId), getActivity(),REGISTERATION_MODE));
                 certificateList.setLayoutManager(new LinearLayoutManager(getActivity()));
             }
 
@@ -135,7 +136,7 @@ public class RegCertificates extends Fragment {
                 Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.alpha);
                 addCertBtn.clearAnimation();
                 addCertBtn.setAnimation(anim);
-                Dialogs.fireAddCertDialog(getContext(), addCertBtn,Integer.parseInt(expertId));
+                Dialogs.fireAddCertDialog(getContext(), addCertBtn,Integer.parseInt(expertId),REGISTERATION_MODE);
             }
         });
 

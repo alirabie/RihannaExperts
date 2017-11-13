@@ -93,4 +93,14 @@
     <string name="loading">تحميل</string>
     <string name="certupdated">تم تحديث الشهادة</string>
     <string name="removecert">تم حذف الشهادة</string>
+    <string name="activcodeerr">أدخل رمز التفعيل</string>
+    <string name="emailerr">أدخل البريد الالكترونى</string>
+    <string name="emailnotmatcherr">البريد الالكترونى غير صحيح</string>
+    <string name="fnameerr">أدخل الاسم الاول</string>
+    <string name="lnameerr">أدخل الاسم الثانى</string>
+    <string name="passworderr">أدخل كلمة المرور</string>
+    <string name="passwordnotmatch">كلمات المرور غير متطابقة</string>
+    <string name="phonenotmatcherr">رقم الجوال غير صحيح (e.g : 14155552671)</string>
+    <string name="phonenumerr">أدخل رقم الجوال</string>
+    <string name="repasserr">اعد كتابة كلمة المرور</string>
 </resources>
