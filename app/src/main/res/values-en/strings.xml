@@ -103,4 +103,11 @@
     <string name="phonenotmatcherr">Invalid Phone Number (e.g : 14155552671)</string>
     <string name="phonenumerr">Phone Number required</string>
     <string name="repasserr">Re Password required</string>
+    <string name="category">Services Category</string>
+    <string name="price">Price</string>
+    <string name="priceafterdecount">Discounted Price</string>
+    <string name="service">Service</string>
+    <string name="subscribe">Subscribe</string>
+    <string name="unsubscribe">Unsubscribe</string>
+    <string name="sr">S.R</string>
 </resources>

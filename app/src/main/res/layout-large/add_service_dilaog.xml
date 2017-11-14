@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:id="@+id/linearLayout9"
+        android:layout_below="@+id/close"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#d8d8d8"
+            android:layout_marginTop="10dp">
+
+            <com.weiwangcn.betterspinner.library.BetterSpinner
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/category_spinner"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:background="#ffffff"
+                android:layout_margin="1dp"
+                android:padding="10dp"
+                android:hint="@string/category"
+                android:textSize="20dp" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#d8d8d8"
+            android:layout_marginTop="10dp">
+
+            <com.weiwangcn.betterspinner.library.BetterSpinner
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/service_spinner"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:background="#ffffff"
+                android:padding="10dp"
+                android:hint="@string/services"
+                android:textSize="20dp"
+                android:layout_margin="1dp" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="#d8d8d8">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:inputType="textPersonName"
+                        android:ems="10"
+                        android:id="@+id/price_sp"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:background="#ffffff"
+                        android:padding="10dp"
+                        android:hint="@string/price"
+                        android:textSize="20dp"
+                        android:layout_weight="1"
+                        android:layout_margin="1dp" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="#d8d8d8">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:inputType="textPersonName"
+                        android:ems="10"
+                        android:id="@+id/discount_sp"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:background="#ffffff"
+                        android:padding="10dp"
+                        android:hint="@string/priceafterdecount"
+                        android:textSize="20dp"
+                        android:layout_weight="1"
+                        android:layout_margin="1dp" />
+                </FrameLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/subscribe"
+            android:id="@+id/subscribe_btn"
+            android:padding="10dp"
+            android:background="@color/colorPrimary"
+            android:textColor="#ffffff"
+            android:layout_below="@+id/linearLayout6"
+            android:layout_centerHorizontal="true"
+            android:textSize="25dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_marginTop="20dp" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="X"
+        android:id="@+id/close"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/linearLayout9"
+        android:textSize="25dp"
+        android:padding="10dp" />
+
+</RelativeLayout>

@@ -106,6 +106,14 @@
     <string name="phonenotmatcherr">Invalid Phone Number (e.g : 14155552671)</string>
     <string name="passwordnotmatch">Passwords Not Matches</string>
 
+    <string name="category">Services Category</string>
+    <string name="service">Service</string>
+    <string name="price">Price</string>
+    <string name="priceafterdecount">Discounted Price</string>
+    <string name="subscribe">Subscribe</string>
+    <string name="unsubscribe">Unsubscribe</string>
+    <string name="sr">S.R</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>

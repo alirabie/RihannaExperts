@@ -12,7 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.SaleMangeFrag"
-        android:layout_above="@+id/linearLayout8">
+        android:layout_above="@+id/linearLayout8"
+        android:layout_below="@+id/subscribe_btn">
 
         <!-- TODO: Update blank fragment layout -->
         <!-- TODO: Update blank fragment layout -->
@@ -57,5 +58,35 @@
             android:layout_weight="1"
             android:layout_margin="10dp" />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/subscribe_btn"
+        android:padding="5dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="+"
+            android:id="@+id/textView32"
+            android:textSize="45dp"
+            android:gravity="center"
+            android:padding="2dp"
+            android:textColor="@color/colorPrimary" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/subscribe"
+            android:id="@+id/textView34"
+            android:textSize="30dp"
+            android:gravity="center"
+            android:textColor="@color/colorPrimary" />
     </LinearLayout>
 </RelativeLayout>

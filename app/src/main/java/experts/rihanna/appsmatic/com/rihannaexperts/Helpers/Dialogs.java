@@ -36,6 +36,7 @@ import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.ExpertsA
 import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.Generator;
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.RegistrationFragments.RegCertificates;
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.UpdateExpertsFragments.ExperincesFragments.UpdateCertificateFrag;
+import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.UpdateExpertsFragments.UpdateServicesFrag;
 import experts.rihanna.appsmatic.com.rihannaexperts.Prefs.SaveSharedPreference;
 import experts.rihanna.appsmatic.com.rihannaexperts.R;
 import retrofit2.Call;
@@ -366,7 +367,7 @@ public class Dialogs {
         certYear.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                year=years.get(position)+"";
+                year = years.get(position) + "";
             }
         });
 
@@ -413,10 +414,10 @@ public class Dialogs {
 
                             if (response.isSuccessful()) {
                                 if (response.body().getCertificates() != null) {
-                                    Toast.makeText(context,context.getResources().getString(R.string.certupdated), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(context, context.getResources().getString(R.string.certupdated), Toast.LENGTH_SHORT).show();
 
                                     //in case of flag 0 that is mean is in register mode and sing up UI and in case of 1 that is mean in update mode update UI
-                                    switch (flag){
+                                    switch (flag) {
                                         case 0:
                                             //refresh fragment in sign up mode
                                             android.support.v4.app.FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
@@ -445,7 +446,7 @@ public class Dialogs {
                             } else {
 
                                 try {
-                                    Toast.makeText(context,"Not Success from Update cert "+response.errorBody().string(),Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(context, "Not Success from Update cert " + response.errorBody().string(), Toast.LENGTH_SHORT).show();
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
@@ -460,7 +461,7 @@ public class Dialogs {
                             if (mProgressDialog.isShowing())
                                 mProgressDialog.dismiss();
 
-                            Toast.makeText(context,"Connection error from update certificate "+t.getMessage(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Connection error from update certificate " + t.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
 
@@ -585,6 +586,148 @@ public class Dialogs {
 
     }
 
+
+    //Subscribe to new service
+    public static void fireSubscribeNewServiceDialog(final Context context,View view,String expertId){
+
+        final List<String>categories=new ArrayList<>();
+        final List<String>services=new ArrayList<>();
+        final BetterSpinner categoriesSp;
+        final BetterSpinner servicesSp;
+        EditText price;
+        EditText descountedPrice;
+        final TextView subscribe_btn,close;
+
+        //Initialize Done Dialog
+        final NiftyDialogBuilder dialogBuildercard = NiftyDialogBuilder.getInstance(context);
+        dialogBuildercard
+                .withDuration(700)//def
+                .withEffect(Effectstype.Fall)
+                .withDialogColor(Color.WHITE)
+                .withTitleColor(Color.BLACK)
+                .withTitle(context.getResources().getString(R.string.services))
+                .isCancelableOnTouchOutside(false)                           //def    | isCancelable(true)
+                .setCustomView(R.layout.add_service_dilaog, view.getContext())
+                .show();
+
+        //Setup items
+        categoriesSp=(BetterSpinner)dialogBuildercard.findViewById(R.id.category_spinner);
+        servicesSp=(BetterSpinner)dialogBuildercard.findViewById(R.id.service_spinner);
+        price=(EditText)dialogBuildercard.findViewById(R.id.price_sp);
+        descountedPrice=(EditText)dialogBuildercard.findViewById(R.id.discount_sp);
+        subscribe_btn=(TextView)dialogBuildercard.findViewById(R.id.subscribe_btn);
+        close=(TextView)dialogBuildercard.findViewById(R.id.close);
+
+
+
+
+
+
+
+
+        categories.add("خدمات الشعر");
+        categoriesSp.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, categories));
+        servicesSp.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, services));
+
+
+
+
+        categoriesSp.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                services.add("قص شعر طويل");
+                services.add("قص شعر قصير");
+                servicesSp.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, services));
+
+
+            }
+        });
+
+
+
+
+        if(true){
+            price.setEnabled(false);
+        }
+
+
+
+
+        subscribe_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Animation anim = AnimationUtils.loadAnimation(context, R.anim.alpha);
+                subscribe_btn.clearAnimation();
+                subscribe_btn.setAnimation(anim);
+
+                //refresh fragment
+                android.support.v4.app.FragmentManager fragmentManager2 = ((FragmentActivity) context).getSupportFragmentManager();
+                android.support.v4.app.FragmentTransaction fragmentTransaction2 = fragmentManager2.beginTransaction();
+                fragmentTransaction2.replace(R.id.viewpager_presentcards, new UpdateServicesFrag());
+                fragmentTransaction2.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+                fragmentTransaction2.commit();
+
+                dialogBuildercard.dismiss();
+
+            }
+        });
+
+
+
+
+
+
+
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Animation anim = AnimationUtils.loadAnimation(context, R.anim.alpha);
+                close.clearAnimation();
+                close.setAnimation(anim);
+                dialogBuildercard.dismiss();
+
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+        dialogBuildercard.setOnKeyListener(new DialogInterface.OnKeyListener() {
+            @Override
+            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+                return keyCode == KeyEvent.KEYCODE_BACK;
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
 
 
 

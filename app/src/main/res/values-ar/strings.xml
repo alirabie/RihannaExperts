@@ -103,4 +103,11 @@
     <string name="phonenotmatcherr">رقم الجوال غير صحيح (e.g : 14155552671)</string>
     <string name="phonenumerr">أدخل رقم الجوال</string>
     <string name="repasserr">اعد كتابة كلمة المرور</string>
+    <string name="category">تصنيف الخدمات</string>
+    <string name="price">السعر</string>
+    <string name="priceafterdecount">السعر المخفض</string>
+    <string name="service">الخدمة</string>
+    <string name="subscribe">أشترك</string>
+    <string name="unsubscribe">إلغاء الاشتراك</string>
+    <string name="sr">ر.س</string>
 </resources>
