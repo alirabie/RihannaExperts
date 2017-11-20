@@ -12,8 +12,8 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:padding="5dp"
         android:id="@+id/linearLayout6"
         android:layout_below="@+id/profile_pic"
@@ -95,7 +95,7 @@
             android:layout_above="@+id/linearLayout4"
             android:layout_alignEnd="@+id/linearLayout4"
             android:id="@+id/linearLayout5"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="5dp">
 
             <ImageView
                 android:layout_width="match_parent"
@@ -127,7 +127,7 @@
             android:layoutDirection="ltr"
             android:layout_below="@+id/linearLayout4"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="5dp">
 
             <ImageView
                 android:layout_width="match_parent"
@@ -160,7 +160,7 @@
             android:id="@+id/linearLayout4"
             android:layout_above="@+id/next_btn"
             android:layout_alignEnd="@+id/linearLayout2"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="5dp">
 
             <ImageView
                 android:layout_width="match_parent"
@@ -240,14 +240,14 @@
             android:textColor="#ffffff"
             android:layout_below="@+id/linearLayout6"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:textSize="20dp" />
+            android:layout_marginTop="5dp"
+            android:textSize="15dp" />
 
     </LinearLayout>
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="130dp"
-        android:layout_height="130dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:src="@drawable/placeholderexpert"
         app:border_color="@color/colorPrimary"
         app:border_width="2dp"

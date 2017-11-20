@@ -39,7 +39,7 @@ public class UpdateExp extends Fragment {
         adapter.addFragment(new UpdateCertificateFrag(), getResources().getString(R.string.certificates));
 
 
-        p=(ViewPager)view.findViewById(R.id.viewpager_presentcards);
+        p=(ViewPager)view.findViewById(R.id.viewpager_presentcards3);
         tabsStrip = (PagerSlidingTabStrip)view.findViewById(R.id.update_expert_info_tabs);
         tabsStrip.setTextColor(Color.WHITE);
 

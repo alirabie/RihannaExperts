@@ -1,10 +1,13 @@
 package experts.rihanna.appsmatic.com.rihannaexperts.Helpers;
 
+import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.Animation;
@@ -17,6 +20,7 @@ import android.widget.Toast;
 
 import com.gitonway.lee.niftymodaldialogeffects.lib.Effectstype;
 import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
+import com.google.gson.Gson;
 import com.weiwangcn.betterspinner.library.BetterSpinner;
 
 import java.io.IOException;
@@ -35,7 +39,9 @@ import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.
 import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.ExpertsApi;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.Generator;
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.RegistrationFragments.RegCertificates;
+import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.AccountMangeFrag;
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.UpdateExpertsFragments.ExperincesFragments.UpdateCertificateFrag;
+import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.UpdateExpertsFragments.UpdateExp;
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.UpdateExpertsFragments.UpdateServicesFrag;
 import experts.rihanna.appsmatic.com.rihannaexperts.Prefs.SaveSharedPreference;
 import experts.rihanna.appsmatic.com.rihannaexperts.R;
@@ -52,7 +58,7 @@ public class Dialogs {
 
 
     //Add certificate
-    public static void fireAddCertDialog(final Context context,View view, final int exId, final int flag){
+    public static void fireAddCertDialog(final Context context,View view, final int exId, final int flag, final android.support.v4.app.Fragment fragment){
 
          final EditText certName;
          final EditText granter;
@@ -124,7 +130,7 @@ public class Dialogs {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(context, ids.get(position), Toast.LENGTH_SHORT).show();
-                categoriyId=ids.get(position);
+                categoriyId = ids.get(position);
 
             }
         });
@@ -136,11 +142,11 @@ public class Dialogs {
         saveBtn=(TextView)dialogBuildercard.findViewById(R.id.save);
         close=(TextView)dialogBuildercard.findViewById(R.id.close);
         certYear=(BetterSpinner)dialogBuildercard.findViewById(R.id.year_of_grant_input);
-        certYear.setAdapter(new ArrayAdapter<>(context,android.R.layout.simple_spinner_dropdown_item,years));
+        certYear.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, years));
         certYear.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                year=years.get(position)+"";
+                year = years.get(position) + "";
             }
         });
 
@@ -209,12 +215,18 @@ public class Dialogs {
                                            break;
                                        case 1:
                                            //refresh fragment in update mode
-                                           android.support.v4.app.FragmentManager fragmentManager2 = ((FragmentActivity) context).getSupportFragmentManager();
+
+                                           android.support.v4.app.FragmentManager fragmentManager2 =((FragmentActivity) context).getSupportFragmentManager();
+                                           /*
                                            android.support.v4.app.FragmentTransaction fragmentTransaction2 = fragmentManager2.beginTransaction();
-                                           fragmentTransaction2.replace(R.id.viewpager_presentcards, new UpdateCertificateFrag());
+                                           fragmentTransaction2.replace(R.id.fragmentcontener, new UpdateExp());
                                            fragmentTransaction2.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
-                                           fragmentTransaction2.commit();
+                                           fragmentTransaction2.commitNowAllowingStateLoss();
+*/
+                                           fragmentManager2.beginTransaction().detach(fragment).attach(fragment).commit();
                                            break;
+
+
                                    }
 
                                     //Close dialog
@@ -269,7 +281,7 @@ public class Dialogs {
 
 
     //update certificate
-    public static void fireUpdateCertDialog(final Context context,View view, final experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.Update.Certificate certificate, final int flag){
+    public static void fireUpdateCertDialog(final Context context,View view, final experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.Update.Certificate certificate, final int flag, final android.support.v4.app.Fragment fragment){
 
 
         final EditText certName;
@@ -348,7 +360,7 @@ public class Dialogs {
         certName.setText(certificate.getName() + "");
         certYear.setText(certificate.getYearAcquired() + "");
         granter.setText(certificate.getAuthorizedBy() + "");
-        spicialty.setText(categories.get(certificate.getServiceCategoryId()));
+//        spicialty.setText(categories.get(certificate.getServiceCategoryId()));
         categoriyId=certificate.getServiceCategoryId()+"";
 
 
@@ -429,10 +441,13 @@ public class Dialogs {
                                         case 1:
                                             //refresh fragment in update mode
                                             android.support.v4.app.FragmentManager fragmentManager2 = ((FragmentActivity) context).getSupportFragmentManager();
+                                            /*
                                             android.support.v4.app.FragmentTransaction fragmentTransaction2 = fragmentManager2.beginTransaction();
-                                            fragmentTransaction2.replace(R.id.viewpager_presentcards, new UpdateCertificateFrag());
+                                            fragmentTransaction2.replace(R.id.fragmentcontener, new AccountMangeFrag());
                                             fragmentTransaction2.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
                                             fragmentTransaction2.commit();
+                                            */
+                                            fragmentManager2.beginTransaction().detach(fragment).attach(fragment).commit();
                                             break;
                                     }
 
@@ -495,8 +510,12 @@ public class Dialogs {
                 updatedCert.setServiceCategoryId(certificate.getServiceCategoryId());
                 updateCertificate.setCertificate(updatedCert);
 
+
+                Gson gson =new Gson();
+
+                Log.e("data : ",gson.toJson(updateCertificate));
                 //Delete certificate
-                Generator.createService(ExpertsApi.class).deleteCertificate(updatedCert).enqueue(new Callback<ResDelete>() {
+                Generator.createService(ExpertsApi.class).deleteCertificate(updateCertificate).enqueue(new Callback<ResDelete>() {
                     @Override
                     public void onResponse(Call<ResDelete> call, Response<ResDelete> response) {
 
@@ -504,7 +523,7 @@ public class Dialogs {
                             mProgressDialog.dismiss();
 
                         if(response.isSuccessful()){
-                            if(response.body().getErrorMessage()!=null){
+                            if(response.body().getStatus().toString().equals("ok")){
                                 Toast.makeText(context,context.getResources().getString(R.string.removecert)+response.body().getStatus(),Toast.LENGTH_SHORT).show();
                                 //in case of flag 0 that is mean is in register mode and sing up UI and in case of 1 that is mean in update mode update UI
                                 switch (flag){
@@ -519,10 +538,13 @@ public class Dialogs {
                                     case 1:
                                         //refresh fragment in update mode
                                         android.support.v4.app.FragmentManager fragmentManager2 = ((FragmentActivity) context).getSupportFragmentManager();
+                                        /*
                                         android.support.v4.app.FragmentTransaction fragmentTransaction2 = fragmentManager2.beginTransaction();
-                                        fragmentTransaction2.replace(R.id.viewpager_presentcards, new UpdateCertificateFrag());
+                                        fragmentTransaction2.replace(R.id.fragmentcontener, new AccountMangeFrag());
                                         fragmentTransaction2.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
                                         fragmentTransaction2.commit();
+                                        */
+                                        fragmentManager2.beginTransaction().detach(fragment).attach(fragment).commit();
                                         break;
                                 }
 
@@ -647,6 +669,7 @@ public class Dialogs {
 
 
 
+        //if expert class B not allow to modify price
         if(true){
             price.setEnabled(false);
         }

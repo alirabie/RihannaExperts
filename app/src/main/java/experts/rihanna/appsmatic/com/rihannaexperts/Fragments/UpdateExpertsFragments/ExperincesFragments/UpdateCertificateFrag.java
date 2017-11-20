@@ -1,5 +1,6 @@
 package experts.rihanna.appsmatic.com.rihannaexperts.Fragments.UpdateExpertsFragments.ExperincesFragments;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,11 +13,20 @@ import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import java.io.IOException;
+
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.Get.CertificatesList;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.Update.UpdateCertificate;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.ExpertsApi;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.Generator;
 import experts.rihanna.appsmatic.com.rihannaexperts.Adaptors.CertificatesAdb;
 import experts.rihanna.appsmatic.com.rihannaexperts.Helpers.Dialogs;
 import experts.rihanna.appsmatic.com.rihannaexperts.Helpers.Utils;
 import experts.rihanna.appsmatic.com.rihannaexperts.Prefs.SaveSharedPreference;
 import experts.rihanna.appsmatic.com.rihannaexperts.R;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class UpdateCertificateFrag extends Fragment {
@@ -42,18 +52,50 @@ public class UpdateCertificateFrag extends Fragment {
         emptyFlag=(LinearLayout)view.findViewById(R.id.click_add_cert_update_flag);
         emptyFlag.setVisibility(View.VISIBLE);
 
-        if(Utils.getExpertCertificates(getActivity(), SaveSharedPreference.getExpertId(getActivity()))!=null) {
-            if (Utils.getExpertCertificates(getActivity(),SaveSharedPreference.getExpertId(getActivity())).getCertificates().isEmpty()) {
-                emptyFlag.setVisibility(View.VISIBLE);
-            } else {
-                emptyFlag.setVisibility(View.INVISIBLE);
-                certificateList.setAdapter(new CertificatesAdb(Utils.getExpertCertificates(getActivity(), SaveSharedPreference.getExpertId(getActivity())), getActivity(),UPDATE_MODE));
-                certificateList.setLayoutManager(new LinearLayoutManager(getActivity()));
+        //Loading Dialog
+        final ProgressDialog mProgressDialog = new ProgressDialog(getActivity());
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.setMessage(getActivity().getResources().getString(R.string.loading));
+        mProgressDialog.show();
+        //Get Data from server
+        Generator.createService(ExpertsApi.class).getExpertCertificates(SaveSharedPreference.getExpertId(getActivity())).enqueue(new Callback<CertificatesList>() {
+            @Override
+            public void onResponse(Call<CertificatesList> call, Response<CertificatesList> response) {
+                if (mProgressDialog.isShowing())
+                    mProgressDialog.dismiss();
+                if (response.isSuccessful()) {
+                    if (response.body().getCertificates() != null) {
+                        if (response.body().getCertificates().isEmpty()) {
+                            emptyFlag.setVisibility(View.VISIBLE);
+                        } else {
+                            emptyFlag.setVisibility(View.INVISIBLE);
+                            certificateList.setAdapter(new CertificatesAdb(response.body(), getActivity(),UpdateCertificateFrag.this, UPDATE_MODE));
+                            certificateList.setLayoutManager(new LinearLayoutManager(getActivity()));
+                        }
+                    } else {
+                        Toast.makeText(getActivity(), "Null from get certificates", Toast.LENGTH_SHORT).show();
+                    }
+
+                } else {
+                    try {
+                        Toast.makeText(getActivity(), "Not success from get certificates " + response.errorBody().string(), Toast.LENGTH_SHORT).show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
             }
 
-        }else {
-            Toast.makeText(getActivity(), "Null from get certificates", Toast.LENGTH_SHORT).show();
-        }
+            @Override
+            public void onFailure(Call<CertificatesList> call, Throwable t) {
+                if (mProgressDialog.isShowing())
+                    mProgressDialog.dismiss();
+
+                Toast.makeText(getActivity(), "Connection error from get certificates " + t.getMessage(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
 
 
 
@@ -65,7 +107,7 @@ public class UpdateCertificateFrag extends Fragment {
                 Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.alpha);
                 addCertBtn.clearAnimation();
                 addCertBtn.setAnimation(anim);
-                Dialogs.fireAddCertDialog(getContext(), addCertBtn, Integer.parseInt(SaveSharedPreference.getExpertId(getActivity())),UPDATE_MODE);
+                Dialogs.fireAddCertDialog(getContext(), addCertBtn, Integer.parseInt(SaveSharedPreference.getExpertId(getActivity())),UPDATE_MODE, UpdateCertificateFrag.this);
                 //Dialogs.fireUpdateCertDialog(getContext(),addCertBtn,1,2);
 
             }

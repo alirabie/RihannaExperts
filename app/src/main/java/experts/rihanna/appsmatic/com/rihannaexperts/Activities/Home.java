@@ -58,14 +58,9 @@ public class Home extends AppCompatActivity  {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimary));
         }
-
-
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         drawer= (DrawerLayout) findViewById(R.id.drawer_layout);
-
-
         tittle=(TextView)findViewById(R.id.filtertitle);
 
 
@@ -77,6 +72,7 @@ public class Home extends AppCompatActivity  {
         fragmentTransaction.replace(R.id.fragmentcontener, mainFrag);
         fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
         fragmentTransaction.commit();
+
         //set title
         tittle.setText(getResources().getString(R.string.hometitle));
 
@@ -104,8 +100,6 @@ public class Home extends AppCompatActivity  {
             settingsSide.setImageResource(R.drawable.settings);
             abutAppSide.setImageResource(R.drawable.about);
             exitLoginSide.setImageResource(R.drawable.logout);
-
-
         }else {
             homeSide.setImageResource(R.drawable.home_en);
             profileSide.setImageResource(R.drawable.profile_en);
@@ -120,13 +114,12 @@ public class Home extends AppCompatActivity  {
 
 
 
-        //Action Side menu buttons :
+        //Action Side menu buttons ********************************** :
 
         //Home button
         homeSide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Animation anim = AnimationUtils.loadAnimation(Home.this, R.anim.alpha);
                 homeSide.clearAnimation();
                 homeSide.setAnimation(anim);
@@ -149,7 +142,6 @@ public class Home extends AppCompatActivity  {
                 Animation anim = AnimationUtils.loadAnimation(Home.this, R.anim.alpha);
                 profileSide.clearAnimation();
                 profileSide.setAnimation(anim);
-
                 AccountMangeFrag accountMangeFrag=new AccountMangeFrag();
                 android.support.v4.app.FragmentManager fragmentManager = (Home.this).getSupportFragmentManager();
                 android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -190,7 +182,6 @@ public class Home extends AppCompatActivity  {
                 Animation anim = AnimationUtils.loadAnimation(Home.this, R.anim.alpha);
                 schaduleTable.clearAnimation();
                 schaduleTable.setAnimation(anim);
-
                 ScheduleMangeFrag scheduleMangeFrag =new ScheduleMangeFrag();
                 android.support.v4.app.FragmentManager fragmentManager = (Home.this).getSupportFragmentManager();
                 android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -200,8 +191,6 @@ public class Home extends AppCompatActivity  {
                 //set title
                 tittle.setText(getResources().getString(R.string.datestable));
                 drawer.closeDrawer(GravityCompat.START);
-
-
                 drawer.closeDrawer(GravityCompat.START);
 
             }
@@ -223,8 +212,6 @@ public class Home extends AppCompatActivity  {
                 fragmentTransaction.commit();
                 //set title
                 tittle.setText(getResources().getString(R.string.daydates));
-
-
                 drawer.closeDrawer(GravityCompat.START);
 
             }
@@ -238,11 +225,9 @@ public class Home extends AppCompatActivity  {
         ordersListSide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Animation anim = AnimationUtils.loadAnimation(Home.this, R.anim.alpha);
                 ordersListSide.clearAnimation();
                 ordersListSide.setAnimation(anim);
-
                 OrdersFrag ordersFrag=new OrdersFrag();
                 android.support.v4.app.FragmentManager fragmentManager = (Home.this).getSupportFragmentManager();
                 android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -251,12 +236,11 @@ public class Home extends AppCompatActivity  {
                 fragmentTransaction.commit();
                 //set title
                 tittle.setText(getResources().getString(R.string.mangeorders));
-
                 drawer.closeDrawer(GravityCompat.START);
-
-
             }
         });
+
+
 
         //settings button
         settingsSide.setOnClickListener(new View.OnClickListener() {
@@ -286,8 +270,6 @@ public class Home extends AppCompatActivity  {
                 Animation anim = AnimationUtils.loadAnimation(Home.this, R.anim.alpha);
                 abutAppSide.clearAnimation();
                 abutAppSide.setAnimation(anim);
-
-
                 AboutAppFrag aboutAppFrag =new AboutAppFrag();
                 android.support.v4.app.FragmentManager fragmentManager = (Home.this).getSupportFragmentManager();
                 android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -296,10 +278,10 @@ public class Home extends AppCompatActivity  {
                 fragmentTransaction.commit();
                 //set title
                 tittle.setText(getResources().getString(R.string.aboutapp));
-
                 drawer.closeDrawer(GravityCompat.START);
             }
         });
+
 
 
 
@@ -321,7 +303,7 @@ public class Home extends AppCompatActivity  {
 
 
 
-        //Side menu
+        //Side menu toggle
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);

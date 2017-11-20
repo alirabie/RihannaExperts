@@ -111,7 +111,7 @@
             android:layout_above="@+id/linearLayout4"
             android:layout_alignEnd="@+id/linearLayout4"
             android:id="@+id/linearLayout5"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="5dp">
 
             <ImageView
                 android:layout_width="match_parent"
@@ -143,7 +143,7 @@
             android:layoutDirection="ltr"
             android:layout_below="@+id/linearLayout4"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="5dp">
 
             <ImageView
                 android:layout_width="match_parent"
@@ -169,7 +169,7 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="5dp">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -189,13 +189,13 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="180dp"
+            android:layout_height="150dp"
             android:padding="2dp"
             android:background="#b8b8b8"
             android:layout_above="@+id/date_time_next_btn"
             android:layout_alignParentEnd="true"
             android:id="@+id/frameLayout2"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="5dp">
 
             <com.google.android.gms.maps.MapView
                 android:id="@+id/map"

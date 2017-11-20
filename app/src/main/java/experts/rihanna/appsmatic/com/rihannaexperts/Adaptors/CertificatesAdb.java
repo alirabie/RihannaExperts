@@ -1,6 +1,7 @@
 package experts.rihanna.appsmatic.com.rihannaexperts.Adaptors;
 
 import android.content.Context;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,13 +25,15 @@ public class CertificatesAdb extends RecyclerView.Adapter<CertificatesAdb.vh0> {
 
     private CertificatesList certificatesList;
     private Context context;
+    private Fragment fragment;
 
     //This var is a flag to determine the operation update or register to control fragments refresh
     private int operationMode;
 
-    public CertificatesAdb(CertificatesList certificatesList, Context context, int operationMode) {
+    public CertificatesAdb(CertificatesList certificatesList, Context context, Fragment fragment, int operationMode) {
         this.certificatesList = certificatesList;
         this.context = context;
+        this.fragment = fragment;
         this.operationMode = operationMode;
     }
 
@@ -48,7 +51,6 @@ public class CertificatesAdb extends RecyclerView.Adapter<CertificatesAdb.vh0> {
         holder.certGranter.setText(certificatesList.getCertificates().get(position).getAuthorizedBy());
 
 
-
         //Updates button action
         holder.editBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,7 +65,7 @@ public class CertificatesAdb extends RecyclerView.Adapter<CertificatesAdb.vh0> {
                 editecert.setAuthorizedBy(certificatesList.getCertificates().get(position).getAuthorizedBy());
                 editecert.setYearAcquired(certificatesList.getCertificates().get(position).getYearAcquired() + "");
                 editecert.setExpertId(certificatesList.getCertificates().get(position).getExpertId());
-                Dialogs.fireUpdateCertDialog(context,holder.editBtn,editecert,operationMode);
+                Dialogs.fireUpdateCertDialog(context,holder.editBtn,editecert,operationMode,fragment);
 
             }
         });

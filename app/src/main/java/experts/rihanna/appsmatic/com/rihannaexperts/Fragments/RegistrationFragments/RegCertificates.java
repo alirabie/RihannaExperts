@@ -58,35 +58,14 @@ public class RegCertificates extends Fragment {
         emptyFlag=(LinearLayout)view.findViewById(R.id.click_to_add_cert_flag);
         emptyFlag.setVisibility(View.VISIBLE);
 
-        if(Utils.getExpertCertificates(getActivity(),expertId)!=null) {
-            if (Utils.getExpertCertificates(getActivity(), expertId).getCertificates().isEmpty()) {
-                emptyFlag.setVisibility(View.VISIBLE);
-            } else {
-                emptyFlag.setVisibility(View.INVISIBLE);
-                certificateList.setAdapter(new CertificatesAdb(Utils.getExpertCertificates(getActivity(), expertId), getActivity(),REGISTERATION_MODE));
-                certificateList.setLayoutManager(new LinearLayoutManager(getActivity()));
-            }
-
-        }else {
-            Toast.makeText(getActivity(), "Null from get certificates", Toast.LENGTH_SHORT).show();
-        }
 
 
 
-
-
-
-
-
-
-
-/*
         //Loading Dialog
         final ProgressDialog mProgressDialog = new ProgressDialog(getActivity());
         mProgressDialog.setIndeterminate(true);
         mProgressDialog.setMessage(getActivity().getResources().getString(R.string.loading));
         mProgressDialog.show();
-
         //Get Data from server
         Generator.createService(ExpertsApi.class).getExpertCertificates(expertId).enqueue(new Callback<CertificatesList>() {
             @Override
@@ -99,7 +78,7 @@ public class RegCertificates extends Fragment {
                             emptyFlag.setVisibility(View.VISIBLE);
                         }else {
                             emptyFlag.setVisibility(View.INVISIBLE);
-                            certificateList.setAdapter(new CertificatesAdb(response.body(), getActivity()));
+                            certificateList.setAdapter(new CertificatesAdb(response.body(), getActivity(),RegCertificates.this,REGISTERATION_MODE));
                             certificateList.setLayoutManager(new LinearLayoutManager(getActivity()));
                         }
                     }else {
@@ -126,7 +105,7 @@ public class RegCertificates extends Fragment {
             }
         });
 
-*/
+
 
 
         //Add cert button action
@@ -136,7 +115,7 @@ public class RegCertificates extends Fragment {
                 Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.alpha);
                 addCertBtn.clearAnimation();
                 addCertBtn.setAnimation(anim);
-                Dialogs.fireAddCertDialog(getContext(), addCertBtn,Integer.parseInt(expertId),REGISTERATION_MODE);
+                Dialogs.fireAddCertDialog(getContext(), addCertBtn,Integer.parseInt(expertId),REGISTERATION_MODE,RegCertificates.this);
             }
         });
 

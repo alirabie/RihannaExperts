@@ -37,6 +37,7 @@ import retrofit2.Response;
  */
 public class Utils extends Activity {
 
+    static CertificatesList certificatesList;
 
 
     //Turn GPS ON Method
@@ -100,50 +101,7 @@ public class Utils extends Activity {
     }
 
 
-    //Get Certificates
-    public static CertificatesList getExpertCertificates(final Context context,String expertId){
-        final CertificatesList[] certificatesList = new CertificatesList[1];
-        //Loading Dialog
-        final ProgressDialog mProgressDialog = new ProgressDialog(context);
-        mProgressDialog.setIndeterminate(true);
-        mProgressDialog.setMessage(context.getResources().getString(R.string.loading));
-        mProgressDialog.show();
-        //Get Data from server
-        Generator.createService(ExpertsApi.class).getExpertCertificates(expertId).enqueue(new Callback<CertificatesList>() {
-            @Override
-            public void onResponse(Call<CertificatesList> call, Response<CertificatesList> response) {
-                if (mProgressDialog.isShowing())
-                    mProgressDialog.dismiss();
-                if(response.isSuccessful()){
-                    if(response.body().getCertificates()!=null){
-                        certificatesList[0] =response.body();
-                    }else {
-                        Toast.makeText(context, "Null from get certificates", Toast.LENGTH_SHORT).show();
-                    }
 
-                }else {
-                    try {
-                        Toast.makeText(context,"Not success from get certificates "+response.errorBody().string(),Toast.LENGTH_SHORT).show();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<CertificatesList> call, Throwable t) {
-                if (mProgressDialog.isShowing())
-                    mProgressDialog.dismiss();
-
-                Toast.makeText(context,"Connection error from get certificates "+t.getMessage(),Toast.LENGTH_SHORT).show();
-
-            }
-        });
-
-        return certificatesList[0];
-
-    }
 
 
 
