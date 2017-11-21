@@ -12,6 +12,7 @@ import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Experinces.DE
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Experinces.GET.GetExperinces;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Experinces.POST.ResPost;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Experinces.PUT.UpdateExp;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.ResService;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -21,6 +22,7 @@ import retrofit2.http.HTTP;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * Created by Eng Ali on 11/12/2017.
@@ -28,8 +30,12 @@ import retrofit2.http.Path;
 public interface ExpertsApi {
 
     //Get Categories
-    @GET("api/categories")
+    @GET("api/categories?fields=name,id")
     Call<ResCategory> getCategories();
+
+    //Get Services
+    @GET("api/products?fields=name,id,price")
+    Call<ResService>getServicesById(@Query("category_id") String id);
 
     //Add certificate
     @POST("api/expert/certificates")

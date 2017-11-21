@@ -1,21 +1,21 @@
-package experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Categories;
+package experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
 /**
- * Created by Eng Ali on 11/12/2017.
+ * Created by Eng Ali on 11/21/2017.
  */
-public class Category {
-
+public class Product {
     @SerializedName("id")
     @Expose
     private String id;
     @SerializedName("name")
     @Expose
     private String name;
+    @SerializedName("price")
+    @Expose
+    private Integer price;
 
     public String getId() {
         return id;
@@ -33,5 +33,11 @@ public class Category {
         this.name = name;
     }
 
+    public Integer getPrice() {
+        return price;
+    }
 
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
 }

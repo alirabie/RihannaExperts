@@ -36,6 +36,7 @@ import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.Delete.ResDelete;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.Update.ResUpdate;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.Update.UpdateCertificate;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.ResService;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.ExpertsApi;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.Generator;
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.RegistrationFragments.RegCertificates;
@@ -55,6 +56,13 @@ import retrofit2.Response;
 public class Dialogs {
     static String categoriyId="";
     static String year="";
+    static String serviceId="";
+    static String servicePrice="";
+    static List<String>categoriesNames;
+    static List<String>servicesNames;
+    static List<String>categoriesIds;
+    static List<String>servicesIds;
+    static List<String>servicesPrice;
 
 
     //Add certificate
@@ -613,11 +621,9 @@ public class Dialogs {
     //Subscribe to new service
     public static void fireSubscribeNewServiceDialog(final Context context,View view,String expertId){
 
-        final List<String>categories=new ArrayList<>();
-        final List<String>services=new ArrayList<>();
         final BetterSpinner categoriesSp;
         final BetterSpinner servicesSp;
-        EditText price;
+        final EditText price;
         EditText descountedPrice;
         final TextView subscribe_btn,close;
 
@@ -641,31 +647,104 @@ public class Dialogs {
         subscribe_btn=(TextView)dialogBuildercard.findViewById(R.id.subscribe_btn);
         close=(TextView)dialogBuildercard.findViewById(R.id.close);
 
+        categoriesSp.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item));
+        servicesSp.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item));
 
-
-
-
-
-
-
-        categories.add("خدمات الشعر");
-        categoriesSp.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, categories));
-        servicesSp.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, services));
-
-
-
-
-        categoriesSp.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        Generator.createService(ExpertsApi.class).getCategories().enqueue(new Callback<ResCategory>() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onResponse(Call<ResCategory> call, Response<ResCategory> response) {
+                if (response.isSuccessful()) {
 
-                services.add("قص شعر طويل");
-                services.add("قص شعر قصير");
-                servicesSp.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, services));
+                    //Fill names and ids
+                    categoriesNames = new ArrayList<String>();
+                    categoriesIds = new ArrayList<String>();
+                    for (int i = 0; i < response.body().getCategories().size(); i++) {
+                        categoriesNames.add(response.body().getCategories().get(i).getName());
+                        categoriesIds.add(response.body().getCategories().get(i).getId());
+                    }
+
+                    categoriesSp.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, categoriesNames));
+                    categoriesSp.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+
+                            Generator.createService(ExpertsApi.class).getServicesById(categoriesIds.get(position)).enqueue(new Callback<ResService>() {
+                                @Override
+                                public void onResponse(Call<ResService> call, Response<ResService> response) {
+                                    if (response.isSuccessful()) {
+                                        //Fill services Ids and names
+                                        servicesNames = new ArrayList<String>();
+                                        servicesIds = new ArrayList<String>();
+                                        servicesPrice=new ArrayList<String>();
+                                        for (int i = 0; i < response.body().getProducts().size(); i++) {
+                                            servicesNames.add(response.body().getProducts().get(i).getName());
+                                            servicesIds.add(response.body().getProducts().get(i).getId());
+                                            servicesPrice.add(response.body().getProducts().get(i).getPrice()+"");
+                                        }
+                                        servicesSp.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item,servicesNames));
+                                        servicesSp.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                            @Override
+                                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                                serviceId=servicesIds.get(position);
+                                                servicePrice=servicesPrice.get(position);
+                                                Toast.makeText(context,serviceId,Toast.LENGTH_SHORT).show();
+                                                price.setHint(servicePrice+context.getResources().getString(R.string.sr));
+                                            }
+                                        });
+
+
+                                    }else {
+                                        try {
+                                            Toast.makeText(context,response.errorBody().string(),Toast.LENGTH_SHORT).show();
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<ResService> call, Throwable t) {
+                                    Toast.makeText(context,"Connection Error from services SP "+t.getMessage(),Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+
+                        }
+                    });
+
+
+                }else {
+                    try {
+                        Toast.makeText(context,response.errorBody().string(),Toast.LENGTH_SHORT).show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
 
 
             }
+
+            @Override
+            public void onFailure(Call<ResCategory> call, Throwable t) {
+                Toast.makeText(context,"Connection Error from Services SP "+t.getMessage(),Toast.LENGTH_SHORT).show();
+            }
         });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
