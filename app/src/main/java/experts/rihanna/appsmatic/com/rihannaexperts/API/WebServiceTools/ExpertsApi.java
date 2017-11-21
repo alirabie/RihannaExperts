@@ -1,11 +1,17 @@
 package experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools;
 
+import com.google.android.gms.nearby.messages.internal.Update;
+
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Categories.ResCategory;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.Add.ResCertificate;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.Delete.ResDelete;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.Get.CertificatesList;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.Update.ResUpdate;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.Update.UpdateCertificate;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Experinces.DELETE.DeleteExp;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Experinces.GET.GetExperinces;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Experinces.POST.ResPost;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Experinces.PUT.UpdateExp;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -41,7 +47,24 @@ public interface ExpertsApi {
     @HTTP(method = "DELETE", path = "api/expert/certificates", hasBody = true)
     Call<ResDelete> deleteCertificate(@Body UpdateCertificate cert);
 
+    //Add new experiences
+    @POST("api/expert/expertise")
+    Call<ResPost> addExperinces(@Body Object ex);
 
+
+    //Get Experiences
+    @GET("api/expert/expertise/{id}")
+    Call<GetExperinces> getExperinces(@Path("id") String id);
+
+
+    //Update Experiences
+    @PUT("api/expert/expertise/")
+    Call<UpdateExp> updateExp(@Body Object exp);
+
+
+    //Delete exp
+    @HTTP(method = "DELETE", path = "api/expert/expertise/", hasBody = true)
+    Call<ResDelete> deleteExp(@Body DeleteExp deleteExp);
 
 
 }

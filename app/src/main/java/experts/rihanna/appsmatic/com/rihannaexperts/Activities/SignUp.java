@@ -26,6 +26,12 @@ import experts.rihanna.appsmatic.com.rihannaexperts.Helpers.Utils;
 public class SignUp extends AppCompatActivity {
 
     private TextView haveAcoountBtn;
+    public static  String expertId="0";
+    public static int infodone=0;
+    public static int addressdone=0;
+    public static int experincesdone=0;
+    public static int certificatesdone=0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,14 +54,6 @@ public class SignUp extends AppCompatActivity {
         fragmentTransaction.replace(R.id.register_fm_contanier,new RegPersonalInfo());
         fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
         fragmentTransaction.commit();
-
-
-
-
-
-
-
-
 
         haveAcoountBtn=(TextView)findViewById(R.id.have_account_btn);
         haveAcoountBtn.setOnClickListener(new View.OnClickListener() {

@@ -50,7 +50,6 @@ public class CertificatesAdb extends RecyclerView.Adapter<CertificatesAdb.vh0> {
       //  holder.certSpicialty.setText(certificatesList.getCertificates().get(position).);
         holder.certGranter.setText(certificatesList.getCertificates().get(position).getAuthorizedBy());
 
-
         //Updates button action
         holder.editBtn.setOnClickListener(new View.OnClickListener() {
             @Override

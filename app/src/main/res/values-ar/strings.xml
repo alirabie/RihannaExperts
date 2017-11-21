@@ -110,4 +110,10 @@
     <string name="subscribe">أشترك</string>
     <string name="unsubscribe">إلغاء الاشتراك</string>
     <string name="sr">ر.س</string>
+    <string name="aboutexperterrr">أدخل بعض المعلومات عنك</string>
+    <string name="experyearscounterr">حدد عدد سنوات الخبرة</string>
+    <string name="sucsess">تم الحفظ</string>
+    <string name="updated">تم التحديث بنجاح</string>
+    <string name="clearexp">حذف الخبرات</string>
+    <string name="deleted">تم الحذف</string>
 </resources>

@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
+import experts.rihanna.appsmatic.com.rihannaexperts.Activities.SignUp;
 import experts.rihanna.appsmatic.com.rihannaexperts.GPS.GPSTracker;
 import experts.rihanna.appsmatic.com.rihannaexperts.R;
 
@@ -75,6 +76,7 @@ public class RegAddressInfo extends Fragment implements OnMapReadyCallback {
 
 
                 //if data sent to server
+                SignUp.addressdone=1;
                 Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.alpha);
                 next.clearAnimation();
                 next.setAnimation(anim);
@@ -92,8 +94,8 @@ public class RegAddressInfo extends Fragment implements OnMapReadyCallback {
             @Override
             public void onClick(View v) {
 
-
                 //if skip this step
+                SignUp.addressdone=0;
                 Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.alpha);
                 skip.clearAnimation();
                 skip.setAnimation(anim);
@@ -126,15 +128,6 @@ public class RegAddressInfo extends Fragment implements OnMapReadyCallback {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
 
                 if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
-                    // handle back button's click listener
-                    Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.alpha);
-                    next.clearAnimation();
-                    next.setAnimation(anim);
-                    android.support.v4.app.FragmentManager fragmentManager = ((FragmentActivity) getContext()).getSupportFragmentManager();
-                    android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.register_fm_contanier, new RegPersonalInfo());
-                    fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
-                    fragmentTransaction.commit();
                     return true;
                 }
                 return false;

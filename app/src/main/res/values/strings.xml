@@ -113,6 +113,12 @@
     <string name="subscribe">Subscribe</string>
     <string name="unsubscribe">Unsubscribe</string>
     <string name="sr">S.R</string>
+    <string name="aboutexperterrr">Insert Your Info </string>
+    <string name="experyearscounterr">Set Your Experiences Years</string>
+    <string name="sucsess">Success</string>
+    <string name="updated">Updated Successfully</string>
+    <string name="clearexp">Clear Experiences</string>
+    <string name="deleted">Deleted</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

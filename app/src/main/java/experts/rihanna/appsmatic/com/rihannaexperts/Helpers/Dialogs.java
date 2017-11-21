@@ -537,6 +537,7 @@ public class Dialogs {
                                         break;
                                     case 1:
                                         //refresh fragment in update mode
+
                                         android.support.v4.app.FragmentManager fragmentManager2 = ((FragmentActivity) context).getSupportFragmentManager();
                                         /*
                                         android.support.v4.app.FragmentTransaction fragmentTransaction2 = fragmentManager2.beginTransaction();

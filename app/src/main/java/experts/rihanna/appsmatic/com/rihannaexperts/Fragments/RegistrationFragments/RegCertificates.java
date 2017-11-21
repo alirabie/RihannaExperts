@@ -21,6 +21,7 @@ import java.io.IOException;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.Get.CertificatesList;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.ExpertsApi;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.Generator;
+import experts.rihanna.appsmatic.com.rihannaexperts.Activities.SignUp;
 import experts.rihanna.appsmatic.com.rihannaexperts.Adaptors.CertificatesAdb;
 import experts.rihanna.appsmatic.com.rihannaexperts.Helpers.Dialogs;
 import experts.rihanna.appsmatic.com.rihannaexperts.Helpers.Utils;
@@ -38,7 +39,6 @@ public class RegCertificates extends Fragment {
     private TextView next;
     private TextView skip;
     private LinearLayout emptyFlag;
-    String expertId="2";
     final int REGISTERATION_MODE=0;
 
     @Override
@@ -60,14 +60,13 @@ public class RegCertificates extends Fragment {
 
 
 
-
         //Loading Dialog
         final ProgressDialog mProgressDialog = new ProgressDialog(getActivity());
         mProgressDialog.setIndeterminate(true);
         mProgressDialog.setMessage(getActivity().getResources().getString(R.string.loading));
         mProgressDialog.show();
         //Get Data from server
-        Generator.createService(ExpertsApi.class).getExpertCertificates(expertId).enqueue(new Callback<CertificatesList>() {
+        Generator.createService(ExpertsApi.class).getExpertCertificates(SignUp.expertId).enqueue(new Callback<CertificatesList>() {
             @Override
             public void onResponse(Call<CertificatesList> call, Response<CertificatesList> response) {
                 if (mProgressDialog.isShowing())
@@ -106,8 +105,6 @@ public class RegCertificates extends Fragment {
         });
 
 
-
-
         //Add cert button action
         addCertBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,7 +112,7 @@ public class RegCertificates extends Fragment {
                 Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.alpha);
                 addCertBtn.clearAnimation();
                 addCertBtn.setAnimation(anim);
-                Dialogs.fireAddCertDialog(getContext(), addCertBtn,Integer.parseInt(expertId),REGISTERATION_MODE,RegCertificates.this);
+                Dialogs.fireAddCertDialog(getContext(), addCertBtn,Integer.parseInt(SignUp.expertId),REGISTERATION_MODE,RegCertificates.this);
             }
         });
 
@@ -188,14 +185,16 @@ public class RegCertificates extends Fragment {
 
                 if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
                     // handle back button's click listener
-                    Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.alpha);
-                    next.clearAnimation();
-                    next.setAnimation(anim);
-                    android.support.v4.app.FragmentManager fragmentManager = ((FragmentActivity) getContext()).getSupportFragmentManager();
-                    android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.register_fm_contanier, new RegExperience());
-                    fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
-                    fragmentTransaction.commit();
+                    if(SignUp.experincesdone==0) {
+                        Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.alpha);
+                        next.clearAnimation();
+                        next.setAnimation(anim);
+                        android.support.v4.app.FragmentManager fragmentManager = ((FragmentActivity) getContext()).getSupportFragmentManager();
+                        android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.register_fm_contanier, new RegExperience());
+                        fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+                        fragmentTransaction.commit();
+                    }
                     return true;
                 }
                 return false;

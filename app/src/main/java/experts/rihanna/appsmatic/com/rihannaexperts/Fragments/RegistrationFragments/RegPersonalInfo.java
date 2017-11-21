@@ -16,6 +16,7 @@ import android.widget.Toast;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import experts.rihanna.appsmatic.com.rihannaexperts.Activities.SignUp;
 import experts.rihanna.appsmatic.com.rihannaexperts.R;
 
 public class RegPersonalInfo extends Fragment {
@@ -107,6 +108,8 @@ public class RegPersonalInfo extends Fragment {
 
                     Toast.makeText(getActivity(),"Good Validations",Toast.LENGTH_SHORT).show();
 
+                    SignUp.expertId="2";
+                    SignUp.infodone=1;
                     android.support.v4.app.FragmentManager fragmentManager = ((FragmentActivity) getContext()).getSupportFragmentManager();
                     android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.register_fm_contanier, new RegAddressInfo());
