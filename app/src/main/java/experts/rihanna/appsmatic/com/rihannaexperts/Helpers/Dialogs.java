@@ -1,12 +1,10 @@
 package experts.rihanna.appsmatic.com.rihannaexperts.Helpers;
 
-import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -36,15 +34,11 @@ import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.Delete.ResDelete;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.Update.ResUpdate;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.Update.UpdateCertificate;
-import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.ResService;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.Get.ResService;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.ExpertsApi;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.Generator;
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.RegistrationFragments.RegCertificates;
-import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.AccountMangeFrag;
-import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.UpdateExpertsFragments.ExperincesFragments.UpdateCertificateFrag;
-import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.UpdateExpertsFragments.UpdateExp;
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.UpdateExpertsFragments.UpdateServicesFrag;
-import experts.rihanna.appsmatic.com.rihannaexperts.Prefs.SaveSharedPreference;
 import experts.rihanna.appsmatic.com.rihannaexperts.R;
 import retrofit2.Call;
 import retrofit2.Callback;

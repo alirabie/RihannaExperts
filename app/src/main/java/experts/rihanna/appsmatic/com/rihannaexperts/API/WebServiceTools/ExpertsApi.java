@@ -1,7 +1,5 @@
 package experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools;
 
-import com.google.android.gms.nearby.messages.internal.Update;
-
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Categories.ResCategory;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.Add.ResCertificate;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.Delete.ResDelete;
@@ -12,11 +10,9 @@ import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Experinces.DE
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Experinces.GET.GetExperinces;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Experinces.POST.ResPost;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Experinces.PUT.UpdateExp;
-import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.ResService;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.Get.ResService;
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.DELETE;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.HTTP;
 import retrofit2.http.POST;
