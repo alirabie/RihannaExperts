@@ -116,4 +116,11 @@
     <string name="updated">Updated Successfully</string>
     <string name="clearexp">Clear Experiences</string>
     <string name="deleted">Deleted</string>
+    <string name="suscribesucsess">Service has been Subscribed</string>
+    <string name="insertdescount">Insert Discount Amount</string>
+    <string name="insertprice">Insert Service Price</string>
+    <string name="categorieserr">Select Category</string>
+    <string name="serviceerr">Select Service</string>
+    <string name="discountvalue">Disc/Amount</string>
+    <string name="unsubscribed">Unsubscribed</string>
 </resources>

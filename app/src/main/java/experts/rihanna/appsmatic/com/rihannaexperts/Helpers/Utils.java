@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.IntentSender;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.View;
@@ -24,6 +26,7 @@ import com.google.android.gms.location.LocationSettingsStatusCodes;
 import java.io.IOException;
 
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.Get.CertificatesList;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.UnSubscribe.ResUnSubscribe;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.ExpertsApi;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.Generator;
 import experts.rihanna.appsmatic.com.rihannaexperts.Adaptors.CertificatesAdb;
@@ -100,6 +103,42 @@ public class Utils extends Activity {
         return true;
     }
 
+
+
+    //Un Subscribe Service
+    public static void unsubscribeService(final Context context,String expertId,String serviceId,final android.support.v4.app.Fragment fragment){
+
+        Generator.createService(ExpertsApi.class).unsubscribe(expertId,serviceId).enqueue(new Callback<ResUnSubscribe>() {
+            @Override
+            public void onResponse(Call<ResUnSubscribe> call, Response<ResUnSubscribe> response) {
+                if(response.isSuccessful()){
+                    if(response.body().getStatus().toString().equals("ok")) {
+                        Toast.makeText(context,response.body().getStatus()+context.getResources().getString(R.string.unsubscribed),Toast.LENGTH_SHORT).show();
+                        android.support.v4.app.FragmentManager fragmentManager2 = ((FragmentActivity) context).getSupportFragmentManager();
+                        fragmentManager2.beginTransaction().detach(fragment).attach(fragment).commit();
+                    }else {
+                        Toast.makeText(context,response.body().getErrorMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                }else {
+                    try {
+                        Toast.makeText(context,response.errorBody().string(),Toast.LENGTH_SHORT).show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResUnSubscribe> call, Throwable t) {
+                Toast.makeText(context,"Connection Error from unsubscribe API "+t.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+
+
+    }
 
 
 

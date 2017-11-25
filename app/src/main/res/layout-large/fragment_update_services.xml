@@ -42,22 +42,6 @@
         android:layout_alignParentEnd="true"
         android:id="@+id/linearLayout8">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/save"
-            android:id="@+id/next_btn"
-            android:padding="10dp"
-            android:background="@color/colorPrimary"
-            android:gravity="center"
-            android:textColor="#ffffff"
-            android:layout_below="@+id/linearLayout6"
-            android:layout_centerHorizontal="true"
-            android:textSize="20dp"
-            android:layout_weight="1"
-            android:layout_margin="10dp" />
-
     </LinearLayout>
 
     <LinearLayout

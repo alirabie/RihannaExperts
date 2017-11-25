@@ -78,7 +78,7 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:inputType="textPersonName"
+                        android:inputType="number"
                         android:ems="10"
                         android:id="@+id/price_sp"
                         android:layout_alignParentTop="true"
@@ -102,7 +102,6 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:inputType="textPersonName"
                         android:ems="10"
                         android:id="@+id/discount_sp"
                         android:layout_alignParentTop="true"
@@ -112,7 +111,8 @@
                         android:hint="@string/priceafterdecount"
                         android:textSize="20dp"
                         android:layout_weight="1"
-                        android:layout_margin="1dp" />
+                        android:layout_margin="1dp"
+                        android:inputType="number" />
                 </FrameLayout>
 
             </LinearLayout>

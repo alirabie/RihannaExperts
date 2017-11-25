@@ -10,7 +10,10 @@ import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Experinces.DE
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Experinces.GET.GetExperinces;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Experinces.POST.ResPost;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Experinces.PUT.UpdateExp;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.ExpertServices.ResExpertServices;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.Get.ResService;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.Subscribe.SubscribeResponse;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.UnSubscribe.ResUnSubscribe;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -67,6 +70,22 @@ public interface ExpertsApi {
     //Delete exp
     @HTTP(method = "DELETE", path = "api/expert/expertise/", hasBody = true)
     Call<ResDelete> deleteExp(@Body DeleteExp deleteExp);
+
+
+    //Subscribe Services
+    @POST("api/expert/services")
+    Call<SubscribeResponse> subscribeService(@Body Object service);
+
+    //Get Expert Services
+    @GET("api/expert/services?")
+    Call<ResExpertServices> getExpertServices(@Query("ExpertId") String id);
+
+
+    //Unsubscribe Service
+    @POST("api/expert/services/unsubscribe?")
+    Call<ResUnSubscribe>unsubscribe(@Query("ExpertId")String expId,@Query("ServiceId")String servId);
+
+
 
 
 }

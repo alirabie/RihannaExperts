@@ -2,6 +2,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
     android:background="#b4b4b4">
 
     <LinearLayout
@@ -28,16 +30,19 @@
                 android:text="service"
                 android:id="@+id/item_layout_service_name"
                 android:gravity="center"
-                android:textSize="20dp"
+                android:textSize="15dp"
                 android:layout_weight="1"
-                android:textColor="#000000" />
+                android:textColor="#000000"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp" />
 
             <LinearLayout
                 android:orientation="horizontal"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:layout_weight="1">
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -48,7 +53,7 @@
                     android:layout_marginLeft="3dp"
                     android:layout_marginRight="3dp"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="20dp"
+                    android:textSize="15dp"
                     android:gravity="center" />
 
                 <TextView
@@ -57,8 +62,50 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="@string/sr"
                     android:id="@+id/textView38"
-                    android:textSize="20dp"
+                    android:textSize="15dp"
                     android:gravity="center" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/discountvalue"
+                    android:id="@+id/textView36"
+                    android:textSize="15dp"
+                    android:gravity="center"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="3dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="100"
+                    android:id="@+id/item_layout_service_disc_amount"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15dp"
+                    android:gravity="center" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/sr"
+                    android:id="@+id/textView37"
+                    android:textSize="15dp"
+                    android:gravity="center"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp" />
 
             </LinearLayout>
 
@@ -71,11 +118,13 @@
             android:text="@string/unsubscribe"
             android:id="@+id/item_layout_service_subscribe_btn"
             android:gravity="center"
-            android:textSize="20dp"
+            android:textSize="15dp"
             android:textColor="#ffffff"
             android:background="@color/colorPrimary"
             android:padding="2dp"
-            android:layout_weight="3" />
+            android:layout_weight="4"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp" />
 
     </LinearLayout>
 </FrameLayout>
