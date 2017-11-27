@@ -126,6 +126,8 @@
     <string name="serviceerr">Select Service</string>
     <string name="discountvalue">Disc/Amount</string>
     <string name="unsubscribed">Unsubscribed</string>
+    <string name="ordernum">Order Number</string>
+    <string name="servicetype">Request status</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

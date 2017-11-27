@@ -123,4 +123,6 @@
     <string name="serviceerr">أختر الخدمة</string>
     <string name="discountvalue">قيمة الخصم</string>
     <string name="unsubscribed">تم اللغاء الاشتراك</string>
+    <string name="ordernum">الطلب رقم</string>
+    <string name="servicetype">حالة الطلب</string>
 </resources>

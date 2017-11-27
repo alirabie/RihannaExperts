@@ -1,5 +1,7 @@
 package experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools;
 
+import java.util.List;
+
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Categories.ResCategory;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.Add.ResCertificate;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.Delete.ResDelete;
@@ -10,6 +12,7 @@ import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Experinces.DE
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Experinces.GET.GetExperinces;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Experinces.POST.ResPost;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Experinces.PUT.UpdateExp;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.MangeOrders.Order;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.ExpertServices.ResExpertServices;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.Get.ResService;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.Subscribe.SubscribeResponse;
@@ -86,6 +89,9 @@ public interface ExpertsApi {
     Call<ResUnSubscribe>unsubscribe(@Query("ExpertId")String expId,@Query("ServiceId")String servId);
 
 
+    //Get Expert Orders
+    @GET("api/expert/orders?")
+    Call<List<Order>>getExpertOrders(@Query("ExpertId")String expId);
 
 
 }

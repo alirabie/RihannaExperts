@@ -18,6 +18,7 @@ public class PreviewScheduleFrag extends Fragment {
 
     MaterialCalendarView materialCalendarView;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

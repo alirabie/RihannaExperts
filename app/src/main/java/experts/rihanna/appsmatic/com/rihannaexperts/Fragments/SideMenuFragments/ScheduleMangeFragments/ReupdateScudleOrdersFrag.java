@@ -15,6 +15,8 @@ import experts.rihanna.appsmatic.com.rihannaexperts.R;
 
 public class ReupdateScudleOrdersFrag extends Fragment {
 
+    private final String SOURCE="preview_schadule_orders";
+
     ImageView busyFlag;
 
     @Override

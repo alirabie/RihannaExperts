@@ -12,6 +12,6 @@ public class OrderInfo extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order_info);
+        setContentView(R.layout.fragment_order_info);
     }
 }
