@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
@@ -26,6 +27,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.ChangeOrderStatus.ChangingResponse;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.MangeOrders.SubOrder;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.ExpertsApi;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.Generator;
@@ -39,10 +41,18 @@ import retrofit2.Response;
 
 public class OrderInfoFrag extends Fragment {
 
-    private TextView orderNumTv,dateTv,timeTv,customerName,customerPhone,customerAddress,emptyOrdersFlag,accept,decline,serviceTypeFlag;
+    private TextView orderNumTv,dateTv,timeTv,customerName,customerPhone,customerAddress,emptyOrdersFlag,accept,decline,finished,serviceTypeFlag;
     private LinearLayout outDoorFlag,showOnmapBtn;
     private FrameLayout orderConfirmedFlag;
     private RecyclerView orderitemsList;
+
+
+    //status
+    private final int PENDING=10;
+    private final int ACCEPT=20;
+    private final int DONE=30;
+    private final int DECLINE=40;
+
 
 
     @Override
@@ -65,12 +75,16 @@ public class OrderInfoFrag extends Fragment {
         emptyOrdersFlag=(TextView)view.findViewById(R.id.order_info_empty_list_flag);
         accept=(TextView)view.findViewById(R.id.accept_btn);
         decline=(TextView)view.findViewById(R.id.next_btn);
+        finished=(TextView)view.findViewById(R.id.finishorder_btn);
         serviceTypeFlag=(TextView)view.findViewById(R.id.servicetypeflag);
         showOnmapBtn=(LinearLayout)view.findViewById(R.id.order_info_show_on_map);
         orderConfirmedFlag=(FrameLayout)view.findViewById(R.id.orderconfirmed_flag);
         orderitemsList=(RecyclerView)view.findViewById(R.id.order_info_order_list);
         orderConfirmedFlag.setVisibility(View.INVISIBLE);
         emptyOrdersFlag.setVisibility(View.INVISIBLE);
+        finished.setVisibility(View.INVISIBLE);
+        accept.setVisibility(View.INVISIBLE);
+        decline.setVisibility(View.INVISIBLE);
 
         Toast.makeText(getContext(),"Order Id "+getArguments().getInt("orderId"),Toast.LENGTH_SHORT).show();
 
@@ -89,6 +103,47 @@ public class OrderInfoFrag extends Fragment {
                         mProgressDialog.dismiss();
                     if(response.body()!=null){
                         orderNumTv.setText(getResources().getString(R.string.ordernum)+" : "+response.body().getId()+"   "+getResources().getString(R.string.servicetype)+" : "+response.body().getOrderStatus());
+
+
+                        //status Control Logic
+                        switch (response.body().getOrderStatusId()){
+                            case PENDING:
+                                //Pending
+                                orderConfirmedFlag.setVisibility(View.INVISIBLE);
+                                finished.setVisibility(View.INVISIBLE);
+                                accept.setVisibility(View.VISIBLE);
+                                decline.setVisibility(View.VISIBLE);
+                                break;
+                            case ACCEPT:
+                                //Accepted
+                                orderConfirmedFlag.setVisibility(View.INVISIBLE);
+                                finished.setVisibility(View.VISIBLE);
+                                accept.setVisibility(View.INVISIBLE);
+                                decline.setVisibility(View.INVISIBLE);
+                                break;
+                            case DONE:
+                                //Finished
+                                orderConfirmedFlag.setVisibility(View.VISIBLE);
+                                finished.setVisibility(View.INVISIBLE);
+                                accept.setVisibility(View.INVISIBLE);
+                                decline.setVisibility(View.INVISIBLE);
+                                break;
+                            case DECLINE :
+                                //Canceled
+                                orderConfirmedFlag.setVisibility(View.INVISIBLE);
+                                finished.setVisibility(View.INVISIBLE);
+                                accept.setVisibility(View.VISIBLE);
+                                decline.setVisibility(View.VISIBLE);
+                                break;
+                        }
+
+
+
+
+
+
+
+
 
                         //Order Items List
                         if(response.body().getOrderItems()!=null) {
@@ -131,6 +186,8 @@ public class OrderInfoFrag extends Fragment {
 
                         //service type
                         serviceTypeFlag.setText(response.body().getServiceType());
+
+
                         //Show on map btn action
                         showOnmapBtn.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -155,7 +212,48 @@ public class OrderInfoFrag extends Fragment {
                                 Animation anim1 = AnimationUtils.loadAnimation(getContext(), R.anim.alpha);
                                 accept.clearAnimation();
                                 accept.setAnimation(anim1);
+                                final ProgressDialog mProgressDialog = new ProgressDialog(getActivity());
+                                mProgressDialog.setIndeterminate(true);
+                                mProgressDialog.setMessage(getActivity().getResources().getString(R.string.loading));
+                                mProgressDialog.show();
+                                Generator.createService(ExpertsApi.class).changeOrdrStatus(getArguments().getInt("orderId")+"",ACCEPT+"").enqueue(new Callback<ChangingResponse>() {
+                                    @Override
+                                    public void onResponse(Call<ChangingResponse> call, Response<ChangingResponse> response) {
+                                        if (response.isSuccessful()) {
+                                            if (mProgressDialog.isShowing())
+                                                mProgressDialog.dismiss();
+                                            if (response.body() != null) {
+                                                if (response.body().getMessage().toString().equals("Status Updated")) {
+                                                    Toast.makeText(getContext(), getResources().getString(R.string.save), Toast.LENGTH_SHORT).show();
+                                                    //Refresh Fragment
+                                                    android.support.v4.app.FragmentManager fragmentManager2 = ((FragmentActivity) getContext()).getSupportFragmentManager();
+                                                    fragmentManager2.beginTransaction().detach(OrderInfoFrag.this).attach(OrderInfoFrag.this).commit();
+                                                }else {
+                                                    Toast.makeText(getContext(),"Not Updated from change order status", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }else {
+                                                Toast.makeText(getContext(),"null from change order status", Toast.LENGTH_SHORT).show();
+                                            }
 
+
+                                        } else {
+                                            if (mProgressDialog.isShowing())
+                                                mProgressDialog.dismiss();
+                                            try {
+                                                Toast.makeText(getContext(), response.errorBody().string(), Toast.LENGTH_SHORT).show();
+                                            } catch (IOException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<ChangingResponse> call, Throwable t) {
+                                        if (mProgressDialog.isShowing())
+                                            mProgressDialog.dismiss();
+                                        Toast.makeText(getContext(),"connection error from change order status "+t.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
 
                             }
                         });
@@ -168,10 +266,109 @@ public class OrderInfoFrag extends Fragment {
                                 Animation anim1 = AnimationUtils.loadAnimation(getContext(), R.anim.alpha);
                                 decline.clearAnimation();
                                 decline.setAnimation(anim1);
+                                final ProgressDialog mProgressDialog = new ProgressDialog(getActivity());
+                                mProgressDialog.setIndeterminate(true);
+                                mProgressDialog.setMessage(getActivity().getResources().getString(R.string.loading));
+                                mProgressDialog.show();
+                                Generator.createService(ExpertsApi.class).changeOrdrStatus(getArguments().getInt("orderId")+"",DECLINE+"").enqueue(new Callback<ChangingResponse>() {
+                                    @Override
+                                    public void onResponse(Call<ChangingResponse> call, Response<ChangingResponse> response) {
+                                        if (response.isSuccessful()) {
+                                            if (mProgressDialog.isShowing())
+                                                mProgressDialog.dismiss();
+                                            if (response.body() != null) {
+                                                if (response.body().getMessage().toString().equals("Status Updated")) {
+                                                    Toast.makeText(getContext(), getResources().getString(R.string.canceld), Toast.LENGTH_SHORT).show();
+                                                    //Refresh Fragment
+                                                    android.support.v4.app.FragmentManager fragmentManager2 = ((FragmentActivity) getContext()).getSupportFragmentManager();
+                                                    fragmentManager2.beginTransaction().detach(OrderInfoFrag.this).attach(OrderInfoFrag.this).commit();
+
+                                                } else {
+                                                    Toast.makeText(getContext(), "Not Updated from change order status", Toast.LENGTH_SHORT).show();
+                                                }
+                                            } else {
+                                                Toast.makeText(getContext(), "null from change order status", Toast.LENGTH_SHORT).show();
+                                            }
 
 
+                                        } else {
+                                            if (mProgressDialog.isShowing())
+                                                mProgressDialog.dismiss();
+                                            try {
+                                                Toast.makeText(getContext(), response.errorBody().string(), Toast.LENGTH_SHORT).show();
+                                            } catch (IOException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<ChangingResponse> call, Throwable t) {
+                                        if (mProgressDialog.isShowing())
+                                            mProgressDialog.dismiss();
+                                        Toast.makeText(getContext(), "connection error from change order status " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
                             }
                         });
+
+
+                        //Finished Btn action
+                        finished.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Animation anim1 = AnimationUtils.loadAnimation(getContext(), R.anim.alpha);
+                                finished.clearAnimation();
+                                finished.setAnimation(anim1);
+                                final ProgressDialog mProgressDialog = new ProgressDialog(getActivity());
+                                mProgressDialog.setIndeterminate(true);
+                                mProgressDialog.setMessage(getActivity().getResources().getString(R.string.loading));
+                                mProgressDialog.show();
+                                Generator.createService(ExpertsApi.class).changeOrdrStatus(getArguments().getInt("orderId")+"",DONE+"").enqueue(new Callback<ChangingResponse>() {
+                                    @Override
+                                    public void onResponse(Call<ChangingResponse> call, Response<ChangingResponse> response) {
+                                        if (response.isSuccessful()) {
+                                            if (mProgressDialog.isShowing())
+                                                mProgressDialog.dismiss();
+                                            if (response.body() != null) {
+                                                if (response.body().getMessage().toString().equals("Status Updated")) {
+                                                    Toast.makeText(getContext(), getResources().getString(R.string.orderfinished), Toast.LENGTH_SHORT).show();
+                                                    //Refresh Fragment
+                                                    android.support.v4.app.FragmentManager fragmentManager2 = ((FragmentActivity) getContext()).getSupportFragmentManager();
+                                                    fragmentManager2.beginTransaction().detach(OrderInfoFrag.this).attach(OrderInfoFrag.this).commit();
+                                                } else {
+                                                    Toast.makeText(getContext(), "Not Updated from change order status", Toast.LENGTH_SHORT).show();
+                                                }
+                                            } else {
+                                                Toast.makeText(getContext(), "null from change order status", Toast.LENGTH_SHORT).show();
+                                            }
+
+
+                                        } else {
+                                            if (mProgressDialog.isShowing())
+                                                mProgressDialog.dismiss();
+                                            try {
+                                                Toast.makeText(getContext(), response.errorBody().string(), Toast.LENGTH_SHORT).show();
+                                            } catch (IOException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<ChangingResponse> call, Throwable t) {
+                                        if (mProgressDialog.isShowing())
+                                            mProgressDialog.dismiss();
+                                        Toast.makeText(getContext(), "connection error from change order status " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+                        });
+
+
+
+
+
 
 
                     }else {

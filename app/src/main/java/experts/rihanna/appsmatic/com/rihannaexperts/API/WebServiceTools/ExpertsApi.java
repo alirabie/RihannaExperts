@@ -8,6 +8,7 @@ import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.Get.CertificatesList;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.Update.ResUpdate;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.Update.UpdateCertificate;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.ChangeOrderStatus.ChangingResponse;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Experinces.DELETE.DeleteExp;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Experinces.GET.GetExperinces;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Experinces.POST.ResPost;
@@ -98,6 +99,10 @@ public interface ExpertsApi {
     @GET("api/expert/suborders?")
     Call<SubOrder>getOrderInfo(@Query("OrderId")String OrderId);
 
+
+    //Change Order Status
+    @POST("/api/expert/order/status?")
+    Call<ChangingResponse>changeOrdrStatus(@Query("OrderId")String orderId,@Query("StatusId")String statusId);
 
 
 }

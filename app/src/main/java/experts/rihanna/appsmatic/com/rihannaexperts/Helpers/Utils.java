@@ -26,6 +26,7 @@ import com.google.android.gms.location.LocationSettingsStatusCodes;
 import java.io.IOException;
 
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.Get.CertificatesList;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.ChangeOrderStatus.ChangingResponse;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.UnSubscribe.ResUnSubscribe;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.ExpertsApi;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.Generator;
@@ -142,6 +143,15 @@ public class Utils extends Activity {
 
 
 
+    //Change Order status
+    public static void changeOrderStatus(Context context,String orderId,String statusId,Fragment fragment){
+
+
+
+
+
+
+    }
 
 
 

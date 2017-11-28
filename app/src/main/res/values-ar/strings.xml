@@ -41,7 +41,7 @@
     <string name="outservice">طلب خدمة خارجية</string>
     <string name="accept">قبول</string>
     <string name="dicline">رفض</string>
-    <string name="orderaccepted">تم تأكيد الطلب</string>
+    <string name="orderaccepted">تم إنهاءالطلب</string>
     <string name="showonmap">إظهار الموقع على الخريطة</string>
     <string name="customerinfo">بيانات العميلة</string>
     <string name="time">الموعد</string>
@@ -125,4 +125,8 @@
     <string name="unsubscribed">تم اللغاء الاشتراك</string>
     <string name="ordernum">الطلب رقم</string>
     <string name="servicetype">حالة الطلب</string>
+    <string name="ordercompleted">إنهاء الطلب</string>
+    <string name="canceld">تم رفض الطلب</string>
+    <string name="accepted">تم قبول الطلب</string>
+    <string name="orderfinished">تم إنهاء الطلب</string>
 </resources>

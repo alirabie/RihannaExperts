@@ -41,7 +41,7 @@
     <string name="outservice">Outdoor Service</string>
     <string name="accept">Accept</string>
     <string name="dicline">Reject</string>
-    <string name="orderaccepted">Request confirmed</string>
+    <string name="orderaccepted">Request Completed</string>
     <string name="showonmap">Show Location On Map</string>
     <string name="customerinfo">Customer Info</string>
     <string name="time">The appointment</string>
@@ -128,6 +128,10 @@
     <string name="unsubscribed">Unsubscribed</string>
     <string name="ordernum">Order Number</string>
     <string name="servicetype">Request status</string>
+    <string name="ordercompleted">Set Order Completed</string>
+    <string name="canceld">Order Canceled</string>
+    <string name="accepted">Order Accepted</string>
+    <string name="orderfinished">Order Finished</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
