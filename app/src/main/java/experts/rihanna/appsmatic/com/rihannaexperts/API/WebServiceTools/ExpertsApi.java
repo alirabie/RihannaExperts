@@ -13,6 +13,7 @@ import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Experinces.GE
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Experinces.POST.ResPost;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Experinces.PUT.UpdateExp;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.MangeOrders.Order;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.MangeOrders.SubOrder;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.ExpertServices.ResExpertServices;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.Get.ResService;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.Subscribe.SubscribeResponse;
@@ -92,6 +93,11 @@ public interface ExpertsApi {
     //Get Expert Orders
     @GET("api/expert/orders?")
     Call<List<Order>>getExpertOrders(@Query("ExpertId")String expId);
+
+    //Get SubOrder By Id
+    @GET("api/expert/suborders?")
+    Call<SubOrder>getOrderInfo(@Query("OrderId")String OrderId);
+
 
 
 }
