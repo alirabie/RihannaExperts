@@ -109,7 +109,7 @@
     <string name="category">Services Category</string>
     <string name="service">Service</string>
     <string name="price">Price</string>
-    <string name="priceafterdecount">Discounted Price</string>
+    <string name="priceafterdecount">Discount amount</string>
     <string name="subscribe">Subscribe</string>
     <string name="unsubscribe">Unsubscribe</string>
     <string name="sr">S.R</string>

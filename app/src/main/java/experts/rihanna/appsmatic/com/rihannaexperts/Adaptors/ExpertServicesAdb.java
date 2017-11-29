@@ -38,6 +38,7 @@ public class ExpertServicesAdb extends RecyclerView.Adapter<ExpertServicesAdb.Vh
     @Override
     public void onBindViewHolder(final Vh002 holder, final int position) {
 
+        animate(holder);
         holder.serviceName.setText(expertServices.getServices().get(position).getServiceId()+"");
         holder.price.setText(expertServices.getServices().get(position).getPrice()+"");
         holder.discAmount.setText(expertServices.getServices().get(position).getDiscountAmount()+"");
@@ -68,6 +69,11 @@ public class ExpertServicesAdb extends RecyclerView.Adapter<ExpertServicesAdb.Vh
         return expertServices.getServices().size();
     }
 
+
+    public void animate(RecyclerView.ViewHolder viewHolder) {
+        final Animation animAnticipateOvershoot = AnimationUtils.loadAnimation(context, R.anim.fadein);
+        viewHolder.itemView.setAnimation(animAnticipateOvershoot);
+    }
     public static class Vh002 extends RecyclerView.ViewHolder{
 
         TextView serviceName,price,discAmount,unSubscribeBtn;

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import experts.rihanna.appsmatic.com.rihannaexperts.Activities.Home;
 import experts.rihanna.appsmatic.com.rihannaexperts.R;
@@ -18,6 +19,7 @@ public class MainFrag extends Fragment {
 
     ImageView orderAdmin,workTimeAdmin,accountAdmin,saleAdmin;
     Animation anim;
+    LinearLayout mainPanel;
 
 
     @Override
@@ -37,7 +39,15 @@ public class MainFrag extends Fragment {
         workTimeAdmin=(ImageView)view.findViewById(R.id.work_table_btn);
         accountAdmin=(ImageView)view.findViewById(R.id.my_account_main_btn);
         saleAdmin=(ImageView)view.findViewById(R.id.sale_mange_btn);
+        mainPanel=(LinearLayout)view.findViewById(R.id.main_contener);
 
+
+
+
+        //Animate home buttons
+        Animation anim1 = AnimationUtils.loadAnimation(getContext(), R.anim.fadein);
+        mainPanel.clearAnimation();
+        mainPanel.setAnimation(anim1);
 
 
         //Mange Orders Button Action

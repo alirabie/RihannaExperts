@@ -105,7 +105,7 @@
     <string name="repasserr">اعد كتابة كلمة المرور</string>
     <string name="category">تصنيف الخدمات</string>
     <string name="price">السعر</string>
-    <string name="priceafterdecount">السعر المخفض</string>
+    <string name="priceafterdecount">قيمة الخصم</string>
     <string name="service">الخدمة</string>
     <string name="subscribe">أشترك</string>
     <string name="unsubscribe">إلغاء الاشتراك</string>

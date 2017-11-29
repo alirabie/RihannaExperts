@@ -86,7 +86,7 @@ public class OrderInfoFrag extends Fragment {
         accept.setVisibility(View.INVISIBLE);
         decline.setVisibility(View.INVISIBLE);
 
-        Toast.makeText(getContext(),"Order Id "+getArguments().getInt("orderId"),Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(),"Order Id "+getArguments().getInt("orderId"),Toast.LENGTH_SHORT).show();
 
 
         //Get Order Info from Server
@@ -133,7 +133,7 @@ public class OrderInfoFrag extends Fragment {
                                 orderConfirmedFlag.setVisibility(View.INVISIBLE);
                                 finished.setVisibility(View.INVISIBLE);
                                 accept.setVisibility(View.VISIBLE);
-                                decline.setVisibility(View.VISIBLE);
+                                decline.setVisibility(View.INVISIBLE);
                                 break;
                         }
 
@@ -195,11 +195,12 @@ public class OrderInfoFrag extends Fragment {
                                 Animation anim1 = AnimationUtils.loadAnimation(getContext(), R.anim.alpha);
                                 showOnmapBtn.clearAnimation();
                                 showOnmapBtn.setAnimation(anim1);
-                                startActivity(new Intent(getContext(), MapsActivity.class)
-                                        .putExtra("lat", Double.parseDouble(response.body().getCustomerLat()))
-                                        .putExtra("long",Double.parseDouble(response.body().getCustomerLong()))
-                                        .putExtra("name", response.body().getCustomer()));
-
+                                try {
+                                    startActivity(new Intent(getContext(), MapsActivity.class)
+                                            .putExtra("lat", Double.parseDouble(response.body().getCustomerLat()))
+                                            .putExtra("long", Double.parseDouble(response.body().getCustomerLong()))
+                                            .putExtra("name", response.body().getCustomer()));
+                                }catch (Exception e){}
 
                             }
                         });
@@ -397,9 +398,6 @@ public class OrderInfoFrag extends Fragment {
                 Toast.makeText(getContext(),"Connection error from Order Info "+t.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
-
-
-
 
     }
 

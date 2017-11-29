@@ -26,6 +26,7 @@ import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.Generato
 import experts.rihanna.appsmatic.com.rihannaexperts.Activities.Home;
 import experts.rihanna.appsmatic.com.rihannaexperts.Adaptors.ExpertOrdersAdb;
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.RegistrationFragments.RegPersonalInfo;
+import experts.rihanna.appsmatic.com.rihannaexperts.Prefs.SaveSharedPreference;
 import experts.rihanna.appsmatic.com.rihannaexperts.R;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -54,7 +55,7 @@ public class OrdersFrag extends Fragment {
         emptyFlag.setVisibility(View.INVISIBLE);
 
 
-        //Get Orders List from Server
+        //Get Orders List from Server with test id 53
 
         //Loading Dialog
         final ProgressDialog mProgressDialog = new ProgressDialog(getActivity());
@@ -96,10 +97,6 @@ public class OrdersFrag extends Fragment {
                 Toast.makeText(getContext(),"Connection error From Orders List"+t.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
-
-
-
-
 
 
 

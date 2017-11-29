@@ -45,6 +45,7 @@ public class CertificatesAdb extends RecyclerView.Adapter<CertificatesAdb.vh0> {
     @Override
     public void onBindViewHolder(final vh0 holder, final int position) {
 
+        animate(holder);
         holder.certName.setText(certificatesList.getCertificates().get(position).getName());
         holder.certYear.setText(certificatesList.getCertificates().get(position).getYearAcquired()+"");
       //  holder.certSpicialty.setText(certificatesList.getCertificates().get(position).);
@@ -76,6 +77,11 @@ public class CertificatesAdb extends RecyclerView.Adapter<CertificatesAdb.vh0> {
     @Override
     public int getItemCount() {
         return certificatesList.getCertificates().size();
+    }
+
+    public void animate(RecyclerView.ViewHolder viewHolder) {
+        final Animation animAnticipateOvershoot = AnimationUtils.loadAnimation(context, R.anim.fadein);
+        viewHolder.itemView.setAnimation(animAnticipateOvershoot);
     }
 
     public static class vh0 extends RecyclerView.ViewHolder{

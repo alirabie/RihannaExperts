@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.MainFrag"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/main_contener">
 
     <!-- TODO: Update blank fragment layout -->
 

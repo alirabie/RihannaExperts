@@ -143,15 +143,6 @@ public class Utils extends Activity {
 
 
 
-    //Change Order status
-    public static void changeOrderStatus(Context context,String orderId,String statusId,Fragment fragment){
-
-
-
-
-
-
-    }
 
 
 

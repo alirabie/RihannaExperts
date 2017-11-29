@@ -89,6 +89,8 @@ public class Home extends AppCompatActivity  {
         exitLoginSide=(ImageView)findViewById(R.id.logout_side_button);
 
 
+
+
         //check language
         if(SaveSharedPreference.getLangId(this).equals("ar")){
             homeSide.setImageResource(R.drawable.home);
@@ -383,6 +385,14 @@ public class Home extends AppCompatActivity  {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_notification) {
+            OrdersFrag ordersFrag=new OrdersFrag();
+            android.support.v4.app.FragmentManager fragmentManager = (Home.this).getSupportFragmentManager();
+            android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.fragmentcontener, ordersFrag);
+            fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+            fragmentTransaction.commit();
+            //set title
+            tittle.setText(getResources().getString(R.string.mangeorders));
             return true;
         }
 
