@@ -129,4 +129,5 @@
     <string name="canceld">تم رفض الطلب</string>
     <string name="accepted">تم قبول الطلب</string>
     <string name="orderfinished">تم إنهاء الطلب</string>
+    <string name="registersucsess">تم التسجيل بنجاح</string>
 </resources>

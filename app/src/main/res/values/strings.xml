@@ -132,6 +132,7 @@
     <string name="canceld">Order Canceled</string>
     <string name="accepted">Order Accepted</string>
     <string name="orderfinished">Order Finished</string>
+    <string name="registersucsess">Registration Successfully</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
