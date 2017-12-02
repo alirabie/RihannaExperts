@@ -13,14 +13,27 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
+import com.gitonway.lee.niftymodaldialogeffects.lib.Effectstype;
+import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
+
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.Locale;
 
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Login.LoginResponse;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.ExpertsApi;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.Generator;
 import experts.rihanna.appsmatic.com.rihannaexperts.Helpers.Utils;
 import experts.rihanna.appsmatic.com.rihannaexperts.Prefs.SaveSharedPreference;
 import experts.rihanna.appsmatic.com.rihannaexperts.R;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Splash extends AppCompatActivity {
 
@@ -40,11 +53,6 @@ public class Splash extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorPrimary));
         }
-
-
-
-        //Initial expert id
-        SaveSharedPreference.setExpertId(getApplicationContext(),"2");
 
 
 
@@ -83,8 +91,63 @@ public class Splash extends AppCompatActivity {
                     e.printStackTrace();
                 } finally {
 
-                    startActivity(new Intent(Splash.this, SignIn.class));
-                    Splash.this.finish();
+                    //Check Login Saved Status
+                    if(SaveSharedPreference.getUserName(Splash.this).equals("")&&SaveSharedPreference.getUserPassword(Splash.this).equals("")) {
+                        Intent i = new Intent(Splash.this, SignIn.class);
+                        startActivity(i);
+                        Splash.this.finish();
+                    }else {
+
+                        final HashMap loginData = new HashMap();
+                        loginData.put("Email", SaveSharedPreference.getUserName(Splash.this));
+                        loginData.put("Password", SaveSharedPreference.getUserPassword(Splash.this));
+                        Generator.createService(ExpertsApi.class).login(loginData).enqueue(new Callback<LoginResponse>() {
+                            @Override
+                            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                                if (response.isSuccessful()) {
+                                    if (response.body().getCustomers() != null) {
+
+                                        SaveSharedPreference.setExpertId(Splash.this, response.body().getCustomers().get(0).getId() + "");
+                                        SaveSharedPreference.setCustomerInfo(Splash.this, response.body());
+                                        Toast.makeText(getApplicationContext(), getResources().getString(R.string.loginsucsess), Toast.LENGTH_LONG).show();
+                                        Log.e("Done : ", response.body().getCustomers().get(0).getId() + "");
+                                        startActivity(new Intent(Splash.this, Home.class));
+                                        Splash.this.finish();
+
+                                    } else if (response.body().getErrors().getAccount() != null) {
+                                        //Show Error
+                                        NiftyDialogBuilder dialogBuilder = NiftyDialogBuilder.getInstance(Splash.this);
+                                        dialogBuilder
+                                                .withTitle(getResources().getString(R.string.app_name))
+                                                .withDialogColor(R.color.colorPrimary)
+                                                .withTitleColor("#FFFFFF")
+                                                .withDuration(700)                                          //def
+                                                .withEffect(Effectstype.RotateBottom)
+                                                .withMessage(response.body().getErrors().getAccount() + "")
+                                                .show();
+                                        startActivity(new Intent(Splash.this, SignIn.class));
+                                        Splash.this.finish();
+                                    }
+
+
+                                } else {
+                                    try {
+                                        Toast.makeText(getApplicationContext(), response.errorBody().string(), Toast.LENGTH_LONG).show();
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<LoginResponse> call, Throwable t) {
+
+                                Toast.makeText(getApplicationContext(), "Connection Error From Login APi Login Failed " + t.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        });
+
+
+                    }
                 }
             }
         };

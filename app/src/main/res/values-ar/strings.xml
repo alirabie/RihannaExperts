@@ -130,4 +130,5 @@
     <string name="accepted">تم قبول الطلب</string>
     <string name="orderfinished">تم إنهاء الطلب</string>
     <string name="registersucsess">تم التسجيل بنجاح</string>
+    <string name="loginsucsess">تم تسجيل الدخول بنجاح</string>
 </resources>

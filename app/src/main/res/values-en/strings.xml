@@ -130,4 +130,5 @@
     <string name="accepted">Order Accepted</string>
     <string name="orderfinished">Order Finished</string>
     <string name="registersucsess">Registration Successfully</string>
+    <string name="loginsucsess">Login Successfully</string>
 </resources>

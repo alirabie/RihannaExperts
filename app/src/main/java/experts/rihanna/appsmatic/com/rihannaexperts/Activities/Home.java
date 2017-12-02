@@ -294,6 +294,9 @@ public class Home extends AppCompatActivity  {
                 Animation anim = AnimationUtils.loadAnimation(Home.this, R.anim.alpha);
                 exitLoginSide.clearAnimation();
                 exitLoginSide.setAnimation(anim);
+                SaveSharedPreference.setExpertId(Home.this, "");
+                SaveSharedPreference.setCustomerInfo(Home.this, null);
+                SaveSharedPreference.setUserName(Home.this,"","");
                 drawer.closeDrawer(GravityCompat.START);
                 startActivity(new Intent(Home.this, SignIn.class));
                 Home.this.finish();
