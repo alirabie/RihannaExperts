@@ -48,7 +48,7 @@ public class CertificatesAdb extends RecyclerView.Adapter<CertificatesAdb.vh0> {
         animate(holder);
         holder.certName.setText(certificatesList.getCertificates().get(position).getName());
         holder.certYear.setText(certificatesList.getCertificates().get(position).getYearAcquired()+"");
-      //  holder.certSpicialty.setText(certificatesList.getCertificates().get(position).);
+        holder.certSpicialty.setText(certificatesList.getCertificates().get(position).getServiceCategoryName());
         holder.certGranter.setText(certificatesList.getCertificates().get(position).getAuthorizedBy());
 
         //Updates button action

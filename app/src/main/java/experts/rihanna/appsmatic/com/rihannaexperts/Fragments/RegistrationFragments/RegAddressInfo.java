@@ -266,7 +266,16 @@ public class RegAddressInfo extends Fragment implements OnMapReadyCallback {
                         stateName = addresses.get(0).getAddressLine(0);
                         countryName=addresses.get(0).getCountryName();
 
-                        location.setText(cityName + "," + stateName + "," + countryName);
+                        StringBuilder stringBuilder=new StringBuilder();
+                        if(cityName!=null){
+                            stringBuilder.append(cityName+",");
+                        }else if(stateName!=null){
+                            stringBuilder.append(stateName+",");
+                        }else if (countryName!=null){
+                            stringBuilder.append(countryName);
+                        }
+                        location.setText(stringBuilder.toString());
+                        location.setText(stringBuilder.toString());
                     }
                 }
 

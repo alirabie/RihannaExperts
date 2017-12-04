@@ -130,7 +130,7 @@ public class UpdateExpertAddressFrag extends Fragment implements OnMapReadyCallb
                         billingAddress.setAddress1(response.body().getCustomers().get(0).getBillingAddress().getAddress1());
                         billingAddress.setAddress2(response.body().getCustomers().get(0).getBillingAddress().getAddress2());
                         billingAddress.setPhoneNumber(response.body().getCustomers().get(0).getBillingAddress().getPhoneNumber());
-                        billingAddress.setZipPostalCode(response.body().getCustomers().get(0).getBillingAddress().getZipPostalCode());
+                        billingAddress.setZipPostalCode("10021");
                         customer.setVerificationcode("");
 
                     } else {
@@ -295,11 +295,21 @@ public class UpdateExpertAddressFrag extends Fragment implements OnMapReadyCallb
                         cityName = addresses.get(0).getAddressLine(0);
                         stateName = addresses.get(0).getAddressLine(1);
                         countryName = addresses.get(0).getAddressLine(2);
+                        StringBuilder stringBuilder=new StringBuilder();
+                        if(cityName!=null){
+                            stringBuilder.append(cityName+",");
+                        }else if(stateName!=null){
+                            stringBuilder.append(stateName+",");
+                        }else if (countryName!=null){
+                            stringBuilder.append(countryName);
+                        }
+
+                        location.setText(stringBuilder.toString());
                     }
                 }
 
 
-                location.setText(cityName + "," + stateName + "," + countryName);
+
 
             }
         });

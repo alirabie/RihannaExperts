@@ -377,7 +377,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="الجوال 010000000"
                 android:id="@+id/order_info_cust_phone"
                 android:textSize="10dp"
                 android:padding="2dp" />
@@ -386,7 +385,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="العوان جدة شارع 12 "
                 android:id="@+id/order_info_cust_address"
                 android:textSize="10dp"
                 android:padding="2dp" />

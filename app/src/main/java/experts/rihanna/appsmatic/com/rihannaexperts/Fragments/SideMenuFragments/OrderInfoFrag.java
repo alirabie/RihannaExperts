@@ -417,17 +417,35 @@ public class OrderInfoFrag extends Fragment {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
 
+
                 if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
                     // handle back button's click listener
-                    OrdersFrag ordersFrag = new OrdersFrag();
-                    android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                    android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.fragmentcontener, ordersFrag);
-                    fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
-                    fragmentTransaction.commit();
-                    //set title
-                    Home.tittle.setText(getResources().getString(R.string.mangeorders));
-                    return true;
+                    if(getArguments().get("action_source").toString().equals("preview_schadule_orders")){
+                        //In case of from preview calender orders
+                        ScheduleMangeFrag scheduleMangeFrag =new ScheduleMangeFrag();
+                        android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                        android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.fragmentcontener, scheduleMangeFrag);
+                        fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+                        fragmentTransaction.commit();
+                        //set title
+                        Home.tittle.setText(getResources().getString(R.string.datestable));
+                        return true;
+
+                    }else {
+                        //in case of from main orders fragment
+                        OrdersFrag ordersFrag = new OrdersFrag();
+                        android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                        android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.fragmentcontener, ordersFrag);
+                        fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+                        fragmentTransaction.commit();
+                        //set title
+                        Home.tittle.setText(getResources().getString(R.string.mangeorders));
+                        return true;
+                    }
+
+
                 }
                 return false;
             }

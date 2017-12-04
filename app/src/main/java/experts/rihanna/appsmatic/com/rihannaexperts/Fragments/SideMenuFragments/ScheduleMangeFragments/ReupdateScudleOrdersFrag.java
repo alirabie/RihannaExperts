@@ -1,23 +1,40 @@
 package experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.ScheduleMangeFragments;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.IOException;
+import java.util.List;
+
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.MangeOrders.Order;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.ExpertsApi;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.Generator;
+import experts.rihanna.appsmatic.com.rihannaexperts.Adaptors.ExpertOrdersAdb;
 import experts.rihanna.appsmatic.com.rihannaexperts.Prefs.SaveSharedPreference;
 import experts.rihanna.appsmatic.com.rihannaexperts.R;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class ReupdateScudleOrdersFrag extends Fragment {
 
-    private final String SOURCE="preview_schadule_orders";
 
-    ImageView busyFlag;
+    private final String SOURCE="preview_schadule_orders";
+    private RecyclerView ordersList;
+    private TextView emptyFlag;
+    private ImageView busyFlag;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -27,9 +44,11 @@ public class ReupdateScudleOrdersFrag extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        emptyFlag=(TextView)view.findViewById(R.id.no_orders_day_flag);
+        emptyFlag.setVisibility(View.INVISIBLE);
         busyFlag=(ImageView)view.findViewById(R.id.order_day_status_flag);
 
 
@@ -41,16 +60,66 @@ public class ReupdateScudleOrdersFrag extends Fragment {
         }
 
 
+        //Get Orders List from Server with test id 53
+        //Loading Dialog
+        final ProgressDialog mProgressDialog = new ProgressDialog(getActivity());
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.setMessage(getActivity().getResources().getString(R.string.loading));
+        mProgressDialog.show();
+        Generator.createService(ExpertsApi.class).getExpertOrders(SaveSharedPreference.getExpertId(getContext()),getArguments().get("date").toString()).enqueue(new Callback<List<Order>>() {
+            @Override
+            public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
+                if(response.isSuccessful()){
+                    if (mProgressDialog.isShowing())
+                        mProgressDialog.dismiss();
+                    if(response.body()!=null){
+                        if (response.body().isEmpty()){
+                            //Empty Flag
+                            emptyFlag.setVisibility(View.VISIBLE);
+                            //Buizzy Flag
+                            if(SaveSharedPreference.getLangId(getContext()).equals("ar")){
+                                busyFlag.setImageResource(R.drawable.busyoff_ar);
+                            }else {
+                                busyFlag.setImageResource(R.drawable.busyoff_en);
+                            }
 
-/*
-        //check language busy on
-        if(SaveSharedPreference.getLangId(getContext()).equals("ar")){
-            busyFlag.setImageResource(R.drawable.busyon_ar);
-        }else {
-            busyFlag.setImageResource(R.drawable.busyon_en);
-        }
+                        }else {
 
-*/
+                            //Empty Flag
+                            emptyFlag.setVisibility(View.INVISIBLE);
+                            //Buizzy Flag
+                            if(SaveSharedPreference.getLangId(getContext()).equals("ar")){
+                                busyFlag.setImageResource(R.drawable.busyon_ar);
+                            }else {
+                                busyFlag.setImageResource(R.drawable.busyon_en);
+                            }
+                            ordersList=(RecyclerView)view.findViewById(R.id.order_day_list);
+                            ordersList.setAdapter(new ExpertOrdersAdb(response.body(),SOURCE,getContext()));
+                            ordersList.setLayoutManager(new LinearLayoutManager(getContext()));
+                        }
+                    }else {
+                        Toast.makeText(getContext(), "Null From Orders List", Toast.LENGTH_SHORT).show();
+                    }
+
+                }else {
+                    if (mProgressDialog.isShowing())
+                        mProgressDialog.dismiss();
+                    try {
+                        Toast.makeText(getContext(),response.errorBody().string(),Toast.LENGTH_SHORT).show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Order>> call, Throwable t) {
+                Toast.makeText(getContext(),"Connection error From Orders List"+t.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
 
 
 

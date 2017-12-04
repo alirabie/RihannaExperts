@@ -14,6 +14,8 @@ import experts.rihanna.appsmatic.com.rihannaexperts.R;
 
 public class DayDatesFrag extends Fragment {
 
+    private final String SOURCE="day_dates_fragment";
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

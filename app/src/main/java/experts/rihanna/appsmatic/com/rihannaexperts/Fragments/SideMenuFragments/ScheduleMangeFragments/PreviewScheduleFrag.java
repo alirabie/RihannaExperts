@@ -6,10 +6,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import experts.rihanna.appsmatic.com.rihannaexperts.Helpers.EventDecorator;
 import experts.rihanna.appsmatic.com.rihannaexperts.R;
@@ -36,15 +40,24 @@ public class PreviewScheduleFrag extends Fragment {
         materialCalendarView.setDateSelected(CalendarDay.today(), true);
 
         //Set Work Day On Calender
+        /*
         materialCalendarView.addDecorator(new EventDecorator(Color.RED,20,11,2017));
         materialCalendarView.addDecorator(new EventDecorator(Color.RED,23,11,2017));
         materialCalendarView.addDecorator(new EventDecorator(Color.RED, 25, 10, 2017));
         materialCalendarView.addDecorator(new EventDecorator(Color.RED,8,10,2017));
-
+*/
 
 
         //first start send today date
+        long date = System.currentTimeMillis();
+        SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy");
+        String dateString = format.format(date);
+        //Toast.makeText(getContext(),dateString,Toast.LENGTH_SHORT).show();
+
         ReupdateScudleOrdersFrag reupdateScudleOrdersFrag=new ReupdateScudleOrdersFrag();
+        Bundle bundle=new Bundle();
+        bundle.putString("date",dateString);
+        reupdateScudleOrdersFrag.setArguments(bundle);
         android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frag_contener, reupdateScudleOrdersFrag);
@@ -57,8 +70,17 @@ public class PreviewScheduleFrag extends Fragment {
             @Override
             public void onDateSelected(MaterialCalendarView widget, CalendarDay date, boolean selected) {
 
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(date.getYear(), date.getMonth(), date.getDay());
+                SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy");
+                String strDate = format.format(calendar.getTime());
+
+                //Toast.makeText(getContext(),strDate,Toast.LENGTH_SHORT).show();
                 //send date to updatable fragment
                 ReupdateScudleOrdersFrag reupdateScudleOrdersFrag=new ReupdateScudleOrdersFrag();
+                Bundle bundle=new Bundle();
+                bundle.putString("date",strDate);
+                reupdateScudleOrdersFrag.setArguments(bundle);
                 android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.frag_contener,reupdateScudleOrdersFrag);

@@ -20,6 +20,9 @@ public class Certificate {
     @SerializedName("service_category_id")
     @Expose
     private Integer serviceCategoryId;
+    @SerializedName("service_category_name")
+    @Expose
+    private String serviceCategoryName;
     @SerializedName("authorized_by")
     @Expose
     private String authorizedBy;
@@ -74,4 +77,13 @@ public class Certificate {
     public void setYearAcquired(Integer yearAcquired) {
         this.yearAcquired = yearAcquired;
     }
+
+    public String getServiceCategoryName() {
+        return serviceCategoryName;
+    }
+
+    public void setServiceCategoryName(String serviceCategoryName) {
+        this.serviceCategoryName = serviceCategoryName;
+    }
 }
+

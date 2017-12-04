@@ -40,7 +40,6 @@ public class OrdersFrag extends Fragment {
     private final String SOURCE="main_orders_list";
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -62,41 +61,81 @@ public class OrdersFrag extends Fragment {
         mProgressDialog.setIndeterminate(true);
         mProgressDialog.setMessage(getActivity().getResources().getString(R.string.loading));
         mProgressDialog.show();
-        Generator.createService(ExpertsApi.class).getExpertOrders(SaveSharedPreference.getExpertId(getContext())).enqueue(new Callback<List<Order>>() {
-            @Override
-            public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
-                if(response.isSuccessful()){
-                    if (mProgressDialog.isShowing())
-                        mProgressDialog.dismiss();
-                    if(response.body()!=null){
-                        if (response.body().isEmpty()){
-                            emptyFlag.setVisibility(View.VISIBLE);
-                        }else {
-                            emptyFlag.setVisibility(View.INVISIBLE);
-                            ordersList=(RecyclerView)view.findViewById(R.id.orders_frag_list);
-                            ordersList.setAdapter(new ExpertOrdersAdb(response.body(),SOURCE,getContext()));
-                            ordersList.setLayoutManager(new LinearLayoutManager(getContext()));
-                        }
-                    }else {
-                        Toast.makeText(getContext(),"Null From Orders List",Toast.LENGTH_SHORT).show();
-                    }
 
-                }else {
-                    if (mProgressDialog.isShowing())
-                        mProgressDialog.dismiss();
-                    try {
-                        Toast.makeText(getContext(),response.errorBody().string(),Toast.LENGTH_SHORT).show();
-                    } catch (IOException e) {
-                        e.printStackTrace();
+        if(getArguments()!=null){
+            Generator.createService(ExpertsApi.class).getExpertOrders(SaveSharedPreference.getExpertId(getContext()),getArguments().getString("today")).enqueue(new Callback<List<Order>>() {
+                @Override
+                public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
+                    if(response.isSuccessful()){
+                        if (mProgressDialog.isShowing())
+                            mProgressDialog.dismiss();
+                        if(response.body()!=null){
+                            if (response.body().isEmpty()){
+                                emptyFlag.setVisibility(View.VISIBLE);
+                            }else {
+                                emptyFlag.setVisibility(View.INVISIBLE);
+                                ordersList=(RecyclerView)view.findViewById(R.id.orders_frag_list);
+                                ordersList.setAdapter(new ExpertOrdersAdb(response.body(),SOURCE,getContext()));
+                                ordersList.setLayoutManager(new LinearLayoutManager(getContext()));
+                            }
+                        }else {
+                            Toast.makeText(getContext(),"Null From Orders List",Toast.LENGTH_SHORT).show();
+                        }
+
+                    }else {
+                        if (mProgressDialog.isShowing())
+                            mProgressDialog.dismiss();
+                        try {
+                            Toast.makeText(getContext(),response.errorBody().string(),Toast.LENGTH_SHORT).show();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<List<Order>> call, Throwable t) {
-                Toast.makeText(getContext(),"Connection error From Orders List"+t.getMessage(),Toast.LENGTH_SHORT).show();
-            }
-        });
+                @Override
+                public void onFailure(Call<List<Order>> call, Throwable t) {
+                    Toast.makeText(getContext(),"Connection error From Orders List"+t.getMessage(),Toast.LENGTH_SHORT).show();
+                }
+            });
+        }else {
+            Generator.createService(ExpertsApi.class).getExpertOrders(SaveSharedPreference.getExpertId(getContext()),"").enqueue(new Callback<List<Order>>() {
+                @Override
+                public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
+                    if(response.isSuccessful()){
+                        if (mProgressDialog.isShowing())
+                            mProgressDialog.dismiss();
+                        if(response.body()!=null){
+                            if (response.body().isEmpty()){
+                                emptyFlag.setVisibility(View.VISIBLE);
+                            }else {
+                                emptyFlag.setVisibility(View.INVISIBLE);
+                                ordersList=(RecyclerView)view.findViewById(R.id.orders_frag_list);
+                                ordersList.setAdapter(new ExpertOrdersAdb(response.body(),SOURCE,getContext()));
+                                ordersList.setLayoutManager(new LinearLayoutManager(getContext()));
+                            }
+                        }else {
+                            Toast.makeText(getContext(),"Null From Orders List",Toast.LENGTH_SHORT).show();
+                        }
+
+                    }else {
+                        if (mProgressDialog.isShowing())
+                            mProgressDialog.dismiss();
+                        try {
+                            Toast.makeText(getContext(),response.errorBody().string(),Toast.LENGTH_SHORT).show();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<List<Order>> call, Throwable t) {
+                    Toast.makeText(getContext(),"Connection error From Orders List"+t.getMessage(),Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
 
 
 

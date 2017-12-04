@@ -26,6 +26,8 @@ import android.widget.TextView;
 import com.gitonway.lee.niftymodaldialogeffects.lib.Effectstype;
 import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
 
+import java.text.SimpleDateFormat;
+
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.AboutAppFrag;
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.AccountMangeFrag;
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.ScheduleMangeFrag;
@@ -206,10 +208,17 @@ public class Home extends AppCompatActivity  {
                 Animation anim = AnimationUtils.loadAnimation(Home.this, R.anim.alpha);
                 dayTimes.clearAnimation();
                 dayTimes.setAnimation(anim);
-                DayDatesFrag dayDatesFrag=new DayDatesFrag();
+                //Get Today Date
+                long date = System.currentTimeMillis();
+                SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy");
+                String dateString = format.format(date);
+                OrdersFrag ordersFrag=new OrdersFrag();
+                Bundle bundle =new Bundle();
+                bundle.putString("today",dateString);
+                ordersFrag.setArguments(bundle);
                 android.support.v4.app.FragmentManager fragmentManager = (Home.this).getSupportFragmentManager();
                 android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragmentcontener,dayDatesFrag);
+                fragmentTransaction.replace(R.id.fragmentcontener, ordersFrag);
                 fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
                 fragmentTransaction.commit();
                 //set title
@@ -231,6 +240,8 @@ public class Home extends AppCompatActivity  {
                 ordersListSide.clearAnimation();
                 ordersListSide.setAnimation(anim);
                 OrdersFrag ordersFrag=new OrdersFrag();
+                Bundle bundle =new Bundle();
+                ordersFrag.setArguments(bundle);
                 android.support.v4.app.FragmentManager fragmentManager = (Home.this).getSupportFragmentManager();
                 android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragmentcontener, ordersFrag);
