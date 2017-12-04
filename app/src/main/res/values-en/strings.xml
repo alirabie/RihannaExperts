@@ -131,4 +131,16 @@
     <string name="orderfinished">Order Finished</string>
     <string name="registersucsess">Registration Successfully</string>
     <string name="loginsucsess">Login Successfully</string>
+    <string name="notimes">No Times</string>
+    <string name="fromto">Cannot Select To before From</string>
+    <string name="insertday">Day Required</string>
+    <string name="day">Day</string>
+    <string name="insertfrom">Time From Required</string>
+    <string name="insertto">Time To Required</string>
+    <string name="addr1">Address 1</string>
+    <string name="addr2">Address 2</string>
+    <string name="city">City</string>
+    <string name="addr1req">Address 1 required</string>
+    <string name="addr2req">Address 2 required</string>
+    <string name="cityreq">City required</string>
 </resources>

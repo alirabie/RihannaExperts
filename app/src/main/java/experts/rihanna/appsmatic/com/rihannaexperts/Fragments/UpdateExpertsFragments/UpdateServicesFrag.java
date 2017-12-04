@@ -1,5 +1,6 @@
 package experts.rihanna.appsmatic.com.rihannaexperts.Fragments.UpdateExpertsFragments;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -55,10 +56,16 @@ public class UpdateServicesFrag extends Fragment {
         emptyFlag.setVisibility(View.INVISIBLE);
 
         //Setup Expert Services List
+        final ProgressDialog mProgressDialog = new ProgressDialog(getContext());
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.setMessage(getContext().getResources().getString(R.string.loading));
+        mProgressDialog.show();
         Generator.createService(ExpertsApi.class).getExpertServices(SaveSharedPreference.getExpertId(getContext())).enqueue(new Callback<ResExpertServices>() {
             @Override
             public void onResponse(Call<ResExpertServices> call, Response<ResExpertServices> response) {
                 if (response.isSuccessful()) {
+                    if (mProgressDialog.isShowing())
+                        mProgressDialog.dismiss();
                     if (response.body().getServices() != null) {
                         if (response.body().getServices().isEmpty()) {
                             emptyFlag.setVisibility(View.VISIBLE);
@@ -73,7 +80,8 @@ public class UpdateServicesFrag extends Fragment {
                     }
 
                 } else {
-
+                    if (mProgressDialog.isShowing())
+                        mProgressDialog.dismiss();
                     try {
                         Toast.makeText(getContext(),response.errorBody().string(),Toast.LENGTH_SHORT).show();
                     } catch (IOException e) {
@@ -85,6 +93,8 @@ public class UpdateServicesFrag extends Fragment {
 
             @Override
             public void onFailure(Call<ResExpertServices> call, Throwable t) {
+                if (mProgressDialog.isShowing())
+                    mProgressDialog.dismiss();
                 Toast.makeText(getContext(),"Connection Error From get Expert Services "+t.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });

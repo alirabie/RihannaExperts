@@ -24,11 +24,43 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="55dp"
+            android:background="@drawable/inputregion"
+            android:gravity="center"
+            android:layoutDirection="ltr"
+            android:layout_above="@+id/linearLayout4"
+            android:layout_alignEnd="@+id/linearLayout4"
+            android:id="@+id/linearLayout5">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/imageView4"
+                android:layout_weight="6" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:ems="10"
+                android:id="@+id/reg_loc_district"
+                android:background="#00ffffff"
+                android:padding="6dp"
+                android:gravity="center|start"
+                android:textAlignment="viewStart"
+                android:hint="@string/city"
+                android:layout_weight="1"
+                android:textSize="20dp"
+                android:inputType="text" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
             android:background="@drawable/inputstreet"
             android:textAlignment="viewStart"
             android:layoutDirection="ltr"
             android:layout_below="@+id/linearLayout2"
-            android:layout_alignStart="@+id/linearLayout5">
+            android:layout_alignStart="@+id/linearLayout5"
+            android:layout_marginTop="10dp">
 
             <ImageView
                 android:layout_width="match_parent"
@@ -46,43 +78,12 @@
                 android:padding="6dp"
                 android:gravity="center|start"
                 android:textAlignment="viewStart"
-                android:hint="@string/buldingnum"
+                android:hint="@string/addr1"
                 android:layout_weight="1"
                 android:textSize="20dp" />
         </LinearLayout>
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:background="@drawable/inputregion"
-            android:gravity="center"
-            android:layoutDirection="ltr"
-            android:layout_above="@+id/linearLayout4"
-            android:layout_alignEnd="@+id/linearLayout4"
-            android:id="@+id/linearLayout5"
-            android:layout_marginTop="10dp">
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/imageView4"
-                android:layout_weight="6" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:ems="10"
-                android:id="@+id/reg_loc_district"
-                android:background="#00ffffff"
-                android:padding="6dp"
-                android:gravity="center|start"
-                android:textAlignment="viewStart"
-                android:hint="@string/negborhoodordistrict"
-                android:layout_weight="1"
-                android:textSize="20dp"
-                android:inputType="phone" />
-        </LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"
@@ -112,9 +113,9 @@
                 android:textSize="20dp"
                 android:gravity="center|start"
                 android:textAlignment="viewStart"
-                android:inputType="textImeMultiLine" />
+                android:inputType="textImeMultiLine"
+                android:hint="@string/addr2" />
         </LinearLayout>
-
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"

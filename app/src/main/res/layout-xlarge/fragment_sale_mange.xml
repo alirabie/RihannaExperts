@@ -1,4 +1,4 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,7 +9,8 @@
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/offers_sevecices_frag_list">
+        android:id="@+id/offers_sevecices_frag_list"
+        android:layout_below="@+id/subscribe_btn">
     </android.support.v7.widget.RecyclerView>
 
     <TextView
@@ -19,5 +20,37 @@
         android:text="@string/noservices"
         android:id="@+id/empty_services_flag_frag"
         android:layout_gravity="center"
-        android:textSize="45dp" />
-</FrameLayout>
+        android:textSize="45dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/subscribe_btn"
+        android:padding="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="+"
+            android:id="@+id/textView30"
+            android:textSize="35dp"
+            android:gravity="center"
+            android:padding="2dp"
+            android:textColor="@color/colorPrimary" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/subscribe"
+            android:id="@+id/textView28"
+            android:textSize="25dp"
+            android:gravity="center"
+            android:textColor="@color/colorPrimary" />
+
+    </LinearLayout>
+</RelativeLayout>

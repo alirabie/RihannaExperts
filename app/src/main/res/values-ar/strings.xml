@@ -131,4 +131,16 @@
     <string name="orderfinished">تم إنهاء الطلب</string>
     <string name="registersucsess">تم التسجيل بنجاح</string>
     <string name="loginsucsess">تم تسجيل الدخول بنجاح</string>
+    <string name="notimes">لا توجد مواعيد</string>
+    <string name="fromto">لا يمكنك تحديد الوقت الى قبل من </string>
+    <string name="insertday">أدخل اليوم</string>
+    <string name="day">اليوم</string>
+    <string name="insertfrom">حدد الوقت من</string>
+    <string name="insertto">حدد الوقت الى</string>
+    <string name="addr1">العنوان الاول</string>
+    <string name="addr2">العنوان الثانى</string>
+    <string name="city">المدينة</string>
+    <string name="addr1req">أدخل اعنوان الاول</string>
+    <string name="addr2req">أدخل العنوان الثانى</string>
+    <string name="cityreq">أدحل المدينة</string>
 </resources>

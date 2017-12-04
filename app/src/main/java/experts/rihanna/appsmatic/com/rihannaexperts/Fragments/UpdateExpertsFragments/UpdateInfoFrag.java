@@ -53,6 +53,7 @@ public class UpdateInfoFrag extends Fragment {
     private EditText rePassword;
     private EditText activationCode;
     private LinearLayout mobActivationConener;
+    BillingAddress billingAddress;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -96,6 +97,7 @@ public class UpdateInfoFrag extends Fragment {
                     if (mProgressDialog.isShowing())
                         mProgressDialog.dismiss();
                     if (response.body().getCustomers() != null) {
+                        billingAddress=new BillingAddress();
                         fName.setText(response.body().getCustomers().get(0).getFirstName());
                         fName.setTextColor(getResources().getColor(R.color.colorAccent));
                         lName.setText(response.body().getCustomers().get(0).getLastName());
@@ -104,6 +106,18 @@ public class UpdateInfoFrag extends Fragment {
                         eMail.setTextColor(getResources().getColor(R.color.colorAccent));
                         phoneNum.setText(response.body().getCustomers().get(0).getBillingAddress().getPhoneNumber() + "");
                         phoneNum.setTextColor(getResources().getColor(R.color.colorAccent));
+
+                        //Fill Adress from currunt
+                        billingAddress.setPhoneNumber(response.body().getCustomers().get(0).getBillingAddress().getPhoneNumber());
+                        billingAddress.setEmail(response.body().getCustomers().get(0).getEmail());
+                        billingAddress.setCountryId(69);
+                        billingAddress.setStateProvinceId(40);
+                        billingAddress.setCity(response.body().getCustomers().get(0).getBillingAddress().getCity());
+                        billingAddress.setAddress1(response.body().getCustomers().get(0).getBillingAddress().getAddress1());
+                        billingAddress.setAddress2(response.body().getCustomers().get(0).getBillingAddress().getAddress2());
+                        billingAddress.setZipPostalCode(response.body().getCustomers().get(0).getBillingAddress().getZipPostalCode());
+
+
                     } else {
                         Toast.makeText(getContext(),"Null from Get Profile Info",Toast.LENGTH_SHORT).show();
                     }
@@ -142,6 +156,7 @@ public class UpdateInfoFrag extends Fragment {
                     next.clearAnimation();
                     next.setAnimation(anim);
 
+
                     //Inputs Validations
                     Pattern pPhone = Pattern.compile("\\(?([0-9]{4})\\)?([ .-]?)([0-9]{4})\\2([0-9]{4})");
                     Matcher mPhone = pPhone.matcher(phoneNum.getText().toString());
@@ -172,7 +187,7 @@ public class UpdateInfoFrag extends Fragment {
 
 
                         //Send Data
-                        BillingAddress billingAddress=new BillingAddress();
+
                         experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.UpdateExpertInfo.PUT.Customer customer=new experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.UpdateExpertInfo.PUT.Customer();
                         UpdateEpert updateEpert=new UpdateEpert();
                         customer.setFirstName(fName.getText().toString());
@@ -187,12 +202,6 @@ public class UpdateInfoFrag extends Fragment {
                         billingAddress.setLastName(lName.getText().toString());
                         billingAddress.setEmail(eMail.getText().toString());
                         billingAddress.setPhoneNumber(phoneNum.getText().toString());
-                        billingAddress.setAddress1("21 West 52nd Street");
-                        billingAddress.setCompany("Appsmatic Ltd");
-                        billingAddress.setCountryId(1);
-                        billingAddress.setStateProvinceId(40);
-                        billingAddress.setCity("New York");
-                        billingAddress.setZipPostalCode("10021");
                         customer.setBillingAddress(billingAddress);
                         customer.setVerificationcode("");
                         updateEpert.setCustomer(customer);
@@ -201,25 +210,25 @@ public class UpdateInfoFrag extends Fragment {
                         mProgressDialog.setIndeterminate(true);
                         mProgressDialog.setMessage(getContext().getResources().getString(R.string.loading));
                         mProgressDialog.show();
-                        Generator.createService(ExpertsApi.class).updateExpertInfo(updateEpert,SaveSharedPreference.getExpertId(getContext())).enqueue(new Callback<UpdateExpertResponse>() {
+                        Generator.createService(ExpertsApi.class).updateExpertInfo(updateEpert, SaveSharedPreference.getExpertId(getContext())).enqueue(new Callback<UpdateExpertResponse>() {
                             @Override
                             public void onResponse(Call<UpdateExpertResponse> call, Response<UpdateExpertResponse> response) {
                                 if (response.isSuccessful()) {
                                     if (mProgressDialog.isShowing())
                                         mProgressDialog.dismiss();
                                     if (response.body().getCustomers() != null) {
-                                        Toast.makeText(getContext(),getContext().getResources().getString(R.string.updated),Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getContext(), getContext().getResources().getString(R.string.updated), Toast.LENGTH_SHORT).show();
                                         //Reload Fragment
                                         android.support.v4.app.FragmentManager fragmentManager2 = ((FragmentActivity) getContext()).getSupportFragmentManager();
                                         fragmentManager2.beginTransaction().detach(UpdateInfoFrag.this).attach(UpdateInfoFrag.this).commit();
                                     } else {
-                                        Toast.makeText(getContext(),"Null from Update Expert Info",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getContext(), "Null from Update Expert Info", Toast.LENGTH_SHORT).show();
                                     }
                                 } else {
                                     if (mProgressDialog.isShowing())
                                         mProgressDialog.dismiss();
                                     try {
-                                        Toast.makeText(getContext(),response.errorBody().string(),Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getContext(), response.errorBody().string(), Toast.LENGTH_SHORT).show();
                                     } catch (IOException e) {
                                         e.printStackTrace();
                                     }
@@ -231,13 +240,13 @@ public class UpdateInfoFrag extends Fragment {
                             public void onFailure(Call<UpdateExpertResponse> call, Throwable t) {
                                 if (mProgressDialog.isShowing())
                                     mProgressDialog.dismiss();
-                                Toast.makeText(getContext(),"Connection error from Update Expert Info "+t.getMessage(),Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "Connection error from Update Expert Info " + t.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
 
 
 
-                        Toast.makeText(getActivity(), "Good Validations", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(getActivity(), "Good Validations", Toast.LENGTH_SHORT).show();
 
 
                     }

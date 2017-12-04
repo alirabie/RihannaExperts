@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +25,7 @@ import java.util.regex.Pattern;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.ExpertRegistartaion.Customer;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.ExpertRegistartaion.RegisterExpert;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.ExpertRegistartaion.ResExpertRegister;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Login.LoginResponse;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.ExpertsApi;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.Generator;
 import experts.rihanna.appsmatic.com.rihannaexperts.Activities.SignUp;
@@ -122,64 +124,18 @@ public class RegPersonalInfo extends Fragment {
                     eMail.setError(getResources().getString(R.string.emailnotmatcherr));
                 }else {
 
-                    //Send Data to server
-                    RegisterExpert registerExpert=new RegisterExpert();
-                    Customer customer =new Customer();
-                    customer.setFirstName(fName.getText().toString());
-                    customer.setLastName(lName.getText().toString());
-                    customer.setEmail(eMail.getText().toString());
-                    customer.setPhone(phoneNum.getText().toString());
-                    customer.setPassword(password.getText().toString());
-                    List<Integer>role_ids=new ArrayList<Integer>();
-                    role_ids.add(3);
-                    customer.setRoleIds(role_ids);
-                    registerExpert.setCustomer(customer);
-                    //Loading Dialog
-                    final ProgressDialog mProgressDialog = new ProgressDialog(getContext());
-                    mProgressDialog.setIndeterminate(true);
-                    mProgressDialog.setMessage(getResources().getString(R.string.loading));
-                    mProgressDialog.show();
-                    Generator.createService(ExpertsApi.class).registerNewExpert(registerExpert).enqueue(new Callback<ResExpertRegister>() {
-                        @Override
-                        public void onResponse(Call<ResExpertRegister> call, Response<ResExpertRegister> response) {
-                            if (response.isSuccessful()) {
-                                if (mProgressDialog.isShowing())
-                                    mProgressDialog.dismiss();
-                                if (response.body() != null) {
-                                    //Registration success
-                                    Toast.makeText(getContext(),getResources().getString(R.string.registersucsess)+" "+response.body().getName(), Toast.LENGTH_SHORT).show();
-                                    SignUp.expertId = response.body().getId()+"";
-                                    SignUp.infodone = 1;
-                                    android.support.v4.app.FragmentManager fragmentManager = ((FragmentActivity) getContext()).getSupportFragmentManager();
-                                    android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                                    fragmentTransaction.replace(R.id.register_fm_contanier, new RegAddressInfo());
-                                    fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
-                                    fragmentTransaction.commit();
-                                } else {
-                                    Toast.makeText(getContext(), "Null from expert registration", Toast.LENGTH_SHORT).show();
-                                }
-                            } else {
-                                if (mProgressDialog.isShowing())
-                                    mProgressDialog.dismiss();
-                                try {
-                                    Toast.makeText(getContext(), response.errorBody().string(), Toast.LENGTH_SHORT).show();
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-                            }
+                    //Send Data to next frag
+                    SignUp.expertFname = fName.getText().toString();
+                    SignUp.expertLname = lName.getText().toString();
+                    SignUp.expertEmail = eMail.getText().toString();
+                    SignUp.expertPhoneNum = phoneNum.getText().toString();
+                    SignUp.password=password.getText().toString();
 
-                        }
-
-                        @Override
-                        public void onFailure(Call<ResExpertRegister> call, Throwable t) {
-                            if (mProgressDialog.isShowing())
-                                mProgressDialog.dismiss();
-                            Toast.makeText(getContext(), "Connection error from expert registration" + t.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-
-
-
+                    android.support.v4.app.FragmentManager fragmentManager = ((FragmentActivity) getContext()).getSupportFragmentManager();
+                    android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.register_fm_contanier, new RegAddressInfo());
+                    fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+                    fragmentTransaction.commit();
                 }
             }
         });

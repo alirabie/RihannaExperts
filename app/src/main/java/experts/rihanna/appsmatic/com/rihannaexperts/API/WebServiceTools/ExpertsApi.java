@@ -17,6 +17,8 @@ import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.ExpertRegista
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Login.LoginResponse;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.MangeOrders.Order;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.MangeOrders.SubOrder;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Schadules.SchdulesResponse;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Schadules.UpdateTime.Response.ResponseUpdate;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.ExpertServices.ResExpertServices;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.Get.ResService;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.Subscribe.SubscribeResponse;
@@ -127,6 +129,19 @@ public interface ExpertsApi {
     //Update Expert Info
     @PUT("api/customers/{id}")
     Call<UpdateExpertResponse> updateExpertInfo(@Body Object item,@Path("id")String id);
+
+
+    //Get Expert Schedules
+    @GET("api/vendors/schedule/{id}")
+    Call<SchdulesResponse>getExpertSchadules(@Path("id")String id);
+
+    //add expert time
+    @POST("api/expert/schedule")
+    Call<ResPost>setNewTime(@Body Object time);
+
+    //update expert time
+    @PUT("api/expert/schedule")
+    Call<ResponseUpdate>updateTime(@Body Object time);
 
 
 }

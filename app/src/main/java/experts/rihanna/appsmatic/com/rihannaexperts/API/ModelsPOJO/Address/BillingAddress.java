@@ -1,10 +1,10 @@
-package experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.UpdateExpertInfo.PUT;
+package experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Address;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by Eng Ali on 12/2/2017.
+ * Created by Eng Ali on 12/3/2017.
  */
 public class BillingAddress {
     @SerializedName("first_name")
@@ -16,9 +16,6 @@ public class BillingAddress {
     @SerializedName("email")
     @Expose
     private String email;
-    @SerializedName("company")
-    @Expose
-    private String company;
     @SerializedName("country_id")
     @Expose
     private Integer countryId;
@@ -65,14 +62,6 @@ public class BillingAddress {
         this.email = email;
     }
 
-    public String getCompany() {
-        return company;
-    }
-
-    public void setCompany(String company) {
-        this.company = company;
-    }
-
     public Integer getCountryId() {
         return countryId;
     }
@@ -105,6 +94,14 @@ public class BillingAddress {
         this.address1 = address1;
     }
 
+    public String getAddress2() {
+        return address2;
+    }
+
+    public void setAddress2(String address2) {
+        this.address2 = address2;
+    }
+
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -119,13 +116,5 @@ public class BillingAddress {
 
     public void setZipPostalCode(String zipPostalCode) {
         this.zipPostalCode = zipPostalCode;
-    }
-
-    public String getAddress2() {
-        return address2;
-    }
-
-    public void setAddress2(String address2) {
-        this.address2 = address2;
     }
 }
