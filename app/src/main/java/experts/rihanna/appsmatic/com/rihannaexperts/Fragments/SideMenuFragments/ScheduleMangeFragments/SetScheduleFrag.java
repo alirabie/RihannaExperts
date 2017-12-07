@@ -6,6 +6,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,7 +69,7 @@ public class SetScheduleFrag extends Fragment {
         to=(EditText)view.findViewById(R.id.work_time_to);
         save=(TextView)view.findViewById(R.id.save_new_scadule_btn);
         dayes=(BetterSpinner)view.findViewById(R.id.day_spinner);
-        DateFormatSymbols dfs = new DateFormatSymbols(Locale.getDefault());
+        DateFormatSymbols dfs = new DateFormatSymbols(Locale.ENGLISH);
         final String weekdays[] = dfs.getWeekdays();
         dayes.setAdapter(new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item,weekdays));
         dayes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -103,7 +104,7 @@ public class SetScheduleFrag extends Fragment {
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                         Time tme = new Time(selectedHour, selectedMinute, 0);//seconds by default set to zero
                         Format formatter;
-                        formatter = new SimpleDateFormat("hh:mm a");
+                        formatter = new SimpleDateFormat("hh:mm a",Locale.ENGLISH);
                         from.setText(formatter.format(tme).toString());
                     }
                 }, hour, minute, false);//Yes 24 hour time
@@ -129,7 +130,7 @@ public class SetScheduleFrag extends Fragment {
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                         Time tme = new Time(selectedHour, selectedMinute, 0);//seconds by default set to zero
                         Format formatter;
-                        formatter = new SimpleDateFormat("hh:mm a");
+                        formatter = new SimpleDateFormat("hh:mm a",Locale.ENGLISH);
                         to.setText(formatter.format(tme).toString());
                     }
                 }, hour, minute, false);//Yes 24 hour time
@@ -157,7 +158,7 @@ public class SetScheduleFrag extends Fragment {
                     dayes.setError(getResources().getString(R.string.insertday));
                 }else {
                     String pattern = "hh:mm a";
-                    SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+                    SimpleDateFormat sdf = new SimpleDateFormat(pattern,Locale.ENGLISH);
                     try {
                         Date datefrom = sdf.parse(from.getText().toString());
                         Date dateto = sdf.parse(to.getText().toString());
@@ -223,6 +224,7 @@ public class SetScheduleFrag extends Fragment {
                         }
                     } catch (ParseException e) {
                         e.printStackTrace();
+                        Log.e("errrr",e.getMessage());
                     }
 
 

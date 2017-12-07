@@ -28,6 +28,9 @@ public class Service {
     @SerializedName("LastUpdate")
     @Expose
     private String lastUpdate;
+    @SerializedName("service_name")
+    @Expose
+    private String serviceName;
 
     public Integer getId() {
         return id;
@@ -83,5 +86,13 @@ public class Service {
 
     public void setLastUpdate(String lastUpdate) {
         this.lastUpdate = lastUpdate;
+    }
+
+    public String getServiceName() {
+        return serviceName;
+    }
+
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
     }
 }

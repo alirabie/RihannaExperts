@@ -32,18 +32,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Address.Customer;
-import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Address.PostAddress;
-import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.ExpertRegistartaion.ResExpertRegister;
-import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Login.LoginResponse;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.ExpertRegistartaion.Request.Customer;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.ExpertRegistartaion.Request.PostAddress;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.ExpertRegistartaion.Response.ResExpertRegister;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.UpdateExpertInfo.PUT.BillingAddress;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.UpdateExpertInfo.PUT.UpdateEpert;
-import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.UpdateExpertInfo.Response.UpdateExpertResponse;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.ExpertsApi;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.Generator;
 import experts.rihanna.appsmatic.com.rihannaexperts.Activities.SignUp;
 import experts.rihanna.appsmatic.com.rihannaexperts.GPS.GPSTracker;
-import experts.rihanna.appsmatic.com.rihannaexperts.Prefs.SaveSharedPreference;
 import experts.rihanna.appsmatic.com.rihannaexperts.R;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -109,7 +106,7 @@ public class RegAddressInfo extends Fragment implements OnMapReadyCallback {
                 }else {
                     PostAddress postAddress=new PostAddress();
                     Customer customer=new Customer();
-                    experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Address.BillingAddress billingAddress=new experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Address.BillingAddress();
+                    experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.ExpertRegistartaion.Request.BillingAddress billingAddress=new experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.ExpertRegistartaion.Request.BillingAddress();
                     billingAddress.setFirstName(SignUp.expertFname);
                     billingAddress.setLastName(SignUp.expertLname);
                     billingAddress.setPhoneNumber(SignUp.expertPhoneNum);
@@ -147,8 +144,8 @@ public class RegAddressInfo extends Fragment implements OnMapReadyCallback {
                                     mProgressDialog.dismiss();
                                 if (response.body() != null) {
                                     //Registration success
-                                    Toast.makeText(getContext(),getResources().getString(R.string.registersucsess)+" "+response.body().getName(), Toast.LENGTH_SHORT).show();
-                                    SignUp.expertId = response.body().getId()+"";
+                                    Toast.makeText(getContext(),getResources().getString(R.string.registersucsess)+" "+response.body().getCustomers().get(0).getEmail(), Toast.LENGTH_SHORT).show();
+                                    SignUp.expertId = response.body().getCustomers().get(0).getExpertId()+"";
                                     Gson gson=new Gson();
                                     Log.e("regResponce",gson.toJson(response.body()));
                                     SignUp.addressdone=1;

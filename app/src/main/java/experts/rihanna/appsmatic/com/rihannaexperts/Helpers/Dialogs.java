@@ -368,7 +368,7 @@ public class Dialogs {
         certName.setText(certificate.getName() + "");
         certYear.setText(certificate.getYearAcquired() + "");
         granter.setText(certificate.getAuthorizedBy() + "");
-//        spicialty.setText(categories.get(certificate.getServiceCategoryId()));
+        spicialty.setHint(certificate.getServiceCategoryName()+"");
         categoriyId=certificate.getServiceCategoryId()+"";
 
 
@@ -688,8 +688,8 @@ public class Dialogs {
                                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                                 serviceId=servicesIds.get(position);
                                                 servicePrice=servicesPrice.get(position);
-                                                Toast.makeText(context,serviceId,Toast.LENGTH_SHORT).show();
-                                                price.setHint(servicePrice+context.getResources().getString(R.string.sr));
+                                                //Toast.makeText(context,serviceId,Toast.LENGTH_SHORT).show();
+                                                price.setText(servicePrice+" "+context.getResources().getString(R.string.sr));
                                             }
                                         });
 
@@ -774,16 +774,17 @@ public class Dialogs {
                         if (mProgressDialog.isShowing())
                             mProgressDialog.dismiss();
                         price.setError(context.getResources().getString(R.string.insertprice));
-                    } else if (descountedPrice.getText().toString().isEmpty()) {
-                        if (mProgressDialog.isShowing())
-                            mProgressDialog.dismiss();
-                        descountedPrice.setError(context.getResources().getString(R.string.insertdescount));
                     } else {
                         SubscribeModel subscribeModel = new SubscribeModel();
                         ExpertService expertService = new ExpertService();
                         expertService.setExpertId(Integer.parseInt(expertId));
-                        expertService.setDiscountAmount(Integer.parseInt(descountedPrice.getText().toString()));
-                        expertService.setPrice(Integer.parseInt(price.getText().toString()));
+                        if(!descountedPrice.getText().toString().isEmpty()){
+                            expertService.setDiscountAmount(Integer.parseInt(descountedPrice.getText().toString()));
+                        }else {
+                            expertService.setDiscountAmount(0);
+                        }
+
+                        expertService.setPrice(Integer.parseInt(servicePrice));
                         expertService.setServiceId(Integer.parseInt(serviceId));
                         expertService.setDiscountPercentage(0.0);
                         subscribeModel.setExpertService(expertService);
@@ -905,16 +906,16 @@ public class Dialogs {
             );
 
 
-            dialogBuildercard.setOnKeyListener(new DialogInterface.OnKeyListener()
+        dialogBuildercard.setOnKeyListener(new DialogInterface.OnKeyListener()
 
-                                               {
-                                                   @Override
-                                                   public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-                                                       return keyCode == KeyEvent.KEYCODE_BACK;
-                                                   }
+                                           {
+                                               @Override
+                                               public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+                                                   return keyCode == KeyEvent.KEYCODE_BACK;
                                                }
+                                           }
 
-            );
+        );
 
 
         }

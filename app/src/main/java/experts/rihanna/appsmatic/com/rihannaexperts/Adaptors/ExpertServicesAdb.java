@@ -39,7 +39,7 @@ public class ExpertServicesAdb extends RecyclerView.Adapter<ExpertServicesAdb.Vh
     public void onBindViewHolder(final Vh002 holder, final int position) {
 
         animate(holder);
-        holder.serviceName.setText(expertServices.getServices().get(position).getServiceId()+"");
+        holder.serviceName.setText(expertServices.getServices().get(position).getServiceName()+"");
         holder.price.setText(expertServices.getServices().get(position).getPrice()+"");
         holder.discAmount.setText(expertServices.getServices().get(position).getDiscountAmount()+"");
         holder.unSubscribeBtn.setOnClickListener(new View.OnClickListener() {

@@ -13,7 +13,7 @@ import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Experinces.DE
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Experinces.GET.GetExperinces;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Experinces.POST.ResPost;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Experinces.PUT.UpdateExp;
-import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.ExpertRegistartaion.ResExpertRegister;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.ExpertRegistartaion.Response.ResExpertRegister;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Login.LoginResponse;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.MangeOrders.Order;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.MangeOrders.SubOrder;
@@ -23,7 +23,6 @@ import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.Expe
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.Get.ResService;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.Subscribe.SubscribeResponse;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.UnSubscribe.ResUnSubscribe;
-import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.UpdateExpertInfo.PUT.UpdateEpert;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.UpdateExpertInfo.Response.UpdateExpertResponse;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -117,7 +116,7 @@ public interface ExpertsApi {
 
 
     //Login
-    @POST("api/customers/login")
+    @POST("api/expert/login")
     Call<LoginResponse> login(@Body Object item);
 
 

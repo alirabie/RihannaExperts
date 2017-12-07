@@ -66,7 +66,7 @@ public class SchdulesAdb extends RecyclerView.Adapter<SchdulesAdb.Vh23> {
     @Override
     public void onBindViewHolder(final Vh23 holder, final int position) {
 
-        DateFormatSymbols dfs = new DateFormatSymbols(Locale.getDefault());
+        DateFormatSymbols dfs = new DateFormatSymbols(Locale.ENGLISH);
         final String weekdays[] = dfs.getWeekdays();
 
         holder.save.setVisibility(View.INVISIBLE);
@@ -119,7 +119,7 @@ public class SchdulesAdb extends RecyclerView.Adapter<SchdulesAdb.Vh23> {
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                         Time tme = new Time(selectedHour, selectedMinute, 0);//seconds by default set to zero
                         Format formatter;
-                        formatter = new SimpleDateFormat("hh:mm a");
+                        formatter = new SimpleDateFormat("hh:mm a",Locale.ENGLISH);
                         holder.from.setText(formatter.format(tme).toString());
                         holder.save.setVisibility(View.VISIBLE);
                     }
@@ -147,7 +147,7 @@ public class SchdulesAdb extends RecyclerView.Adapter<SchdulesAdb.Vh23> {
                     public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                         Time tme = new Time(selectedHour, selectedMinute, 0);//seconds by default set to zero
                         Format formatter;
-                        formatter = new SimpleDateFormat("hh:mm a");
+                        formatter = new SimpleDateFormat("hh:mm a",Locale.ENGLISH);
                         holder.to.setText(formatter.format(tme).toString());
                         holder.save.setVisibility(View.VISIBLE);
                     }
@@ -167,7 +167,7 @@ public class SchdulesAdb extends RecyclerView.Adapter<SchdulesAdb.Vh23> {
                 holder.save.setAnimation(anim);
 
                 String pattern = "hh:mm a";
-                SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+                SimpleDateFormat sdf = new SimpleDateFormat(pattern,Locale.ENGLISH);
                 try {
                     Date datefrom = sdf.parse(holder.from.getText().toString());
                     Date dateto = sdf.parse(holder.to.getText().toString());

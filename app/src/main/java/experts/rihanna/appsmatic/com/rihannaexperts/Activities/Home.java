@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -27,6 +28,7 @@ import com.gitonway.lee.niftymodaldialogeffects.lib.Effectstype;
 import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
 
 import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.AboutAppFrag;
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.AccountMangeFrag;
@@ -66,6 +68,7 @@ public class Home extends AppCompatActivity  {
         tittle=(TextView)findViewById(R.id.filtertitle);
 
 
+        Log.e("xx",SaveSharedPreference.getCustId(getApplicationContext())+" "+SaveSharedPreference.getExpertId(getApplicationContext()));
 
         //set main fragment on app start
         MainFrag mainFrag=new MainFrag();
@@ -210,7 +213,7 @@ public class Home extends AppCompatActivity  {
                 dayTimes.setAnimation(anim);
                 //Get Today Date
                 long date = System.currentTimeMillis();
-                SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy");
+                SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy", Locale.US);
                 String dateString = format.format(date);
                 OrdersFrag ordersFrag=new OrdersFrag();
                 Bundle bundle =new Bundle();
@@ -240,8 +243,6 @@ public class Home extends AppCompatActivity  {
                 ordersListSide.clearAnimation();
                 ordersListSide.setAnimation(anim);
                 OrdersFrag ordersFrag=new OrdersFrag();
-                Bundle bundle =new Bundle();
-                ordersFrag.setArguments(bundle);
                 android.support.v4.app.FragmentManager fragmentManager = (Home.this).getSupportFragmentManager();
                 android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragmentcontener, ordersFrag);
@@ -305,7 +306,7 @@ public class Home extends AppCompatActivity  {
                 Animation anim = AnimationUtils.loadAnimation(Home.this, R.anim.alpha);
                 exitLoginSide.clearAnimation();
                 exitLoginSide.setAnimation(anim);
-                SaveSharedPreference.setExpertId(Home.this, "");
+                SaveSharedPreference.setExpertId(Home.this, "","");
                 SaveSharedPreference.setCustomerInfo(Home.this, null);
                 SaveSharedPreference.setUserName(Home.this,"","");
                 drawer.closeDrawer(GravityCompat.START);

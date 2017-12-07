@@ -14,6 +14,7 @@ import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 import experts.rihanna.appsmatic.com.rihannaexperts.Helpers.EventDecorator;
 import experts.rihanna.appsmatic.com.rihannaexperts.R;
@@ -50,7 +51,7 @@ public class PreviewScheduleFrag extends Fragment {
 
         //first start send today date
         long date = System.currentTimeMillis();
-        SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy");
+        SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy", Locale.ENGLISH);
         String dateString = format.format(date);
         //Toast.makeText(getContext(),dateString,Toast.LENGTH_SHORT).show();
 
@@ -72,7 +73,7 @@ public class PreviewScheduleFrag extends Fragment {
 
                 Calendar calendar = Calendar.getInstance();
                 calendar.set(date.getYear(), date.getMonth(), date.getDay());
-                SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy");
+                SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy",Locale.ENGLISH);
                 String strDate = format.format(calendar.getTime());
 
                 //Toast.makeText(getContext(),strDate,Toast.LENGTH_SHORT).show();

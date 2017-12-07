@@ -16,10 +16,11 @@ import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Login.LoginRe
  */
 public class SaveSharedPreference {
     static final String LANG_ID="langId";
-    static final String CUSTOMER_ID="customerid";
+    static final String CUSTOMER_IDD="customerid";
     static final String CUSTOMER_INFO="customerInfo";
     static final String PREF_USER_NAME = "username";
     static final String PREF_USER_PASS = "password";
+    static final String EXPERT_ID="expertiid";
 
     static SharedPreferences getSharedPreferences(Context ctx) {
         return PreferenceManager.getDefaultSharedPreferences(ctx);
@@ -42,15 +43,27 @@ public class SaveSharedPreference {
 
 
 
-    public static void setExpertId(Context context,String id){
+
+
+
+    public static void setExpertId(Context context,String customerid,String expid){
         SharedPreferences.Editor editor = getSharedPreferences(context).edit();
-        editor.putString(CUSTOMER_ID, id);
+        editor.putString(CUSTOMER_IDD, customerid);
+        editor.putString(EXPERT_ID, expid);
         editor.commit();
     }
 
     public static String getExpertId(Context context){
-        return getSharedPreferences(context).getString(CUSTOMER_ID, "");
+        return getSharedPreferences(context).getString(EXPERT_ID, "");
     }
+
+
+    public static String getCustId(Context context){
+        return getSharedPreferences(context).getString(CUSTOMER_IDD, "");
+    }
+
+
+
 
 
 

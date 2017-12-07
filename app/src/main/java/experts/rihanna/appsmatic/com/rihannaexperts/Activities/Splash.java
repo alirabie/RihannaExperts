@@ -107,10 +107,13 @@ public class Splash extends AppCompatActivity {
                                 if (response.isSuccessful()) {
                                     if (response.body().getCustomers() != null) {
 
-                                        SaveSharedPreference.setExpertId(Splash.this, response.body().getCustomers().get(0).getId() + "");
+                                        //save expert Id
+                                        SaveSharedPreference.setExpertId(Splash.this,response.body().getCustomers().get(0).getId()+"",response.body().getCustomers().get(0).getExpertId()+"");
+
                                         SaveSharedPreference.setCustomerInfo(Splash.this, response.body());
                                         Toast.makeText(getApplicationContext(), getResources().getString(R.string.loginsucsess), Toast.LENGTH_LONG).show();
-                                        Log.e("Done : ", response.body().getCustomers().get(0).getId() + "");
+
+                                        Log.e("Done : ", SaveSharedPreference.getExpertId(getApplicationContext()));
                                         startActivity(new Intent(Splash.this, Home.class));
                                         Splash.this.finish();
 

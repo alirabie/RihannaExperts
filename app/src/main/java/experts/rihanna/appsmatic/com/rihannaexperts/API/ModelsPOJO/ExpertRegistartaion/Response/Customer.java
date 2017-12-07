@@ -1,4 +1,4 @@
-package experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Login;
+package experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.ExpertRegistartaion.Response;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 /**
- * Created by Eng Ali on 12/2/2017.
+ * Created by Eng Ali on 12/1/2017.
  */
 public class Customer {
     @SerializedName("expert_id")
@@ -23,7 +23,7 @@ public class Customer {
     private ShippingAddress shippingAddress;
     @SerializedName("addresses")
     @Expose
-    private List<Address> addresses = null;
+    private List<Object> addresses = null;
     @SerializedName("id")
     @Expose
     private String id;
@@ -41,7 +41,7 @@ public class Customer {
     private String lastName;
     @SerializedName("phone")
     @Expose
-    private Object phone;
+    private String phone;
     @SerializedName("admin_comment")
     @Expose
     private Object adminComment;
@@ -71,13 +71,21 @@ public class Customer {
     private String createdOnUtc;
     @SerializedName("last_login_date_utc")
     @Expose
-    private String lastLoginDateUtc;
+    private Object lastLoginDateUtc;
     @SerializedName("last_activity_date_utc")
     @Expose
     private String lastActivityDateUtc;
     @SerializedName("role_ids")
     @Expose
     private List<Object> roleIds = null;
+
+    public Integer getExpertId() {
+        return expertId;
+    }
+
+    public void setExpertId(Integer expertId) {
+        this.expertId = expertId;
+    }
 
     public List<Object> getShoppingCartItems() {
         return shoppingCartItems;
@@ -103,11 +111,11 @@ public class Customer {
         this.shippingAddress = shippingAddress;
     }
 
-    public List<Address> getAddresses() {
+    public List<Object> getAddresses() {
         return addresses;
     }
 
-    public void setAddresses(List<Address> addresses) {
+    public void setAddresses(List<Object> addresses) {
         this.addresses = addresses;
     }
 
@@ -151,11 +159,11 @@ public class Customer {
         this.lastName = lastName;
     }
 
-    public Object getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(Object phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
@@ -231,11 +239,11 @@ public class Customer {
         this.createdOnUtc = createdOnUtc;
     }
 
-    public String getLastLoginDateUtc() {
+    public Object getLastLoginDateUtc() {
         return lastLoginDateUtc;
     }
 
-    public void setLastLoginDateUtc(String lastLoginDateUtc) {
+    public void setLastLoginDateUtc(Object lastLoginDateUtc) {
         this.lastLoginDateUtc = lastLoginDateUtc;
     }
 
@@ -255,11 +263,4 @@ public class Customer {
         this.roleIds = roleIds;
     }
 
-    public Integer getExpertId() {
-        return expertId;
-    }
-
-    public void setExpertId(Integer expertId) {
-        this.expertId = expertId;
-    }
 }

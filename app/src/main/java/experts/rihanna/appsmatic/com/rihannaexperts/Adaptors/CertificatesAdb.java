@@ -65,6 +65,7 @@ public class CertificatesAdb extends RecyclerView.Adapter<CertificatesAdb.vh0> {
                 editecert.setAuthorizedBy(certificatesList.getCertificates().get(position).getAuthorizedBy());
                 editecert.setYearAcquired(certificatesList.getCertificates().get(position).getYearAcquired() + "");
                 editecert.setExpertId(certificatesList.getCertificates().get(position).getExpertId());
+                editecert.setServiceCategoryName(certificatesList.getCertificates().get(position).getServiceCategoryName());
                 Dialogs.fireUpdateCertDialog(context,holder.editBtn,editecert,operationMode,fragment);
 
             }

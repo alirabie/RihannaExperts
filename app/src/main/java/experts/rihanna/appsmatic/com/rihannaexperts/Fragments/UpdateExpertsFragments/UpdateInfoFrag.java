@@ -1,13 +1,10 @@
 package experts.rihanna.appsmatic.com.rihannaexperts.Fragments.UpdateExpertsFragments;
 
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.view.KeyEvent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,17 +21,12 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.ExpertRegistartaion.Customer;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Login.LoginResponse;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.UpdateExpertInfo.PUT.BillingAddress;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.UpdateExpertInfo.PUT.UpdateEpert;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.UpdateExpertInfo.Response.UpdateExpertResponse;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.ExpertsApi;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.Generator;
-import experts.rihanna.appsmatic.com.rihannaexperts.Activities.Home;
-import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.RegistrationFragments.RegAddressInfo;
-import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.AccountMangeFrag;
-import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.MainFrag;
 import experts.rihanna.appsmatic.com.rihannaexperts.Prefs.SaveSharedPreference;
 import experts.rihanna.appsmatic.com.rihannaexperts.R;
 import retrofit2.Call;
@@ -90,7 +82,8 @@ public class UpdateInfoFrag extends Fragment {
         mProgressDialog.setMessage(getContext().getResources().getString(R.string.loading));
         mProgressDialog.show();
         //Get Profile Info
-        Generator.createService(ExpertsApi.class).getProfile(SaveSharedPreference.getExpertId(getContext())).enqueue(new Callback<LoginResponse>() {
+        Log.e("info",SaveSharedPreference.getCustId(getContext()));
+        Generator.createService(ExpertsApi.class).getProfile(SaveSharedPreference.getCustId(getContext())).enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 if (response.isSuccessful()) {
@@ -210,7 +203,7 @@ public class UpdateInfoFrag extends Fragment {
                         mProgressDialog.setIndeterminate(true);
                         mProgressDialog.setMessage(getContext().getResources().getString(R.string.loading));
                         mProgressDialog.show();
-                        Generator.createService(ExpertsApi.class).updateExpertInfo(updateEpert, SaveSharedPreference.getExpertId(getContext())).enqueue(new Callback<UpdateExpertResponse>() {
+                        Generator.createService(ExpertsApi.class).updateExpertInfo(updateEpert, SaveSharedPreference.getCustId(getContext())).enqueue(new Callback<UpdateExpertResponse>() {
                             @Override
                             public void onResponse(Call<UpdateExpertResponse> call, Response<UpdateExpertResponse> response) {
                                 if (response.isSuccessful()) {

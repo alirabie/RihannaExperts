@@ -1,4 +1,4 @@
-package experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Address;
+package experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.ExpertRegistartaion.Request;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

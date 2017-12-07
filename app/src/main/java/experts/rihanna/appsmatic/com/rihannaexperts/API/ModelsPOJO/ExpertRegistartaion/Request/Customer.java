@@ -1,4 +1,4 @@
-package experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.ExpertRegistartaion;
+package experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.ExpertRegistartaion.Request;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -6,10 +6,9 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 /**
- * Created by Eng Ali on 12/1/2017.
+ * Created by Eng Ali on 12/3/2017.
  */
 public class Customer {
-
     @SerializedName("role_ids")
     @Expose
     private List<Integer> roleIds = null;
@@ -28,6 +27,9 @@ public class Customer {
     @SerializedName("phone")
     @Expose
     private String phone;
+    @SerializedName("billing_address")
+    @Expose
+    private BillingAddress billingAddress;
 
     public List<Integer> getRoleIds() {
         return roleIds;
@@ -35,6 +37,14 @@ public class Customer {
 
     public void setRoleIds(List<Integer> roleIds) {
         this.roleIds = roleIds;
+    }
+
+    public BillingAddress getBillingAddress() {
+        return billingAddress;
+    }
+
+    public void setBillingAddress(BillingAddress billingAddress) {
+        this.billingAddress = billingAddress;
     }
 
     public String getEmail() {

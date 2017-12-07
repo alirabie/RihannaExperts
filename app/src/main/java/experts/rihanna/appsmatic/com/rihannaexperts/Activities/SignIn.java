@@ -138,10 +138,15 @@ public class SignIn extends AppCompatActivity {
                                         SaveSharedPreference.setUserName(SignIn.this, "", "");
                                     }
 
-                                    SaveSharedPreference.setExpertId(SignIn.this, response.body().getCustomers().get(0).getId() + "");
+
+                                    //save expert Id
+                                    SaveSharedPreference.setExpertId(SignIn.this,response.body().getCustomers().get(0).getId()+"",response.body().getCustomers().get(0).getExpertId()+"");
+
                                     SaveSharedPreference.setCustomerInfo(SignIn.this, response.body());
+
                                     Toast.makeText(getApplicationContext(), getResources().getString(R.string.loginsucsess), Toast.LENGTH_LONG).show();
-                                    Log.e("Done : ", response.body().getCustomers().get(0).getId() + "");
+
+                                    Log.e("Done : ", SaveSharedPreference.getExpertId(getApplicationContext()));
                                     startActivity(new Intent(SignIn.this, Home.class));
                                     SignIn.this.finish();
                                 } else if(response.body().getErrors().getAccount()!=null){

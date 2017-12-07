@@ -1,13 +1,10 @@
 package experts.rihanna.appsmatic.com.rihannaexperts.Fragments.UpdateExpertsFragments.AddressFraments;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,8 +29,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Address.PostAddress;
-import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.ExpertRegistartaion.ResExpertRegister;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Login.LoginResponse;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.UpdateExpertInfo.PUT.BillingAddress;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.UpdateExpertInfo.PUT.Customer;
@@ -41,9 +36,6 @@ import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.UpdateExpertI
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.UpdateExpertInfo.Response.UpdateExpertResponse;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.ExpertsApi;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.Generator;
-import experts.rihanna.appsmatic.com.rihannaexperts.Activities.SignUp;
-import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.RegistrationFragments.RegExperience;
-import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.UpdateExpertsFragments.UpdateAddressFrag;
 import experts.rihanna.appsmatic.com.rihannaexperts.GPS.GPSTracker;
 import experts.rihanna.appsmatic.com.rihannaexperts.Prefs.SaveSharedPreference;
 import experts.rihanna.appsmatic.com.rihannaexperts.R;
@@ -99,7 +91,7 @@ public class UpdateExpertAddressFrag extends Fragment implements OnMapReadyCallb
         mProgressDialog.setIndeterminate(true);
         mProgressDialog.setMessage(getContext().getResources().getString(R.string.loading));
         mProgressDialog.show();
-        Generator.createService(ExpertsApi.class).getProfile(SaveSharedPreference.getExpertId(getContext())).enqueue(new Callback<LoginResponse>() {
+        Generator.createService(ExpertsApi.class).getProfile(SaveSharedPreference.getCustId(getContext())).enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 if (response.isSuccessful()) {
@@ -111,13 +103,13 @@ public class UpdateExpertAddressFrag extends Fragment implements OnMapReadyCallb
                         location.setText(response.body().getCustomers().get(0).getBillingAddress().getAddress2());
 
                         //Fill Adress from currunt
-                        billingAddress=new BillingAddress();
-                        customer=new Customer();
+                        billingAddress = new BillingAddress();
+                        customer = new Customer();
                         customer.setFirstName(response.body().getCustomers().get(0).getFirstName());
                         customer.setLastName(response.body().getCustomers().get(0).getLastName());
                         customer.setEmail(response.body().getCustomers().get(0).getEmail());
                         customer.setPhone("");
-                        List<Integer>role_ids=new ArrayList<Integer>();
+                        List<Integer> role_ids = new ArrayList<Integer>();
                         role_ids.add(3);
                         customer.setRoleIds(role_ids);
                         billingAddress.setFirstName(response.body().getCustomers().get(0).getFirstName());
@@ -152,7 +144,7 @@ public class UpdateExpertAddressFrag extends Fragment implements OnMapReadyCallb
             public void onFailure(Call<LoginResponse> call, Throwable t) {
                 if (mProgressDialog.isShowing())
                     mProgressDialog.dismiss();
-                Toast.makeText(getContext(),"Connection Error from Get Profile Info "+t.getMessage(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Connection Error from Get Profile Info " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -213,7 +205,7 @@ public class UpdateExpertAddressFrag extends Fragment implements OnMapReadyCallb
                     updateEpert.setCustomer(customer);
                     Gson gson=new Gson();
                     Log.e("reg", gson.toJson(updateEpert));
-                    Generator.createService(ExpertsApi.class).updateExpertInfo(updateEpert, SaveSharedPreference.getExpertId(getContext())).enqueue(new Callback<UpdateExpertResponse>() {
+                    Generator.createService(ExpertsApi.class).updateExpertInfo(updateEpert, SaveSharedPreference.getCustId(getContext())).enqueue(new Callback<UpdateExpertResponse>() {
                         @Override
                         public void onResponse(Call<UpdateExpertResponse> call, Response<UpdateExpertResponse> response) {
                             if (response.isSuccessful()) {

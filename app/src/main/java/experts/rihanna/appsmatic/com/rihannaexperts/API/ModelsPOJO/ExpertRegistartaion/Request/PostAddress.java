@@ -1,13 +1,12 @@
-package experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.ExpertRegistartaion;
+package experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.ExpertRegistartaion.Request;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by Eng Ali on 12/1/2017.
+ * Created by Eng Ali on 12/3/2017.
  */
-public class RegisterExpert {
-
+public class PostAddress {
     @SerializedName("customer")
     @Expose
     private Customer customer;

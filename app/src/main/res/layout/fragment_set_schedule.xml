@@ -101,7 +101,7 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:padding="5dp"
         android:layout_gravity="center_horizontal|top"
         android:id="@+id/linearLayout25"
@@ -122,7 +122,8 @@
             android:textColor="@color/colorPrimary"
             android:layout_weight="1"
             android:layout_marginLeft="3dp"
-            android:layout_marginRight="3dp" />
+            android:layout_marginRight="3dp"
+            android:gravity="center_vertical" />
 
     </LinearLayout>
 

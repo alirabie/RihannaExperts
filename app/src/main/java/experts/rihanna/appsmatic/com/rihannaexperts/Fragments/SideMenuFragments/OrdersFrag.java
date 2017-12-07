@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,6 +63,7 @@ public class OrdersFrag extends Fragment {
         mProgressDialog.setMessage(getActivity().getResources().getString(R.string.loading));
         mProgressDialog.show();
 
+        Log.e("ordes",SaveSharedPreference.getExpertId(getContext()));
         if(getArguments()!=null){
             Generator.createService(ExpertsApi.class).getExpertOrders(SaveSharedPreference.getExpertId(getContext()),getArguments().getString("today")).enqueue(new Callback<List<Order>>() {
                 @Override
