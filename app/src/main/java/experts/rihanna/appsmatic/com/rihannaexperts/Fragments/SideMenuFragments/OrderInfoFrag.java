@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.ChangeOrderStatus.ChangingResponse;
@@ -45,6 +46,7 @@ public class OrderInfoFrag extends Fragment {
     private LinearLayout outDoorFlag,showOnmapBtn;
     private FrameLayout orderConfirmedFlag;
     private RecyclerView orderitemsList;
+    private LinearLayout customerInfoPannel;
 
 
     //status
@@ -80,6 +82,7 @@ public class OrderInfoFrag extends Fragment {
         showOnmapBtn=(LinearLayout)view.findViewById(R.id.order_info_show_on_map);
         orderConfirmedFlag=(FrameLayout)view.findViewById(R.id.orderconfirmed_flag);
         orderitemsList=(RecyclerView)view.findViewById(R.id.order_info_order_list);
+        customerInfoPannel=(LinearLayout)view.findViewById(R.id.customer_info_pannel);
         orderConfirmedFlag.setVisibility(View.INVISIBLE);
         emptyOrdersFlag.setVisibility(View.INVISIBLE);
         finished.setVisibility(View.INVISIBLE);
@@ -87,6 +90,10 @@ public class OrderInfoFrag extends Fragment {
         decline.setVisibility(View.INVISIBLE);
 
         //Toast.makeText(getContext(),"Order Id "+getArguments().getInt("orderId"),Toast.LENGTH_SHORT).show();
+
+
+        //Hide Customer Data once expert accept order
+        customerInfoPannel.setVisibility(View.INVISIBLE);
 
 
         //Get Order Info from Server
@@ -113,6 +120,7 @@ public class OrderInfoFrag extends Fragment {
                                 finished.setVisibility(View.INVISIBLE);
                                 accept.setVisibility(View.VISIBLE);
                                 decline.setVisibility(View.VISIBLE);
+                                customerInfoPannel.setVisibility(View.INVISIBLE);
                                 break;
                             case ACCEPT:
                                 //Accepted
@@ -120,6 +128,7 @@ public class OrderInfoFrag extends Fragment {
                                 finished.setVisibility(View.VISIBLE);
                                 accept.setVisibility(View.INVISIBLE);
                                 decline.setVisibility(View.INVISIBLE);
+                                customerInfoPannel.setVisibility(View.VISIBLE);
                                 break;
                             case DONE:
                                 //Finished
@@ -127,6 +136,7 @@ public class OrderInfoFrag extends Fragment {
                                 finished.setVisibility(View.INVISIBLE);
                                 accept.setVisibility(View.INVISIBLE);
                                 decline.setVisibility(View.INVISIBLE);
+                                customerInfoPannel.setVisibility(View.VISIBLE);
                                 break;
                             case DECLINE :
                                 //Canceled
@@ -134,6 +144,7 @@ public class OrderInfoFrag extends Fragment {
                                 finished.setVisibility(View.INVISIBLE);
                                 accept.setVisibility(View.VISIBLE);
                                 decline.setVisibility(View.INVISIBLE);
+                                customerInfoPannel.setVisibility(View.INVISIBLE);
                                 break;
                         }
 
