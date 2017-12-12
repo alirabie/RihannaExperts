@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,6 +42,7 @@ public class UpdateServicesFrag extends Fragment {
     private TextView next,emptyFlag;
     private LinearLayout subscribe_btn;
     private RecyclerView servicesList;
+    private CheckBox isIndoorServ;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,6 +55,7 @@ public class UpdateServicesFrag extends Fragment {
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         emptyFlag=(TextView)view.findViewById(R.id.empty_services_flag_frag);
+        isIndoorServ=(CheckBox)view.findViewById(R.id.indor_serv_check);
         emptyFlag.setVisibility(View.INVISIBLE);
 
         //Setup Expert Services List

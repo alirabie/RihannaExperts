@@ -6,20 +6,6 @@
     android:background="@drawable/login_bg">
 
     <!-- TODO: Update blank fragment layout -->
-    <CheckBox
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/indoorservice"
-        android:layout_weight="1"
-        android:checked="false"
-        android:textAlignment="viewStart"
-        android:textSize="25dp"
-        android:textColor="@color/colorPrimary"
-        android:layout_below="@+id/subscribe_btn"
-        android:layout_alignParentStart="true"
-        android:padding="5dp"
-        android:id="@+id/indor_serv_check"
-        android:layout_marginBottom="10dp" />
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -27,24 +13,24 @@
         android:layout_height="match_parent"
         tools:context="experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.SaleMangeFrag"
         android:layout_above="@+id/linearLayout8"
-        android:layout_below="@+id/indor_serv_check">
+        android:layout_below="@+id/add_photo_btn">
 
         <!-- TODO: Update blank fragment layout -->
         <!-- TODO: Update blank fragment layout -->
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/sevecices_frag_list">
+            android:id="@+id/image_list">
         </android.support.v7.widget.RecyclerView>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/noservices"
-            android:id="@+id/empty_services_flag_frag"
+            android:text="@string/noImages"
             android:layout_gravity="center"
-            android:textSize="45dp" />
+            android:id="@+id/empty_pics_flag"
+            android:textSize="30dp" />
     </FrameLayout>
 
 
@@ -62,29 +48,28 @@
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:id="@+id/subscribe_btn"
-        android:padding="5dp" >
+        android:padding="5dp"
+        android:layout_margin="10dp"
+        android:id="@+id/add_photo_btn"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/imageView20"
+            android:src="@drawable/cameraicon"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="+"
-            android:id="@+id/textView32"
-            android:textSize="45dp"
+            android:text="@string/addphoto"
+            android:id="@+id/textView28"
+            android:textSize="20dp"
             android:gravity="center"
-            android:padding="2dp"
             android:textColor="@color/colorPrimary" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/subscribe"
-            android:id="@+id/textView34"
-            android:textSize="30dp"
-            android:gravity="center"
-            android:textColor="@color/colorPrimary" />
     </LinearLayout>
 </RelativeLayout>

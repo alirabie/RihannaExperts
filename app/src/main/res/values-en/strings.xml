@@ -143,4 +143,8 @@
     <string name="addr1req">Address 1 required</string>
     <string name="addr2req">Address 2 required</string>
     <string name="cityreq">City required</string>
+    <string name="addphoto">Add Image</string>
+    <string name="noImages">No Images</string>
+    <string name="imgs">Photos</string>
+    <string name="indoorservice">Service is in the expert center</string>
 </resources>

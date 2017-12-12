@@ -13,6 +13,7 @@ import com.astuetz.PagerSlidingTabStrip;
 
 import experts.rihanna.appsmatic.com.rihannaexperts.Activities.Home;
 import experts.rihanna.appsmatic.com.rihannaexperts.Adaptors.CustomFragmentPagerAdapter;
+import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.UpdateExpertsFragments.PhotoGalleryFrag;
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.UpdateExpertsFragments.UpdateAddressFrag;
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.UpdateExpertsFragments.ExperincesFragments.PracticalExFrag;
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.UpdateExpertsFragments.UpdateExp;
@@ -46,6 +47,7 @@ public class AccountMangeFrag extends Fragment {
         adapter.addFragment(new UpdateAddressFrag(), getResources().getString(R.string.address));
         adapter.addFragment(new UpdateExp(), getResources().getString(R.string.exp));
         adapter.addFragment(new UpdateServicesFrag(), getResources().getString(R.string.services));
+        adapter.addFragment(new PhotoGalleryFrag(), getResources().getString(R.string.imgs));
 
         p=(ViewPager)view.findViewById(R.id.viewpager_presentcards);
         tabsStrip = (PagerSlidingTabStrip)view.findViewById(R.id.update_expert_info_tabs);

@@ -143,4 +143,8 @@
     <string name="addr1req">أدخل اعنوان الاول</string>
     <string name="addr2req">أدخل العنوان الثانى</string>
     <string name="cityreq">أدحل المدينة</string>
+    <string name="addphoto">أضف صورة</string>
+    <string name="noImages">لا توجد صور</string>
+    <string name="imgs">الصور</string>
+    <string name="indoorservice">الخدمة فى مركز الخبيرة</string>
 </resources>

@@ -100,6 +100,16 @@ public class UpdateCertificateFrag extends Fragment {
 
 
 
+        emptyFlag.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.alpha);
+                emptyFlag.clearAnimation();
+                emptyFlag.setAnimation(anim);
+                Dialogs.fireAddCertDialog(getContext(), addCertBtn, Integer.parseInt(SaveSharedPreference.getExpertId(getActivity())), UPDATE_MODE, UpdateCertificateFrag.this);
+            }
+        });
+
         //Add cert button action
         addCertBtn.setOnClickListener(new View.OnClickListener() {
             @Override

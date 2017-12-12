@@ -25,6 +25,7 @@ import experts.rihanna.appsmatic.com.rihannaexperts.Activities.SignUp;
 import experts.rihanna.appsmatic.com.rihannaexperts.Adaptors.CertificatesAdb;
 import experts.rihanna.appsmatic.com.rihannaexperts.Helpers.Dialogs;
 import experts.rihanna.appsmatic.com.rihannaexperts.Helpers.Utils;
+import experts.rihanna.appsmatic.com.rihannaexperts.Prefs.SaveSharedPreference;
 import experts.rihanna.appsmatic.com.rihannaexperts.R;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -71,22 +72,22 @@ public class RegCertificates extends Fragment {
             public void onResponse(Call<CertificatesList> call, Response<CertificatesList> response) {
                 if (mProgressDialog.isShowing())
                     mProgressDialog.dismiss();
-                if(response.isSuccessful()){
-                    if(response.body().getCertificates()!=null){
-                        if(response.body().getCertificates().isEmpty()){
+                if (response.isSuccessful()) {
+                    if (response.body().getCertificates() != null) {
+                        if (response.body().getCertificates().isEmpty()) {
                             emptyFlag.setVisibility(View.VISIBLE);
-                        }else {
+                        } else {
                             emptyFlag.setVisibility(View.INVISIBLE);
-                            certificateList.setAdapter(new CertificatesAdb(response.body(), getActivity(),RegCertificates.this,REGISTERATION_MODE));
+                            certificateList.setAdapter(new CertificatesAdb(response.body(), getActivity(), RegCertificates.this, REGISTERATION_MODE));
                             certificateList.setLayoutManager(new LinearLayoutManager(getActivity()));
                         }
-                    }else {
-                        Toast.makeText(getActivity(),"Null from get certificates",Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getActivity(), "Null from get certificates", Toast.LENGTH_SHORT).show();
                     }
 
-                }else {
+                } else {
                     try {
-                        Toast.makeText(getActivity(),"Not success from get certificates "+response.errorBody().string(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Not success from get certificates " + response.errorBody().string(), Toast.LENGTH_SHORT).show();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -99,11 +100,21 @@ public class RegCertificates extends Fragment {
                 if (mProgressDialog.isShowing())
                     mProgressDialog.dismiss();
 
-                Toast.makeText(getActivity(),"Connection error from get certificates "+t.getMessage(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Connection error from get certificates " + t.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
         });
 
+
+        emptyFlag.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.alpha);
+                emptyFlag.clearAnimation();
+                emptyFlag.setAnimation(anim);
+                Dialogs.fireAddCertDialog(getContext(), addCertBtn, Integer.parseInt(SignUp.expertId), REGISTERATION_MODE, RegCertificates.this);
+            }
+        });
 
         //Add cert button action
         addCertBtn.setOnClickListener(new View.OnClickListener() {
@@ -112,7 +123,7 @@ public class RegCertificates extends Fragment {
                 Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.alpha);
                 addCertBtn.clearAnimation();
                 addCertBtn.setAnimation(anim);
-                Dialogs.fireAddCertDialog(getContext(), addCertBtn,Integer.parseInt(SignUp.expertId),REGISTERATION_MODE,RegCertificates.this);
+                Dialogs.fireAddCertDialog(getContext(), addCertBtn, Integer.parseInt(SignUp.expertId), REGISTERATION_MODE, RegCertificates.this);
             }
         });
 
