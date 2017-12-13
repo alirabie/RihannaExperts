@@ -158,7 +158,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/time"
                 android:id="@+id/textView12"
-                android:textSize="25dp"
+                android:textSize="20dp"
                 android:padding="2dp"
                 android:textColor="@color/colorPrimary"
                 android:gravity="center" />
@@ -179,7 +179,7 @@
                 android:padding="3dp">
 
                 <ImageView
-                    android:layout_width="25dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:id="@+id/imageView8"
                     android:src="@drawable/calendar"
@@ -194,6 +194,14 @@
                     android:textSize="20dp"
                     android:padding="2dp"
                     android:textColor="#000000" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/edite_date_btn"
+                    android:src="@drawable/editicon"
+                    android:padding="3dp" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -203,7 +211,7 @@
                 android:padding="3dp">
 
                 <ImageView
-                    android:layout_width="25dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:id="@+id/imageView9"
                     android:src="@drawable/time"
@@ -214,22 +222,76 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="Medium Text"
-                    android:id="@+id/order_info_time"
+                    android:id="@+id/order_info_time_from"
                     android:textSize="20dp"
                     android:padding="2dp"
                     android:textColor="#000000" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/edittime_from_btn"
+                    android:src="@drawable/editicon"
+                    android:padding="3dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="-"
+                    android:id="@+id/textView39"
+                    android:textSize="20dp"
+                    android:padding="2dp"
+                    android:textColor="#000000"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/imageView21"
+                    android:src="@drawable/time"
+                    android:padding="2dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Medium Text"
+                    android:id="@+id/order_info_time_to"
+                    android:textSize="20dp"
+                    android:padding="2dp"
+                    android:textColor="#000000" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/edittime_to_btn"
+                    android:src="@drawable/editicon"
+                    android:padding="3dp" />
+
             </LinearLayout>
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/edittime_btn"
-                android:src="@drawable/editicon"
-                android:padding="5dp" />
         </LinearLayout>
 
-    </LinearLayout>
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/save"
+            android:id="@+id/savetimedate"
+            android:textSize="20dp"
+            android:layout_marginBottom="15dp"
+            android:background="@color/colorPrimary"
+            android:textColor="#ffffff"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center" />
 
+    </LinearLayout>
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

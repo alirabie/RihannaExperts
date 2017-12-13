@@ -138,8 +138,8 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:padding="10dp"
+            android:layout_height="match_parent"
+            android:padding="5dp"
             android:id="@+id/linearLayout13"
             android:background="#ffffff"
             android:layout_alignParentEnd="true"
@@ -147,7 +147,7 @@
 
             <ImageView
                 android:layout_width="25dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/imageView12"
                 android:src="@drawable/timeicon"
                 android:padding="2dp" />
@@ -159,9 +159,8 @@
                 android:text="@string/time"
                 android:id="@+id/textView12"
                 android:textSize="20dp"
-                android:padding="2dp"
                 android:textColor="@color/colorPrimary"
-                android:gravity="center_vertical" />
+                android:gravity="center" />
         </LinearLayout>
 
         <LinearLayout
@@ -191,9 +190,17 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="Medium Text"
                     android:id="@+id/order_info_date"
-                    android:textSize="16dp"
+                    android:textSize="15dp"
                     android:padding="2dp"
                     android:textColor="#000000" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/edite_date_btn"
+                    android:src="@drawable/editicon"
+                    android:padding="3dp" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -214,19 +221,74 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="Medium Text"
-                    android:id="@+id/order_info_time"
-                    android:textSize="16dp"
+                    android:id="@+id/order_info_time_from"
+                    android:textSize="15dp"
                     android:padding="2dp"
                     android:textColor="#000000" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/edittime_from_btn"
+                    android:src="@drawable/editicon"
+                    android:padding="3dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="-"
+                    android:id="@+id/textView39"
+                    android:textSize="11dp"
+                    android:padding="2dp"
+                    android:textColor="#000000"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp" />
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="match_parent"
+                    android:id="@+id/imageView22"
+                    android:src="@drawable/time"
+                    android:padding="2dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Medium Text"
+                    android:id="@+id/order_info_time_to"
+                    android:textSize="15dp"
+                    android:padding="2dp"
+                    android:textColor="#000000" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/edittime_to_btn"
+                    android:src="@drawable/editicon"
+                    android:padding="3dp" />
+
             </LinearLayout>
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/edittime_btn"
-                android:src="@drawable/editicon"
-                android:padding="5dp" />
         </LinearLayout>
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/save"
+            android:id="@+id/savetimedate"
+            android:textSize="15dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/colorPrimary"
+            android:textColor="#ffffff"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal" />
 
     </LinearLayout>
 

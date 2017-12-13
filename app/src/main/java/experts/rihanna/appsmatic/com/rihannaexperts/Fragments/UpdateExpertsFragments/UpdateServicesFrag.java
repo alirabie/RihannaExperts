@@ -56,6 +56,17 @@ public class UpdateServicesFrag extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         emptyFlag=(TextView)view.findViewById(R.id.empty_services_flag_frag);
         isIndoorServ=(CheckBox)view.findViewById(R.id.indor_serv_check);
+
+        if(SaveSharedPreference.getCustomerInfo(getContext()).getCustomers().get(0).getCustomerRoleName().equals("Expert B")){
+            isIndoorServ.setVisibility(View.INVISIBLE);
+        }else {
+            isIndoorServ.setVisibility(View.VISIBLE);
+        }
+
+
+
+
+
         emptyFlag.setVisibility(View.INVISIBLE);
 
         //Setup Expert Services List

@@ -24,6 +24,7 @@ import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.Get.
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.Subscribe.SubscribeResponse;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.UnSubscribe.ResUnSubscribe;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.UpdateExpertInfo.Response.UpdateExpertResponse;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.UpdateOrderTime.Res;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -141,6 +142,10 @@ public interface ExpertsApi {
     //update expert time
     @PUT("api/expert/schedule")
     Call<ResponseUpdate>updateTime(@Body Object time);
+
+    //Update Order Time
+    @POST("api/expert/order/changetime?")
+    Call<Res>updateOrderTime(@Query("orderid")String orderId,@Query("timefrom")String timefrom,@Query("timeto")String timeto);
 
 
 }

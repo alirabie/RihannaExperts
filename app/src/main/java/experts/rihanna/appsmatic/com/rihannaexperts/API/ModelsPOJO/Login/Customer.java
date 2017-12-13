@@ -12,6 +12,9 @@ public class Customer {
     @SerializedName("expert_id")
     @Expose
     private Integer expertId;
+    @SerializedName("customer_role_name")
+    @Expose
+    private String customerRoleName;
     @SerializedName("shopping_cart_items")
     @Expose
     private List<Object> shoppingCartItems = null;
@@ -261,5 +264,13 @@ public class Customer {
 
     public void setExpertId(Integer expertId) {
         this.expertId = expertId;
+    }
+
+    public String getCustomerRoleName() {
+        return customerRoleName;
+    }
+
+    public void setCustomerRoleName(String customerRoleName) {
+        this.customerRoleName = customerRoleName;
     }
 }
