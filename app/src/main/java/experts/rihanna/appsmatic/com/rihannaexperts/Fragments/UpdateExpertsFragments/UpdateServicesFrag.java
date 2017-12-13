@@ -57,6 +57,8 @@ public class UpdateServicesFrag extends Fragment {
         emptyFlag=(TextView)view.findViewById(R.id.empty_services_flag_frag);
         isIndoorServ=(CheckBox)view.findViewById(R.id.indor_serv_check);
 
+
+        //check if expert B or A
         if(SaveSharedPreference.getCustomerInfo(getContext()).getCustomers().get(0).getCustomerRoleName().equals("Expert B")){
             isIndoorServ.setVisibility(View.INVISIBLE);
         }else {

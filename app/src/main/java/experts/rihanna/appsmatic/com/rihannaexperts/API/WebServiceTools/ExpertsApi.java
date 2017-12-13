@@ -9,6 +9,7 @@ import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.Update.ResUpdate;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.Update.UpdateCertificate;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.ChangeOrderStatus.ChangingResponse;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Districts.Districts;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Experinces.DELETE.DeleteExp;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Experinces.GET.GetExperinces;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Experinces.POST.ResPost;
@@ -23,6 +24,7 @@ import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.Expe
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.Get.ResService;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.Subscribe.SubscribeResponse;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.UnSubscribe.ResUnSubscribe;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.States.ResStates;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.UpdateExpertInfo.Response.UpdateExpertResponse;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.UpdateOrderTime.Res;
 import retrofit2.Call;
@@ -146,6 +148,14 @@ public interface ExpertsApi {
     //Update Order Time
     @POST("api/expert/order/changetime?")
     Call<Res>updateOrderTime(@Query("orderid")String orderId,@Query("timefrom")String timefrom,@Query("timeto")String timeto);
+
+    //Get States by id
+    @GET("api/states/{id}")
+    Call<ResStates> getStates(@Path("id") String id);
+
+    //Get districts
+    @GET("api/districts/country/{country}/state/{state}")
+    Call<Districts>getDestrics(@Path("country") String country,@Path("state") String state);
 
 
 }

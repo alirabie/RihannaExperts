@@ -147,4 +147,7 @@
     <string name="noImages">لا توجد صور</string>
     <string name="imgs">الصور</string>
     <string name="indoorservice">الخدمة فى مركز الخبيرة</string>
+    <string name="addoutdooraddress">إضافة عنوان خارجى</string>
+    <string name="noaddress">لا توجد عنواين خارجية</string>
+    <string name="nabourhode">الحى</string>
 </resources>

@@ -147,4 +147,7 @@
     <string name="noImages">No Images</string>
     <string name="imgs">Photos</string>
     <string name="indoorservice">Service is in the expert center</string>
+    <string name="addoutdooraddress">Add Outdoor Address</string>
+    <string name="noaddress">No Outdoor Addresses</string>
+    <string name="nabourhode">Neighbourhood</string>
 </resources>

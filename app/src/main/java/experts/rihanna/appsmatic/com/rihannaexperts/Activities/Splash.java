@@ -136,6 +136,7 @@ public class Splash extends AppCompatActivity {
                                 } else {
                                     try {
                                         Toast.makeText(getApplicationContext(), response.errorBody().string(), Toast.LENGTH_LONG).show();
+                                        Splash.this.finish();
                                     } catch (IOException e) {
                                         e.printStackTrace();
                                     }

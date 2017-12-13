@@ -2,73 +2,93 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="experts.rihanna.appsmatic.com.rihannaexperts.Fragments.UpdateExpertsFragments.AddressFraments.UpdateOutdoorServicesFrag">
+    tools:context=".Fragments.RegistrationFragments.RegPersonalInfo">
 
     <!-- TODO: Update blank fragment layout -->
-
-    <LinearLayout
-        android:orientation="horizontal"
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:id="@+id/linearLayout19">
+        android:layout_height="match_parent"
+        tools:context="experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.SaleMangeFrag"
+        android:id="@+id/frameLayout6"
+        android:layout_below="@+id/add_new_address_btn">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageView18"
-            android:src="@android:drawable/ic_menu_mylocation" />
+        <!-- TODO: Update blank fragment layout -->
+        <!-- TODO: Update blank fragment layout -->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/locationdetict"
-            android:id="@+id/textView5"
-            android:gravity="center"
-            android:textSize="20dp" />
-    </LinearLayout>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:padding="2dp"
-        android:background="#b8b8b8"
-        android:id="@+id/frameLayout2"
-        android:layout_below="@+id/linearLayout19"
-        android:layout_alignParentEnd="true"
-        android:layout_above="@+id/linearLayout23">
-
-        <com.google.android.gms.maps.MapView
-            android:id="@+id/map"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="1dp">
-        </com.google.android.gms.maps.MapView>
     </FrameLayout>
 
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:id="@+id/linearLayout23">
+        android:gravity="center"
+        android:padding="5dp"
+        android:id="@+id/add_new_address_btn"
+        android:layout_marginTop="10dp">
 
-        <TextView
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/save"
-            android:id="@+id/save_multi_address"
-            android:padding="10dp"
-            android:background="@color/colorPrimary"
-            android:gravity="center"
-            android:textColor="#ffffff"
-            android:layout_below="@+id/linearLayout6"
-            android:layout_centerHorizontal="true"
-            android:textSize="20dp"
+            android:background="#d8d8d8"
             android:layout_weight="1"
-            android:layout_margin="10dp" />
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp">
+
+            <com.weiwangcn.betterspinner.library.BetterSpinner
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/city_spinner"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:background="#ffffff"
+                android:layout_margin="1dp"
+                android:padding="10dp"
+                android:hint="@string/city"
+                android:textSize="25dp" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#d8d8d8"
+            android:layout_weight="1"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp">
+
+            <com.weiwangcn.betterspinner.library.BetterSpinner
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/nabourhod_spinner"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:background="#ffffff"
+                android:layout_margin="1dp"
+                android:padding="10dp"
+                android:hint="@string/nabourhode"
+                android:textSize="25dp" />
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="+"
+            android:id="@+id/add_address_btn"
+            android:layout_below="@+id/add_new_address_btn"
+            android:layout_alignParentStart="true"
+            android:gravity="center"
+            android:layout_margin="5dp"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            android:textSize="50dp" />
+
+
     </LinearLayout>
+
 </RelativeLayout>
