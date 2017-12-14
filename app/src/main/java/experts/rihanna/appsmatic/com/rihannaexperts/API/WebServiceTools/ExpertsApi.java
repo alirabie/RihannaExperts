@@ -15,6 +15,8 @@ import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Experinces.GE
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Experinces.POST.ResPost;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Experinces.PUT.UpdateExp;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.ExpertRegistartaion.Response.ResExpertRegister;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.IndoorServicesCntroal.IndoorGetRes;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.IndoorServicesCntroal.Put.ResChangeStatus;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Login.LoginResponse;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.MangeOrders.Order;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.MangeOrders.SubOrder;
@@ -156,6 +158,15 @@ public interface ExpertsApi {
     //Get districts
     @GET("api/districts/country/{country}/state/{state}")
     Call<Districts>getDestrics(@Path("country") String country,@Path("state") String state);
+
+    //Get Indoor Service status
+    @GET("api/expert/indoor?")
+    Call<IndoorGetRes>getIndoorStatus(@Query("ExpertId") String expId);
+
+    //update expert Indoor Services status
+    @PUT("api/expert/indoor/update?")
+    Call<ResChangeStatus>updateIndoorServiceStatus(@Query("ExpertId") String expId,@Query("IndoorService") String status);
+
 
 
 }

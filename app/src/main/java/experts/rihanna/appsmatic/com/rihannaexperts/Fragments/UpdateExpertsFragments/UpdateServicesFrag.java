@@ -21,6 +21,7 @@ import android.widget.Toast;
 import java.io.IOException;
 
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.Get.CertificatesList;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.IndoorServicesCntroal.IndoorGetRes;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.ExpertServices.ResExpertServices;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.ExpertsApi;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.Generator;
@@ -68,8 +69,44 @@ public class UpdateServicesFrag extends Fragment {
 
 
 
-
         emptyFlag.setVisibility(View.INVISIBLE);
+
+
+        //get Indoor status
+        Generator.createService(ExpertsApi.class).getIndoorStatus(SaveSharedPreference.getExpertId(getContext())).enqueue(new Callback<IndoorGetRes>() {
+            @Override
+            public void onResponse(Call<IndoorGetRes> call, Response<IndoorGetRes> response) {
+                if(response.isSuccessful()){
+                    if(response.body().getIndoorService()!=null){
+
+                        if(response.body().getIndoorService().equals("True")){
+                            isIndoorServ.setChecked(true);
+
+                        }else if(response.body().getIndoorService().equals("False")){
+                            isIndoorServ.setChecked(false);
+                        }
+
+                    }else {
+                        Toast.makeText(getContext(),"Null from get indoor services status",Toast.LENGTH_SHORT).show();
+                    }
+                }else {
+                    try {
+                        Toast.makeText(getContext(),response.errorBody().string(),Toast.LENGTH_SHORT).show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<IndoorGetRes> call, Throwable t) {
+                Toast.makeText(getContext(),"Connection error from get indoor services status "+t.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+
 
         //Setup Expert Services List
         final ProgressDialog mProgressDialog = new ProgressDialog(getContext());
@@ -88,18 +125,18 @@ public class UpdateServicesFrag extends Fragment {
                         } else {
                             emptyFlag.setVisibility(View.INVISIBLE);
                             servicesList = (RecyclerView) view.findViewById(R.id.sevecices_frag_list);
-                            servicesList.setAdapter(new ExpertServicesAdb(getContext(),response.body(),UpdateServicesFrag.this));
+                            servicesList.setAdapter(new ExpertServicesAdb(getContext(), response.body(), UpdateServicesFrag.this));
                             servicesList.setLayoutManager(new LinearLayoutManager(getContext()));
                         }
-                    }else {
-                        Toast.makeText(getContext(),"Null From get Expert Services",Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getContext(), "Null From get Expert Services", Toast.LENGTH_SHORT).show();
                     }
 
                 } else {
                     if (mProgressDialog.isShowing())
                         mProgressDialog.dismiss();
                     try {
-                        Toast.makeText(getContext(),response.errorBody().string(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), response.errorBody().string(), Toast.LENGTH_SHORT).show();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -111,7 +148,7 @@ public class UpdateServicesFrag extends Fragment {
             public void onFailure(Call<ResExpertServices> call, Throwable t) {
                 if (mProgressDialog.isShowing())
                     mProgressDialog.dismiss();
-                Toast.makeText(getContext(),"Connection Error From get Expert Services "+t.getMessage(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Connection Error From get Expert Services " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 

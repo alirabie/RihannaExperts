@@ -154,6 +154,9 @@
     <string name="noaddress">No Outdoor Addresses</string>
     <string name="nabourhode">Neighbourhood</string>
 
+    <string name="indoortrue">You are Now Present Indoor Service</string>
+    <string name="indoorfalse">You are Now Not Present Indoor Service</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
