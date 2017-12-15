@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +23,7 @@ import java.io.IOException;
 
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.Get.CertificatesList;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.IndoorServicesCntroal.IndoorGetRes;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.IndoorServicesCntroal.Put.ResChangeStatus;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.ExpertServices.ResExpertServices;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.ExpertsApi;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.Generator;
@@ -105,6 +107,86 @@ public class UpdateServicesFrag extends Fragment {
         });
 
 
+
+        //Change Indoor status
+        isIndoorServ.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isIndoorServ.isChecked()) {
+                    final ProgressDialog mProgressDialog = new ProgressDialog(getContext());
+                    mProgressDialog.setIndeterminate(true);
+                    mProgressDialog.setMessage(getContext().getResources().getString(R.string.loading));
+                    mProgressDialog.show();
+                    Generator.createService(ExpertsApi.class).updateIndoorServiceStatus(SaveSharedPreference.getExpertId(getContext()), "true").enqueue(new Callback<ResChangeStatus>() {
+                        @Override
+                        public void onResponse(Call<ResChangeStatus> call, Response<ResChangeStatus> response) {
+                            if (response.isSuccessful()) {
+                                if (mProgressDialog.isShowing())
+                                    mProgressDialog.dismiss();
+                                if (response.body().getAttributes() != null) {
+                                    if (response.body().getAttributes().get(0).getAttributeDefaultValue().equals("True")) {
+                                        Toast.makeText(getContext(), getResources().getString(R.string.indoortrue), Toast.LENGTH_SHORT).show();
+                                    }
+                                } else {
+                                    Toast.makeText(getContext(), "Null from change Indoor status API ", Toast.LENGTH_SHORT).show();
+                                }
+                            } else {
+                                if (mProgressDialog.isShowing())
+                                    mProgressDialog.dismiss();
+                                try {
+                                    Toast.makeText(getContext(), response.errorBody().string(), Toast.LENGTH_SHORT).show();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResChangeStatus> call, Throwable t) {
+                            if (mProgressDialog.isShowing())
+                                mProgressDialog.dismiss();
+                            Toast.makeText(getContext(), "Connection error from change Indoor status API " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }else if(!isIndoorServ.isChecked()) {
+                    final ProgressDialog mProgressDialog = new ProgressDialog(getContext());
+                    mProgressDialog.setIndeterminate(true);
+                    mProgressDialog.setMessage(getContext().getResources().getString(R.string.loading));
+                    mProgressDialog.show();
+                    Generator.createService(ExpertsApi.class).updateIndoorServiceStatus(SaveSharedPreference.getExpertId(getContext()), "false").enqueue(new Callback<ResChangeStatus>() {
+                        @Override
+                        public void onResponse(Call<ResChangeStatus> call, Response<ResChangeStatus> response) {
+                            if (response.isSuccessful()) {
+                                if (mProgressDialog.isShowing())
+                                    mProgressDialog.dismiss();
+                                if (response.body().getAttributes() != null) {
+                                    if (response.body().getAttributes().get(0).getAttributeDefaultValue().equals("False")) {
+                                        Toast.makeText(getContext(), getResources().getString(R.string.indoorfalse), Toast.LENGTH_SHORT).show();
+                                    }
+                                } else {
+                                    Toast.makeText(getContext(), "Null from change Indoor status API ", Toast.LENGTH_SHORT).show();
+                                }
+                            } else {
+                                if (mProgressDialog.isShowing())
+                                    mProgressDialog.dismiss();
+                                try {
+                                    Toast.makeText(getContext(), response.errorBody().string(), Toast.LENGTH_SHORT).show();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResChangeStatus> call, Throwable t) {
+                            if (mProgressDialog.isShowing())
+                                mProgressDialog.dismiss();
+                            Toast.makeText(getContext(), "Connection error from change Indoor status API " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+        });
 
 
 

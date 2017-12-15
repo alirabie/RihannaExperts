@@ -150,6 +150,6 @@
     <string name="addoutdooraddress">إضافة عنوان خارجى</string>
     <string name="noaddress">لا توجد عنواين خارجية</string>
     <string name="nabourhode">الحى</string>
-    <string name="indoorfalse">أنتي الان تقدمى خدمة داخل الصالون </string>
-    <string name="indoortrue">أنتى الان لا تقدمي خدمة داخل الصالون</string>
+    <string name="indoorfalse">أنتي الان لا تقدمى خدمة داخل الصالون</string>
+    <string name="indoortrue">أنتى الان تقدمي خدمة داخل الصالون</string>
 </resources>
