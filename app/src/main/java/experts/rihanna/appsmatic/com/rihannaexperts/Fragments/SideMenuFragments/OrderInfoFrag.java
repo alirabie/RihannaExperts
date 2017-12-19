@@ -434,15 +434,13 @@ public class OrderInfoFrag extends Fragment  {
 
 
 
-
-
                                 final Calendar calendar=Calendar.getInstance();
                                DatePickerDialog datePicker = new DatePickerDialog(getContext(), 0, new DatePickerDialog.OnDateSetListener() {
 
                                     @Override
                                     public void onDateSet(DatePicker view, int year, int monthOfYear,int dayOfMonth) {
                                         Calendar c=Calendar.getInstance();
-                                        c.set(year,monthOfYear-1,dayOfMonth);
+                                        c.set(year,monthOfYear,dayOfMonth);
                                         SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy/MM/dd",Locale.ENGLISH);
                                         String date = dateFormatter.format(c.getTime());
                                             dateTv.setText(date);

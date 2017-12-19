@@ -82,7 +82,7 @@
 
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
-                android:layout_height="134dp"
+                android:layout_height="115dp"
                 android:layout_gravity="center"
                 android:id="@+id/order_info_order_list"></android.support.v7.widget.RecyclerView>
 
@@ -415,9 +415,10 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp">
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="10dp">
 
             <TextView
                 android:layout_width="match_parent"
