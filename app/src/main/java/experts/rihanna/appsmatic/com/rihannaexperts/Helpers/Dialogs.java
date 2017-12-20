@@ -736,7 +736,7 @@ public class Dialogs {
         //if expert class B not allow to modify price
         if(SaveSharedPreference.getCustomerInfo(context).getCustomers().get(0).getCustomerRoleName().equals("Expert B")){
             price.setEnabled(false);
-            descountedPrice.setEnabled(true);
+            descountedPrice.setEnabled(false);
         }else {
             price.setEnabled(true);
             descountedPrice.setEnabled(true);

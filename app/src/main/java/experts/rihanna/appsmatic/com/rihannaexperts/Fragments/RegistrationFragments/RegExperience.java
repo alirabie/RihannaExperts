@@ -61,7 +61,7 @@ public class RegExperience extends Fragment {
 
 
         years=new ArrayList<>();
-        for(int i=1;i<=10;i++){
+        for(int i=1;i<=30;i++){
             years.add(i+"");
         }
         yearsCount=(BetterSpinner)view.findViewById(R.id.exper_years_count);

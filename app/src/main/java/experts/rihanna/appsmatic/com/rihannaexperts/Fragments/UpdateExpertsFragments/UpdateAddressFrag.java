@@ -39,6 +39,7 @@ import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.UpdateExpertsFragments.AddressFraments.UpdateExpertAddressFrag;
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.UpdateExpertsFragments.AddressFraments.UpdateOutdoorServicesFrag;
 import experts.rihanna.appsmatic.com.rihannaexperts.GPS.GPSTracker;
+import experts.rihanna.appsmatic.com.rihannaexperts.Prefs.SaveSharedPreference;
 import experts.rihanna.appsmatic.com.rihannaexperts.R;
 
 
@@ -64,8 +65,14 @@ public class UpdateAddressFrag extends Fragment {
 
         adapter = new CustomFragmentPagerAdapter(getChildFragmentManager());
 
-        adapter.addFragment(new UpdateExpertAddressFrag(),getResources().getString(R.string.expaddress));
-        adapter.addFragment(new UpdateOutdoorServicesFrag(), getResources().getString(R.string.outdoraddress));
+        //if expert class B not allow to here indoor address
+        if(SaveSharedPreference.getCustomerInfo(getContext()).getCustomers().get(0).getCustomerRoleName().equals("Expert B")){
+            adapter.addFragment(new UpdateOutdoorServicesFrag(), getResources().getString(R.string.outdoraddress));
+        }else {
+            adapter.addFragment(new UpdateExpertAddressFrag(), getResources().getString(R.string.expaddress));
+            adapter.addFragment(new UpdateOutdoorServicesFrag(), getResources().getString(R.string.outdoraddress));
+        }
+
 
 
         p=(ViewPager)view.findViewById(R.id.viewpager_presentcards);
