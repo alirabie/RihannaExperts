@@ -12,37 +12,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.SaleMangeFrag"
-        android:layout_above="@+id/linearLayout8"
-        android:layout_below="@+id/add_photo_btn">
+        android:layout_below="@+id/add_photo_btn"
+        android:id="@+id/images_cont">
 
         <!-- TODO: Update blank fragment layout -->
         <!-- TODO: Update blank fragment layout -->
-        <android.support.v7.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/image_list">
-        </android.support.v7.widget.RecyclerView>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/noImages"
-            android:layout_gravity="center"
-            android:id="@+id/empty_pics_flag"
-            android:textSize="40dp" />
     </FrameLayout>
 
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:id="@+id/linearLayout8">
-
-    </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"

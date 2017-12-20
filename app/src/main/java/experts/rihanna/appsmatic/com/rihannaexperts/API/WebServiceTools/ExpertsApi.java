@@ -29,6 +29,9 @@ import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.UnSu
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.States.ResStates;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.UpdateExpertInfo.Response.UpdateExpertResponse;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.UpdateOrderTime.Res;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.UploadingImages.Del.DeletePhotoRes;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.UploadingImages.Get.GetExpertPhotos;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.UploadingImages.PutResponse.ResponseUploadImage;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -167,6 +170,19 @@ public interface ExpertsApi {
     @PUT("api/expert/indoor/update?")
     Call<ResChangeStatus>updateIndoorServiceStatus(@Query("ExpertId") String expId,@Query("IndoorService") String status);
 
+    //Upload Image
+    @PUT("api/expert/images")
+    Call<ResponseUploadImage>uploadImage(@Body Object photoOb);
+
+
+    //Get Expert Photos
+    @GET("api/expert/images?")
+    Call<GetExpertPhotos>getExpertPhotos(@Query("ExpertId") String expId);
+
+
+    //add expert time
+    @POST("api/expert/images/delete/?")
+    Call<DeletePhotoRes>deletePhoto(@Query("ExpertId") String expId,@Query("ImageId") String imgId);
 
 
 }
