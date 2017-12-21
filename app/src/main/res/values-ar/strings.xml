@@ -152,4 +152,6 @@
     <string name="nabourhode">الحى</string>
     <string name="indoorfalse">أنتي الان لا تقدمى خدمة داخل الصالون</string>
     <string name="indoortrue">أنتى الان تقدمي خدمة داخل الصالون</string>
+    <string name="outdor">خدمة خارجية</string>
+    <string name="indor">خدمة داخلية</string>
 </resources>

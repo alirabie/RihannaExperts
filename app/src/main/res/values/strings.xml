@@ -153,6 +153,8 @@
     <string name="addoutdooraddress">Add Outdoor Address</string>
     <string name="noaddress">No Outdoor Addresses</string>
     <string name="nabourhode">Neighbourhood</string>
+    <string name="indor">Indoor Service</string>
+    <string name="outdor">Outdoor Service</string>
 
     <string name="indoortrue">You are Now Present Indoor Service</string>
     <string name="indoorfalse">You are Now Not Present Indoor Service</string>

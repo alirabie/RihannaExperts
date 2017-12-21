@@ -240,8 +240,11 @@ public class OrderInfoFrag extends Fragment  {
                         customerName.setText(response.body().getCustomer());
 
                         //service type
-                        serviceTypeFlag.setText(response.body().getServiceType());
-
+                        if(response.body().getServiceType().toString().equals("Indoor")) {
+                            serviceTypeFlag.setText(getResources().getString(R.string.indor));
+                        }else {
+                            serviceTypeFlag.setText(getResources().getString(R.string.outdor));
+                        }
 
                         //Show on map btn action
                         showOnmapBtn.setOnClickListener(new View.OnClickListener() {

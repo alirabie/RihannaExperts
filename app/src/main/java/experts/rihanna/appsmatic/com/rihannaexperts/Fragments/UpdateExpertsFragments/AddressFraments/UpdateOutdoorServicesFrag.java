@@ -196,6 +196,7 @@ public class UpdateOutdoorServicesFrag extends Fragment {
                 //Reload Fragment
                 cities.setText("");
                 nabourhods.setText("");
+
                 android.support.v4.app.FragmentManager fragmentManager = ((FragmentActivity) getContext()).getSupportFragmentManager();
                 android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.frameLayout6, new OutdoorAdressesFrag());
