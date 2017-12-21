@@ -45,6 +45,7 @@ import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.RegistrationFragme
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.ScheduleMangeFragments.ExpertTimesFarg;
 import experts.rihanna.appsmatic.com.rihannaexperts.GPS.GPSTracker;
 import experts.rihanna.appsmatic.com.rihannaexperts.Helpers.Dialogs;
+import experts.rihanna.appsmatic.com.rihannaexperts.Prefs.SaveSharedPreference;
 import experts.rihanna.appsmatic.com.rihannaexperts.R;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -87,73 +88,6 @@ public class UpdateOutdoorServicesFrag extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         addAddress_btn=(TextView)view.findViewById(R.id.add_address_btn);
 
-        cities =(BetterSpinner)view.findViewById(R.id.city_spinner);
-        nabourhods=(BetterSpinner)view.findViewById(R.id.nabourhod_spinner);
-        cities.setAdapter(new ArrayAdapter<>(getContext(),android.R.layout.simple_spinner_dropdown_item));
-        nabourhods.setAdapter(new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item));
-
-
-
-        //Setup Spinners
-        Generator.createService(ExpertsApi.class).getStates(SAUDI_ID+"").enqueue(new Callback<ResStates>() {
-            @Override
-            public void onResponse(Call<ResStates> call, Response<ResStates> response) {
-                if (response.isSuccessful()) {
-                    statesNames = new ArrayList<String>();
-                    statesIds = new ArrayList<String>();
-                    //fill names and ids to spinner list from response
-                    for (int i = 0; i < response.body().getStates().size(); i++) {
-                        statesNames.add(response.body().getStates().get(i).getName());
-                        statesIds.add(response.body().getStates().get(i).getId());
-                    }
-                    cities.setAdapter(new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, statesNames));
-                    cities.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            statusid = statesIds.get(position);
-                            Generator.createService(ExpertsApi.class).getDestrics("Saudi Arabia", statesNames.get(position)).enqueue(new Callback<Districts>() {
-                                @Override
-                                public void onResponse(Call<Districts> call, Response<Districts> response) {
-                                    if (response.isSuccessful()) {
-                                        districtsNames = new ArrayList<String>();
-                                        districtsIds = new ArrayList<String>();
-                                        //fill names and ids to spinner list from response
-                                        for (int i = 0; i < response.body().getDistricts().size(); i++) {
-                                            districtsNames.add(response.body().getDistricts().get(i).getName());
-                                            districtsIds.add(response.body().getDistricts().get(i).getId());
-                                        }
-
-                                        nabourhods.setAdapter(new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, districtsNames));
-                                        nabourhods.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                                            @Override
-                                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                                nabourhodId = districtsIds.get(position);
-                                            }
-                                        });
-
-
-                                    }
-                                }
-
-                                @Override
-                                public void onFailure(Call<Districts> call, Throwable t) {
-
-                                }
-                            });
-
-
-                        }
-                    });
-
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<ResStates> call, Throwable t) {
-
-            }
-        });
 
 
 
@@ -166,42 +100,13 @@ public class UpdateOutdoorServicesFrag extends Fragment {
         fragmentTransaction.commit();
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         addAddress_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Animation anim = AnimationUtils.loadAnimation(getActivity(), R.anim.alpha);
                 addAddress_btn.clearAnimation();
                 addAddress_btn.setAnimation(anim);
-
-                Toast.makeText(getContext(), "StateId : " + statusid + " districtId : " + nabourhodId, Toast.LENGTH_SHORT).show();
-
-
-                //Invoke Add outdoor address method
-
-
-                //Reload Fragment
-                cities.setText("");
-                nabourhods.setText("");
-
-                android.support.v4.app.FragmentManager fragmentManager = ((FragmentActivity) getContext()).getSupportFragmentManager();
-                android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.frameLayout6, new OutdoorAdressesFrag());
-                fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
-                fragmentTransaction.commit();
+              Dialogs.fireAddOutdoorAddressDialog(getContext(),addAddress_btn, SaveSharedPreference.getExpertId(getContext()),UpdateOutdoorServicesFrag.this);
 
             }
         });

@@ -20,6 +20,8 @@ import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.IndoorService
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Login.LoginResponse;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.MangeOrders.Order;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.MangeOrders.SubOrder;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.OutdoorAddress.Get.ResAddress;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.OutdoorAddress.Set.SetNewAddressResponse;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Schadules.SchdulesResponse;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Schadules.UpdateTime.Response.ResponseUpdate;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.ExpertServices.ResExpertServices;
@@ -183,6 +185,15 @@ public interface ExpertsApi {
     //add expert time
     @POST("api/expert/images/delete/?")
     Call<DeletePhotoRes>deletePhoto(@Query("ExpertId") String expId,@Query("ImageId") String imgId);
+
+    //Add new Outdoor Address
+    @POST("api/expert/address")
+    Call<SetNewAddressResponse>addnewAddress(@Body Object ob);
+
+    //Add new Outdoor Address
+    @GET("api/expert/addresses?")
+    Call<List<ResAddress>>getOutdoorAddress(@Query("ExpertId")String expId);
+
 
 
 }

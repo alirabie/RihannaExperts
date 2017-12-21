@@ -155,6 +155,7 @@
     <string name="nabourhode">Neighbourhood</string>
     <string name="indor">Indoor Service</string>
     <string name="outdor">Outdoor Service</string>
+    <string name="addnewadd">Add New Outdoor Address</string>
 
     <string name="indoortrue">You are Now Present Indoor Service</string>
     <string name="indoorfalse">You are Now Not Present Indoor Service</string>

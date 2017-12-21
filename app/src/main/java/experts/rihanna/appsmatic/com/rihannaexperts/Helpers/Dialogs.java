@@ -35,13 +35,19 @@ import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.Delete.ResDelete;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.Update.ResUpdate;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.Update.UpdateCertificate;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Districts.Districts;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.OutdoorAddress.Set.Address;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.OutdoorAddress.Set.PostNewAddress;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.OutdoorAddress.Set.SetNewAddressResponse;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.Get.ResService;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.Subscribe.ExpertService;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.Subscribe.SubscribeModel;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.Subscribe.SubscribeResponse;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.States.ResStates;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.ExpertsApi;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.Generator;
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.RegistrationFragments.RegCertificates;
+import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.UpdateExpertsFragments.AddressFraments.OutdoorAdressesFrag;
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.UpdateExpertsFragments.UpdateServicesFrag;
 import experts.rihanna.appsmatic.com.rihannaexperts.Prefs.SaveSharedPreference;
 import experts.rihanna.appsmatic.com.rihannaexperts.R;
@@ -62,6 +68,18 @@ public class Dialogs {
     static List<String>categoriesIds;
     static List<String>servicesIds;
     static List<String>servicesPrice;
+
+
+    private static List<String>statesIds;
+    private static List<String>statesNames;
+    private static List<String> districtsIds;
+    private static List<String> districtsNames;
+    private static final String SAUDI_ID="69";
+
+   static String stateKey;
+   static String statusid;
+   static String nabourhodkey;
+   static String nabourhodId;
 
 
 
@@ -921,6 +939,155 @@ public class Dialogs {
         }
 
 
+    //Add new outdoor address
+    public static void fireAddOutdoorAddressDialog(final Context context,View view, final String expertId, final android.support.v4.app.Fragment fragment){
+
+        //Initialize Done Dialog
+        final NiftyDialogBuilder dialogBuildercard = NiftyDialogBuilder.getInstance(context);
+        dialogBuildercard
+                .withDuration(700)//def
+                .withEffect(Effectstype.Fall)
+                .withDialogColor(Color.WHITE)
+                .withTitleColor(Color.BLACK)
+                .withTitle(context.getResources().getString(R.string.outdoraddress))
+                .isCancelableOnTouchOutside(false)                           //def    | isCancelable(true)
+                .setCustomView(R.layout.dialog_add_outdoor_place, view.getContext())
+                .show();
+
+
+        final BetterSpinner cities =(BetterSpinner)dialogBuildercard.findViewById(R.id.city_spinner);
+        final BetterSpinner nabourhods=(BetterSpinner)dialogBuildercard.findViewById(R.id.nabourhod_spinner);
+        final EditText addressInput =(EditText)dialogBuildercard.findViewById(R.id.address_input);
+        cities.setAdapter(new ArrayAdapter<>(context,android.R.layout.simple_spinner_dropdown_item));
+        nabourhods.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item));
+
+        //Setup Spinners
+        Generator.createService(ExpertsApi.class).getStates(SAUDI_ID+"").enqueue(new Callback<ResStates>() {
+            @Override
+            public void onResponse(Call<ResStates> call, Response<ResStates> response) {
+                if (response.isSuccessful()) {
+                    statesNames = new ArrayList<String>();
+                    statesIds = new ArrayList<String>();
+                    //fill names and ids to spinner list from response
+                    for (int i = 0; i < response.body().getStates().size(); i++) {
+                        statesNames.add(response.body().getStates().get(i).getName());
+                        statesIds.add(response.body().getStates().get(i).getId());
+                    }
+                    cities.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, statesNames));
+                    cities.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            statusid = statesIds.get(position);
+                            Generator.createService(ExpertsApi.class).getDestrics("Saudi Arabia", statesNames.get(position)).enqueue(new Callback<Districts>() {
+                                @Override
+                                public void onResponse(Call<Districts> call, Response<Districts> response) {
+                                    if (response.isSuccessful()) {
+                                        districtsNames = new ArrayList<String>();
+                                        districtsIds = new ArrayList<String>();
+                                        //fill names and ids to spinner list from response
+                                        for (int i = 0; i < response.body().getDistricts().size(); i++) {
+                                            districtsNames.add(response.body().getDistricts().get(i).getName());
+                                            districtsIds.add(response.body().getDistricts().get(i).getId());
+                                        }
+
+                                        nabourhods.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, districtsNames));
+                                        nabourhods.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                            @Override
+                                            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                                nabourhodId = districtsIds.get(position);
+                                            }
+                                        });
+
+
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<Districts> call, Throwable t) {
+
+                                }
+                            });
+
+
+                        }
+                    });
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ResStates> call, Throwable t) {
+
+            }
+        });
+
+
+        final TextView ddAddress_btn=(TextView)dialogBuildercard.findViewById(R.id.add_address_btn);
+        ddAddress_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Animation anim = AnimationUtils.loadAnimation(context, R.anim.alpha);
+                ddAddress_btn.clearAnimation();
+                ddAddress_btn.setAnimation(anim);
+
+               // Toast.makeText(context, "StateId : " + statusid + " districtId : " + nabourhodId, Toast.LENGTH_SHORT).show();
+
+
+                if(cities.getText().toString().isEmpty()){
+                    cities.setError("!");
+                }else if(nabourhods.getText().toString().isEmpty()){
+                    nabourhods.setError("!");
+                }else if (addressInput.getText().toString().isEmpty()){
+                    addressInput.setError("!");
+                }else {
+                    Address address = new Address();
+                    PostNewAddress postNewAddress = new PostNewAddress();
+                    address.setCountryId(69);
+                    address.setStateId(Integer.parseInt(statusid));
+                    address.setDistrictId(Integer.parseInt(nabourhodId));
+                    address.setAddress(addressInput.getText().toString());
+                    address.setVendorId(Integer.parseInt(expertId));
+                    postNewAddress.setAddress(address);
+                    Generator.createService(ExpertsApi.class).addnewAddress(postNewAddress).enqueue(new Callback<SetNewAddressResponse>() {
+                        @Override
+                        public void onResponse(Call<SetNewAddressResponse> call, Response<SetNewAddressResponse> response) {
+                            if (response.isSuccessful()) {
+                                if (response.body() != null) {
+                                    statusid = "";
+                                    nabourhodId = "";
+                                    android.support.v4.app.FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
+                                    android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                    fragmentTransaction.replace(R.id.frameLayout6, new OutdoorAdressesFrag());
+                                    fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+                                    fragmentTransaction.commit();
+                                    dialogBuildercard.dismiss();
+                                } else {
+                                    Toast.makeText(context, "Null from add outdoor address API ", Toast.LENGTH_SHORT).show();
+                                }
+
+                            } else {
+                                try {
+                                    Toast.makeText(context, response.errorBody().string(), Toast.LENGTH_SHORT).show();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<SetNewAddressResponse> call, Throwable t) {
+                            Toast.makeText(context, "Connection Error from add outdoor address API " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+
+
+            }
+        });
+
+    }
 
     }
 

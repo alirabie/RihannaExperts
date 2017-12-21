@@ -154,4 +154,5 @@
     <string name="indoortrue">You are Now Present Indoor Service</string>
     <string name="outdor">Outdoor Service</string>
     <string name="indor">Indoor Service</string>
+    <string name="addnewadd">Add New Outdoor Address</string>
 </resources>
