@@ -30,6 +30,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Login.LoginResponse;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Schadules.Deleteschaduleres;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Schadules.SchdulesResponse;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Schadules.UpdateTime.Deliveryschedule;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Schadules.UpdateTime.PutTime;
@@ -98,7 +99,7 @@ public class SchdulesAdb extends RecyclerView.Adapter<SchdulesAdb.Vh23> {
         String dateTv=DateFormat.format(date);
 
 
-        holder.weekDay.setText(weekdays[schdulesResponse.getDeliveryschedules().get(position).getDay() + 1] + " " + dateTv);
+        holder.weekDay.setText(weekdays[schdulesResponse.getDeliveryschedules().get(position).getDay() + 1]);
         holder.from.setText(formattedDateFrom);
         holder.to.setText(fromatedDateTo);
 
@@ -246,6 +247,49 @@ public class SchdulesAdb extends RecyclerView.Adapter<SchdulesAdb.Vh23> {
 
 
 
+        //Delete Time
+        holder.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Animation anim = AnimationUtils.loadAnimation(context, R.anim.alpha);
+                holder.delete.clearAnimation();
+                holder.delete.setAnimation(anim);
+
+
+                Generator.createService(ExpertsApi.class).deleteSchadule(
+                        schdulesResponse.getDeliveryschedules().get(position).getVendorid()+"",
+                        schdulesResponse.getDeliveryschedules().get(position).getId()+"")
+                        .enqueue(new Callback<Deleteschaduleres>() {
+                            @Override
+                            public void onResponse(Call<Deleteschaduleres> call, Response<Deleteschaduleres> response) {
+                                if (response.isSuccessful()) {
+                                    if(response.body().getStatus().equals("ok")){
+                                        //refresh fragment
+                                        android.support.v4.app.FragmentManager fragmentManager3 = ((FragmentActivity) context).getSupportFragmentManager();
+                                        fragmentManager3.beginTransaction().detach(fragment).attach(fragment).commit();
+
+                                    }else {
+                                        Toast.makeText(context,response.body().getErrorMessage(),Toast.LENGTH_SHORT).show();
+                                    }
+
+                                } else {
+                                    try {
+                                        Toast.makeText(context,response.errorBody().string(),Toast.LENGTH_SHORT).show();
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<Deleteschaduleres> call, Throwable t) {
+                                Toast.makeText(context,"Connection error from schedule delete API "+t.getMessage(),Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }
+        });
+
+
 
     }
 
@@ -257,7 +301,7 @@ public class SchdulesAdb extends RecyclerView.Adapter<SchdulesAdb.Vh23> {
     public static class Vh23 extends RecyclerView.ViewHolder{
 
         private TextView weekDay,from,to,save;
-        private ImageView editfrom,editTo;
+        private ImageView editfrom,editTo,delete;
         public Vh23(View itemView) {
             super(itemView);
 
@@ -267,6 +311,8 @@ public class SchdulesAdb extends RecyclerView.Adapter<SchdulesAdb.Vh23> {
             save=(TextView)itemView.findViewById(R.id.save_time_btn);
             editfrom=(ImageView)itemView.findViewById(R.id.edit_time_from);
             editTo=(ImageView)itemView.findViewById(R.id.edit_time_to);
+            delete=(ImageView)itemView.findViewById(R.id.delete_time_btn);
+
 
 
         }

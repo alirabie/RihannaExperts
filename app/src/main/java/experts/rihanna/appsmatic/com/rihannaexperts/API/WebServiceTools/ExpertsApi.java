@@ -22,6 +22,7 @@ import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.MangeOrders.O
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.MangeOrders.SubOrder;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.OutdoorAddress.Get.ResAddress;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.OutdoorAddress.Set.SetNewAddressResponse;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Schadules.Deleteschaduleres;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Schadules.SchdulesResponse;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Schadules.UpdateTime.Response.ResponseUpdate;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.ExpertServices.ResExpertServices;
@@ -194,6 +195,9 @@ public interface ExpertsApi {
     @GET("api/expert/addresses?")
     Call<List<ResAddress>>getOutdoorAddress(@Query("ExpertId")String expId);
 
+    //Delete schedule
+    @POST("api/expert/schedule/delete?")
+    Call<Deleteschaduleres>deleteSchadule(@Query("vendorid")String expId,@Query("scheduleid")String schduleId);
 
 
 }
