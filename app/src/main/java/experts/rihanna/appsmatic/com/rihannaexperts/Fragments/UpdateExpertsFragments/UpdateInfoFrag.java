@@ -190,6 +190,8 @@ public class UpdateInfoFrag extends Fragment {
                         customer.setPassword(password.getText().toString());
                         List<Integer>role_ids=new ArrayList<Integer>();
                         role_ids.add(3);
+                        role_ids.add(5);
+                        role_ids.add(6);
                         customer.setRoleIds(role_ids);
                         billingAddress.setFirstName(fName.getText().toString());
                         billingAddress.setLastName(lName.getText().toString());

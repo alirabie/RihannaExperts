@@ -698,7 +698,12 @@ public class Dialogs {
                                         for (int i = 0; i < response.body().getProducts().size(); i++) {
                                             servicesNames.add(response.body().getProducts().get(i).getName());
                                             servicesIds.add(response.body().getProducts().get(i).getId());
-                                            servicesPrice.add(response.body().getProducts().get(i).getPrice()+"");
+                                            if(response.body().getProducts().get(i).getPrice()==null){
+                                                servicesPrice.add("0");
+                                            }else {
+                                                servicesPrice.add(response.body().getProducts().get(i).getPrice()+"");
+                                            }
+
                                         }
                                         servicesSp.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item,servicesNames));
                                         servicesSp.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -806,6 +811,8 @@ public class Dialogs {
                         expertService.setServiceId(Integer.parseInt(serviceId));
                         expertService.setDiscountPercentage(0.0);
                         subscribeModel.setExpertService(expertService);
+                        Gson gson=new Gson();
+                        Log.e("sub888888",gson.toJson(subscribeModel));
                         Generator.createService(ExpertsApi.class).subscribeService(subscribeModel).enqueue(new Callback<SubscribeResponse>() {
                             @Override
                             public void onResponse(Call<SubscribeResponse> call, Response<SubscribeResponse> response) {
