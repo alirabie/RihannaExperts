@@ -2,6 +2,7 @@ package experts.rihanna.appsmatic.com.rihannaexperts.Activities;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
@@ -168,15 +169,31 @@ public class Home extends AppCompatActivity  {
                 Animation anim = AnimationUtils.loadAnimation(Home.this, R.anim.alpha);
                 latestOffersSide.clearAnimation();
                 latestOffersSide.setAnimation(anim);
-                SaleMangeFrag saleMangeFrag=new SaleMangeFrag();
-                android.support.v4.app.FragmentManager fragmentManager = (Home.this).getSupportFragmentManager();
-                android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragmentcontener,saleMangeFrag);
-                fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
-                fragmentTransaction.commit();
-                //set title
-                tittle.setText(getResources().getString(R.string.mangeoffers));
-                drawer.closeDrawer(GravityCompat.START);
+
+                //if expert class B not allow to modify price
+                if(SaveSharedPreference.getCustomerInfo(getApplicationContext()).getCustomers().get(0).getCustomerRoleName().equals("Expert B")){
+                    final NiftyDialogBuilder dialogBuildercard = NiftyDialogBuilder.getInstance(Home.this);
+                    dialogBuildercard
+                            .withDuration(700)//def
+                            .withEffect(Effectstype.Slidetop)
+                            .withDialogColor(getResources().getColor(R.color.colorPrimary))
+                            .withTitleColor(Color.BLACK)
+                            .withTitle(getResources().getString(R.string.app_name))
+                            .withMessage(getResources().getString(R.string.discountaccess))
+                            .isCancelableOnTouchOutside(true)                           //def    | isCancelable(true)
+                            .show();
+                }else {
+                    SaleMangeFrag saleMangeFrag=new SaleMangeFrag();
+                    android.support.v4.app.FragmentManager fragmentManager = (Home.this).getSupportFragmentManager();
+                    android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.fragmentcontener,saleMangeFrag);
+                    fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+                    fragmentTransaction.commit();
+                    //set title
+                    tittle.setText(getResources().getString(R.string.mangeoffers));
+                    drawer.closeDrawer(GravityCompat.START);
+                }
+
 
             }
         });

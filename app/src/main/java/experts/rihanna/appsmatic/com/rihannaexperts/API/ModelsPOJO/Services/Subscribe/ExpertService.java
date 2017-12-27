@@ -16,10 +16,10 @@ public class ExpertService {
     private Integer serviceId;
     @SerializedName("price")
     @Expose
-    private Integer price;
+    private Double price;
     @SerializedName("discount_amount")
     @Expose
-    private Integer discountAmount;
+    private Double discountAmount;
     @SerializedName("discount_percentage")
     @Expose
     private Double discountPercentage;
@@ -40,19 +40,19 @@ public class ExpertService {
         this.serviceId = serviceId;
     }
 
-    public Integer getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
-    public Integer getDiscountAmount() {
+    public Double getDiscountAmount() {
         return discountAmount;
     }
 
-    public void setDiscountAmount(Integer discountAmount) {
+    public void setDiscountAmount(Double discountAmount) {
         this.discountAmount = discountAmount;
     }
 

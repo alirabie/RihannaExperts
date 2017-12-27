@@ -97,7 +97,8 @@
                     android:layout_weight="1"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
-                    android:background="#d8d8d8">
+                    android:background="#d8d8d8"
+                    android:id="@+id/didcframe">
 
                     <EditText
                         android:layout_width="match_parent"

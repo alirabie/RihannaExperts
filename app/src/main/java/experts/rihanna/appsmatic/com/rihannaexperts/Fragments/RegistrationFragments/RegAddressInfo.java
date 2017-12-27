@@ -144,9 +144,9 @@ public class RegAddressInfo extends Fragment implements OnMapReadyCallback {
                             if (response.isSuccessful()) {
                                 if (mProgressDialog.isShowing())
                                     mProgressDialog.dismiss();
-                                if (response.body() != null) {
+                                if (response.body().getCustomers() != null) {
                                     //Registration success
-                                    Toast.makeText(getContext(),getResources().getString(R.string.registersucsess)+" "+response.body().getCustomers().get(0).getEmail(), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(),getResources().getString(R.string.registersucsess), Toast.LENGTH_SHORT).show();
                                     SignUp.expertId = response.body().getCustomers().get(0).getExpertId()+"";
                                     Gson gson=new Gson();
                                     Log.e("regResponce",gson.toJson(response.body()));
@@ -158,7 +158,7 @@ public class RegAddressInfo extends Fragment implements OnMapReadyCallback {
                                     fragmentTransaction.commit();
                                     Log.e("Id : ", SignUp.expertId);
                                 } else {
-                                    Toast.makeText(getContext(), "Null from expert registration", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(),"Registration Failed Null from expert registration", Toast.LENGTH_SHORT).show();
                                 }
                             } else {
                                 if (mProgressDialog.isShowing())

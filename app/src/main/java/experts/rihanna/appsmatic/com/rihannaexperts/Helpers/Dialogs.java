@@ -14,6 +14,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -644,6 +645,7 @@ public class Dialogs {
         final EditText price;
         final EditText descountedPrice;
         final TextView subscribe_btn,close;
+        FrameLayout discountframe;
         //Initialize Done Dialog
         final NiftyDialogBuilder dialogBuildercard = NiftyDialogBuilder.getInstance(context);
         dialogBuildercard
@@ -662,6 +664,7 @@ public class Dialogs {
         price=(EditText)dialogBuildercard.findViewById(R.id.price_sp);
         descountedPrice=(EditText)dialogBuildercard.findViewById(R.id.discount_sp);
         subscribe_btn=(TextView)dialogBuildercard.findViewById(R.id.subscribe_btn);
+        discountframe=(FrameLayout)dialogBuildercard.findViewById(R.id.didcframe);
         close=(TextView)dialogBuildercard.findViewById(R.id.close);
 
         categoriesSp.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item));
@@ -759,10 +762,12 @@ public class Dialogs {
         //if expert class B not allow to modify price
         if(SaveSharedPreference.getCustomerInfo(context).getCustomers().get(0).getCustomerRoleName().equals("Expert B")){
             price.setEnabled(false);
-            descountedPrice.setEnabled(false);
+            descountedPrice.setVisibility(View.INVISIBLE);
+            discountframe.setVisibility(View.INVISIBLE);
         }else {
             price.setEnabled(true);
-            descountedPrice.setEnabled(true);
+            descountedPrice.setVisibility(View.VISIBLE);
+            discountframe.setVisibility(View.VISIBLE);
         }
 
 
@@ -797,19 +802,21 @@ public class Dialogs {
                         if (mProgressDialog.isShowing())
                             mProgressDialog.dismiss();
                         price.setError(context.getResources().getString(R.string.insertprice));
-                    } else {
+                    }else {
+
                         SubscribeModel subscribeModel = new SubscribeModel();
                         ExpertService expertService = new ExpertService();
                         expertService.setExpertId(Integer.parseInt(expertId));
                         if(!descountedPrice.getText().toString().isEmpty()){
-                            expertService.setDiscountAmount(Integer.parseInt(descountedPrice.getText().toString()));
+                            expertService.setDiscountAmount(Double.parseDouble(descountedPrice.getText().toString()));
+                            expertService.setDiscountPercentage((Double.parseDouble(descountedPrice.getText().toString()) / Double.parseDouble(servicePrice)));
                         }else {
-                            expertService.setDiscountAmount(0);
+                            expertService.setDiscountAmount(0.0);
+                            expertService.setDiscountPercentage(0.0);
                         }
 
-                        expertService.setPrice(Integer.parseInt(servicePrice));
+                        expertService.setPrice(Double.parseDouble(servicePrice));
                         expertService.setServiceId(Integer.parseInt(serviceId));
-                        expertService.setDiscountPercentage(0.0);
                         subscribeModel.setExpertService(expertService);
                         Gson gson=new Gson();
                         Log.e("sub888888",gson.toJson(subscribeModel));
@@ -865,8 +872,8 @@ public class Dialogs {
                         SubscribeModel subscribeModel = new SubscribeModel();
                         ExpertService expertService = new ExpertService();
                         expertService.setExpertId(Integer.parseInt(expertId));
-                        expertService.setDiscountAmount(0);
-                        expertService.setPrice(Integer.parseInt(servicePrice));
+                        expertService.setDiscountAmount(0.0);
+                        expertService.setPrice(Double.parseDouble(servicePrice));
                         expertService.setServiceId(Integer.parseInt(serviceId));
                         expertService.setDiscountPercentage(0.0);
                         subscribeModel.setExpertService(expertService);

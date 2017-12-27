@@ -89,7 +89,7 @@ public class UpdateServicesFrag extends Fragment {
                         }
 
                     }else {
-                        Toast.makeText(getContext(),"Null from get indoor services status",Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(getContext(),"Null from get indoor services status",Toast.LENGTH_SHORT).show();
                     }
                 }else {
                     try {
