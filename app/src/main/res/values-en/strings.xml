@@ -156,4 +156,7 @@
     <string name="indor">Indoor Service</string>
     <string name="addnewadd">Add New Outdoor Address</string>
     <string name="discountaccess">Discounts are added by Rihanna Administration for this account</string>
+    <string name="paymentstaus">Payment Status</string>
+    <string name="total">Total Price</string>
+    <string name="notset">Not Set</string>
 </resources>

@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -91,7 +92,8 @@ public class Dialogs {
          final EditText granter;
          final BetterSpinner certYear;
          final BetterSpinner spicialty;
-         final TextView saveBtn,close;
+         final TextView saveBtn;
+         final ImageView close;
 
 
 
@@ -167,7 +169,7 @@ public class Dialogs {
         certName=(EditText)dialogBuildercard.findViewById(R.id.cert_name_input);
         granter=(EditText)dialogBuildercard.findViewById(R.id.granter_input);
         saveBtn=(TextView)dialogBuildercard.findViewById(R.id.save);
-        close=(TextView)dialogBuildercard.findViewById(R.id.close);
+        close=(ImageView)dialogBuildercard.findViewById(R.id.close);
         certYear=(BetterSpinner)dialogBuildercard.findViewById(R.id.year_of_grant_input);
         certYear.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, years));
         certYear.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -315,7 +317,8 @@ public class Dialogs {
         final EditText granter;
         final BetterSpinner certYear;
         final BetterSpinner spicialty;
-        final TextView saveBtn,delete,close;
+        final TextView saveBtn,delete;
+        final ImageView close;
 
 
 
@@ -346,7 +349,7 @@ public class Dialogs {
         granter=(EditText)dialogBuildercard.findViewById(R.id.granter_input);
         saveBtn=(TextView)dialogBuildercard.findViewById(R.id.save2);
         delete=(TextView)dialogBuildercard.findViewById(R.id.next_btn);
-        close=(TextView)dialogBuildercard.findViewById(R.id.close);
+        close=(ImageView)dialogBuildercard.findViewById(R.id.close);
         certYear=(BetterSpinner)dialogBuildercard.findViewById(R.id.year_of_grant_input);
         certYear.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, years));
 

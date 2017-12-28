@@ -156,4 +156,7 @@
     <string name="indor">خدمة داخلية</string>
     <string name="addnewadd">أضف عنوان خارجى جديد</string>
     <string name="discountaccess">العروض تضاف فقط من قبل ادارة تطبيق ريحانه لهذا الحساب</string>
+    <string name="paymentstaus">حالة الدفع</string>
+    <string name="total">السعر الكلى</string>
+    <string name="notset">لم يحدد</string>
 </resources>

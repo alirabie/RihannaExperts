@@ -1,32 +1,24 @@
 package experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments;
 
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
-import java.util.List;
 
-import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.MangeOrders.Order;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Orders.OrderHeader.OrdersResponse;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.ExpertsApi;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.Generator;
 import experts.rihanna.appsmatic.com.rihannaexperts.Activities.Home;
 import experts.rihanna.appsmatic.com.rihannaexperts.Adaptors.ExpertOrdersAdb;
-import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.RegistrationFragments.RegPersonalInfo;
 import experts.rihanna.appsmatic.com.rihannaexperts.Prefs.SaveSharedPreference;
 import experts.rihanna.appsmatic.com.rihannaexperts.R;
 import retrofit2.Call;
@@ -51,44 +43,45 @@ public class OrdersFrag extends Fragment {
     @Override
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        emptyFlag=(TextView)view.findViewById(R.id.empty_orders_flag_frag);
+        emptyFlag = (TextView) view.findViewById(R.id.empty_orders_flag_frag);
         emptyFlag.setVisibility(View.INVISIBLE);
 
 
         //Get Orders List from Server with test id 53
 
-        //Loading Dialog
-        final ProgressDialog mProgressDialog = new ProgressDialog(getActivity());
-        mProgressDialog.setIndeterminate(true);
-        mProgressDialog.setMessage(getActivity().getResources().getString(R.string.loading));
-        mProgressDialog.show();
+        if (getArguments() == null) {
 
-        Log.e("ordes",SaveSharedPreference.getExpertId(getContext()));
-        if(getArguments()!=null){
-            Generator.createService(ExpertsApi.class).getExpertOrders(SaveSharedPreference.getExpertId(getContext()),getArguments().getString("today")).enqueue(new Callback<List<Order>>() {
+
+            //Loading Dialog
+            final ProgressDialog mProgressDialog = new ProgressDialog(getActivity());
+            mProgressDialog.setIndeterminate(true);
+            mProgressDialog.setMessage(getActivity().getResources().getString(R.string.loading));
+            mProgressDialog.show();
+
+            Generator.createService(ExpertsApi.class).getExpertOrders(SaveSharedPreference.getExpertId(getContext())).enqueue(new Callback<OrdersResponse>() {
                 @Override
-                public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
-                    if(response.isSuccessful()){
+                public void onResponse(Call<OrdersResponse> call, Response<OrdersResponse> response) {
+                    if (response.isSuccessful()) {
                         if (mProgressDialog.isShowing())
                             mProgressDialog.dismiss();
-                        if(response.body()!=null){
-                            if (response.body().isEmpty()){
+                        if (response.body() != null) {
+                            if (response.body().getOrders().isEmpty()) {
                                 emptyFlag.setVisibility(View.VISIBLE);
-                            }else {
+                            } else {
                                 emptyFlag.setVisibility(View.INVISIBLE);
-                                ordersList=(RecyclerView)view.findViewById(R.id.orders_frag_list);
-                                ordersList.setAdapter(new ExpertOrdersAdb(response.body(),SOURCE,getContext()));
+                                ordersList = (RecyclerView) view.findViewById(R.id.orders_frag_list);
+                                ordersList.setAdapter(new ExpertOrdersAdb(response.body(), getContext(), SOURCE));
                                 ordersList.setLayoutManager(new LinearLayoutManager(getContext()));
                             }
-                        }else {
-                            Toast.makeText(getContext(),"Null From Orders List",Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getContext(), "Null From Orders List", Toast.LENGTH_SHORT).show();
                         }
 
-                    }else {
+                    } else {
                         if (mProgressDialog.isShowing())
                             mProgressDialog.dismiss();
                         try {
-                            Toast.makeText(getContext(),response.errorBody().string(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), response.errorBody().string(), Toast.LENGTH_SHORT).show();
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -96,35 +89,42 @@ public class OrdersFrag extends Fragment {
                 }
 
                 @Override
-                public void onFailure(Call<List<Order>> call, Throwable t) {
-                    Toast.makeText(getContext(),"Connection error From Orders List"+t.getMessage(),Toast.LENGTH_SHORT).show();
+                public void onFailure(Call<OrdersResponse> call, Throwable t) {
+                    Toast.makeText(getContext(), "Connection error From Orders List" + t.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
+
         }else {
-            Generator.createService(ExpertsApi.class).getExpertOrders(SaveSharedPreference.getExpertId(getContext()),"").enqueue(new Callback<List<Order>>() {
+
+            //Loading Dialog
+            final ProgressDialog mProgressDialog = new ProgressDialog(getActivity());
+            mProgressDialog.setIndeterminate(true);
+            mProgressDialog.setMessage(getActivity().getResources().getString(R.string.loading));
+            mProgressDialog.show();
+            Generator.createService(ExpertsApi.class).getFilterdOrders(SaveSharedPreference.getExpertId(getContext()), getArguments().getString("today")).enqueue(new Callback<OrdersResponse>() {
                 @Override
-                public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
-                    if(response.isSuccessful()){
+                public void onResponse(Call<OrdersResponse> call, Response<OrdersResponse> response) {
+                    if (response.isSuccessful()) {
                         if (mProgressDialog.isShowing())
                             mProgressDialog.dismiss();
-                        if(response.body()!=null){
-                            if (response.body().isEmpty()){
+                        if (response.body() != null) {
+                            if (response.body().getOrders().isEmpty()) {
                                 emptyFlag.setVisibility(View.VISIBLE);
-                            }else {
+                            } else {
                                 emptyFlag.setVisibility(View.INVISIBLE);
-                                ordersList=(RecyclerView)view.findViewById(R.id.orders_frag_list);
-                                ordersList.setAdapter(new ExpertOrdersAdb(response.body(),SOURCE,getContext()));
+                                ordersList = (RecyclerView) view.findViewById(R.id.orders_frag_list);
+                                ordersList.setAdapter(new ExpertOrdersAdb(response.body(), getContext(), SOURCE));
                                 ordersList.setLayoutManager(new LinearLayoutManager(getContext()));
                             }
-                        }else {
-                            Toast.makeText(getContext(),"Null From Orders List",Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getContext(), "Null From Orders List", Toast.LENGTH_SHORT).show();
                         }
 
-                    }else {
+                    } else {
                         if (mProgressDialog.isShowing())
                             mProgressDialog.dismiss();
                         try {
-                            Toast.makeText(getContext(),response.errorBody().string(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), response.errorBody().string(), Toast.LENGTH_SHORT).show();
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -132,17 +132,15 @@ public class OrdersFrag extends Fragment {
                 }
 
                 @Override
-                public void onFailure(Call<List<Order>> call, Throwable t) {
-                    Toast.makeText(getContext(),"Connection error From Orders List"+t.getMessage(),Toast.LENGTH_SHORT).show();
+                public void onFailure(Call<OrdersResponse> call, Throwable t) {
+                    Toast.makeText(getContext(), "Connection error From Orders List" + t.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
+
         }
 
 
-
-
     }
-
 
 
 

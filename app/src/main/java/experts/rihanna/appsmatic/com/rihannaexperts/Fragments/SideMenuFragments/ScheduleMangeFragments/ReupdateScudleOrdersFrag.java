@@ -1,8 +1,6 @@
 package experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.ScheduleMangeFragments;
 
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,9 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
-import java.util.List;
 
-import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.MangeOrders.Order;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Orders.OrderHeader.OrdersResponse;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.ExpertsApi;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.Generator;
 import experts.rihanna.appsmatic.com.rihannaexperts.Adaptors.ExpertOrdersAdb;
@@ -66,14 +63,14 @@ public class ReupdateScudleOrdersFrag extends Fragment {
         mProgressDialog.setIndeterminate(true);
         mProgressDialog.setMessage(getActivity().getResources().getString(R.string.loading));
         mProgressDialog.show();
-        Generator.createService(ExpertsApi.class).getExpertOrders(SaveSharedPreference.getExpertId(getContext()),getArguments().get("date").toString()).enqueue(new Callback<List<Order>>() {
+        Generator.createService(ExpertsApi.class).getFilterdOrders(SaveSharedPreference.getExpertId(getContext()), getArguments().get("date").toString()).enqueue(new Callback<OrdersResponse>() {
             @Override
-            public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
+            public void onResponse(Call<OrdersResponse> call, Response<OrdersResponse> response) {
                 if(response.isSuccessful()){
                     if (mProgressDialog.isShowing())
                         mProgressDialog.dismiss();
                     if(response.body()!=null){
-                        if (response.body().isEmpty()){
+                        if (response.body().getOrders().isEmpty()){
                             //Empty Flag
                             emptyFlag.setVisibility(View.VISIBLE);
                             //Buizzy Flag
@@ -94,7 +91,7 @@ public class ReupdateScudleOrdersFrag extends Fragment {
                                 busyFlag.setImageResource(R.drawable.busyon_en);
                             }
                             ordersList=(RecyclerView)view.findViewById(R.id.order_day_list);
-                            ordersList.setAdapter(new ExpertOrdersAdb(response.body(),SOURCE,getContext()));
+                            ordersList.setAdapter(new ExpertOrdersAdb(response.body(),getContext(),SOURCE));
                             ordersList.setLayoutManager(new LinearLayoutManager(getContext()));
                         }
                     }else {
@@ -113,7 +110,7 @@ public class ReupdateScudleOrdersFrag extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<Order>> call, Throwable t) {
+            public void onFailure(Call<OrdersResponse> call, Throwable t) {
                 Toast.makeText(getContext(),"Connection error From Orders List"+t.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });

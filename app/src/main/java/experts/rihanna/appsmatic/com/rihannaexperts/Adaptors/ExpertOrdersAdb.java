@@ -13,13 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-
-import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.MangeOrders.Order;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Orders.OrderHeader.OrdersResponse;
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.OrderInfoFrag;
 import experts.rihanna.appsmatic.com.rihannaexperts.Prefs.SaveSharedPreference;
 import experts.rihanna.appsmatic.com.rihannaexperts.R;
@@ -29,14 +23,14 @@ import experts.rihanna.appsmatic.com.rihannaexperts.R;
  */
 public class ExpertOrdersAdb extends RecyclerView.Adapter<ExpertOrdersAdb.vh00> {
 
-    private List<Order>orders;
+    private OrdersResponse orders;
     private Context context;
     private String actionSource;
 
-    public ExpertOrdersAdb(List<Order> orders, String actionSource, Context context) {
+    public ExpertOrdersAdb(OrdersResponse orders, Context context, String actionSource) {
         this.orders = orders;
-        this.actionSource = actionSource;
         this.context = context;
+        this.actionSource = actionSource;
     }
 
     @Override
@@ -58,39 +52,12 @@ public class ExpertOrdersAdb extends RecyclerView.Adapter<ExpertOrdersAdb.vh00> 
 
 
 
-        holder.orderTv.setText(context.getResources().getString(R.string.ordernum)+" : "+orders.get(position).getOrderNum()+"   "+context.getResources().getString(R.string.servicetype)+" : "+orders.get(position).getOrderStatus());
-        //Date setup
-        SimpleDateFormat sourceFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-        SimpleDateFormat DesiredFormat = new SimpleDateFormat("hh:mm a", Locale.ENGLISH);
-        SimpleDateFormat DateFormat=new SimpleDateFormat("yyyy/MM/dd",Locale.ENGLISH);
-        Date dateFrom = null;
-        try {
-            dateFrom = sourceFormat.parse(orders.get(position).getServiceTimeFrom());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        Date dateTo = null;
-        try {
-            dateTo = sourceFormat.parse(orders.get(position).getServiceTimeTo());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        Date date=null;
-        try {
-            date = sourceFormat.parse(orders.get(position).getServiceTimeFrom());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        holder.orderTv.setText(context.getResources().getString(R.string.ordernum)+" : "+orders.getOrders().get(position).getId()+"   "+context.getResources().getString(R.string.servicetype)+" : "+orders.getOrders().get(position).getOrderStatus());
+        holder.dateTv.setText(context.getResources().getString(R.string.total)+" : "+orders.getOrders().get(position).getOrderTotal()+context.getResources().getString(R.string.sr));
+        holder.timeTv.setText(context.getResources().getString(R.string.paymentstaus)+" : "+orders.getOrders().get(position).getPaymentStatus());
 
 
 
-
-        String formattedDateFrom = DesiredFormat.format(dateFrom.getTime());
-        String fromatedDateTo=DesiredFormat.format(dateTo.getTime());
-        String dateTv=DateFormat.format(date);
-
-        holder.timeTv.setText(formattedDateFrom+" - "+fromatedDateTo);
-        holder.dateTv.setText(dateTv);
 
         //Order List Item Btn Action
         holder.contaner.setOnClickListener(new View.OnClickListener() {
@@ -103,7 +70,7 @@ public class ExpertOrdersAdb extends RecyclerView.Adapter<ExpertOrdersAdb.vh00> 
                 //Go Order Info Fragment
                 OrderInfoFrag orderInfoFrag=new OrderInfoFrag();
                 Bundle bundle = new Bundle();
-                bundle.putInt("orderId",orders.get(position).getId());
+                bundle.putString("orderId", orders.getOrders().get(position).getId());
                 bundle.putString("action_source",actionSource);
                 orderInfoFrag.setArguments(bundle);
                 android.support.v4.app.FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
@@ -117,7 +84,7 @@ public class ExpertOrdersAdb extends RecyclerView.Adapter<ExpertOrdersAdb.vh00> 
     }
     @Override
     public int getItemCount() {
-        return orders.size();
+        return orders.getOrders().size();
     }
 
 

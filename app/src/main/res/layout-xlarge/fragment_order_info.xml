@@ -9,7 +9,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="6dp"
+        android:padding="3dp"
         android:background="#eaeaea"
         android:id="@+id/linearLayout10">
 
@@ -36,11 +36,12 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@+id/linearLayout10"
         android:layout_alignParentEnd="true"
         android:background="#ffffff"
-        android:id="@+id/linearLayout14">
+        android:id="@+id/linearLayout14"
+        android:layout_above="@+id/linearLayout15">
 
 
 
@@ -75,14 +76,15 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_below="@+id/linearLayout12"
             android:layout_alignParentEnd="true"
-            android:background="#ffffff">
+            android:background="#ffffff"
+            android:layout_weight="1">
 
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
-                android:layout_height="134dp"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:id="@+id/order_info_order_list"></android.support.v7.widget.RecyclerView>
 
@@ -93,7 +95,7 @@
                 android:text="@string/noorders"
                 android:id="@+id/order_info_empty_list_flag"
                 android:layout_gravity="center"
-                android:textSize="35dp" />
+                android:textSize="45dp" />
         </FrameLayout>
         <LinearLayout
             android:orientation="horizontal"
@@ -117,7 +119,7 @@
                 android:layout_height="match_parent"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:id="@+id/servicetypeflag"
-                android:textSize="25dp"
+                android:textSize="30dp"
                 android:padding="3dp"
                 android:textColor="#000000"
                 android:gravity="center"
@@ -129,169 +131,48 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/linearLayout14"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="10dp"
         android:background="#ffffff"
-        android:id="@+id/linearLayout15">
+        android:id="@+id/linearLayout15"
+        android:layout_above="@+id/customer_info_pannel"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp">
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="2dp"
+            android:padding="4dp"
             android:id="@+id/linearLayout13"
             android:background="#ffffff"
             android:layout_alignParentEnd="true"
             android:layout_below="@+id/linearLayout14">
 
-            <ImageView
-                android:layout_width="25dp"
+            <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/imageView12"
-                android:src="@drawable/timeicon"
-                android:padding="2dp" />
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Small Text"
+                android:id="@+id/totalprice"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="25dp"
+                android:textColor="@color/colorPrimary" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/time"
-                android:id="@+id/textView12"
-                android:textSize="20dp"
-                android:padding="2dp"
-                android:textColor="@color/colorPrimary"
-                android:gravity="center" />
+                android:text="Medium Text"
+                android:id="@+id/paymentstatus"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="25dp"
+                android:textColor="@color/colorPrimary" />
         </LinearLayout>
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="10dp">
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="3dp">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:id="@+id/imageView8"
-                    android:src="@drawable/calendar"
-                    android:padding="2dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Medium Text"
-                    android:id="@+id/order_info_date"
-                    android:textSize="20dp"
-                    android:padding="2dp"
-                    android:textColor="#000000" />
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/edite_date_btn"
-                    android:src="@drawable/editicon"
-                    android:padding="3dp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="3dp">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:id="@+id/imageView9"
-                    android:src="@drawable/time"
-                    android:padding="2dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Medium Text"
-                    android:id="@+id/order_info_time_from"
-                    android:textSize="20dp"
-                    android:padding="2dp"
-                    android:textColor="#000000" />
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/edittime_from_btn"
-                    android:src="@drawable/editicon"
-                    android:padding="3dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="-"
-                    android:id="@+id/textView39"
-                    android:textSize="20dp"
-                    android:padding="2dp"
-                    android:textColor="#000000"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:id="@+id/imageView21"
-                    android:src="@drawable/time"
-                    android:padding="2dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Medium Text"
-                    android:id="@+id/order_info_time_to"
-                    android:textSize="20dp"
-                    android:padding="2dp"
-                    android:textColor="#000000" />
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/edittime_to_btn"
-                    android:src="@drawable/editicon"
-                    android:padding="3dp" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/save"
-            android:id="@+id/savetimedate"
-            android:textSize="20dp"
-            android:layout_marginBottom="15dp"
-            android:background="@color/colorPrimary"
-            android:textColor="#ffffff"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingTop="2dp"
-            android:paddingBottom="2dp"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center" />
 
     </LinearLayout>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -313,7 +194,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/accept"
                 android:id="@+id/accept_btn"
-                android:padding="10dp"
+                android:padding="5dp"
                 android:background="@color/colorPrimary"
                 android:textColor="#ffffff"
                 android:layout_below="@+id/linearLayout6"
@@ -328,7 +209,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/dicline"
                 android:id="@+id/next_btn"
-                android:padding="10dp"
+                android:padding="5dp"
                 android:background="@color/colorPrimary"
                 android:gravity="center"
                 android:textColor="#ffffff"
@@ -361,13 +242,14 @@
                 android:padding="5dp"
                 android:textColor="@color/colorPrimary" />
         </FrameLayout>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/ordercompleted"
             android:id="@+id/finishorder_btn"
-            android:padding="10dp"
+            android:padding="5dp"
             android:background="@color/colorPrimary"
             android:textColor="#ffffff"
             android:layout_below="@+id/linearLayout6"
@@ -382,12 +264,12 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:background="#ffffff"
         android:id="@+id/customer_info_pannel"
-        android:layout_below="@+id/linearLayout15"
         android:layout_alignParentEnd="true"
-        android:layout_above="@+id/frameLayout">
+        android:layout_above="@+id/frameLayout"
+        android:layout_marginTop="10dp"
+        android:padding="8dp">
 
         <LinearLayout
             android:orientation="horizontal"
@@ -412,7 +294,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="@string/customerinfo"
                 android:id="@+id/textView9"
-                android:textSize="25dp"
+                android:textSize="22dp"
                 android:padding="2dp"
                 android:textColor="@color/colorPrimary"
                 android:gravity="center" />
@@ -421,68 +303,70 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp">
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="10dp">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="سارة محمد على"
                 android:id="@+id/order_info_cust_name"
-                android:textSize="20dp"
+                android:textSize="21dp"
                 android:textColor="#000000"
                 android:padding="2dp" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:id="@+id/order_info_cust_phone"
-                android:textSize="18dp"
-                android:padding="2dp" />
+                android:textSize="20dp"
+                android:padding="2dp"
+                android:text="01003527944" />
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:id="@+id/order_info_cust_address"
-                android:textSize="18dp"
-                android:padding="2dp" />
+                android:textSize="20dp"
+                android:padding="2dp"
+                android:text="شارع التحرير الدقى" />
 
-            <LinearLayout
-                android:orientation="horizontal"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/state_tv"
+                android:textSize="20dp"
+                android:padding="2dp"
+                android:text="القاهرة" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp">
+
+            <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:id="@+id/order_info_show_on_map">
+                android:id="@+id/call_btn"
+                android:src="@drawable/phone"
+                android:layout_weight="1" />
 
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="3dp" >
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/sms_btn"
+                android:src="@drawable/message"
+                android:layout_weight="1" />
 
-                    <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="match_parent"
-                        android:id="@+id/imageView14"
-                        android:src="@drawable/address_icon"
-                        android:padding="2dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:text="@string/showonmap"
-                        android:id="@+id/textView14"
-                        android:textSize="20dp"
-                        android:padding="2dp"
-                        android:textColor="#000000" />
-                </LinearLayout>
-
-            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>

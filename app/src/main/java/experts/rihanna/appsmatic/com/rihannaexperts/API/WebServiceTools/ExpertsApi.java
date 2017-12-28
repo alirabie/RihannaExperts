@@ -18,8 +18,8 @@ import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.ExpertRegista
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.IndoorServicesCntroal.IndoorGetRes;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.IndoorServicesCntroal.Put.ResChangeStatus;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Login.LoginResponse;
-import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.MangeOrders.Order;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.MangeOrders.SubOrder;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Orders.OrderHeader.OrdersResponse;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.OutdoorAddress.Get.ResAddress;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.OutdoorAddress.Set.SetNewAddressResponse;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Schadules.Deleteschaduleres;
@@ -109,11 +109,15 @@ public interface ExpertsApi {
 
     //Get Expert Orders
     @GET("api/expert/orders?")
-    Call<List<Order>>getExpertOrders(@Query("ExpertId")String expId,@Query("orderdate")String date);
+    Call<OrdersResponse>getExpertOrders(@Query("ExpertId")String expId);
+
+    //Get Expert Orders by date
+    @GET("api/expert/order/filterbydate?")
+    Call<OrdersResponse>getFilterdOrders(@Query("ExpertId")String expId,@Query("Filter")String date);
 
     //Get SubOrder By Id
-    @GET("api/expert/suborders?")
-    Call<SubOrder>getOrderInfo(@Query("OrderId")String OrderId);
+    @GET("api/expert/order/services?")
+    Call<OrdersResponse>getOrderInfo(@Query("ExpertId")String expId,@Query("OrderId")String OrderId);
 
 
     //Change Order Status
@@ -154,8 +158,8 @@ public interface ExpertsApi {
     Call<ResponseUpdate>updateTime(@Body Object time);
 
     //Update Order Time
-    @POST("api/expert/order/changetime?")
-    Call<Res>updateOrderTime(@Query("orderid")String orderId,@Query("timefrom")String timefrom,@Query("timeto")String timeto);
+    @POST("api/expert/service/changetime?")
+    Call<Res>updateOrderTime(@Query("orderitemid")String orderId,@Query("timefrom")String timefrom,@Query("timeto")String timeto);
 
     //Get States by id
     @GET("api/states/{id}")
