@@ -117,7 +117,7 @@ public interface ExpertsApi {
 
     //Get SubOrder By Id
     @GET("api/expert/order/services?")
-    Call<OrdersResponse>getOrderInfo(@Query("ExpertId")String expId,@Query("OrderId")String OrderId);
+    Call<OrdersResponse>getOrderInfo(@Query("ExpertId")int expId,@Query("OrderId")int OrderId);
 
 
     //Change Order Status

@@ -134,7 +134,7 @@ public class OrderInfoFrag extends Fragment  {
         mProgressDialog.setIndeterminate(true);
         mProgressDialog.setMessage(getActivity().getResources().getString(R.string.loading));
         mProgressDialog.show();
-        Generator.createService(ExpertsApi.class).getOrderInfo(SaveSharedPreference.getExpertId(getContext()),getArguments().getInt("orderId")+"").enqueue(new Callback<OrdersResponse>() {
+        Generator.createService(ExpertsApi.class).getOrderInfo(Integer.parseInt(SaveSharedPreference.getExpertId(getContext())),Integer.parseInt(getArguments().get("orderId").toString())).enqueue(new Callback<OrdersResponse>() {
             @Override
             public void onResponse(Call<OrdersResponse> call, final Response<OrdersResponse> response) {
                 if (response.isSuccessful()) {
@@ -194,17 +194,16 @@ public class OrderInfoFrag extends Fragment  {
                         }
 
 
-
                         //Customer name
-                        customerName.setText(response.body().getOrders().get(0).getBillingAddress().getFirstName()+" "+response.body().getOrders().get(0).getBillingAddress().getLastName());
+                        customerName.setText(response.body().getOrders().get(0).getBillingAddress().getFirstName() + " " + response.body().getOrders().get(0).getBillingAddress().getLastName());
                         //Customer phone
                         customerPhone.setText(response.body().getOrders().get(0).getBillingAddress().getPhoneNumber());
                         //Customer address
                         customerAddress.setText(response.body().getOrders().get(0).getBillingAddress().getAddress1());
                         //Customer state
-                        CustomerstateTv.setText(response.body().getOrders().get(0).getBillingAddress().getCity());
+                        CustomerstateTv.setText(response.body().getOrders().get(0).getBillingAddress().getProvince()+" "+response.body().getOrders().get(0).getBillingAddress().getCity());
 
-                        totalPrice.setText(getContext().getResources().getString(R.string.total)+" : "+response.body().getOrders().get(0).getOrderTotal()+getContext().getResources().getString(R.string.sr));
+                        totalPrice.setText(getContext().getResources().getString(R.string.total) + " : " + response.body().getOrders().get(0).getOrderTotal() + getContext().getResources().getString(R.string.sr));
                         paymentType.setText(getContext().getResources().getString(R.string.paymentstaus) + " : " + response.body().getOrders().get(0).getPaymentStatus());
 
 
@@ -247,7 +246,7 @@ public class OrderInfoFrag extends Fragment  {
                                 mProgressDialog.setIndeterminate(true);
                                 mProgressDialog.setMessage(getActivity().getResources().getString(R.string.loading));
                                 mProgressDialog.show();
-                                Generator.createService(ExpertsApi.class).changeOrdrStatus(getArguments().get("orderId").toString() , ACCEPT + "").enqueue(new Callback<ChangingResponse>() {
+                                Generator.createService(ExpertsApi.class).changeOrdrStatus(getArguments().get("orderId").toString(), ACCEPT + "").enqueue(new Callback<ChangingResponse>() {
                                     @Override
                                     public void onResponse(Call<ChangingResponse> call, Response<ChangingResponse> response) {
                                         if (response.isSuccessful()) {
@@ -397,8 +396,6 @@ public class OrderInfoFrag extends Fragment  {
                         });
 
 
-
-
                         //Call
                         callCust.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -436,7 +433,6 @@ public class OrderInfoFrag extends Fragment  {
                         });
 
 
-
                         //SMS
                         sms.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -445,7 +441,7 @@ public class OrderInfoFrag extends Fragment  {
                                 sms.clearAnimation();
                                 sms.setAnimation(anim1);
 
-                                if(response.body().getOrders().get(0).getBillingAddress().getPhoneNumber()!=null) {
+                                if (response.body().getOrders().get(0).getBillingAddress().getPhoneNumber() != null) {
                                     getContext().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("sms:"
                                             + response.body().getOrders().get(0).getBillingAddress().getPhoneNumber())));
                                 }
@@ -453,41 +449,31 @@ public class OrderInfoFrag extends Fragment  {
                         });
 
 
-
-
-
-
-
-
-
-
-
-
-                        }else{
-
-                            Toast.makeText(getContext(), "Null from Order Info", Toast.LENGTH_SHORT).show();
-                        }
-
                     } else {
-                        if (mProgressDialog.isShowing())
-                            mProgressDialog.dismiss();
-                        try {
-                            Toast.makeText(getContext(), response.errorBody().string(), Toast.LENGTH_SHORT).show();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+
+                        Toast.makeText(getContext(), "Null from Order Info", Toast.LENGTH_SHORT).show();
+                    }
+
+                } else {
+                    if (mProgressDialog.isShowing())
+                        mProgressDialog.dismiss();
+                    try {
+                        Toast.makeText(getContext(), response.errorBody().string(), Toast.LENGTH_SHORT).show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
 
 
             }
 
-                @Override
-                public void onFailure (Call < OrdersResponse > call, Throwable t){
-                    if (mProgressDialog.isShowing())
-                        mProgressDialog.dismiss();
-                    Toast.makeText(getContext(), "Connection error from Order Info " + t.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
+            @Override
+            public void onFailure(Call<OrdersResponse> call, Throwable t) {
+                if (mProgressDialog.isShowing())
+                    mProgressDialog.dismiss();
+                Toast.makeText(getContext(), "Connection error from Order Info " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
 
