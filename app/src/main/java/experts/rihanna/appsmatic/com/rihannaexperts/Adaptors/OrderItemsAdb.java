@@ -41,10 +41,12 @@ import retrofit2.Response;
 public class OrderItemsAdb extends RecyclerView.Adapter<OrderItemsAdb.Vh01> {
     List<experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Orders.OrderHeader.OrderItem>orderItems;
     Context context;
+    String status;
 
-    public OrderItemsAdb(List<experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Orders.OrderHeader.OrderItem> orderItems, Context context) {
+    public OrderItemsAdb(List<experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Orders.OrderHeader.OrderItem> orderItems, Context context,String status) {
         this.orderItems = orderItems;
         this.context = context;
+        this.status=status;
     }
 
     @Override
@@ -94,6 +96,14 @@ public class OrderItemsAdb extends RecyclerView.Adapter<OrderItemsAdb.Vh01> {
             holder.timeToTv.setText(orderItems.get(position).getServiceTimeTo().toString());
         }
 
+
+
+        //Close editing time and date when order finished
+        if(status.equals("Complete")){
+            holder.editDate.setVisibility(View.INVISIBLE);
+            holder.editTimeFrom.setVisibility(View.INVISIBLE);
+            holder.editTimeTo.setVisibility(View.INVISIBLE);
+        }
 
 
         //Date config
@@ -232,6 +242,7 @@ public class OrderItemsAdb extends RecyclerView.Adapter<OrderItemsAdb.Vh01> {
                                                                         mProgressDialog.dismiss();
                                                                     if (response.body().getMessage() != null) {
                                                                         Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                                                        holder.saveTimeDate.setVisibility(View.INVISIBLE);
                                                                     } else {
                                                                         Toast.makeText(context, "Null From Update Order Time", Toast.LENGTH_SHORT).show();
                                                                     }

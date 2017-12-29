@@ -187,7 +187,7 @@ public class OrderInfoFrag extends Fragment  {
 
                         //Order Items List
                         if (response.body().getOrders().get(0).getOrderItems() != null) {
-                            orderitemsList.setAdapter(new OrderItemsAdb(response.body().getOrders().get(0).getOrderItems(), getContext()));
+                            orderitemsList.setAdapter(new OrderItemsAdb(response.body().getOrders().get(0).getOrderItems(), getContext(),response.body().getOrders().get(0).getOrderStatus()));
                             orderitemsList.setLayoutManager(new LinearLayoutManager(getContext()));
                         } else {
                             emptyOrdersFlag.setVisibility(View.VISIBLE);
