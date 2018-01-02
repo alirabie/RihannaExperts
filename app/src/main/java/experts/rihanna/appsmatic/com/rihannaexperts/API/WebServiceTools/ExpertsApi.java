@@ -159,7 +159,7 @@ public interface ExpertsApi {
 
     //Update Order Time
     @POST("api/expert/service/changetime?")
-    Call<Res>updateOrderTime(@Query("orderitemid")String orderId,@Query("timefrom")String timefrom,@Query("timeto")String timeto);
+    Call<Res>updateOrderTime(@Query("orderitemid")String orderId,@Query("servicedate")String date,@Query("timefrom")String timefrom,@Query("timeto")String timeto);
 
     //Get States by id
     @GET("api/states/{id}")
@@ -187,7 +187,7 @@ public interface ExpertsApi {
     Call<GetExpertPhotos>getExpertPhotos(@Query("ExpertId") String expId);
 
 
-    //add expert time
+    //delete expert photo
     @POST("api/expert/images/delete/?")
     Call<DeletePhotoRes>deletePhoto(@Query("ExpertId") String expId,@Query("ImageId") String imgId);
 

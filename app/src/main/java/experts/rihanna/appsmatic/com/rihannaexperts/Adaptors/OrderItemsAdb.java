@@ -234,7 +234,7 @@ public class OrderItemsAdb extends RecyclerView.Adapter<OrderItemsAdb.Vh01> {
                                                         mProgressDialog.setIndeterminate(true);
                                                         mProgressDialog.setMessage(context.getString(R.string.loading));
                                                         mProgressDialog.show();
-                                                        Generator.createService(ExpertsApi.class).updateOrderTime(orderItems.get(position).getId()+"", holder.timefromTv.getText().toString(),holder.timeToTv.getText().toString()).enqueue(new Callback<Res>() {
+                                                        Generator.createService(ExpertsApi.class).updateOrderTime(orderItems.get(position).getId()+"",holder.dateTv.getText()+"",holder.timefromTv.getText().toString(),holder.timeToTv.getText().toString()).enqueue(new Callback<Res>() {
                                                             @Override
                                                             public void onResponse(Call<Res> call, Response<Res> response) {
                                                                 if (response.isSuccessful()) {

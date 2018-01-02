@@ -207,14 +207,15 @@ public class OrderInfoFrag extends Fragment  {
                         paymentType.setText(getContext().getResources().getString(R.string.paymentstaus) + " : " + response.body().getOrders().get(0).getPaymentStatus());
 
 
-                        /*
+
                         //service type
-                        if(response.body().getServiceType().toString().equals("Indoor")) {
-                            serviceTypeFlag.setText(getResources().getString(R.string.indor));
-                        }else {
-                            serviceTypeFlag.setText(getResources().getString(R.string.outdor));
+                        if(response.body().getOrders().get(0).getServiceType()!=null) {
+                            if (response.body().getOrders().get(0).getServiceType().toString().equals("indoor")) {
+                                serviceTypeFlag.setText(getResources().getString(R.string.indor));
+                            } else {
+                                serviceTypeFlag.setText(getResources().getString(R.string.outdor));
+                            }
                         }
-*/
                         /*
                         //Show on map btn action
                         showOnmapBtn.setOnClickListener(new View.OnClickListener() {

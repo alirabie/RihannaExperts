@@ -136,6 +136,9 @@ public class Order {
     @SerializedName("shipping_address")
     @Expose
     private Object shippingAddress;
+    @SerializedName("service_type")
+    @Expose
+    private String serviceType;
     @SerializedName("order_items")
     @Expose
     private List<OrderItem> orderItems = null;
@@ -526,5 +529,13 @@ public class Order {
 
     public void setCustomerTaxDisplayType(Object customerTaxDisplayType) {
         this.customerTaxDisplayType = customerTaxDisplayType;
+    }
+
+    public String getServiceType() {
+        return serviceType;
+    }
+
+    public void setServiceType(String serviceType) {
+        this.serviceType = serviceType;
     }
 }
