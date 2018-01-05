@@ -160,4 +160,6 @@
     <string name="total">السعر الكلى</string>
     <string name="notset">لم يحدد</string>
     <string name="phonenum">+966565161868</string>
+    <string name="gallery">معرض الصور</string>
+    <string name="camera">الكاميرا</string>
 </resources>

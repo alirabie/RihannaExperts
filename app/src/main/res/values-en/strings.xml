@@ -160,4 +160,6 @@
     <string name="total">Total Price</string>
     <string name="notset">Not Set</string>
     <string name="phonenum">+966565161868</string>
+    <string name="gallery">Photos Gallery</string>
+    <string name="camera">Camera</string>
 </resources>

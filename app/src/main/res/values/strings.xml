@@ -164,7 +164,8 @@
     <string name="paymentstaus">Payment Status</string>
     <string name="notset">Not Set</string>
     <string name="phonenum">+966565161868</string>
-
+    <string name="camera">Camera</string>
+    <string name="gallery">Photos Gallery</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="title_activity_maps" translatable="false">Map</string>
