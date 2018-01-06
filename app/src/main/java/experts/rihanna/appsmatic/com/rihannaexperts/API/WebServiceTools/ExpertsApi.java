@@ -203,5 +203,10 @@ public interface ExpertsApi {
     @POST("api/expert/schedule/delete?")
     Call<Deleteschaduleres>deleteSchadule(@Query("vendorid")String expId,@Query("scheduleid")String schduleId);
 
+    @POST("api/expert/address/delete?")
+    Call<ResCertificate>deleteaddress(@Query("addressid")String addressId,@Query("vendorid")String expId);
+
+
+
 
 }
