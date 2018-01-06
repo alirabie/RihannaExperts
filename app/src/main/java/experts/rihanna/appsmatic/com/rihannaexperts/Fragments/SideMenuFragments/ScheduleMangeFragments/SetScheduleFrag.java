@@ -69,13 +69,15 @@ public class SetScheduleFrag extends Fragment {
         to=(EditText)view.findViewById(R.id.work_time_to);
         save=(TextView)view.findViewById(R.id.save_new_scadule_btn);
         dayes=(BetterSpinner)view.findViewById(R.id.day_spinner);
-        DateFormatSymbols dfs = new DateFormatSymbols(Locale.ENGLISH);
+        DateFormatSymbols dfs = new DateFormatSymbols(getResources().getConfiguration().locale);
+        DateFormatSymbols dfs2 = new DateFormatSymbols(Locale.ENGLISH);
         final String weekdays[] = dfs.getWeekdays();
+        final String weekdays2[] = dfs2.getWeekdays();
         dayes.setAdapter(new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item,weekdays));
         dayes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-              day=weekdays[position];
+              day=weekdays2[position];
                 Toast.makeText(getContext(),day,Toast.LENGTH_SHORT).show();
             }
         });

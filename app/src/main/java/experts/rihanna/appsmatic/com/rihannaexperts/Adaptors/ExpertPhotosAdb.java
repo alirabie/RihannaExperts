@@ -1,8 +1,10 @@
 package experts.rihanna.appsmatic.com.rihannaexperts.Adaptors;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,15 +14,21 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.gitonway.lee.niftymodaldialogeffects.lib.Effectstype;
+import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
+import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.Delete.ResDelete;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.Update.UpdateCertificate;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.UploadingImages.Del.DeletePhotoRes;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.UploadingImages.Get.GetExpertPhotos;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.UploadingImages.Get.Image;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.ExpertsApi;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.Generator;
+import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.RegistrationFragments.RegCertificates;
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.UpdateExpertsFragments.PhotosHolderFragment;
 import experts.rihanna.appsmatic.com.rihannaexperts.Prefs.SaveSharedPreference;
 import experts.rihanna.appsmatic.com.rihannaexperts.R;
@@ -75,38 +83,82 @@ public class ExpertPhotosAdb extends RecyclerView.Adapter<ExpertPhotosAdb.Photos
         holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Animation anim = AnimationUtils.loadAnimation(context,R.anim.alpha);
+                Animation anim = AnimationUtils.loadAnimation(context, R.anim.alpha);
                 holder.deleteBtn.clearAnimation();
                 holder.deleteBtn.setAnimation(anim);
 
-                Generator.createService(ExpertsApi.class).deletePhoto(SaveSharedPreference.getExpertId(context),expertPhotos.getCustomers().get(0).getImages().get(position).getId()+"").enqueue(new Callback<DeletePhotoRes>() {
-                    @Override
-                    public void onResponse(Call<DeletePhotoRes> call, Response<DeletePhotoRes> response) {
-                        if(response.isSuccessful()){
-
-                            //Update Fragment
-                            PhotosHolderFragment photosHolderFragment=new PhotosHolderFragment();
-                            android.support.v4.app.FragmentManager fragmentManager = ((FragmentActivity)context).getSupportFragmentManager();
-                            android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                            fragmentTransaction.replace(R.id.images_cont, photosHolderFragment);
-                            fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
-                            fragmentTransaction.commit();
 
 
-                        }else {
-                            try {
-                                Toast.makeText(context,response.errorBody().string(),Toast.LENGTH_SHORT).show();
-                            } catch (IOException e) {
-                                e.printStackTrace();
+                final NiftyDialogBuilder dialogBuilder = NiftyDialogBuilder.getInstance(context);
+                dialogBuilder
+                        .withTitle(context.getString(R.string.app_name))
+                        .withDialogColor(R.color.colorPrimary)
+                        .withTitleColor("#FFFFFF")
+                        .withIcon(context.getDrawable(R.drawable.logo))
+                        .withDuration(700)                                          //def
+                        .withEffect(Effectstype.RotateBottom)
+                        .withMessage(context.getString(R.string.areyousure))
+                        .withButton1Text(context.getString(R.string.yes))
+                        .withButton2Text(context.getString(R.string.no))
+                        .setButton1Click(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Generator.createService(ExpertsApi.class).deletePhoto(SaveSharedPreference.getExpertId(context), expertPhotos.getCustomers().get(0).getImages().get(position).getId() + "").enqueue(new Callback<DeletePhotoRes>() {
+                                    @Override
+                                    public void onResponse(Call<DeletePhotoRes> call, Response<DeletePhotoRes> response) {
+                                        if (response.isSuccessful()) {
+
+                                            //Update Fragment
+                                            PhotosHolderFragment photosHolderFragment = new PhotosHolderFragment();
+                                            android.support.v4.app.FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
+                                            android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                            fragmentTransaction.replace(R.id.images_cont, photosHolderFragment);
+                                            fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+                                            fragmentTransaction.commit();
+
+
+                                        } else {
+                                            try {
+                                                Toast.makeText(context, response.errorBody().string(), Toast.LENGTH_SHORT).show();
+                                            } catch (IOException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<DeletePhotoRes> call, Throwable t) {
+                                        Toast.makeText(context, "Connection Error from delete photo API " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                                dialogBuilder.dismiss();
+
                             }
-                        }
-                    }
+                        })
+                        .setButton2Click(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialogBuilder.dismiss();
+                            }
+                        })
+                        .show();
 
-                    @Override
-                    public void onFailure(Call<DeletePhotoRes> call, Throwable t) {
-                        Toast.makeText(context,"Connection Error from delete photo API "+t.getMessage(),Toast.LENGTH_SHORT).show();
-                    }
-                });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
             }

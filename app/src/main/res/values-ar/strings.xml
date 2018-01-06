@@ -162,4 +162,9 @@
     <string name="phonenum">+966565161868</string>
     <string name="gallery">معرض الصور</string>
     <string name="camera">الكاميرا</string>
+    <string name="areyousure">تأكيد</string>
+    <string name="canceldd">مرفوض</string>
+    <string name="completed">منتهى</string>
+    <string name="pending">إنتظار</string>
+    <string name="procissing">جارى العمل عليه</string>
 </resources>

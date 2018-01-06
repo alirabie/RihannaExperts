@@ -170,6 +170,11 @@
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="title_activity_maps" translatable="false">Map</string>
     <string name="title_activity_home" translatable="false">Home</string>
+    <string name="areyousure">Confirm ?</string>
+    <string name="pending">Pending</string>
+    <string name="procissing">Processing</string>
+    <string name="completed">Completed</string>
+    <string name="canceldd">Canceled</string>
 
     <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
     <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>

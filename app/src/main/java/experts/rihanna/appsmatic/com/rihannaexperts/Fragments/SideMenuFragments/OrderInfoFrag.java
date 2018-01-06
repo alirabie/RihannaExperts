@@ -141,7 +141,42 @@ public class OrderInfoFrag extends Fragment  {
                     if (mProgressDialog.isShowing())
                         mProgressDialog.dismiss();
                     if (response.body() != null) {
-                        orderNumTv.setText(getResources().getString(R.string.ordernum) + " : " + getArguments().get("orderId") + "   " + getResources().getString(R.string.servicetype) + " : " + response.body().getOrders().get(0).getOrderStatus());
+
+
+
+                        //status Control Logic
+                        switch (response.body().getOrders().get(0).getOrderStatus()) {
+                            case "Pending":
+                                orderNumTv.setText(getResources().getString(R.string.ordernum) + " : "
+                                        + getArguments().get("orderId") + "   "
+                                        + getResources().getString(R.string.servicetype) + " : "
+                                        + getResources().getString(R.string.pending));
+                                break;
+                            case "Processing":
+                                orderNumTv.setText(getResources().getString(R.string.ordernum) + " : "
+                                        + getArguments().get("orderId") + "   "
+                                        + getResources().getString(R.string.servicetype) + " : "
+                                        + getResources().getString(R.string.procissing));
+                                break;
+                            case "Complete":
+                                orderNumTv.setText(getResources().getString(R.string.ordernum) + " : "
+                                        + getArguments().get("orderId") + "   "
+                                        + getResources().getString(R.string.servicetype) + " : "
+                                        + getResources().getString(R.string.completed));
+                                break;
+                            case "Cancelled":
+                                orderNumTv.setText(getResources().getString(R.string.ordernum) + " : "
+                                        + getArguments().get("orderId") + "   "
+                                        + getResources().getString(R.string.servicetype) + " : "
+                                        + getResources().getString(R.string.canceldd));
+                                break;
+                        }
+
+
+
+
+
+
 
                         //status Control Logic
                         switch (response.body().getOrders().get(0).getOrderStatus()) {
@@ -204,7 +239,38 @@ public class OrderInfoFrag extends Fragment  {
                         CustomerstateTv.setText(response.body().getOrders().get(0).getBillingAddress().getProvince()+" "+response.body().getOrders().get(0).getBillingAddress().getCity());
 
                         totalPrice.setText(getContext().getResources().getString(R.string.total) + " : " + response.body().getOrders().get(0).getOrderTotal() + getContext().getResources().getString(R.string.sr));
-                        paymentType.setText(getContext().getResources().getString(R.string.paymentstaus) + " : " + response.body().getOrders().get(0).getPaymentStatus());
+
+
+
+                        switch (response.body().getOrders().get(0).getPaymentStatus()) {
+                            case "Pending":
+                                paymentType.setText(getContext().getResources().getString(R.string.paymentstaus)
+                                        + " : " + getString(R.string.pending));
+                                break;
+                            case "Processing":
+                                paymentType.setText(getContext().getResources().getString(R.string.paymentstaus)
+                                        + " : " + getString(R.string.procissing));
+                                break;
+                            case "Complete":
+                                paymentType.setText(getContext().getResources().getString(R.string.paymentstaus)
+                                        + " : " + getString(R.string.completed));
+                                break;
+                            case "Cancelled":
+                                paymentType.setText(getContext().getResources().getString(R.string.paymentstaus)
+                                        + " : " + getString(R.string.canceldd));
+                                break;
+                        }
+
+
+
+
+
+
+
+
+
+
+
 
 
 

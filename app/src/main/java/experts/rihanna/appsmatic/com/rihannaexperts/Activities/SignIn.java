@@ -15,6 +15,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +42,7 @@ public class SignIn extends AppCompatActivity {
     private TextView forgetPassBtn, createNewAccount, login;
     private EditText emailInput,passwordInput;
     private CheckBox saveLoginData;
+    private ImageView langBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,23 +65,34 @@ public class SignIn extends AppCompatActivity {
         passwordInput=(EditText)findViewById(R.id.password_input_login);
         login = (TextView) findViewById(R.id.login_btn);
         saveLoginData=(CheckBox)findViewById(R.id.remeberlogincheck);
+        langBtn=(ImageView)findViewById(R.id.lang_btn);
+
+        //Set images languages
+        if(SaveSharedPreference.getLangId(this).equals("ar")){
+            langBtn.setImageResource(R.drawable.englishbtn);
+        }else{
+            langBtn.setImageResource(R.drawable.arabicbtn);
+        }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        //Lang switch button action
+        langBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if( SaveSharedPreference.getLangId(getApplicationContext()).equals("ar")) {
+                    SaveSharedPreference.setLangId(getApplicationContext(), "en");
+                    langBtn.setImageResource(R.drawable.arabicbtn);
+                    SignIn.this.finish();
+                    startActivity(new Intent(getApplicationContext(),Splash.class));
+                }else {
+                    SaveSharedPreference.setLangId(getApplicationContext(), "ar");
+                    langBtn.setImageResource(R.drawable.englishbtn);
+                    SignIn.this.finish();
+                    startActivity(new Intent(getApplicationContext(),Splash.class));
+                }
+            }
+        });
 
 
 

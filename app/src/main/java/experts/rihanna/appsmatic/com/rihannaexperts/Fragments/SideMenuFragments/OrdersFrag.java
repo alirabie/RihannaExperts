@@ -3,6 +3,8 @@ package experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
@@ -31,6 +33,7 @@ public class OrdersFrag extends Fragment {
     private RecyclerView ordersList;
     private TextView emptyFlag;
     private final String SOURCE="main_orders_list";
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
 
     @Override
@@ -45,6 +48,17 @@ public class OrdersFrag extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         emptyFlag = (TextView) view.findViewById(R.id.empty_orders_flag_frag);
         emptyFlag.setVisibility(View.INVISIBLE);
+
+        mSwipeRefreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.orders_swipe_refresh_layout);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                //refresh fragment
+                android.support.v4.app.FragmentManager fragmentManager3 = ((FragmentActivity) getContext()).getSupportFragmentManager();
+                fragmentManager3.beginTransaction().detach(OrdersFrag.this).attach(OrdersFrag.this).commit();
+            }
+        });
+
 
 
         //Get Orders List from Server with test id 53

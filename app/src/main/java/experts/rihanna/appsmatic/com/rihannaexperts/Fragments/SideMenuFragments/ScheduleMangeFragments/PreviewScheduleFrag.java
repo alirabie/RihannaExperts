@@ -39,6 +39,8 @@ public class PreviewScheduleFrag extends Fragment {
 
         //Set today selection
         materialCalendarView.setDateSelected(CalendarDay.today(), true);
+        materialCalendarView.setCurrentDate(Calendar.getInstance(Locale.getDefault()));
+
 
         //Set Work Day On Calender
         /*

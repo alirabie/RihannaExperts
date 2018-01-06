@@ -51,11 +51,61 @@ public class ExpertOrdersAdb extends RecyclerView.Adapter<ExpertOrdersAdb.vh00> 
         }
 
 
+        //status Control Logic
+        switch (orders.getOrders().get(position).getOrderStatus()) {
+            case "Pending":
+                holder.orderTv.setText(context.getResources().getString(R.string.ordernum)+" : "
+                        +orders.getOrders().get(position).getId()+"   "
+                        +context.getResources().getString(R.string.servicetype)+" : "
+                        +context.getResources().getString(R.string.pending));
+                break;
+            case "Processing":
+                holder.orderTv.setText(context.getResources().getString(R.string.ordernum)+" : "
+                        +orders.getOrders().get(position).getId()+"   "
+                        +context.getResources().getString(R.string.servicetype)+" : "
+                        +context.getResources().getString(R.string.procissing));
+                break;
+            case "Complete":
+                holder.orderTv.setText(context.getResources().getString(R.string.ordernum)+" : "
+                        +orders.getOrders().get(position).getId()+"   "
+                        +context.getResources().getString(R.string.servicetype)+" : "
+                        +context.getResources().getString(R.string.completed));
+                break;
+            case "Cancelled":
+                holder.orderTv.setText(context.getResources().getString(R.string.ordernum)+" : "
+                        +orders.getOrders().get(position).getId()+"   "
+                        +context.getResources().getString(R.string.servicetype)+" : "
+                        +context.getResources().getString(R.string.canceldd));
+                break;
+        }
 
 
-        holder.orderTv.setText(context.getResources().getString(R.string.ordernum)+" : "+orders.getOrders().get(position).getId()+"   "+context.getResources().getString(R.string.servicetype)+" : "+orders.getOrders().get(position).getOrderStatus());
+
         holder.dateTv.setText(context.getResources().getString(R.string.total)+" : "+orders.getOrders().get(position).getOrderTotal()+context.getResources().getString(R.string.sr));
-        holder.timeTv.setText(context.getResources().getString(R.string.paymentstaus)+" : "+orders.getOrders().get(position).getPaymentStatus());
+
+
+        switch (orders.getOrders().get(position).getPaymentStatus()){
+            case "Pending":
+                holder.timeTv.setText(context.getResources().getString(R.string.paymentstaus)+" : "
+                        +context.getResources().getString(R.string.pending));
+                break;
+            case "Processing":
+                holder.timeTv.setText(context.getResources().getString(R.string.paymentstaus)+" : "
+                        +context.getResources().getString(R.string.procissing));
+                break;
+            case "Complete":
+                holder.timeTv.setText(context.getResources().getString(R.string.paymentstaus)+" : "
+                        +context.getResources().getString(R.string.completed));
+                break;
+            case "Cancelled":
+                holder.timeTv.setText(context.getResources().getString(R.string.paymentstaus)+" : "
+                        +context.getResources().getString(R.string.canceldd));
+                break;
+
+        }
+
+
+
 
 
 

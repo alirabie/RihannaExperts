@@ -17,6 +17,8 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.gitonway.lee.niftymodaldialogeffects.lib.Effectstype;
+import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -67,7 +69,7 @@ public class SchdulesAdb extends RecyclerView.Adapter<SchdulesAdb.Vh23> {
     @Override
     public void onBindViewHolder(final Vh23 holder, final int position) {
 
-        DateFormatSymbols dfs = new DateFormatSymbols(Locale.ENGLISH);
+        DateFormatSymbols dfs = new DateFormatSymbols(context.getResources().getConfiguration().locale);
         final String weekdays[] = dfs.getWeekdays();
 
         holder.save.setVisibility(View.INVISIBLE);
@@ -256,36 +258,64 @@ public class SchdulesAdb extends RecyclerView.Adapter<SchdulesAdb.Vh23> {
                 holder.delete.setAnimation(anim);
 
 
-                Generator.createService(ExpertsApi.class).deleteSchadule(
-                        schdulesResponse.getDeliveryschedules().get(position).getVendorid()+"",
-                        schdulesResponse.getDeliveryschedules().get(position).getId()+"")
-                        .enqueue(new Callback<Deleteschaduleres>() {
+                final NiftyDialogBuilder dialogBuilder = NiftyDialogBuilder.getInstance(context);
+                dialogBuilder
+                        .withTitle(context.getString(R.string.app_name))
+                        .withDialogColor(R.color.colorPrimary)
+                        .withTitleColor("#FFFFFF")
+                        .withIcon(context.getDrawable(R.drawable.logo))
+                        .withDuration(700)                                          //def
+                        .withEffect(Effectstype.RotateBottom)
+                        .withMessage(context.getString(R.string.areyousure))
+                        .withButton1Text(context.getString(R.string.yes))
+                        .withButton2Text(context.getString(R.string.no))
+                        .setButton1Click(new View.OnClickListener() {
                             @Override
-                            public void onResponse(Call<Deleteschaduleres> call, Response<Deleteschaduleres> response) {
-                                if (response.isSuccessful()) {
-                                    if(response.body().getStatus().equals("ok")){
-                                        //refresh fragment
-                                        android.support.v4.app.FragmentManager fragmentManager3 = ((FragmentActivity) context).getSupportFragmentManager();
-                                        fragmentManager3.beginTransaction().detach(fragment).attach(fragment).commit();
+                            public void onClick(View v) {
+                                Generator.createService(ExpertsApi.class).deleteSchadule(
+                                        schdulesResponse.getDeliveryschedules().get(position).getVendorid() + "",
+                                        schdulesResponse.getDeliveryschedules().get(position).getId() + "")
+                                        .enqueue(new Callback<Deleteschaduleres>() {
+                                            @Override
+                                            public void onResponse(Call<Deleteschaduleres> call, Response<Deleteschaduleres> response) {
+                                                if (response.isSuccessful()) {
+                                                    if (response.body().getStatus().equals("ok")) {
+                                                        //refresh fragment
+                                                        android.support.v4.app.FragmentManager fragmentManager3 = ((FragmentActivity) context).getSupportFragmentManager();
+                                                        fragmentManager3.beginTransaction().detach(fragment).attach(fragment).commit();
 
-                                    }else {
-                                        Toast.makeText(context,response.body().getErrorMessage(),Toast.LENGTH_SHORT).show();
-                                    }
+                                                    } else {
+                                                        Toast.makeText(context, response.body().getErrorMessage(), Toast.LENGTH_SHORT).show();
+                                                    }
 
-                                } else {
-                                    try {
-                                        Toast.makeText(context,response.errorBody().string(),Toast.LENGTH_SHORT).show();
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
+                                                } else {
+                                                    try {
+                                                        Toast.makeText(context, response.errorBody().string(), Toast.LENGTH_SHORT).show();
+                                                    } catch (IOException e) {
+                                                        e.printStackTrace();
+                                                    }
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onFailure(Call<Deleteschaduleres> call, Throwable t) {
+                                                Toast.makeText(context, "Connection error from schedule delete API " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                dialogBuilder.dismiss();
+
                             }
-
+                        })
+                        .setButton2Click(new View.OnClickListener() {
                             @Override
-                            public void onFailure(Call<Deleteschaduleres> call, Throwable t) {
-                                Toast.makeText(context,"Connection error from schedule delete API "+t.getMessage(),Toast.LENGTH_SHORT).show();
+                            public void onClick(View v) {
+                                dialogBuilder.dismiss();
                             }
-                        });
+                        })
+                        .show();
+
+
+
             }
         });
 

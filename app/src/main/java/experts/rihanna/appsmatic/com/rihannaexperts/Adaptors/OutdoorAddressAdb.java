@@ -40,7 +40,7 @@ public class OutdoorAddressAdb extends RecyclerView.Adapter<OutdoorAddressAdb.Ou
         animate(holder);
         holder.city.setText(addresses.get(position).getState());
         holder.district.setText(addresses.get(position).getDistrict());
-        holder.address.setText(addresses.get(position).getAddress());
+
 
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,7 +73,6 @@ public class OutdoorAddressAdb extends RecyclerView.Adapter<OutdoorAddressAdb.Ou
 
             city=(TextView)itemView.findViewById(R.id.city_name_tv);
             district=(TextView)itemView.findViewById(R.id.district_name_tv);
-            address=(TextView)itemView.findViewById(R.id.add_tv);
             delete=(ImageView)itemView.findViewById(R.id.delete_btn);
 
         }

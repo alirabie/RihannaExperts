@@ -41,6 +41,7 @@ import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Districts.Dis
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.OutdoorAddress.Set.Address;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.OutdoorAddress.Set.PostNewAddress;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.OutdoorAddress.Set.SetNewAddressResponse;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Schadules.Deleteschaduleres;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.Get.ResService;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.Subscribe.ExpertService;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.Subscribe.SubscribeModel;
@@ -525,92 +526,108 @@ public class Dialogs {
                 delete.clearAnimation();
                 delete.setAnimation(anim);
 
-                //Loading Dialog
-                final ProgressDialog mProgressDialog = new ProgressDialog(context);
-                mProgressDialog.setIndeterminate(true);
-                mProgressDialog.setMessage(context.getResources().getString(R.string.loading));
-                mProgressDialog.show();
-                UpdateCertificate updateCertificate = new UpdateCertificate();
-                experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.Update.Certificate updatedCert = new experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.Update.Certificate();
-                updatedCert.setId(certificate.getId());
-                updatedCert.setName(certificate.getName());
-                updatedCert.setExpertId(certificate.getExpertId());
-                updatedCert.setYearAcquired(certificate.getYearAcquired());
-                updatedCert.setAuthorizedBy(certificate.getAuthorizedBy());
-                updatedCert.setServiceCategoryId(certificate.getServiceCategoryId());
-                updateCertificate.setCertificate(updatedCert);
 
 
-                Gson gson =new Gson();
 
-                Log.e("data : ",gson.toJson(updateCertificate));
-                //Delete certificate
-                Generator.createService(ExpertsApi.class).deleteCertificate(updateCertificate).enqueue(new Callback<ResDelete>() {
-                    @Override
-                    public void onResponse(Call<ResDelete> call, Response<ResDelete> response) {
+                final NiftyDialogBuilder dialogBuilder = NiftyDialogBuilder.getInstance(context);
+                dialogBuilder
+                        .withTitle(context.getString(R.string.app_name))
+                        .withDialogColor(R.color.colorPrimary)
+                        .withTitleColor("#FFFFFF")
+                        .withIcon(context.getDrawable(R.drawable.logo))
+                        .withDuration(700)                                          //def
+                        .withEffect(Effectstype.RotateBottom)
+                        .withMessage(context.getString(R.string.areyousure))
+                        .withButton1Text(context.getString(R.string.yes))
+                        .withButton2Text(context.getString(R.string.no))
+                        .setButton1Click(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                //Loading Dialog
+                                final ProgressDialog mProgressDialog = new ProgressDialog(context);
+                                mProgressDialog.setIndeterminate(true);
+                                mProgressDialog.setMessage(context.getResources().getString(R.string.loading));
+                                mProgressDialog.show();
+                                UpdateCertificate updateCertificate = new UpdateCertificate();
+                                experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.Update.Certificate updatedCert = new experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.Update.Certificate();
+                                updatedCert.setId(certificate.getId());
+                                updatedCert.setName(certificate.getName());
+                                updatedCert.setExpertId(certificate.getExpertId());
+                                updatedCert.setYearAcquired(certificate.getYearAcquired());
+                                updatedCert.setAuthorizedBy(certificate.getAuthorizedBy());
+                                updatedCert.setServiceCategoryId(certificate.getServiceCategoryId());
+                                updateCertificate.setCertificate(updatedCert);
+                                Gson gson =new Gson();
+                                Log.e("data : ",gson.toJson(updateCertificate));
+                                //Delete certificate
+                                Generator.createService(ExpertsApi.class).deleteCertificate(updateCertificate).enqueue(new Callback<ResDelete>() {
+                                    @Override
+                                    public void onResponse(Call<ResDelete> call, Response<ResDelete> response) {
 
-                        if (mProgressDialog.isShowing())
-                            mProgressDialog.dismiss();
+                                        if (mProgressDialog.isShowing())
+                                            mProgressDialog.dismiss();
 
-                        if(response.isSuccessful()){
-                            if(response.body().getStatus().toString().equals("ok")){
-                                Toast.makeText(context,context.getResources().getString(R.string.removecert)+response.body().getStatus(),Toast.LENGTH_SHORT).show();
-                                //in case of flag 0 that is mean is in register mode and sing up UI and in case of 1 that is mean in update mode update UI
-                                switch (flag){
-                                    case 0:
-                                        //refresh fragment in sign up mode
-                                        android.support.v4.app.FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
-                                        android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                                        fragmentTransaction.replace(R.id.register_fm_contanier, new RegCertificates());
-                                        fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
-                                        fragmentTransaction.commit();
-                                        break;
-                                    case 1:
-                                        //refresh fragment in update mode
+                                        if(response.isSuccessful()){
+                                            if(response.body().getStatus().toString().equals("ok")){
+                                                Toast.makeText(context,context.getResources().getString(R.string.removecert)+response.body().getStatus(),Toast.LENGTH_SHORT).show();
+                                                //in case of flag 0 that is mean is in register mode and sing up UI and in case of 1 that is mean in update mode update UI
+                                                switch (flag){
+                                                    case 0:
+                                                        //refresh fragment in sign up mode
+                                                        android.support.v4.app.FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
+                                                        android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                                        fragmentTransaction.replace(R.id.register_fm_contanier, new RegCertificates());
+                                                        fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+                                                        fragmentTransaction.commit();
+                                                        break;
+                                                    case 1:
+                                                        //refresh fragment in update mode
 
-                                        android.support.v4.app.FragmentManager fragmentManager2 = ((FragmentActivity) context).getSupportFragmentManager();
+                                                        android.support.v4.app.FragmentManager fragmentManager2 = ((FragmentActivity) context).getSupportFragmentManager();
                                         /*
                                         android.support.v4.app.FragmentTransaction fragmentTransaction2 = fragmentManager2.beginTransaction();
                                         fragmentTransaction2.replace(R.id.fragmentcontener, new AccountMangeFrag());
                                         fragmentTransaction2.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
                                         fragmentTransaction2.commit();
                                         */
-                                        fragmentManager2.beginTransaction().detach(fragment).attach(fragment).commit();
-                                        break;
-                                }
+                                                        fragmentManager2.beginTransaction().detach(fragment).attach(fragment).commit();
+                                                        break;
+                                                }
 
-                                dialogBuildercard.dismiss();
+                                                dialogBuildercard.dismiss();
 
-                            }else {
-                                Toast.makeText(context,response.body().getErrorMessage(),Toast.LENGTH_SHORT).show();
+                                            }else {
+                                                Toast.makeText(context,response.body().getErrorMessage(),Toast.LENGTH_SHORT).show();
+                                            }
+                                        }else {
+                                            try {
+                                                Toast.makeText(context,"Response not success from remove certificates"+response.errorBody().string(),Toast.LENGTH_SHORT).show();
+                                            } catch (IOException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<ResDelete> call, Throwable t) {
+                                        if (mProgressDialog.isShowing())
+                                            mProgressDialog.dismiss();
+                                        Toast.makeText(context,"Connection error from remove certificate "+t.getMessage(),Toast.LENGTH_SHORT).show();
+
+                                    }
+                                });
+                                dialogBuilder.dismiss();
+
                             }
-                        }else {
-                            try {
-                                Toast.makeText(context,"Response not success from remove certificates"+response.errorBody().string(),Toast.LENGTH_SHORT).show();
-                            } catch (IOException e) {
-                                e.printStackTrace();
+                        })
+                        .setButton2Click(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialogBuilder.dismiss();
                             }
-                        }
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<ResDelete> call, Throwable t) {
-                        if (mProgressDialog.isShowing())
-                            mProgressDialog.dismiss();
-                        Toast.makeText(context,"Connection error from remove certificate "+t.getMessage(),Toast.LENGTH_SHORT).show();
-
-                    }
-                });
-
-
-
-
-
-
-
-
-
+                        })
+                        .show();
 
 
             }
@@ -974,7 +991,6 @@ public class Dialogs {
 
         final BetterSpinner cities =(BetterSpinner)dialogBuildercard.findViewById(R.id.city_spinner);
         final BetterSpinner nabourhods=(BetterSpinner)dialogBuildercard.findViewById(R.id.nabourhod_spinner);
-        final EditText addressInput =(EditText)dialogBuildercard.findViewById(R.id.address_input);
         cities.setAdapter(new ArrayAdapter<>(context,android.R.layout.simple_spinner_dropdown_item));
         nabourhods.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item));
 
@@ -1055,15 +1071,13 @@ public class Dialogs {
                     cities.setError("!");
                 }else if(nabourhods.getText().toString().isEmpty()){
                     nabourhods.setError("!");
-                }else if (addressInput.getText().toString().isEmpty()){
-                    addressInput.setError("!");
                 }else {
                     Address address = new Address();
                     PostNewAddress postNewAddress = new PostNewAddress();
                     address.setCountryId(69);
                     address.setStateId(Integer.parseInt(statusid));
                     address.setDistrictId(Integer.parseInt(nabourhodId));
-                    address.setAddress(addressInput.getText().toString());
+                    address.setAddress("address");
                     address.setVendorId(Integer.parseInt(expertId));
                     postNewAddress.setAddress(address);
                     Generator.createService(ExpertsApi.class).addnewAddress(postNewAddress).enqueue(new Callback<SetNewAddressResponse>() {

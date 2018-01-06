@@ -113,7 +113,25 @@ public class OrderItemsAdb extends RecyclerView.Adapter<OrderItemsAdb.Vh01> {
                 Animation anim = AnimationUtils.loadAnimation(context, R.anim.alpha);
                 holder.editDate.clearAnimation();
                 holder.editDate.setAnimation(anim);
+
+
+                    //Date setup
+                    SimpleDateFormat sourceFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+
+                    Date date = null;
+                    try {
+                        date = sourceFormat.parse(orderItems.get(position).getServiceDate());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+
+
+
                 final Calendar calendar = Calendar.getInstance();
+                if(date!=null) {
+                    calendar.setTimeInMillis(date.getTime());
+                }
                 DatePickerDialog datePicker = new DatePickerDialog(context, 0, new DatePickerDialog.OnDateSetListener() {
 
                     @Override
