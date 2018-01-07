@@ -1,4 +1,4 @@
-package experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments;
+package experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.ManageOrdersFragments;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -15,12 +15,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Orders.OrderHeader.Order;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Orders.OrderHeader.OrdersResponse;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.ExpertsApi;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.Generator;
 import experts.rihanna.appsmatic.com.rihannaexperts.Activities.Home;
 import experts.rihanna.appsmatic.com.rihannaexperts.Adaptors.ExpertOrdersAdb;
+import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.MainFrag;
 import experts.rihanna.appsmatic.com.rihannaexperts.Prefs.SaveSharedPreference;
 import experts.rihanna.appsmatic.com.rihannaexperts.R;
 import retrofit2.Call;
@@ -28,7 +32,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class OrdersFrag extends Fragment {
+public class OrdersFragCanceld extends Fragment {
 
     private RecyclerView ordersList;
     private TextView emptyFlag;
@@ -55,7 +59,7 @@ public class OrdersFrag extends Fragment {
             public void onRefresh() {
                 //refresh fragment
                 android.support.v4.app.FragmentManager fragmentManager3 = ((FragmentActivity) getContext()).getSupportFragmentManager();
-                fragmentManager3.beginTransaction().detach(OrdersFrag.this).attach(OrdersFrag.this).commit();
+                fragmentManager3.beginTransaction().detach(OrdersFragCanceld.this).attach(OrdersFragCanceld.this).commit();
             }
         });
 
@@ -82,10 +86,22 @@ public class OrdersFrag extends Fragment {
                             if (response.body().getOrders().isEmpty()) {
                                 emptyFlag.setVisibility(View.VISIBLE);
                             } else {
-                                emptyFlag.setVisibility(View.INVISIBLE);
-                                ordersList = (RecyclerView) view.findViewById(R.id.orders_frag_list);
-                                ordersList.setAdapter(new ExpertOrdersAdb(response.body(), getContext(), SOURCE));
-                                ordersList.setLayoutManager(new LinearLayoutManager(getContext()));
+                                OrdersResponse ordersResponse=new OrdersResponse();
+                                List<Order> orders=new ArrayList<Order>();
+                                for (int i=0;i<response.body().getOrders().size();i++){
+                                    if(response.body().getOrders().get(i).getOrderStatus().equals("Cancelled")){
+                                        orders.add(response.body().getOrders().get(i));
+                                    }
+                                }
+                                if(orders.isEmpty()){
+                                    emptyFlag.setVisibility(View.VISIBLE);
+                                }else {
+                                    emptyFlag.setVisibility(View.INVISIBLE);
+                                    ordersResponse.setOrders(orders);
+                                    ordersList = (RecyclerView) view.findViewById(R.id.orders_frag_list);
+                                    ordersList.setAdapter(new ExpertOrdersAdb(ordersResponse, getContext(), SOURCE));
+                                    ordersList.setLayoutManager(new LinearLayoutManager(getContext()));
+                                }
                             }
                         } else {
                             Toast.makeText(getContext(), "Null From Orders List", Toast.LENGTH_SHORT).show();

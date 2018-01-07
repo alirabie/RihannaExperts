@@ -167,4 +167,8 @@
     <string name="completed">منتهى</string>
     <string name="pending">إنتظار</string>
     <string name="procissing">جارى العمل عليه</string>
+    <string name="processingorders">المقبولة</string>
+    <string name="pendingorders">قيد الانتظار</string>
+    <string name="completedorders">المنتهية</string>
+    <string name="canceldorders">المرفوضة</string>
 </resources>

@@ -34,7 +34,6 @@ public class UpdateExp extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         adapter = new CustomFragmentPagerAdapter(getChildFragmentManager());
-
         adapter.addFragment(new PracticalExFrag(),getResources().getString(R.string.practexp));
         adapter.addFragment(new UpdateCertificateFrag(), getResources().getString(R.string.certificates));
 

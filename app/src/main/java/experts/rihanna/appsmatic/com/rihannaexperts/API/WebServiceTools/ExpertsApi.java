@@ -146,8 +146,8 @@ public interface ExpertsApi {
 
 
     //Get Expert Schedules
-    @GET("api/vendors/schedule/{id}")
-    Call<SchdulesResponse>getExpertSchadules(@Path("id")String id);
+    @GET("api/vendors/schedule?&IsClientApp=false")
+    Call<SchdulesResponse>getExpertSchadules(@Query("VendorId")String id);
 
     //add expert time
     @POST("api/expert/schedule")

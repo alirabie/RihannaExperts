@@ -175,6 +175,10 @@
     <string name="procissing">Processing</string>
     <string name="completed">Completed</string>
     <string name="canceldd">Canceled</string>
+    <string name="completedorders">Completed</string>
+    <string name="pendingorders">Pending</string>
+    <string name="processingorders">Accepted</string>
+    <string name="canceldorders">Canceled</string>
 
     <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
     <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>

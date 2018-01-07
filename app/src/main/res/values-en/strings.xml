@@ -167,4 +167,8 @@
     <string name="completed">Completed</string>
     <string name="pending">Pending</string>
     <string name="procissing">Processing</string>
+    <string name="processingorders">Accepted</string>
+    <string name="pendingorders">Pending</string>
+    <string name="completedorders">Completed</string>
+    <string name="canceldorders">Canceled</string>
 </resources>
