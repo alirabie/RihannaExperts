@@ -151,7 +151,7 @@ public class UpdateInfoFrag extends Fragment {
 
 
                     //Inputs Validations
-                    Pattern pPhone = Pattern.compile("\\(?([0-9]{4})\\)?([ .-]?)([0-9]{4})\\2([0-9]{4})");
+                    Pattern pPhone = Pattern.compile("^(009665|9665|\\+9665|05|5)([0-9]{8})$");
                     Matcher mPhone = pPhone.matcher(phoneNum.getText().toString());
                     Pattern p = Pattern.compile("^(.+)@(.+)$");
                     Matcher m = p.matcher(eMail.getText().toString());
@@ -196,7 +196,7 @@ public class UpdateInfoFrag extends Fragment {
                         billingAddress.setFirstName(fName.getText().toString());
                         billingAddress.setLastName(lName.getText().toString());
                         billingAddress.setEmail(eMail.getText().toString());
-                        billingAddress.setPhoneNumber(phoneNum.getText().toString());
+                        billingAddress.setPhoneNumber("966"+phoneNum.getText().toString().substring(phoneNum.getText().toString().indexOf("5")));
                         customer.setBillingAddress(billingAddress);
                         customer.setVerificationcode("");
                         updateEpert.setCustomer(customer);

@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Rihanna Experts</string>
-    <string name="phoneormail">Email Or Phone Number</string>
+    <string name="phoneormail">Email </string>
     <string name="yourpass">Your password</string>
     <string name="signin">Sign In</string>
     <string name="plesesignin">Sign In to your Account</string>
@@ -16,7 +16,7 @@
     <string name="lastname">Last Name</string>
     <string name="emailhintinputlogin">Email</string>
     <string name="passwordhintinputlogin">Password</string>
-    <string name="phonehintinputlogin">Phone Number (e.g : 966555544444)</string>
+    <string name="phonehintinputlogin">Phone Number </string>
     <string name="repasswordhintinputlogin">Re-Password</string>
     <string name="addressinfo">Address / Location</string>
     <string name="buldingnum">Building Number Or Street</string>

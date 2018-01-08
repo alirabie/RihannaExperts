@@ -3,6 +3,7 @@ package experts.rihanna.appsmatic.com.rihannaexperts.Fragments.RegistrationFragm
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -78,10 +79,9 @@ public class RegPersonalInfo extends Fragment {
                 Animation anim = AnimationUtils.loadAnimation(getActivity(), R.anim.alpha);
                 next.clearAnimation();
                 next.setAnimation(anim);
-
                 //Inputs Validations
-                Pattern pPhone= Pattern.compile("\\(?([0-9]{4})\\)?([ .-]?)([0-9]{4})\\2([0-9]{4})");
-                Matcher mPhone=pPhone.matcher(phoneNum.getText().toString());
+                Pattern pPhone = Pattern.compile("^(009665|9665|\\+9665|05|5)([0-9]{8})$");
+                Matcher mPhone = pPhone.matcher(phoneNum.getText().toString());
                 Pattern p = Pattern.compile("^(.+)@(.+)$");
                 Matcher m = p.matcher(eMail.getText().toString());
                 if(fName.getText().toString().isEmpty()){
@@ -113,9 +113,9 @@ public class RegPersonalInfo extends Fragment {
                     SignUp.expertFname = fName.getText().toString();
                     SignUp.expertLname = lName.getText().toString();
                     SignUp.expertEmail = eMail.getText().toString();
-                    SignUp.expertPhoneNum = phoneNum.getText().toString();
+                    SignUp.expertPhoneNum ="966"+phoneNum.getText().toString().substring(phoneNum.getText().toString().indexOf("5"));
                     SignUp.password=password.getText().toString();
-
+                    //Log.e("phone","966"+phoneNum.getText().toString().substring(phoneNum.getText().toString().indexOf("5")));
                     android.support.v4.app.FragmentManager fragmentManager = ((FragmentActivity) getContext()).getSupportFragmentManager();
                     android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.register_fm_contanier, new RegAddressInfo());

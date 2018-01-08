@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">خبيرات ريحانه</string>
     <string name="forgetpass">هل نسيت كلمة المرور ؟</string>
-    <string name="phoneormail">البريد الالكترونى او رقم الجوال</string>
+    <string name="phoneormail">البريد الالكترونى</string>
     <string name="plesesignin">قم بتسجيل الدخول لحسابك</string>
     <string name="remeberlogin">تذكر الدخول</string>
     <string name="signin">تسجيل الدخول</string>
@@ -16,7 +16,7 @@
     <string name="lastname">الاسم الثانى</string>
     <string name="emailhintinputlogin">البريد الالكترونى</string>
     <string name="passwordhintinputlogin">كلمة المرور</string>
-    <string name="phonehintinputlogin">(e.g : 966555544444)</string>
+    <string name="phonehintinputlogin">رقم الجوال</string>
     <string name="repasswordhintinputlogin">إعادة كلمة المرور</string>
     <string name="addressinfo">العنوان أو الموقع</string>
     <string name="buldingnum">رقم المبنى أو أسم الشارع</string>
