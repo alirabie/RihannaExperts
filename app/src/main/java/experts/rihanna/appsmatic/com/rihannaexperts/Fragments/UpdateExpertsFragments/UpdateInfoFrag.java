@@ -151,6 +151,8 @@ public class UpdateInfoFrag extends Fragment {
 
 
                     //Inputs Validations
+                    Pattern pPhone = Pattern.compile("\\(?([0-9]{4})\\)?([ .-]?)([0-9]{4})\\2([0-9]{4})");
+                    Matcher mPhone = pPhone.matcher(phoneNum.getText().toString());
                     Pattern p = Pattern.compile("^(.+)@(.+)$");
                     Matcher m = p.matcher(eMail.getText().toString());
                     if (fName.getText().toString().isEmpty()) {
@@ -170,6 +172,8 @@ public class UpdateInfoFrag extends Fragment {
                     }*/ else if (!password.getText().toString().equals(rePassword.getText().toString())) {
                         password.setError(getResources().getString(R.string.passwordnotmatch));
                         rePassword.setError(getResources().getString(R.string.passwordnotmatch));
+                    } else if (!mPhone.matches()) {
+                        phoneNum.setError(getResources().getString(R.string.phonenotmatcherr));
                     } else if (!m.matches()) {
                         eMail.setError(getResources().getString(R.string.emailnotmatcherr));
                     } else {
@@ -192,7 +196,7 @@ public class UpdateInfoFrag extends Fragment {
                         billingAddress.setFirstName(fName.getText().toString());
                         billingAddress.setLastName(lName.getText().toString());
                         billingAddress.setEmail(eMail.getText().toString());
-                        billingAddress.setPhoneNumber("966" + phoneNum.getText().toString());
+                        billingAddress.setPhoneNumber(phoneNum.getText().toString());
                         customer.setBillingAddress(billingAddress);
                         customer.setVerificationcode("");
                         updateEpert.setCustomer(customer);

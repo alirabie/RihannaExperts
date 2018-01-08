@@ -15,7 +15,7 @@
     <string name="fristname">First Name</string>
     <string name="lastname">Last Name</string>
     <string name="emailhintinputlogin">Email</string>
-    <string name="phonehintinputlogin">Phone Number</string>
+    <string name="phonehintinputlogin">Phone Number ( (e.g : 966555544444)</string>
     <string name="passwordhintinputlogin">Password</string>
     <string name="repasswordhintinputlogin">Re-Password</string>
     <string name="addressinfo">Address / Location</string>
@@ -103,7 +103,7 @@
     <string name="repasserr">Re Password required</string>
     <string name="activcodeerr">Activation Code required</string>
     <string name="emailnotmatcherr">Invalid Email</string>
-    <string name="phonenotmatcherr">Invalid Phone Number (e.g : 14155552671)</string>
+    <string name="phonenotmatcherr">Invalid Phone Number (e.g : 966555544444)</string>
     <string name="passwordnotmatch">Passwords Not Matches</string>
 
     <string name="category">Services Category</string>
