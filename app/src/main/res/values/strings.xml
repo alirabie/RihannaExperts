@@ -179,6 +179,7 @@
     <string name="pendingorders">Pending</string>
     <string name="processingorders">Accepted</string>
     <string name="canceldorders">Canceled</string>
+    <string name="timebusy">Sorry This Time Is Reserved Please Choose another time</string>
 
     <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
     <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>

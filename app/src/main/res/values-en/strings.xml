@@ -171,4 +171,5 @@
     <string name="pendingorders">Pending</string>
     <string name="completedorders">Completed</string>
     <string name="canceldorders">Canceled</string>
+    <string name="timebusy">Sorry This Time Is Reserved Please Choose another time</string>
 </resources>

@@ -17,6 +17,7 @@ import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Experinces.PU
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.ExpertRegistartaion.Response.ResExpertRegister;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.IndoorServicesCntroal.IndoorGetRes;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.IndoorServicesCntroal.Put.ResChangeStatus;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.IsBusy.IsBusyRes;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Login.LoginResponse;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.MangeOrders.SubOrder;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Orders.OrderHeader.OrdersResponse;
@@ -203,8 +204,17 @@ public interface ExpertsApi {
     @POST("api/expert/schedule/delete?")
     Call<Deleteschaduleres>deleteSchadule(@Query("vendorid")String expId,@Query("scheduleid")String schduleId);
 
+    //Delete Address
     @POST("api/expert/address/delete?")
     Call<ResCertificate>deleteaddress(@Query("addressid")String addressId,@Query("vendorid")String expId);
+
+
+    //Check If Busy
+    @POST("api/expert/schedule/isbusy?")
+    Call<IsBusyRes>IsBuSYtime(@Query("expertid")String expId,
+                              @Query("servicedate")String date,
+                              @Query("timefrom")String timeFrom,
+                              @Query("timeto")String timeTo);
 
 
 

@@ -4,7 +4,9 @@ import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,9 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.gitonway.lee.niftymodaldialogeffects.lib.Effectstype;
+import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
+
 import java.io.IOException;
 import java.sql.Time;
 import java.text.Format;
@@ -27,9 +32,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.IsBusy.IsBusyRes;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Schadules.Deleteschaduleres;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.UpdateOrderTime.Res;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.ExpertsApi;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.Generator;
+import experts.rihanna.appsmatic.com.rihannaexperts.Prefs.SaveSharedPreference;
 import experts.rihanna.appsmatic.com.rihannaexperts.R;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -242,33 +250,96 @@ public class OrderItemsAdb extends RecyclerView.Adapter<OrderItemsAdb.Vh01> {
                                                     if (dateto.compareTo(datefrom) > 0) {
 
 
-                                                      //  Log.e("From : ", timefromTv.getText().toString());
-                                                      //  Log.e("To : ", timeToTv.getText().toString());
-                                                      //  Log.e("Date : ", dateTv.getText().toString());
+                                                        //Date setup
+                                                        SimpleDateFormat sourceFormat = new SimpleDateFormat("yyyy/MM/dd");
+                                                        SimpleDateFormat sourceTimeFormat = new SimpleDateFormat("hh:mm a", Locale.ENGLISH);
+                                                        SimpleDateFormat targetTimeFormat = new SimpleDateFormat("HH:mm", Locale.ENGLISH);
+                                                        final SimpleDateFormat DateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+                                                        Date date = null;
+                                                        try {
+                                                            date = sourceFormat.parse(holder.dateTv.getText().toString());
+                                                        } catch (ParseException e) {
+                                                            e.printStackTrace();
+                                                        }
+                                                        Date timefrom = null;
+                                                        try {
+                                                            timefrom = sourceTimeFormat.parse(holder.timefromTv.getText().toString());
+                                                        } catch (ParseException e) {
+                                                            e.printStackTrace();
+                                                        }
 
+                                                        Date timeto = null;
+                                                        try {
+                                                            timeto = sourceTimeFormat.parse(holder.timeToTv.getText().toString());
+                                                        } catch (ParseException e) {
+                                                            e.printStackTrace();
+                                                        }
 
-                                                        //Update time and date
-                                                        final ProgressDialog mProgressDialog = new ProgressDialog(context);
-                                                        mProgressDialog.setIndeterminate(true);
-                                                        mProgressDialog.setMessage(context.getString(R.string.loading));
-                                                        mProgressDialog.show();
-                                                        Generator.createService(ExpertsApi.class).updateOrderTime(orderItems.get(position).getId()+"",holder.dateTv.getText()+"",holder.timefromTv.getText().toString(),holder.timeToTv.getText().toString()).enqueue(new Callback<Res>() {
+                                                        String datet = DateFormat.format(date);
+                                                        String timeFrom=targetTimeFormat.format(timefrom);
+                                                        String timeTo=targetTimeFormat.format(timeto);
+                                                       // Log.e("dddd",datet+timeFrom+timeTo);
+                                                        Generator.createService(ExpertsApi.class).IsBuSYtime(SaveSharedPreference.getExpertId(context), datet, timeFrom, timeTo).enqueue(new Callback<IsBusyRes>() {
                                                             @Override
-                                                            public void onResponse(Call<Res> call, Response<Res> response) {
-                                                                if (response.isSuccessful()) {
-                                                                    if (mProgressDialog.isShowing())
-                                                                        mProgressDialog.dismiss();
-                                                                    if (response.body().getMessage() != null) {
-                                                                        Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                                                                        holder.saveTimeDate.setVisibility(View.INVISIBLE);
-                                                                    } else {
-                                                                        Toast.makeText(context, "Null From Update Order Time", Toast.LENGTH_SHORT).show();
+                                                            public void onResponse(Call<IsBusyRes> call, Response<IsBusyRes> response) {
+
+                                                                if(response.isSuccessful()){
+                                                                    if(response.body().getStatus()!=null){
+                                                                        if(response.body().getStatus()){
+                                                                            final NiftyDialogBuilder dialogBuilder = NiftyDialogBuilder.getInstance(context);
+                                                                            dialogBuilder
+                                                                                    .withTitle(context.getString(R.string.app_name))
+                                                                                    .withDialogColor(R.color.colorPrimary)
+                                                                                    .withTitleColor("#FFFFFF")
+                                                                                    .withIcon(context.getDrawable(R.drawable.logo))
+                                                                                    .withDuration(700)                                          //def
+                                                                                    .withEffect(Effectstype.RotateBottom)
+                                                                                    .withMessage(context.getString(R.string.timebusy))
+                                                                                    .show();
+                                                                        }else {
+                                                                            //Update time and date
+                                                                            final ProgressDialog mProgressDialog = new ProgressDialog(context);
+                                                                            mProgressDialog.setIndeterminate(true);
+                                                                            mProgressDialog.setMessage(context.getString(R.string.loading));
+                                                                            mProgressDialog.show();
+                                                                            Generator.createService(ExpertsApi.class).updateOrderTime(orderItems.get(position).getId()+"",holder.dateTv.getText()+"",holder.timefromTv.getText().toString(),holder.timeToTv.getText().toString()).enqueue(new Callback<Res>() {
+                                                                                @Override
+                                                                                public void onResponse(Call<Res> call, Response<Res> response) {
+                                                                                    if (response.isSuccessful()) {
+                                                                                        if (mProgressDialog.isShowing())
+                                                                                            mProgressDialog.dismiss();
+                                                                                        if (response.body().getMessage() != null) {
+                                                                                            Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                                                                            holder.saveTimeDate.setVisibility(View.INVISIBLE);
+                                                                                        } else {
+                                                                                            Toast.makeText(context, "Null From Update Order Time", Toast.LENGTH_SHORT).show();
+                                                                                        }
+                                                                                    } else {
+                                                                                        if (mProgressDialog.isShowing())
+                                                                                            mProgressDialog.dismiss();
+                                                                                        try {
+                                                                                            Toast.makeText(context, response.errorBody().string(), Toast.LENGTH_SHORT).show();
+                                                                                        } catch (IOException e) {
+                                                                                            e.printStackTrace();
+                                                                                        }
+                                                                                    }
+
+                                                                                }
+
+                                                                                @Override
+                                                                                public void onFailure(Call<Res> call, Throwable t) {
+                                                                                    if (mProgressDialog.isShowing())
+                                                                                        mProgressDialog.dismiss();
+                                                                                    Toast.makeText(context, "Connection error From Update Order Time" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                                                                                }
+                                                                            });
+                                                                        }
+                                                                    }else {
+                                                                        Toast.makeText(context,"Null from check time if busy ",Toast.LENGTH_SHORT).show();
                                                                     }
-                                                                } else {
-                                                                    if (mProgressDialog.isShowing())
-                                                                        mProgressDialog.dismiss();
+                                                                }else {
                                                                     try {
-                                                                        Toast.makeText(context, response.errorBody().string(), Toast.LENGTH_SHORT).show();
+                                                                        Toast.makeText(context,response.errorBody().string(),Toast.LENGTH_SHORT).show();
                                                                     } catch (IOException e) {
                                                                         e.printStackTrace();
                                                                     }
@@ -277,12 +348,11 @@ public class OrderItemsAdb extends RecyclerView.Adapter<OrderItemsAdb.Vh01> {
                                                             }
 
                                                             @Override
-                                                            public void onFailure(Call<Res> call, Throwable t) {
-                                                                if (mProgressDialog.isShowing())
-                                                                    mProgressDialog.dismiss();
-                                                                Toast.makeText(context, "Connection error From Update Order Time" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                                                            public void onFailure(Call<IsBusyRes> call, Throwable t) {
+                                                                Toast.makeText(context,"Connection error from check time if busy ",Toast.LENGTH_SHORT).show();
                                                             }
                                                         });
+
 
                                                     } else {
                                                         Toast.makeText(context, context.getResources().getString(R.string.fromto), Toast.LENGTH_SHORT).show();
