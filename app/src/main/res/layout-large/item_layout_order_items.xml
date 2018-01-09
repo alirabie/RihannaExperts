@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="7dp"
     android:layout_marginTop="4dp"
     android:layout_marginBottom="4dp"
     android:background="#ffffff">
@@ -10,17 +9,27 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#ececec">
 
-        <CheckBox
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/imageView21"
+            android:src="@android:drawable/ic_notification_overlay"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp" />
+
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:checked="false"
-            android:textAlignment="viewStart"
-            android:textSize="10dp"
-            android:textColor="@color/colorPrimary"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Medium Text"
+            android:id="@+id/order_items_name"
             android:layout_weight="1"
-            android:id="@+id/compelte" />
+            android:textSize="15dp"
+            android:gravity="center"
+            android:textColor="@color/colorPrimary" />
 
         <TextView
             android:layout_width="match_parent"
@@ -33,21 +42,15 @@
             android:gravity="center"
             android:textColor="@color/colorPrimary" />
 
-        <TextView
+        <CheckBox
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Medium Text"
-            android:id="@+id/order_items_name"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:textAlignment="viewStart"
+            android:textSize="10dp"
+            android:textColor="@color/colorPrimary"
             android:layout_weight="1"
-            android:textSize="15dp"
-            android:gravity="center"
-            android:textColor="@color/colorPrimary" />
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/imageView21"
-            android:src="@android:drawable/ic_notification_overlay" />
+            android:id="@+id/compelte" />
 
     </LinearLayout>
 
@@ -62,7 +65,9 @@
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="3dp">
+            android:padding="3dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp">
 
             <ImageView
                 android:layout_width="match_parent"
@@ -94,7 +99,9 @@
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="3dp">
+            android:padding="3dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp">
 
             <ImageView
                 android:layout_width="match_parent"
@@ -150,23 +157,32 @@
                 android:padding="3dp" />
 
         </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/save"
+            android:id="@+id/savetimedate"
+            android:textSize="15dp"
+            android:layout_marginBottom="3dp"
+            android:background="@color/colorPrimary"
+            android:textColor="#ffffff"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:gravity="center"
+            android:layout_marginTop="3dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp" />
+
     </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/save"
-        android:id="@+id/savetimedate"
-        android:textSize="15dp"
-        android:layout_marginBottom="5dp"
-        android:background="@color/colorPrimary"
-        android:textColor="#ffffff"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="2dp"
-        android:paddingBottom="2dp"
-        android:gravity="center"
-        android:layout_marginTop="3dp" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimary"></LinearLayout>
 
 </LinearLayout>
