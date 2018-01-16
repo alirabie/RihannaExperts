@@ -67,8 +67,6 @@ public class OutdoorAdressesFrag extends Fragment {
                             adressList.setLayoutManager(new LinearLayoutManager(getContext()));
                             //Setup List
 
-
-
                         }
 
                     }else {

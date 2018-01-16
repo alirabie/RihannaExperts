@@ -73,7 +73,16 @@ public class UpdateOutdoorServicesFrag extends Fragment {
     private String nabourhodId;
 
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        //Add Outdoor Address Frag
+        android.support.v4.app.FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
+        android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frameLayout6, new OutdoorAdressesFrag());
+        fragmentTransaction.commitAllowingStateLoss();
 
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -87,19 +96,6 @@ public class UpdateOutdoorServicesFrag extends Fragment {
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         addAddress_btn=(TextView)view.findViewById(R.id.add_address_btn);
-
-
-
-
-
-        //Add Outdoor Address Frag
-        android.support.v4.app.FragmentManager fragmentManager = ((FragmentActivity) getContext()).getSupportFragmentManager();
-        android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frameLayout6, new OutdoorAdressesFrag());
-        fragmentTransaction.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
-        fragmentTransaction.commit();
-
-
         addAddress_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
