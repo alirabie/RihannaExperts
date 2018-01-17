@@ -735,7 +735,7 @@ public class Dialogs {
                                                 serviceId=servicesIds.get(position);
                                                 servicePrice=servicesPrice.get(position);
                                                 //Toast.makeText(context,serviceId,Toast.LENGTH_SHORT).show();
-                                                price.setText(servicePrice+" "+context.getResources().getString(R.string.sr));
+                                                price.setText(servicePrice);
                                             }
                                         });
 
@@ -829,13 +829,13 @@ public class Dialogs {
                         expertService.setExpertId(Integer.parseInt(expertId));
                         if(!descountedPrice.getText().toString().isEmpty()){
                             expertService.setDiscountAmount(Double.parseDouble(descountedPrice.getText().toString()));
-                            expertService.setDiscountPercentage((Double.parseDouble(descountedPrice.getText().toString()) / Double.parseDouble(servicePrice)));
+                            expertService.setDiscountPercentage((Double.parseDouble(descountedPrice.getText().toString()) / Double.parseDouble(price.getText().toString()))*100);
                         }else {
                             expertService.setDiscountAmount(0.0);
                             expertService.setDiscountPercentage(0.0);
                         }
 
-                        expertService.setPrice(Double.parseDouble(servicePrice));
+                        expertService.setPrice(Double.parseDouble(price.getText().toString()));
                         expertService.setServiceId(Integer.parseInt(serviceId));
                         subscribeModel.setExpertService(expertService);
                         Gson gson=new Gson();

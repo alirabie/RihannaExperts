@@ -12,6 +12,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
+import java.util.Locale;
 
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.ExpertServices.ResExpertServices;
 import experts.rihanna.appsmatic.com.rihannaexperts.Helpers.Utils;
@@ -45,7 +46,7 @@ public class ExpertServicesAdb extends RecyclerView.Adapter<ExpertServicesAdb.Vh
         holder.serviceName.setText(expertServices.getServices().get(position).getServiceName() + "");
         holder.price.setText(expertServices.getServices().get(position).getPrice()+"");
         holder.discAmount.setText(expertServices.getServices().get(position).getDiscountAmount() + "");
-        holder.perc.setText(new DecimalFormat("##.#").format(expertServices.getServices().get(position).getDiscountPercentage()*100)+"%");
+        holder.perc.setText(new DecimalFormat("##.#").format(expertServices.getServices().get(position).getDiscountPercentage())+"%");
 
 
         holder.unSubscribeBtn.setOnClickListener(new View.OnClickListener() {
@@ -54,8 +55,6 @@ public class ExpertServicesAdb extends RecyclerView.Adapter<ExpertServicesAdb.Vh
                 Animation anim = AnimationUtils.loadAnimation(context, R.anim.alpha);
                 holder.unSubscribeBtn.clearAnimation();
                 holder.unSubscribeBtn.setAnimation(anim);
-
-
                 Utils.unsubscribeService(context,expertServices.getServices().get(position).getExpertId()+"",expertServices.getServices().get(position).getId()+"",fragment);
 
 

@@ -172,4 +172,5 @@
     <string name="completedorders">المنتهية</string>
     <string name="canceldorders">المرفوضة</string>
     <string name="timebusy">نأسف حيث ان هذا الوقت محجوز مسبقا من فضلك اختارى وقت اخر</string>
+    <string name="notifiction">لديك طلب جديد</string>
 </resources>

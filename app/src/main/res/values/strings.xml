@@ -183,6 +183,7 @@
 
     <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
     <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+    <string name="notifiction">You Have New Order</string>
 
     <string name="action_settings" translatable="false">Settings</string>
     <string name="title_activity_about_app_frag" translatable="false">AboutAppFrag</string>
