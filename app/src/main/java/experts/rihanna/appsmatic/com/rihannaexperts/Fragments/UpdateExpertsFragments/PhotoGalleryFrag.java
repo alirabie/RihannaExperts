@@ -176,6 +176,7 @@ public class PhotoGalleryFrag extends Fragment {
                     Bitmap bitmap=null;
                     try {
                         bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), outPutfileUri);
+
                         if(bitmap!=null) {
                             Customer customer = new Customer();
                             PostImages postImages = new PostImages();

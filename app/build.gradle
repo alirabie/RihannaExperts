@@ -8,8 +8,8 @@ android {
         applicationId "experts.rihanna.appsmatic.com.rihannaexperts"
         minSdkVersion 21
         targetSdkVersion 25
-        versionCode 9
-        versionName "1.8"
+        versionCode 10
+        versionName "1.9"
         multiDexEnabled true
         generatedDensities = []
     }
@@ -74,5 +74,4 @@ dependencies {
 dependencies {
     compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
 }
-
 
