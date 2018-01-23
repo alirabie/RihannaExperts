@@ -111,6 +111,8 @@ public class UpdateExpertAddressFrag extends Fragment implements OnMapReadyCallb
                         customer.setPhone("");
                         List<Integer> role_ids = new ArrayList<Integer>();
                         role_ids.add(3);
+                        role_ids.add(5);
+                        role_ids.add(6);
                         customer.setRoleIds(role_ids);
                         billingAddress.setFirstName(response.body().getCustomers().get(0).getFirstName());
                         billingAddress.setLastName(response.body().getCustomers().get(0).getLastName());

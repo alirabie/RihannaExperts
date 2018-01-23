@@ -11,7 +11,7 @@
         app:pstsShouldExpand="true"
         app:pstsTextAllCaps="true"
         android:fillViewport="true"
-        android:textSize="13sp"
+        android:textSize="8sp"
         android:textAlignment="center"
         app:pstsIndicatorColor="#d0d0d0"
         android:background="#eb4398" />

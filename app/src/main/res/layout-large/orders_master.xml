@@ -22,6 +22,4 @@
         android:layout_height="match_parent"
         android:background="@android:color/white"
         android:layout_below="@+id/update_expert_info_tabs" />
-
-
 </RelativeLayout>
