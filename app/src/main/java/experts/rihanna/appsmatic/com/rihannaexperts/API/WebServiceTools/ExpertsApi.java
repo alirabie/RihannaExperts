@@ -8,6 +8,7 @@ import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.Get.CertificatesList;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.Update.ResUpdate;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.Update.UpdateCertificate;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.ChangeLang.LangRes;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.ChangeOrderStatus.ChangingResponse;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Districts.Districts;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Experinces.DELETE.DeleteExp;
@@ -36,6 +37,7 @@ import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.UpdateOrderTi
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.UploadingImages.Del.DeletePhotoRes;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.UploadingImages.Get.GetExpertPhotos;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.UploadingImages.PutResponse.ResponseUploadImage;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Verifications.VerificationCode;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -216,6 +218,16 @@ public interface ExpertsApi {
                               @Query("timefrom")String timeFrom,
                               @Query("timeto")String timeTo);
 
+
+
+    //Change Language on server
+    @POST("api/languages?")
+    Call<LangRes>changeLang(@Query("languageid")String langId,@Query("customerid")String customerId);
+
+
+    //Retrieve Password
+    @POST("api/customers/RetrievePassword/{email}/ ")
+    Call<VerificationCode>retrivePassword(@Path("email") String email);
 
 
 

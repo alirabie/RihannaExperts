@@ -44,6 +44,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.ChangeLang.LangRes;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Orders.OrderHeader.Order;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Orders.OrderHeader.OrdersResponse;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.ExpertsApi;
@@ -435,21 +436,23 @@ public class Home extends AppCompatActivity  {
                                                     ordersCount=response.body().getOrders().size();
                                                 }
                                             } else {
-                                                Toast.makeText(getBaseContext(), "Null From Orders List", Toast.LENGTH_SHORT).show();
+                                                //Toast.makeText(getBaseContext(), "Null From Orders List", Toast.LENGTH_SHORT).show();
                                             }
 
                                         } else {
+                                            /*
                                             try {
                                                 Toast.makeText(getBaseContext(), response.errorBody().string(), Toast.LENGTH_SHORT).show();
                                             } catch (IOException e) {
                                                 e.printStackTrace();
                                             }
+                                            */
                                         }
                                     }
 
                                     @Override
                                     public void onFailure(Call<OrdersResponse> call, Throwable t) {
-                                        Toast.makeText(getBaseContext(), "Connection error From Orders List" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                                      //  Toast.makeText(getBaseContext(), "Connection error From Orders List" + t.getMessage(), Toast.LENGTH_SHORT).show();
                                     }
                                 });
 
@@ -579,6 +582,37 @@ public class Home extends AppCompatActivity  {
         return super.onOptionsItemSelected(item);
     }
 
+
+
+
+    //Change Language on server
+    public static void changeLanguage(final Context context,String langId,String custId){
+        Generator.createService(ExpertsApi.class).changeLang(langId, custId).enqueue(new Callback<LangRes>() {
+            @Override
+            public void onResponse(Call<LangRes> call, Response<LangRes> response) {
+
+                if(response.isSuccessful()){
+                    if(response.body().getStatus().equals("ok")){
+                        Toast.makeText(context,"Changed",Toast.LENGTH_SHORT).show();
+                    }else {
+                        Toast.makeText(context,"error"+response.body().getErrorMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                }else {
+
+                    try {
+                        Toast.makeText(context,"Error from change lang API "+response.errorBody().string(),Toast.LENGTH_SHORT).show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LangRes> call, Throwable t) {
+                Toast.makeText(context,"Connection error from change lang API "+t.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
 
     public static void setOrdersCount(final Context context){

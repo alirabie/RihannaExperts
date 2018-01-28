@@ -28,6 +28,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Login.LoginResponse;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Verifications.VerificationCode;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.ExpertsApi;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.Generator;
 import experts.rihanna.appsmatic.com.rihannaexperts.Prefs.SaveSharedPreference;
@@ -157,6 +158,13 @@ public class SignIn extends AppCompatActivity {
 
                                     SaveSharedPreference.setCustomerInfo(SignIn.this, response.body());
 
+                                    //Change Lang from server
+                                    if(SaveSharedPreference.getLangId(getApplicationContext()).equals("ar")){
+                                        Home.changeLanguage(getApplicationContext(),"3",SaveSharedPreference.getCustId(getApplicationContext()));
+                                    }else {
+                                        Home.changeLanguage(getApplicationContext(),"1",SaveSharedPreference.getCustId(getApplicationContext()));
+                                    }
+
                                     Toast.makeText(getApplicationContext(), getResources().getString(R.string.loginsucsess), Toast.LENGTH_LONG).show();
 
                                     Log.e("Done : ", SaveSharedPreference.getExpertId(getApplicationContext()));
@@ -211,7 +219,51 @@ public class SignIn extends AppCompatActivity {
                 Animation anim = AnimationUtils.loadAnimation(SignIn.this, R.anim.alpha);
                 forgetPassBtn.clearAnimation();
                 forgetPassBtn.setAnimation(anim);
-                startActivity(new Intent(SignIn.this,RecoverPassword.class));
+
+                Pattern p = Pattern.compile("^(.+)@(.+)$");
+                Matcher m = p.matcher(emailInput.getText().toString());
+                if (emailInput.getText().length() == 0 || !m.matches()) {
+                    emailInput.setError(getResources().getString(R.string.emailerr));
+                } else {
+
+                    final ProgressDialog mProgressDialog = new ProgressDialog(SignIn.this);
+                    mProgressDialog.setIndeterminate(true);
+                    mProgressDialog.setMessage(getApplicationContext().getResources().getString(R.string.loading));
+                    mProgressDialog.show();
+                    Generator.createService(ExpertsApi.class).retrivePassword(emailInput.getText().toString()).enqueue(new Callback<VerificationCode>() {
+                        @Override
+                        public void onResponse(Call<VerificationCode> call, Response<VerificationCode> response) {
+
+                            if (response.isSuccessful()) {
+                                if (response.body().getErrorMessage().equals("") || response.body().getErrorMessage() == null) {
+                                    if (mProgressDialog.isShowing())
+                                        mProgressDialog.dismiss();
+                                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.newpasswillsend) + " ", Toast.LENGTH_LONG).show();
+
+                                } else {
+                                    Toast.makeText(getApplicationContext(), response.body().getErrorMessage() + "", Toast.LENGTH_LONG).show();
+                                }
+
+                            } else {
+
+                                if (mProgressDialog.isShowing())
+                                    mProgressDialog.dismiss();
+                                Toast.makeText(getApplicationContext(), "Not success from retrieve password", Toast.LENGTH_LONG).show();
+
+                            }
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<VerificationCode> call, Throwable t) {
+                            if (mProgressDialog.isShowing())
+                                mProgressDialog.dismiss();
+                            Toast.makeText(getApplicationContext(), "Failure from retrieve password" + t.getMessage().toString(), Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
+
+              //  startActivity(new Intent(SignIn.this,RecoverPassword.class));
             }
         });
 

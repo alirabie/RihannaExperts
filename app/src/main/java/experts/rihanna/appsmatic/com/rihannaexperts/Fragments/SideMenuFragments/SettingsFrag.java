@@ -19,6 +19,7 @@ import com.weiwangcn.betterspinner.library.BetterSpinner;
 import java.util.ArrayList;
 import java.util.List;
 
+import experts.rihanna.appsmatic.com.rihannaexperts.Activities.Home;
 import experts.rihanna.appsmatic.com.rihannaexperts.Activities.Splash;
 import experts.rihanna.appsmatic.com.rihannaexperts.Prefs.SaveSharedPreference;
 import experts.rihanna.appsmatic.com.rihannaexperts.R;
@@ -75,20 +76,20 @@ public class SettingsFrag extends Fragment {
         acceptBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.alpha);
                 acceptBtn.clearAnimation();
                 acceptBtn.setAnimation(anim);
-
                 //Save Lang Selection depended on lang flag
                 switch (langFlag) {
                     case 0:
                         break;
                     case 1:
                         SaveSharedPreference.setLangId(getActivity().getApplicationContext(), "ar");
+                        Home.changeLanguage(getContext(),"3",SaveSharedPreference.getCustId(getContext()));
                         break;
                     case 2:
                         SaveSharedPreference.setLangId(getActivity().getApplicationContext(), "en");
+                        Home.changeLanguage(getContext(), "1", SaveSharedPreference.getCustId(getContext()));
                         break;
                 }
 

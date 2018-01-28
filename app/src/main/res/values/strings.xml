@@ -188,4 +188,5 @@
     <string name="action_settings" translatable="false">Settings</string>
     <string name="title_activity_about_app_frag" translatable="false">AboutAppFrag</string>
     <string name="title_activity_recover_password" translatable="false">RecoverPassword</string>
+    <string name="newpasswillsend">New Default Password will send in SMS shortly</string>
 </resources>

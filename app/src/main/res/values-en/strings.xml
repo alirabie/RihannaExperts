@@ -173,4 +173,5 @@
     <string name="canceldorders">Canceled</string>
     <string name="timebusy">Sorry This Time Is Reserved Please Choose another time</string>
     <string name="notifiction">You Have New Order</string>
+    <string name="newpasswillsend">New Default Password will send in SMS shortly</string>
 </resources>
