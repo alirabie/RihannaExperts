@@ -67,7 +67,7 @@ public class OrdersFragPending extends Fragment {
 
         //Get Orders List from Server with test id 53
 
-        if (getArguments() == null) {
+        if (getArguments().getString("today") == null) {
 
 
             //Loading Dialog
@@ -144,10 +144,23 @@ public class OrdersFragPending extends Fragment {
                             if (response.body().getOrders().isEmpty()) {
                                 emptyFlag.setVisibility(View.VISIBLE);
                             } else {
-                                emptyFlag.setVisibility(View.INVISIBLE);
-                                ordersList = (RecyclerView) view.findViewById(R.id.orders_frag_list);
-                                ordersList.setAdapter(new ExpertOrdersAdb(response.body(), getContext(), SOURCE));
-                                ordersList.setLayoutManager(new LinearLayoutManager(getContext()));
+                                OrdersResponse ordersResponse=new OrdersResponse();
+                                List<experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Orders.OrderHeader.Order>orders=new ArrayList<experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Orders.OrderHeader.Order>();
+                                for (int i=0;i<response.body().getOrders().size();i++){
+                                    if(response.body().getOrders().get(i).getOrderStatus().equals("Pending")){
+                                        orders.add(response.body().getOrders().get(i));
+                                    }
+                                }
+                                if(orders.isEmpty()){
+                                    emptyFlag.setVisibility(View.VISIBLE);
+                                }else {
+                                    emptyFlag.setVisibility(View.INVISIBLE);
+                                    ordersResponse.setOrders(orders);
+                                    ordersList = (RecyclerView) view.findViewById(R.id.orders_frag_list);
+                                    ordersList.setAdapter(new ExpertOrdersAdb(ordersResponse, getContext(), SOURCE));
+                                    ordersList.setLayoutManager(new LinearLayoutManager(getContext()));
+                                }
+
                             }
                         } else {
                             Toast.makeText(getContext(), "Null From Orders List", Toast.LENGTH_SHORT).show();

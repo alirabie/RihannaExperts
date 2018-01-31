@@ -286,7 +286,7 @@ public class Home extends AppCompatActivity  {
                 dayTimes.setAnimation(anim);
                 //Get Today Date
                 long date = System.currentTimeMillis();
-                SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy", Locale.US);
+                SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy", Locale.ENGLISH);
                 String dateString = format.format(date);
                 OrdersFrag ordersFrag=new OrdersFrag();
                 Bundle bundle =new Bundle();

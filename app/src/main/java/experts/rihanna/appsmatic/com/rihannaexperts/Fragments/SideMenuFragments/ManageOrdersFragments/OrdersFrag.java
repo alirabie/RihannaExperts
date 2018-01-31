@@ -41,6 +41,8 @@ public class OrdersFrag extends Fragment {
     ViewPager p;
     PagerSlidingTabStrip tabsStrip;
     CustomFragmentPagerAdapter adapter;
+    public static String today;
+
 
 
     @Override
@@ -54,11 +56,25 @@ public class OrdersFrag extends Fragment {
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
+        Bundle bundle=new Bundle();
+        if(getArguments()!=null) {
+            bundle.putString("today",getArguments().getString("today"));
+        }
         adapter = new CustomFragmentPagerAdapter(getChildFragmentManager());
-        adapter.addFragment(new OrdersFragPending(),getResources().getString(R.string.pendingorders));
-        adapter.addFragment(new OrdersFragProcssing(), getResources().getString(R.string.processingorders));
-        adapter.addFragment(new OrdersFragCompleted(), getResources().getString(R.string.completedorders));
-        adapter.addFragment(new OrdersFragCanceld(), getResources().getString(R.string.canceldorders));
+        OrdersFragPending ordersFragPending=new OrdersFragPending();
+        ordersFragPending.setArguments(bundle);
+        OrdersFragProcssing ordersFragProcssing=new OrdersFragProcssing();
+        ordersFragProcssing.setArguments(bundle);
+        OrdersFragCompleted ordersFragCompleted=new OrdersFragCompleted();
+        ordersFragCompleted.setArguments(bundle);
+        OrdersFragCanceld ordersFragCanceld=new OrdersFragCanceld();
+        ordersFragCanceld.setArguments(bundle);
+
+        adapter.addFragment(ordersFragPending, getResources().getString(R.string.pendingorders));
+        adapter.addFragment(ordersFragProcssing, getResources().getString(R.string.processingorders));
+        adapter.addFragment(ordersFragCompleted, getResources().getString(R.string.completedorders));
+        adapter.addFragment(ordersFragCanceld, getResources().getString(R.string.canceldorders));
 
 
         p=(ViewPager)view.findViewById(R.id.viewpager_presentcards);
