@@ -10,6 +10,7 @@ import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.Update.UpdateCertificate;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.ChangeLang.LangRes;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.ChangeOrderStatus.ChangingResponse;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.ContactUs.MessegeSentRes;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Districts.Districts;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Experinces.DELETE.DeleteExp;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Experinces.GET.GetExperinces;
@@ -228,6 +229,10 @@ public interface ExpertsApi {
     //Retrieve Password
     @POST("api/customers/RetrievePassword/{email}/ ")
     Call<VerificationCode>retrivePassword(@Path("email") String email);
+
+    //send message
+    @POST("api/contactus")
+    Call<MessegeSentRes>contactUs(@Body Object obj);
 
 
 

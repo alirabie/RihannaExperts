@@ -14,21 +14,34 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.aakira.expandablelayout.ExpandableRelativeLayout;
 
+import java.io.IOException;
+
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.ContactUs.Contactuspost;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.ContactUs.MessegeSentRes;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.ExpertsApi;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.Generator;
 import experts.rihanna.appsmatic.com.rihannaexperts.Activities.Home;
 import experts.rihanna.appsmatic.com.rihannaexperts.Prefs.SaveSharedPreference;
 import experts.rihanna.appsmatic.com.rihannaexperts.R;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AboutAppFrag extends Fragment {
 
     private TextView txt1,txt2,txt3;
     private Button bt1,bt2,bt3;
     private ExpandableRelativeLayout expandableLayout1, expandableLayout2, expandableLayout3;
-    private ImageView copyright,twBtn,instaBtn,fbBtn,gmBtn;;
+    private ImageView copyright,twBtn,instaBtn,fbBtn,gmBtn;
+    private EditText messageInput;
+    private TextView sendBtn;
 
 
     @Override
@@ -50,6 +63,8 @@ public class AboutAppFrag extends Fragment {
         gmBtn=(ImageView)view.findViewById(R.id.gm_btn);
 
 
+        messageInput=(EditText)view.findViewById(R.id.complaints_input_body);
+        sendBtn=(TextView)view.findViewById(R.id.complaints_send_btn_about_us);
 
         copyright=(ImageView)view.findViewById(R.id.copyright_tv);
         bt1=(Button)view.findViewById(R.id.expandableButton1);
@@ -112,6 +127,10 @@ public class AboutAppFrag extends Fragment {
 
             }
         });
+
+
+
+
 
 
 
@@ -182,6 +201,47 @@ public class AboutAppFrag extends Fragment {
 
 
 
+        sendBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Animation anim = AnimationUtils.loadAnimation(getContext(), R.anim.alpha);
+                sendBtn.clearAnimation();
+                sendBtn.setAnimation(anim);
+                if(messageInput.getText().toString().isEmpty()){
+                    messageInput.setError("!");
+                }else {
+                    Contactuspost contactuspost=new Contactuspost();
+                    contactuspost.setSubject("Experts App");
+                    contactuspost.setEnquiry(messageInput.getText().toString());
+                    contactuspost.setEmail("");
+                    contactuspost.setFullName("");
+                    Generator.createService(ExpertsApi.class).contactUs(contactuspost).enqueue(new Callback<MessegeSentRes>() {
+                        @Override
+                        public void onResponse(Call<MessegeSentRes> call, Response<MessegeSentRes> response) {
+                            if(response.isSuccessful()){
+                                if(response.body().getMessage().equals("ok")){
+                                    Toast.makeText(getContext(), getResources().getString(R.string.messagesent), Toast.LENGTH_SHORT).show();
+                                    messageInput.setText("");
+                                }else {
+                                    Toast.makeText(getContext(),response.body().getErrorMessage(),Toast.LENGTH_SHORT).show();
+                                }
+                            }else {
+                                try {
+                                    Toast.makeText(getContext(),response.errorBody().string(),Toast.LENGTH_SHORT).show();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                        @Override
+                        public void onFailure(Call<MessegeSentRes> call, Throwable t) {
+                            Toast.makeText(getContext(),"Connection error from contact us API "+t.getMessage(),Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                }
+            }
+        });
 
 
 

@@ -174,4 +174,5 @@
     <string name="timebusy">نأسف حيث ان هذا الوقت محجوز مسبقا من فضلك اختارى وقت اخر</string>
     <string name="notifiction">لديك طلب جديد</string>
     <string name="newpasswillsend">سوف يتم ارسالة كلمة مرور افتراضية على جوالك لان</string>
+    <string name="messagesent">تم ارسال رسالتك بنجاح</string>
 </resources>

@@ -47,10 +47,14 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activities.SignIn"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan"
+            android:isScrollContainer="true"/>
         <activity
             android:name=".Activities.SignUp"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan"
+            android:isScrollContainer="true"/>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -66,7 +70,9 @@
         <activity
             android:name=".Activities.Home"
             android:label=""
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan"
+            android:isScrollContainer="true"/>
         <activity android:name=".Activities.OrderInfo" />
         <activity
             android:name=".Activities.RecoverPassword"
