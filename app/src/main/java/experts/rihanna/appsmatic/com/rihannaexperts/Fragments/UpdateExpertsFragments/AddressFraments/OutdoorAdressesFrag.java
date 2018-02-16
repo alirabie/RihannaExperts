@@ -61,10 +61,13 @@ public class OutdoorAdressesFrag extends Fragment {
                         if (response.body().isEmpty()){
                             emptyFlag.setVisibility(View.VISIBLE);
                         }else {
+                            LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+                            mLayoutManager.setReverseLayout(true);
+                            mLayoutManager.setStackFromEnd(true);
                             emptyFlag.setVisibility(View.INVISIBLE);
                             adressList = (RecyclerView) view.findViewById(R.id.address_list);
                             adressList.setAdapter(new OutdoorAddressAdb(getContext(), response.body()));
-                            adressList.setLayoutManager(new LinearLayoutManager(getContext()));
+                            adressList.setLayoutManager(mLayoutManager);
                             //Setup List
 
                         }

@@ -67,10 +67,13 @@ public class SaleMangeFrag extends Fragment {
                         if (response.body().getServices().isEmpty()) {
                             emptyFlag.setVisibility(View.VISIBLE);
                         } else {
+                            LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+                            mLayoutManager.setReverseLayout(true);
+                            mLayoutManager.setStackFromEnd(true);
                             emptyFlag.setVisibility(View.INVISIBLE);
                             servicesList = (RecyclerView) view.findViewById(R.id.offers_sevecices_frag_list);
                             servicesList.setAdapter(new ExpertServicesAdb(getContext(), response.body(), SaleMangeFrag.this));
-                            servicesList.setLayoutManager(new LinearLayoutManager(getContext()));
+                            servicesList.setLayoutManager(mLayoutManager);
                         }
                     } else {
                         Toast.makeText(getContext(), "Null From get Expert Services and Offers", Toast.LENGTH_SHORT).show();

@@ -61,9 +61,12 @@ public class PhotosHolderFragment extends Fragment {
                         if(response.body().getCustomers().get(0).getImages().isEmpty()){
                             emptyFlag.setVisibility(View.VISIBLE);
                         }else {
+                            LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+                            mLayoutManager.setReverseLayout(true);
+                            mLayoutManager.setStackFromEnd(true);
                             emptyFlag.setVisibility(View.INVISIBLE);
                             photosList.setAdapter(new ExpertPhotosAdb(getContext(), response.body()));
-                            photosList.setLayoutManager(new LinearLayoutManager(getContext()));
+                            photosList.setLayoutManager(mLayoutManager);
                         }
 
                     }else {

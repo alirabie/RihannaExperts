@@ -68,9 +68,12 @@ public class UpdateCertificateFrag extends Fragment {
                         if (response.body().getCertificates().isEmpty()) {
                             emptyFlag.setVisibility(View.VISIBLE);
                         } else {
+                            LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+                            mLayoutManager.setReverseLayout(true);
+                            mLayoutManager.setStackFromEnd(true);
                             emptyFlag.setVisibility(View.INVISIBLE);
                             certificateList.setAdapter(new CertificatesAdb(response.body(), getActivity(),UpdateCertificateFrag.this, UPDATE_MODE));
-                            certificateList.setLayoutManager(new LinearLayoutManager(getActivity()));
+                            certificateList.setLayoutManager(mLayoutManager);
                         }
                     } else {
                         Toast.makeText(getActivity(), "Null from get certificates", Toast.LENGTH_SHORT).show();

@@ -96,11 +96,14 @@ public class OrdersFragCompleted extends Fragment {
                                 if(orders.isEmpty()){
                                     emptyFlag.setVisibility(View.VISIBLE);
                                 }else {
+                                    LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+                                    mLayoutManager.setReverseLayout(true);
+                                    mLayoutManager.setStackFromEnd(true);
                                     emptyFlag.setVisibility(View.INVISIBLE);
                                     ordersResponse.setOrders(orders);
                                     ordersList = (RecyclerView) view.findViewById(R.id.orders_frag_list);
                                     ordersList.setAdapter(new ExpertOrdersAdb(ordersResponse, getContext(), SOURCE));
-                                    ordersList.setLayoutManager(new LinearLayoutManager(getContext()));
+                                    ordersList.setLayoutManager(mLayoutManager);
                                 }
                             }
                         } else {
@@ -151,11 +154,14 @@ public class OrdersFragCompleted extends Fragment {
                                 if(orders.isEmpty()){
                                     emptyFlag.setVisibility(View.VISIBLE);
                                 }else {
+                                    LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+                                    mLayoutManager.setReverseLayout(true);
+                                    mLayoutManager.setStackFromEnd(true);
                                     emptyFlag.setVisibility(View.INVISIBLE);
                                     ordersResponse.setOrders(orders);
                                     ordersList = (RecyclerView) view.findViewById(R.id.orders_frag_list);
                                     ordersList.setAdapter(new ExpertOrdersAdb(ordersResponse, getContext(), SOURCE));
-                                    ordersList.setLayoutManager(new LinearLayoutManager(getContext()));
+                                    ordersList.setLayoutManager(mLayoutManager);
                                 }                            }
                         } else {
                             Toast.makeText(getContext(), "Null From Orders List", Toast.LENGTH_SHORT).show();

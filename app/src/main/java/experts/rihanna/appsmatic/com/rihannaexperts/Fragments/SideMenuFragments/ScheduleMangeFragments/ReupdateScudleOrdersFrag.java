@@ -90,9 +90,13 @@ public class ReupdateScudleOrdersFrag extends Fragment {
                             }else {
                                 busyFlag.setImageResource(R.drawable.busyon_en);
                             }
+
+                            LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+                            mLayoutManager.setReverseLayout(true);
+                            mLayoutManager.setStackFromEnd(true);
                             ordersList=(RecyclerView)view.findViewById(R.id.order_day_list);
                             ordersList.setAdapter(new ExpertOrdersAdb(response.body(),getContext(),SOURCE));
-                            ordersList.setLayoutManager(new LinearLayoutManager(getContext()));
+                            ordersList.setLayoutManager(mLayoutManager);
                         }
                     }else {
                         Toast.makeText(getContext(), "Null From Orders List", Toast.LENGTH_SHORT).show();

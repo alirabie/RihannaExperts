@@ -64,10 +64,13 @@ public class ExpertTimesFarg extends Fragment {
                         if(response.body().getDeliveryschedules().isEmpty()){
                             emptyFlag.setVisibility(View.VISIBLE);
                         }else {
+                            LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+                            mLayoutManager.setReverseLayout(true);
+                            mLayoutManager.setStackFromEnd(true);
                             emptyFlag.setVisibility(View.INVISIBLE);
                             timesList=(RecyclerView)view.findViewById(R.id.times_list);
                             timesList.setAdapter(new SchdulesAdb(response.body(),ExpertTimesFarg.this,getContext()));
-                            timesList.setLayoutManager(new LinearLayoutManager(getContext()));
+                            timesList.setLayoutManager(mLayoutManager);
                         }
 
                     }else {
