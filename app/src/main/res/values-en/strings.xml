@@ -137,7 +137,7 @@
     <string name="day">Day</string>
     <string name="insertfrom">Time From Required</string>
     <string name="insertto">Time To Required</string>
-    <string name="addr1">Address 1</string>
+    <string name="addr1">Address </string>
     <string name="addr2">Address 2</string>
     <string name="city">City</string>
     <string name="addr1req">Address 1 required</string>
@@ -175,4 +175,5 @@
     <string name="notifiction">You Have New Order</string>
     <string name="newpasswillsend">New Default Password will send in SMS shortly</string>
     <string name="messagesent">Message has been Sent Successfully</string>
+    <string name="cannotsetzero">Service Price can not be 0</string>
 </resources>

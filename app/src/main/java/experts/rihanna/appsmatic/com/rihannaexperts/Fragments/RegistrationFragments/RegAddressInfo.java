@@ -59,7 +59,6 @@ public class RegAddressInfo extends Fragment implements OnMapReadyCallback {
     private String stateName;
     private String countryName;
     private Geocoder geocoder;
-    private EditText location;
     private EditText addr1;
     private EditText city;
     private BillingAddress billingAddress;
@@ -78,7 +77,6 @@ public class RegAddressInfo extends Fragment implements OnMapReadyCallback {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         next=(TextView)view.findViewById(R.id.next_btn);
-        location=(EditText)view.findViewById(R.id.reg_loc_location);
         mapView=(MapView) view.findViewById(R.id.map);
         addr1=(EditText)view.findViewById(R.id.reg_loc_bulding_num);
         city=(EditText)view.findViewById(R.id.reg_loc_district);
@@ -101,8 +99,6 @@ public class RegAddressInfo extends Fragment implements OnMapReadyCallback {
                     city.setError(getResources().getString(R.string.cityreq));
                 }else if(addr1.getText().toString().isEmpty()){
                     addr1.setError(getResources().getString(R.string.addr1req));
-                }else if(location.getText().toString().isEmpty()){
-                    location.setError(getResources().getString(R.string.addr2req));
                 }else {
                     PostAddress postAddress=new PostAddress();
                     Customer customer=new Customer();
@@ -112,7 +108,7 @@ public class RegAddressInfo extends Fragment implements OnMapReadyCallback {
                     billingAddress.setPhoneNumber(SignUp.expertPhoneNum);
                     billingAddress.setEmail(SignUp.expertEmail);
                     billingAddress.setAddress1(addr1.getText().toString());
-                    billingAddress.setAddress2(location.getText().toString());
+                    billingAddress.setAddress2("");
                     billingAddress.setCity(city.getText().toString());
                     billingAddress.setCountryId(69);
                     billingAddress.setStateProvinceId(40);
@@ -273,8 +269,7 @@ public class RegAddressInfo extends Fragment implements OnMapReadyCallback {
                         }else if (countryName!=null){
                             stringBuilder.append(countryName);
                         }
-                        location.setText(stringBuilder.toString());
-                        location.setText(stringBuilder.toString());
+                        addr1.setText(stringBuilder.toString());
                     }
                 }
 

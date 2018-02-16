@@ -133,39 +133,6 @@
         </LinearLayout>
 
 
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="66dp"
-            android:background="@drawable/inputcity"
-            android:gravity="center"
-            android:layoutDirection="ltr"
-            android:layout_below="@+id/linearLayout4"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="10dp">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/imageView3"
-                android:layout_weight="6" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:ems="10"
-                android:id="@+id/reg_loc_location"
-                android:background="#00ffffff"
-                android:padding="6dp"
-                android:layout_weight="1"
-                android:textSize="25dp"
-                android:gravity="center|start"
-                android:textAlignment="viewStart"
-                android:inputType="textImeMultiLine"
-                android:hint="@string/addr2" />
-        </LinearLayout>
-
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"

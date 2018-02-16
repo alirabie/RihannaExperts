@@ -78,7 +78,6 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:inputType="number"
                         android:ems="10"
                         android:id="@+id/price_sp"
                         android:layout_alignParentTop="true"
@@ -88,7 +87,8 @@
                         android:hint="@string/price"
                         android:textSize="15dp"
                         android:layout_weight="1"
-                        android:layout_margin="1dp" />
+                        android:layout_margin="1dp"
+                        android:inputType="number" />
                 </FrameLayout>
 
                 <FrameLayout

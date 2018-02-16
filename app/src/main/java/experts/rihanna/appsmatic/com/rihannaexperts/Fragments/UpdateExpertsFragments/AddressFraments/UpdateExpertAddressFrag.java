@@ -56,7 +56,6 @@ public class UpdateExpertAddressFrag extends Fragment implements OnMapReadyCallb
     private String stateName;
     private String countryName;
     private Geocoder geocoder;
-    private EditText location;
     private EditText addr1;
     private EditText city;
     BillingAddress billingAddress;
@@ -74,7 +73,6 @@ public class UpdateExpertAddressFrag extends Fragment implements OnMapReadyCallb
         super.onViewCreated(view, savedInstanceState);
 
         next = (TextView) view.findViewById(R.id.next_btn);
-        location = (EditText) view.findViewById(R.id.reg_loc_location);
         addr1=(EditText)view.findViewById(R.id.reg_loc_bulding_num);
         city=(EditText)view.findViewById(R.id.reg_loc_district);
         mapView = (MapView) view.findViewById(R.id.map);
@@ -100,7 +98,6 @@ public class UpdateExpertAddressFrag extends Fragment implements OnMapReadyCallb
                     if (response.body().getCustomers() != null) {
                         city.setText(response.body().getCustomers().get(0).getBillingAddress().getCity());
                         addr1.setText(response.body().getCustomers().get(0).getBillingAddress().getAddress1());
-                        location.setText(response.body().getCustomers().get(0).getBillingAddress().getAddress2());
 
                         //Fill Adress from currunt
                         billingAddress = new BillingAddress();
@@ -188,8 +185,6 @@ public class UpdateExpertAddressFrag extends Fragment implements OnMapReadyCallb
                     city.setError(getResources().getString(R.string.cityreq));
                 }else if(addr1.getText().toString().isEmpty()){
                     addr1.setError(getResources().getString(R.string.addr1req));
-                }else if(location.getText().toString().isEmpty()){
-                    location.setError(getResources().getString(R.string.addr2req));
                 }else {
 
 
@@ -200,7 +195,7 @@ public class UpdateExpertAddressFrag extends Fragment implements OnMapReadyCallb
 
 
                     billingAddress.setAddress1(addr1.getText().toString());
-                    billingAddress.setAddress2(location.getText().toString());
+                    billingAddress.setAddress2("");
                     billingAddress.setCity(city.getText().toString());
                     customer.setBillingAddress(billingAddress);
                     UpdateEpert updateEpert=new UpdateEpert();
@@ -298,7 +293,7 @@ public class UpdateExpertAddressFrag extends Fragment implements OnMapReadyCallb
                             stringBuilder.append(countryName);
                         }
 
-                        location.setText(stringBuilder.toString());
+                        addr1.setText(stringBuilder.toString());
                     }
                 }
 

@@ -391,7 +391,7 @@ public class Dialogs {
         certName.setText(certificate.getName() + "");
         certYear.setText(certificate.getYearAcquired() + "");
         granter.setText(certificate.getAuthorizedBy() + "");
-        spicialty.setHint(certificate.getServiceCategoryName()+"");
+        spicialty.setHint(certificate.getServiceCategoryName() + "");
         categoriyId=certificate.getServiceCategoryId()+"";
 
 
@@ -709,7 +709,6 @@ public class Dialogs {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-
                             Generator.createService(ExpertsApi.class).getServicesById(categoriesIds.get(position)).enqueue(new Callback<ResService>() {
                                 @Override
                                 public void onResponse(Call<ResService> call, Response<ResService> response) {
@@ -814,16 +813,23 @@ public class Dialogs {
                         if (mProgressDialog.isShowing())
                             mProgressDialog.dismiss();
                         categoriesSp.setError(context.getResources().getString(R.string.categorieserr));
+
                     } else if (servicesSp.getText().toString().isEmpty()) {
                         if (mProgressDialog.isShowing())
                             mProgressDialog.dismiss();
                         servicesSp.setError(context.getResources().getString(R.string.serviceerr));
+
                     } else if (price.getText().toString().isEmpty()) {
                         if (mProgressDialog.isShowing())
                             mProgressDialog.dismiss();
                         price.setError(context.getResources().getString(R.string.insertprice));
-                    }else {
 
+                    }else if (Double.parseDouble(price.getText().toString())<=0) {
+                        if (mProgressDialog.isShowing())
+                            mProgressDialog.dismiss();
+                        price.setError(context.getResources().getString(R.string.cannotsetzero));
+
+                    }else {
                         SubscribeModel subscribeModel = new SubscribeModel();
                         ExpertService expertService = new ExpertService();
                         expertService.setExpertId(Integer.parseInt(expertId));

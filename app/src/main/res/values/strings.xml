@@ -141,7 +141,7 @@
     <string name="insertfrom">Time From Required</string>
     <string name="insertto">Time To Required</string>
     <string name="city">City</string>
-    <string name="addr1">Address 1</string>
+    <string name="addr1">Address </string>
     <string name="addr2">Address 2</string>
     <string name="addr1req">Address 1 required</string>
     <string name="addr2req">Address 2 required</string>
@@ -181,6 +181,7 @@
     <string name="canceldorders">Canceled</string>
     <string name="timebusy">Sorry This Time Is Reserved Please Choose another time</string>
     <string name="messagesent">Message has been Sent Successfully</string>
+    <string name="cannotsetzero">Service Price can not be 0</string>
 
     <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
     <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>

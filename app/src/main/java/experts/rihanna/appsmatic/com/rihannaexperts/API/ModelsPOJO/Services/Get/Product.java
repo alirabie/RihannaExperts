@@ -15,7 +15,7 @@ public class Product {
     private String name;
     @SerializedName("price")
     @Expose
-    private Integer price;
+    private Double price;
 
     public String getId() {
         return id;
@@ -33,11 +33,11 @@ public class Product {
         this.name = name;
     }
 
-    public Integer getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 }
