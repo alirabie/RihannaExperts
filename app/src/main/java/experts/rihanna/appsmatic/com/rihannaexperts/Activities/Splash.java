@@ -118,6 +118,10 @@ public class Splash extends AppCompatActivity {
                                         Splash.this.finish();
 
                                     } else if (response.body().getErrors().getAccount() != null) {
+
+                                        SaveSharedPreference.setExpertId(Splash.this, "","");
+                                        SaveSharedPreference.setCustomerInfo(Splash.this, null);
+                                        SaveSharedPreference.setUserName(Splash.this, "", "");
                                         //Show Error
                                         NiftyDialogBuilder dialogBuilder = NiftyDialogBuilder.getInstance(Splash.this);
                                         dialogBuilder
