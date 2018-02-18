@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
 public class Service {
     @SerializedName("id")
     @Expose
-    private Integer id;
+    private int id;
     @SerializedName("expert_id")
     @Expose
     private Integer expertId;
@@ -48,11 +48,11 @@ public class Service {
         this.expertId = expertId;
     }
 
-    public Integer getServiceId() {
+    public int getServiceId() {
         return serviceId;
     }
 
-    public void setServiceId(Integer serviceId) {
+    public void setServiceId(int serviceId) {
         this.serviceId = serviceId;
     }
 

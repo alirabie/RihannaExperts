@@ -47,9 +47,12 @@ import java.util.Locale;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.ChangeLang.LangRes;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Orders.OrderHeader.Order;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Orders.OrderHeader.OrdersResponse;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.ExpertServices.ResExpertServices;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.ExpertServices.Service;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.ExpertsApi;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.Generator;
 import experts.rihanna.appsmatic.com.rihannaexperts.Adaptors.ExpertOrdersAdb;
+import experts.rihanna.appsmatic.com.rihannaexperts.Adaptors.ExpertServicesAdb;
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.AboutAppFrag;
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.AccountMangeFrag;
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.ScheduleMangeFrag;
@@ -73,6 +76,7 @@ public class Home extends AppCompatActivity  {
     public static int ordersCount=0;
     public static NotificationManager manager;
     static int notId=0;
+    public static boolean IsExist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
@@ -640,6 +644,55 @@ public class Home extends AppCompatActivity  {
                 Toast.makeText(context, "Connection error From Orders List" + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+
+
+
+
+    public static void checkServiceExist(final Context context , final int serviceId){
+
+        Generator.createService(ExpertsApi.class).getExpertServices(SaveSharedPreference.getExpertId(context)).enqueue(new Callback<ResExpertServices>() {
+            @Override
+            public void onResponse(Call<ResExpertServices> call, Response<ResExpertServices> response) {
+                if (response.isSuccessful()) {
+
+                    if (response.body().getServices() != null) {
+                        if (response.body().getServices().isEmpty()) {
+                            IsExist=false;
+                        } else {
+
+                            for (int i=0;i<response.body().getServices().size();i++){
+                                if(response.body().getServices().get(i).getServiceId()==serviceId){
+                                    IsExist=true;
+                                    break;
+                                }else {
+                                    IsExist=false;
+                                }
+                            }
+                        }
+                    } else {
+                        Toast.makeText(context, "Null From get Expert Services", Toast.LENGTH_SHORT).show();
+                    }
+
+                } else {
+
+                    try {
+                        Toast.makeText(context, response.errorBody().string(), Toast.LENGTH_SHORT).show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResExpertServices> call, Throwable t) {
+
+                Toast.makeText(context, "Connection Error From get Expert Services " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
 

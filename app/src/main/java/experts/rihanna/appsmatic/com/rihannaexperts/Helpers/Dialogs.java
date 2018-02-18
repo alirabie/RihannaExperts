@@ -6,6 +6,8 @@ import android.content.DialogInterface;
 import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -42,6 +44,8 @@ import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.OutdoorAddres
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.OutdoorAddress.Set.PostNewAddress;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.OutdoorAddress.Set.SetNewAddressResponse;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Schadules.Deleteschaduleres;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.ExpertServices.ResExpertServices;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.ExpertServices.Service;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.Get.ResService;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.Subscribe.ExpertService;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.Subscribe.SubscribeModel;
@@ -49,6 +53,8 @@ import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.Subs
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.States.ResStates;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.ExpertsApi;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.Generator;
+import experts.rihanna.appsmatic.com.rihannaexperts.Activities.Home;
+import experts.rihanna.appsmatic.com.rihannaexperts.Adaptors.ExpertServicesAdb;
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.RegistrationFragments.RegCertificates;
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.UpdateExpertsFragments.AddressFraments.OutdoorAdressesFrag;
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.UpdateExpertsFragments.UpdateServicesFrag;
@@ -65,12 +71,15 @@ public class Dialogs {
     static String categoriyId="";
     static String year="";
     static String serviceId="";
+    static String serviceName="";
     static String servicePrice="";
     static List<String>categoriesNames;
     static List<String>servicesNames;
     static List<String>categoriesIds;
     static List<String>servicesIds;
     static List<String>servicesPrice;
+    public static boolean IsExist ;
+
 
 
     private static List<String>statesIds;
@@ -716,32 +725,34 @@ public class Dialogs {
                                         //Fill services Ids and names
                                         servicesNames = new ArrayList<String>();
                                         servicesIds = new ArrayList<String>();
-                                        servicesPrice=new ArrayList<String>();
+                                        servicesPrice = new ArrayList<String>();
                                         for (int i = 0; i < response.body().getProducts().size(); i++) {
                                             servicesNames.add(response.body().getProducts().get(i).getName());
                                             servicesIds.add(response.body().getProducts().get(i).getId());
-                                            if(response.body().getProducts().get(i).getPrice()==null){
+                                            if (response.body().getProducts().get(i).getPrice() == null) {
                                                 servicesPrice.add("0");
-                                            }else {
-                                                servicesPrice.add(response.body().getProducts().get(i).getPrice()+"");
+                                            } else {
+                                                servicesPrice.add(response.body().getProducts().get(i).getPrice() + "");
                                             }
 
                                         }
-                                        servicesSp.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item,servicesNames));
+                                        servicesSp.setAdapter(new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, servicesNames));
                                         servicesSp.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                             @Override
                                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                                serviceId=servicesIds.get(position);
-                                                servicePrice=servicesPrice.get(position);
+                                                serviceId = servicesIds.get(position);
+                                                serviceName = servicesNames.get(position);
+                                                servicePrice = servicesPrice.get(position);
                                                 //Toast.makeText(context,serviceId,Toast.LENGTH_SHORT).show();
                                                 price.setText(servicePrice);
+                                                Home.checkServiceExist(context, Integer.parseInt(serviceId));
                                             }
                                         });
 
 
-                                    }else {
+                                    } else {
                                         try {
-                                            Toast.makeText(context,response.errorBody().string(),Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(context, response.errorBody().string(), Toast.LENGTH_SHORT).show();
                                         } catch (IOException e) {
                                             e.printStackTrace();
                                         }
@@ -750,7 +761,7 @@ public class Dialogs {
 
                                 @Override
                                 public void onFailure(Call<ResService> call, Throwable t) {
-                                    Toast.makeText(context,"Connection Error from services SP "+t.getMessage(),Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(context, "Connection Error from services SP " + t.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             });
 
@@ -759,9 +770,9 @@ public class Dialogs {
                     });
 
 
-                }else {
+                } else {
                     try {
-                        Toast.makeText(context,response.errorBody().string(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, response.errorBody().string(), Toast.LENGTH_SHORT).show();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -772,7 +783,7 @@ public class Dialogs {
 
             @Override
             public void onFailure(Call<ResCategory> call, Throwable t) {
-                Toast.makeText(context,"Connection Error from Services SP "+t.getMessage(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Connection Error from Services SP " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -799,12 +810,12 @@ public class Dialogs {
                 Animation anim = AnimationUtils.loadAnimation(context, R.anim.alpha);
                 subscribe_btn.clearAnimation();
                 subscribe_btn.setAnimation(anim);
-
                 //Loading Dialog
                 final ProgressDialog mProgressDialog = new ProgressDialog(context);
                 mProgressDialog.setIndeterminate(true);
                 mProgressDialog.setMessage(context.getResources().getString(R.string.loading));
                 mProgressDialog.show();
+
 
                 //in case of expert A
                 if (IsA) {
@@ -824,126 +835,139 @@ public class Dialogs {
                             mProgressDialog.dismiss();
                         price.setError(context.getResources().getString(R.string.insertprice));
 
-                    }else if (Double.parseDouble(price.getText().toString())<=0) {
+                    } else if (Double.parseDouble(price.getText().toString()) <= 0) {
                         if (mProgressDialog.isShowing())
                             mProgressDialog.dismiss();
                         price.setError(context.getResources().getString(R.string.cannotsetzero));
 
+                    } else if (Home.IsExist) {
+                        if (mProgressDialog.isShowing())
+                            mProgressDialog.dismiss();
+                        Toast.makeText(context,context.getResources().getString(R.string.serviceexistes),Toast.LENGTH_SHORT).show();
+
                     }else {
+
                         SubscribeModel subscribeModel = new SubscribeModel();
-                        ExpertService expertService = new ExpertService();
-                        expertService.setExpertId(Integer.parseInt(expertId));
-                        if(!descountedPrice.getText().toString().isEmpty()){
-                            expertService.setDiscountAmount(Double.parseDouble(descountedPrice.getText().toString()));
-                            expertService.setDiscountPercentage((Double.parseDouble(descountedPrice.getText().toString()) / Double.parseDouble(price.getText().toString()))*100);
-                        }else {
-                            expertService.setDiscountAmount(0.0);
-                            expertService.setDiscountPercentage(0.0);
+                    ExpertService expertService = new ExpertService();
+                    expertService.setExpertId(Integer.parseInt(expertId));
+                    if (!descountedPrice.getText().toString().isEmpty()) {
+                        expertService.setDiscountAmount(Double.parseDouble(descountedPrice.getText().toString()));
+                        expertService.setDiscountPercentage((Double.parseDouble(descountedPrice.getText().toString()) / Double.parseDouble(price.getText().toString())) * 100);
+                    } else {
+                        expertService.setDiscountAmount(0.0);
+                        expertService.setDiscountPercentage(0.0);
+                    }
+
+                    expertService.setPrice(Double.parseDouble(price.getText().toString()));
+                    expertService.setServiceId(Integer.parseInt(serviceId));
+                    subscribeModel.setExpertService(expertService);
+                    Gson gson = new Gson();
+                    Log.e("sub888888", gson.toJson(subscribeModel));
+                    Generator.createService(ExpertsApi.class).subscribeService(subscribeModel).enqueue(new Callback<SubscribeResponse>() {
+                        @Override
+                        public void onResponse(Call<SubscribeResponse> call, Response<SubscribeResponse> response) {
+                            if (response.isSuccessful()) {
+                                if (mProgressDialog.isShowing())
+                                    mProgressDialog.dismiss();
+                                if (response.body().getStatus().toString().equals("ok")) {
+                                    Toast.makeText(context, context.getResources().getString(R.string.suscribesucsess) + response.body().getStatus(), Toast.LENGTH_SHORT).show();
+                                    //refresh fragment
+                                    android.support.v4.app.FragmentManager fragmentManager3 = ((FragmentActivity) context).getSupportFragmentManager();
+                                    fragmentManager3.beginTransaction().detach(fragment).attach(fragment).commit();
+                                    dialogBuildercard.dismiss();
+
+                                } else {
+                                    Toast.makeText(context, response.body().getErrorMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            } else {
+                                if (mProgressDialog.isShowing())
+                                    mProgressDialog.dismiss();
+                                try {
+                                    Toast.makeText(context, response.errorBody().string(), Toast.LENGTH_SHORT).show();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
                         }
 
-                        expertService.setPrice(Double.parseDouble(price.getText().toString()));
-                        expertService.setServiceId(Integer.parseInt(serviceId));
-                        subscribeModel.setExpertService(expertService);
-                        Gson gson=new Gson();
-                        Log.e("sub888888",gson.toJson(subscribeModel));
-                        Generator.createService(ExpertsApi.class).subscribeService(subscribeModel).enqueue(new Callback<SubscribeResponse>() {
-                            @Override
-                            public void onResponse(Call<SubscribeResponse> call, Response<SubscribeResponse> response) {
-                                if (response.isSuccessful()) {
-                                    if (mProgressDialog.isShowing())
-                                        mProgressDialog.dismiss();
-                                    if (response.body().getStatus().toString().equals("ok")) {
-                                        Toast.makeText(context, context.getResources().getString(R.string.suscribesucsess) + response.body().getStatus(), Toast.LENGTH_SHORT).show();
-                                        //refresh fragment
-                                        android.support.v4.app.FragmentManager fragmentManager3 = ((FragmentActivity) context).getSupportFragmentManager();
-                                        fragmentManager3.beginTransaction().detach(fragment).attach(fragment).commit();
-                                        dialogBuildercard.dismiss();
-
-                                    } else {
-                                        Toast.makeText(context, response.body().getErrorMessage(), Toast.LENGTH_SHORT).show();
-                                    }
-                                } else {
-                                    if (mProgressDialog.isShowing())
-                                        mProgressDialog.dismiss();
-                                    try {
-                                        Toast.makeText(context, response.errorBody().string(), Toast.LENGTH_SHORT).show();
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(Call<SubscribeResponse> call, Throwable t) {
-                                if (mProgressDialog.isShowing())
-                                    mProgressDialog.dismiss();
-                                Toast.makeText(context, "Connection error from service subscribe " + t.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                } else
-
-                //in case of expert B
-                {
-                    //Inputs validations if expert A
-                    if (categoriesSp.getText().toString().isEmpty()) {
-                        if (mProgressDialog.isShowing())
-                            mProgressDialog.dismiss();
-                        categoriesSp.setError(context.getResources().getString(R.string.categorieserr));
-                    } else if (servicesSp.getText().toString().isEmpty()) {
-                        if (mProgressDialog.isShowing())
-                            mProgressDialog.dismiss();
-                        servicesSp.setError(context.getResources().getString(R.string.serviceerr));
-                    } else {
-                        SubscribeModel subscribeModel = new SubscribeModel();
-                        ExpertService expertService = new ExpertService();
-                        expertService.setExpertId(Integer.parseInt(expertId));
-                        expertService.setDiscountAmount(0.0);
-                        expertService.setPrice(Double.parseDouble(servicePrice));
-                        expertService.setServiceId(Integer.parseInt(serviceId));
-                        expertService.setDiscountPercentage(0.0);
-                        subscribeModel.setExpertService(expertService);
-                        Generator.createService(ExpertsApi.class).subscribeService(subscribeModel).enqueue(new Callback<SubscribeResponse>() {
-                            @Override
-                            public void onResponse(Call<SubscribeResponse> call, Response<SubscribeResponse> response) {
-                                if (response.isSuccessful()) {
-                                    if (mProgressDialog.isShowing())
-                                        mProgressDialog.dismiss();
-                                    if (response.body().getStatus().toString().equals("ok")) {
-
-                                        Toast.makeText(context, context.getResources().getString(R.string.suscribesucsess) + response.body().getStatus(), Toast.LENGTH_SHORT).show();
-                                        //refresh fragment
-                                        android.support.v4.app.FragmentManager fragmentManager3 = ((FragmentActivity) context).getSupportFragmentManager();
-                                        fragmentManager3.beginTransaction().detach(fragment).attach(fragment).commit();
-                                        dialogBuildercard.dismiss();
-
-
-                                    } else {
-                                        Toast.makeText(context, response.body().getErrorMessage(), Toast.LENGTH_SHORT).show();
-                                    }
-                                } else {
-                                    if (mProgressDialog.isShowing())
-                                        mProgressDialog.dismiss();
-                                    try {
-                                        Toast.makeText(context, response.errorBody().string(), Toast.LENGTH_SHORT).show();
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(Call<SubscribeResponse> call, Throwable t) {
-                                if (mProgressDialog.isShowing())
-                                    mProgressDialog.dismiss();
-                                Toast.makeText(context, "Connection error from service subscribe " + t.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        });
-
-                    }
-                }
+                        @Override
+                        public void onFailure(Call<SubscribeResponse> call, Throwable t) {
+                            if (mProgressDialog.isShowing())
+                                mProgressDialog.dismiss();
+                            Toast.makeText(context, "Connection error from service subscribe " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
             }
+
+            else
+
+            //in case of expert B
+            {
+                //Inputs validations if expert A
+                if (categoriesSp.getText().toString().isEmpty()) {
+                    if (mProgressDialog.isShowing())
+                        mProgressDialog.dismiss();
+                    categoriesSp.setError(context.getResources().getString(R.string.categorieserr));
+                } else if (servicesSp.getText().toString().isEmpty()) {
+                    if (mProgressDialog.isShowing())
+                        mProgressDialog.dismiss();
+                    servicesSp.setError(context.getResources().getString(R.string.serviceerr));
+                }else if (Home.IsExist) {
+                    if (mProgressDialog.isShowing())
+                        mProgressDialog.dismiss();
+                    Toast.makeText(context,context.getResources().getString(R.string.serviceexistes),Toast.LENGTH_SHORT).show();
+
+                } else {
+                    SubscribeModel subscribeModel = new SubscribeModel();
+                    ExpertService expertService = new ExpertService();
+                    expertService.setExpertId(Integer.parseInt(expertId));
+                    expertService.setDiscountAmount(0.0);
+                    expertService.setPrice(Double.parseDouble(servicePrice));
+                    expertService.setServiceId(Integer.parseInt(serviceId));
+                    expertService.setDiscountPercentage(0.0);
+                    subscribeModel.setExpertService(expertService);
+                    Generator.createService(ExpertsApi.class).subscribeService(subscribeModel).enqueue(new Callback<SubscribeResponse>() {
+                        @Override
+                        public void onResponse(Call<SubscribeResponse> call, Response<SubscribeResponse> response) {
+                            if (response.isSuccessful()) {
+                                if (mProgressDialog.isShowing())
+                                    mProgressDialog.dismiss();
+                                if (response.body().getStatus().toString().equals("ok")) {
+
+                                    Toast.makeText(context, context.getResources().getString(R.string.suscribesucsess) + response.body().getStatus(), Toast.LENGTH_SHORT).show();
+                                    //refresh fragment
+                                    android.support.v4.app.FragmentManager fragmentManager3 = ((FragmentActivity) context).getSupportFragmentManager();
+                                    fragmentManager3.beginTransaction().detach(fragment).attach(fragment).commit();
+                                    dialogBuildercard.dismiss();
+
+
+                                } else {
+                                    Toast.makeText(context, response.body().getErrorMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            } else {
+                                if (mProgressDialog.isShowing())
+                                    mProgressDialog.dismiss();
+                                try {
+                                    Toast.makeText(context, response.errorBody().string(), Toast.LENGTH_SHORT).show();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<SubscribeResponse> call, Throwable t) {
+                            if (mProgressDialog.isShowing())
+                                mProgressDialog.dismiss();
+                            Toast.makeText(context, "Connection error from service subscribe " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                }
+            }
+        }
+    }
 
             );
 
@@ -1126,7 +1150,15 @@ public class Dialogs {
 
     }
 
-    }
+
+
+
+
+
+
+
+
+}
 
 
 

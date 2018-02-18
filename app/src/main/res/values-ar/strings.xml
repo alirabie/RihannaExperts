@@ -176,4 +176,5 @@
     <string name="newpasswillsend">سوف يتم ارسالة كلمة مرور افتراضية على جوالك لان</string>
     <string name="messagesent">تم ارسال رسالتك بنجاح</string>
     <string name="cannotsetzero">لا يمكن تحديد سعر الخدمة 0 </string>
+    <string name="serviceexistes">انت مشترك فى هذه الخدمة بالفعل</string>
 </resources>
