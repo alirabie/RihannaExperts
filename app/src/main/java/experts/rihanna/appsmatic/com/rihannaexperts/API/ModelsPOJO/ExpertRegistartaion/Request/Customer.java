@@ -9,12 +9,18 @@ import java.util.List;
  * Created by Eng Ali on 12/3/2017.
  */
 public class Customer {
+
+
+
     @SerializedName("role_ids")
     @Expose
     private List<Integer> roleIds = null;
     @SerializedName("email")
     @Expose
     private String email;
+    @SerializedName("vendor_name")
+    @Expose
+    private String vendorName;
     @SerializedName("password")
     @Expose
     private String password;
@@ -53,6 +59,14 @@ public class Customer {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getVendorName() {
+        return vendorName;
+    }
+
+    public void setVendorName(String vendorName) {
+        this.vendorName = vendorName;
     }
 
     public String getPassword() {

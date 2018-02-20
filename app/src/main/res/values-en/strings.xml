@@ -177,4 +177,6 @@
     <string name="messagesent">Message has been Sent Successfully</string>
     <string name="cannotsetzero">Service Price can not be 0</string>
     <string name="serviceexistes">This service already Subscribed</string>
+    <string name="vendorname">Nickname</string>
+    <string name="nameerr">Please Add Nickname</string>
 </resources>

@@ -36,15 +36,16 @@ import retrofit2.Response;
 
 public class UpdateInfoFrag extends Fragment {
     private TextView next;
-    private TextView getActivationCodeBtn;
+   // private TextView getActivationCodeBtn;
     private EditText fName;
     private EditText lName;
     private EditText eMail;
     private EditText phoneNum;
     private EditText password;
     private EditText rePassword;
+    private EditText nickname;
     private EditText activationCode;
-    private LinearLayout mobActivationConener;
+   // private LinearLayout mobActivationConener;
     BillingAddress billingAddress;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -65,16 +66,17 @@ public class UpdateInfoFrag extends Fragment {
         fName=(EditText)view.findViewById(R.id.reg_input_fname);
         lName=(EditText)view.findViewById(R.id.reg_input_lname);
         eMail=(EditText)view.findViewById(R.id.reg_input_email);
+        nickname=(EditText)view.findViewById(R.id.req_input_activity_name);
         phoneNum=(EditText)view.findViewById(R.id.reg_input_phone_num);
         password=(EditText)view.findViewById(R.id.reg_input_password);
         rePassword=(EditText)view.findViewById(R.id.reg_input_re_password);
-        activationCode=(EditText)view.findViewById(R.id.ver_code_input);
-        getActivationCodeBtn=(TextView)view.findViewById(R.id.send_ver_code_btn);
-        mobActivationConener=(LinearLayout)view.findViewById(R.id.linearLayout17);
+        //activationCode=(EditText)view.findViewById(R.id.ver_code_input);
+       // getActivationCodeBtn=(TextView)view.findViewById(R.id.send_ver_code_btn);
+        //mobActivationConener=(LinearLayout)view.findViewById(R.id.linearLayout17);
         next=(TextView)view.findViewById(R.id.next_btn);
 
         //Hide Phone Verification
-        mobActivationConener.setVisibility(View.INVISIBLE);
+      //  mobActivationConener.setVisibility(View.INVISIBLE);
 
 
         final ProgressDialog mProgressDialog = new ProgressDialog(getContext());
@@ -97,6 +99,8 @@ public class UpdateInfoFrag extends Fragment {
                         lName.setTextColor(getResources().getColor(R.color.colorAccent));
                         eMail.setText(response.body().getCustomers().get(0).getEmail());
                         eMail.setTextColor(getResources().getColor(R.color.colorAccent));
+                        nickname.setText(response.body().getCustomers().get(0).getVendorName() + "");
+                        nickname.setTextColor(getResources().getColor(R.color.colorAccent));
                         phoneNum.setText(response.body().getCustomers().get(0).getBillingAddress().getPhoneNumber() + "");
                         phoneNum.setTextColor(getResources().getColor(R.color.colorAccent));
 
@@ -161,6 +165,8 @@ public class UpdateInfoFrag extends Fragment {
                         lName.setError(getResources().getString(R.string.lnameerr));
                     } else if (eMail.getText().toString().isEmpty()) {
                         eMail.setError(getResources().getString(R.string.emailerr));
+                    }else if(nickname.getText().toString().isEmpty()){
+                        nickname.setError(getResources().getString(R.string.nameerr));
                     } else if (phoneNum.getText().toString().isEmpty()) {
                         phoneNum.setError(getResources().getString(R.string.phonenumerr));
                     } else if (password.getText().toString().isEmpty()) {
@@ -186,6 +192,7 @@ public class UpdateInfoFrag extends Fragment {
                         customer.setFirstName(fName.getText().toString());
                         customer.setLastName(lName.getText().toString());
                         customer.setEmail(eMail.getText().toString());
+                        customer.setVendorName(nickname.getText().toString());
                         customer.setPhone("");
                         customer.setPassword(password.getText().toString());
                         List<Integer>role_ids=new ArrayList<Integer>();

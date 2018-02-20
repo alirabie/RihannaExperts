@@ -36,6 +36,9 @@ public class Customer {
     @SerializedName("email")
     @Expose
     private String email;
+    @SerializedName("vendor_name")
+    @Expose
+    private String vendorName;
     @SerializedName("first_name")
     @Expose
     private String firstName;
@@ -136,6 +139,14 @@ public class Customer {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getVendorName() {
+        return vendorName;
+    }
+
+    public void setVendorName(String vendorName) {
+        this.vendorName = vendorName;
     }
 
     public String getFirstName() {

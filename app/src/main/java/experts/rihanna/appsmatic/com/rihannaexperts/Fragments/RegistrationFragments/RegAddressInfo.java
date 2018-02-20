@@ -122,6 +122,7 @@ public class RegAddressInfo extends Fragment implements OnMapReadyCallback {
                     customer.setFirstName(SignUp.expertFname);
                     customer.setLastName(SignUp.expertLname);
                     customer.setEmail(SignUp.expertEmail);
+                    customer.setVendorName(SignUp.nickname);
                     customer.setPhone(SignUp.expertPhoneNum);
                     customer.setPassword(SignUp.password);
                     postAddress.setCustomer(customer);

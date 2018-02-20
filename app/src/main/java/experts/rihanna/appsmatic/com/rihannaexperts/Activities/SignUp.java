@@ -29,6 +29,7 @@ public class SignUp extends AppCompatActivity {
     public static  String expertId="0";
     public static String expertFname="A";
     public static String expertLname="b";
+    public static String nickname="c";
     public static String expertPhoneNum="0";
     public static String expertEmail="";
     public static String password="";

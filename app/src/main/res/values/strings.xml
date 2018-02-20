@@ -182,6 +182,8 @@
     <string name="timebusy">Sorry This Time Is Reserved Please Choose another time</string>
     <string name="messagesent">Message has been Sent Successfully</string>
     <string name="cannotsetzero">Service Price can not be 0</string>
+    <string name="vendorname">Nickname</string>
+    <string name="nameerr">Please Add Nickname</string>
 
     <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
     <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>

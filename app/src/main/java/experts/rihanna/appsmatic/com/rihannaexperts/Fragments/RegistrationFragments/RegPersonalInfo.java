@@ -17,21 +17,23 @@ import android.widget.TextView;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import experts.rihanna.appsmatic.com.rihannaexperts.Activities.SignIn;
 import experts.rihanna.appsmatic.com.rihannaexperts.Activities.SignUp;
 import experts.rihanna.appsmatic.com.rihannaexperts.R;
 
 public class RegPersonalInfo extends Fragment {
 
     private TextView next;
-    private TextView getActivationCodeBtn;
+    //private TextView getActivationCodeBtn;
     private EditText fName;
     private EditText lName;
+    private EditText name;
     private EditText eMail;
     private EditText phoneNum;
     private EditText password;
     private EditText rePassword;
-    private EditText activationCode;
-    private LinearLayout mobActivationConener;
+    //private EditText activationCode;
+   // private LinearLayout mobActivationConener;
 
 
     @Override
@@ -49,16 +51,17 @@ public class RegPersonalInfo extends Fragment {
         fName=(EditText)view.findViewById(R.id.reg_input_fname);
         lName=(EditText)view.findViewById(R.id.reg_input_lname);
         eMail=(EditText)view.findViewById(R.id.reg_input_email);
+        name=(EditText)view.findViewById(R.id.req_input_activity_name);
         phoneNum=(EditText)view.findViewById(R.id.reg_input_phone_num);
         password=(EditText)view.findViewById(R.id.reg_input_password);
         rePassword=(EditText)view.findViewById(R.id.reg_input_re_password);
-        activationCode=(EditText)view.findViewById(R.id.ver_code_input);
-        getActivationCodeBtn=(TextView)view.findViewById(R.id.send_ver_code_btn);
-        mobActivationConener=(LinearLayout)view.findViewById(R.id.linearLayout17);
+        //activationCode=(EditText)view.findViewById(R.id.ver_code_input);
+       // getActivationCodeBtn=(TextView)view.findViewById(R.id.send_ver_code_btn);
+        //mobActivationConener=(LinearLayout)view.findViewById(R.id.linearLayout17);
         next=(TextView)view.findViewById(R.id.next_btn);
 
         //Hide Phone Verification
-       mobActivationConener.setVisibility(View.INVISIBLE);
+       //mobActivationConener.setVisibility(View.INVISIBLE);
 
 
 
@@ -88,6 +91,8 @@ public class RegPersonalInfo extends Fragment {
                     fName.setError(getResources().getString(R.string.fnameerr));
                 }else if (lName.getText().toString().isEmpty()){
                     lName.setError(getResources().getString(R.string.lnameerr));
+                }else if(name.getText().toString().isEmpty()){
+                    name.setError(getResources().getString(R.string.nameerr));
                 }else if(eMail.getText().toString().isEmpty()){
                     eMail.setError(getResources().getString(R.string.emailerr));
                 }else if(phoneNum.getText().toString().isEmpty()){
@@ -113,6 +118,7 @@ public class RegPersonalInfo extends Fragment {
                     SignUp.expertFname = fName.getText().toString();
                     SignUp.expertLname = lName.getText().toString();
                     SignUp.expertEmail = eMail.getText().toString();
+                    SignUp.nickname=name.getText().toString();
                     SignUp.expertPhoneNum ="966"+phoneNum.getText().toString().substring(phoneNum.getText().toString().indexOf("5"));
                     SignUp.password=password.getText().toString();
                     //Log.e("phone","966"+phoneNum.getText().toString().substring(phoneNum.getText().toString().indexOf("5")));
