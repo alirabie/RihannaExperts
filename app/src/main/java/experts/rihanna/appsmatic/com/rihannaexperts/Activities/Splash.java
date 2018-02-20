@@ -29,6 +29,7 @@ import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Login.LoginRe
 import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.ExpertsApi;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.Generator;
 import experts.rihanna.appsmatic.com.rihannaexperts.Helpers.Utils;
+import experts.rihanna.appsmatic.com.rihannaexperts.NotificationsServiceEx;
 import experts.rihanna.appsmatic.com.rihannaexperts.Prefs.SaveSharedPreference;
 import experts.rihanna.appsmatic.com.rihannaexperts.R;
 import retrofit2.Call;
@@ -55,6 +56,8 @@ public class Splash extends AppCompatActivity {
         }
 
 
+        //Background notification service
+        launchTestService();
 
         //Check location permissions for Marshmallow
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -178,6 +181,14 @@ public class Splash extends AppCompatActivity {
     }
 
 
+    public void launchTestService() {
+        // Construct our Intent specifying the Service
+        Intent i = new Intent(this, NotificationsServiceEx.class);
+        // Add extras to the bundle
+        i.putExtra("foo", "bar");
+        // Start the service
+        startService(i);
+    }
 
 
 }

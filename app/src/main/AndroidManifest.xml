@@ -67,6 +67,22 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
+
+        <service
+            android:name=".NotificationsServiceEx"
+            android:exported="false"/>
+
+        <receiver
+            android:name=".RestartServiceex"
+            android:enabled="true"
+            android:exported="true"
+            android:label="RestartServiceWhenStopped"
+            android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
+            <intent-filter>
+                <action android:name="RestartServiceEx" />
+            </intent-filter>
+        </receiver>
+
         <activity
             android:name=".Activities.Home"
             android:label=""

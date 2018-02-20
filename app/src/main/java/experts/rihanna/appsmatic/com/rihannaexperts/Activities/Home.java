@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.media.RingtoneManager;
@@ -84,7 +85,7 @@ public class Home extends AppCompatActivity  {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        setOrdersCount(Home.this);
+        setLang(R.layout.activity_home);
         Window window = this.getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -397,77 +398,6 @@ public class Home extends AppCompatActivity  {
 
 
 
-        //Check every 1/2 min for orders
-        final android.os.Handler mHandler = new android.os.Handler();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                // TODO Auto-generated method stub
-                while (true) {
-                    try {
-                        Thread.sleep(30000);
-
-                        mHandler.post(new Runnable() {
-
-                            @Override
-                            public void run() {
-                                // TODO Auto-generated method stub
-
-                                Generator.createService(ExpertsApi.class).getExpertOrders(SaveSharedPreference.getExpertId(getBaseContext())).enqueue(new Callback<OrdersResponse>() {
-                                    @Override
-                                    public void onResponse(Call<OrdersResponse> call, Response<OrdersResponse> response) {
-                                        if (response.isSuccessful()) {
-                                            if (response.body() != null) {
-                                                if(response.body().getOrders().size()>ordersCount){
-                                                    Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-                                                    NotificationCompat.Builder builder =
-                                                            (NotificationCompat.Builder) new NotificationCompat.Builder(getApplicationContext())
-                                                                    .setSmallIcon(R.drawable.rihanna_logo)
-                                                                    .setVibrate(new long[] { 1000, 1000, 1000, 1000, 1000 })
-                                                                    .setSound(alarmSound)
-                                                                    .setContentTitle(getResources().getString(R.string.app_name))
-                                                                    .setAutoCancel(true)
-                                                                    .setContentText(getResources().getString(R.string.notifiction));
-                                                    Intent notificationIntent = new Intent(getApplicationContext(),Home.class).putExtra("target","orders");
-                                                    TaskStackBuilder taskStackBuilder=TaskStackBuilder.create(getApplicationContext());
-                                                    taskStackBuilder.addParentStack(Home.class);
-                                                    taskStackBuilder.addNextIntent(notificationIntent);
-                                                    PendingIntent contentIntent = taskStackBuilder.getPendingIntent(0,PendingIntent.FLAG_UPDATE_CURRENT);
-                                                    builder.setContentIntent(contentIntent);
-                                                    manager=(NotificationManager)getSystemService(getApplicationContext().NOTIFICATION_SERVICE);
-                                                    manager.notify(notId,builder.build());
-                                                    notId++;
-                                                    ordersCount=response.body().getOrders().size();
-                                                }
-                                            } else {
-                                                //Toast.makeText(getBaseContext(), "Null From Orders List", Toast.LENGTH_SHORT).show();
-                                            }
-
-                                        } else {
-                                            /*
-                                            try {
-                                                Toast.makeText(getBaseContext(), response.errorBody().string(), Toast.LENGTH_SHORT).show();
-                                            } catch (IOException e) {
-                                                e.printStackTrace();
-                                            }
-                                            */
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onFailure(Call<OrdersResponse> call, Throwable t) {
-                                      //  Toast.makeText(getBaseContext(), "Connection error From Orders List" + t.getMessage(), Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-
-                            }
-                        });
-                    } catch (Exception e) {
-                        // TODO: handle exception
-                    }
-                }
-            }
-        }).start();
 
 
 
@@ -619,32 +549,7 @@ public class Home extends AppCompatActivity  {
     }
 
 
-    public static void setOrdersCount(final Context context){
-        Generator.createService(ExpertsApi.class).getExpertOrders(SaveSharedPreference.getExpertId(context)).enqueue(new Callback<OrdersResponse>() {
-            @Override
-            public void onResponse(Call<OrdersResponse> call, Response<OrdersResponse> response) {
-                if (response.isSuccessful()) {
-                    if (response.body() != null) {
-                        ordersCount=response.body().getOrders().size();
-                    } else {
-                        Toast.makeText(context, "Null From Orders List", Toast.LENGTH_SHORT).show();
-                    }
 
-                } else {
-                    try {
-                        Toast.makeText(context, response.errorBody().string(), Toast.LENGTH_SHORT).show();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<OrdersResponse> call, Throwable t) {
-                Toast.makeText(context, "Connection error From Orders List" + t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
 
 
 
@@ -696,7 +601,16 @@ public class Home extends AppCompatActivity  {
     }
 
 
-
+    // Change language method
+    public  void setLang(int layout){
+        String languageToLoad = SaveSharedPreference.getLangId(this);
+        Locale locale = new Locale(languageToLoad);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+        this.setContentView(layout);
+    }
 
 
 
