@@ -163,7 +163,7 @@ public class NotificationsServiceEx extends IntentService {
 
             @Override
             public void onFailure(Call<OrdersResponse> call, Throwable t) {
-                Toast.makeText(context, "Connection error From Orders List" + t.getMessage(), Toast.LENGTH_SHORT).show();
+           //     Toast.makeText(context, "Connection error From Orders List" + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 

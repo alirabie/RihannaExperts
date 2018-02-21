@@ -180,4 +180,12 @@
     <string name="vendorname">الاسم المستعار</string>
     <string name="nameerr">من فضلك قم باضافة اسمك المستعار</string>
     <string name="ordersnot">طلبات جديدة</string>
+    <string name="connectionerr">من فضلك تحقق من وجود خدمة الانترنت .. !</string>
+    <string name="connectionerror">خطأ فى الاتصال</string>
+    <string name="dismiss">إخفاء</string>
+    <string name="rihannadisc">ريحانه هو تطبيق لتقديم الطريقة الامثل للبحث عن افضل خبيرات التجميل وتيسير عملية التواصل معهم وحجز الخدمات ومعرفة احتياجات العميلة ومن ثم الخبيرة الامثل لمساعدتها </string>
+    <string name="termsheder">تتألف شروط الاستخدام هذه من الشروط والأحكام الواردة أدناه</string>
+    <string name="role1">تطبيق ريحانة ينتمي الي شركة ريحانة ولا يسمح بمحاكاته او تقليده</string>
+    <string name="role2">التأكد من صحة كل بيانات الخبيرة مسؤوليتها قانونيا</string>
+    <string name="role3">التعامل بمهنية مع العميلات وحفظ خصوصياتهم</string>
 </resources>

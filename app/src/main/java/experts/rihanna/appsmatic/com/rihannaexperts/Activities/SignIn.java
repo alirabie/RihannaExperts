@@ -3,6 +3,7 @@ package experts.rihanna.appsmatic.com.rihannaexperts.Activities;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -199,7 +200,24 @@ public class SignIn extends AppCompatActivity {
                         public void onFailure(Call<LoginResponse> call, Throwable t) {
                             if (mProgressDialog.isShowing())
                                 mProgressDialog.dismiss();
-                            Toast.makeText(getApplicationContext(), "Connection Error From Login APi Login Failed " + t.getMessage(), Toast.LENGTH_LONG).show();
+                            final NiftyDialogBuilder dialogBuildercard = NiftyDialogBuilder.getInstance(SignIn.this);
+                            dialogBuildercard
+                                    .withDuration(700)//def
+                                    .withEffect(Effectstype.Fall)
+                                    .withIcon(getResources().getDrawable(R.drawable.logo))
+                                    .withDialogColor(Color.BLACK)
+                                    .withTitleColor(Color.WHITE)
+                                    .withMessage(getResources().getString(R.string.connectionerr))
+                                    .withTitle(getResources().getString(R.string.connectionerror))
+                                    .isCancelableOnTouchOutside(false)
+                                    .withButton1Text(getResources().getString(R.string.dismiss))
+                                    .setButton1Click(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            dialogBuildercard.dismiss();
+                                            SignIn.this.finish();
+                                        }
+                                    }).show();
                         }
                     });
                 }

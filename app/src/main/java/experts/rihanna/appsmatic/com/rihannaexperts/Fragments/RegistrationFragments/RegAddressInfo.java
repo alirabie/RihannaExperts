@@ -1,6 +1,7 @@
 package experts.rihanna.appsmatic.com.rihannaexperts.Fragments.RegistrationFragments;
 
 import android.app.ProgressDialog;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -18,6 +19,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.gitonway.lee.niftymodaldialogeffects.lib.Effectstype;
+import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -173,7 +176,24 @@ public class RegAddressInfo extends Fragment implements OnMapReadyCallback {
                         public void onFailure(Call<ResExpertRegister> call, Throwable t) {
                             if (mProgressDialog.isShowing())
                                 mProgressDialog.dismiss();
-                            Toast.makeText(getContext(), "Connection error from expert registration" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                            final NiftyDialogBuilder dialogBuildercard = NiftyDialogBuilder.getInstance(getContext());
+                            dialogBuildercard
+                                    .withDuration(700)//def
+                                    .withEffect(Effectstype.Fall)
+                                    .withIcon(getResources().getDrawable(R.drawable.logo))
+                                    .withDialogColor(Color.BLACK)
+                                    .withTitleColor(Color.WHITE)
+                                    .withMessage(getResources().getString(R.string.connectionerr))
+                                    .withTitle(getResources().getString(R.string.connectionerror))
+                                    .isCancelableOnTouchOutside(false)
+                                    .withButton1Text(getResources().getString(R.string.dismiss))
+                                    .setButton1Click(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            dialogBuildercard.dismiss();
+                                            getActivity().finish();
+                                        }
+                                    }).show();
                         }
                     });
 

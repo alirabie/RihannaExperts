@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.location.LocationManager;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
@@ -14,6 +15,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -153,7 +155,24 @@ public class Splash extends AppCompatActivity {
                             @Override
                             public void onFailure(Call<LoginResponse> call, Throwable t) {
 
-                                Toast.makeText(getApplicationContext(), "Connection Error From Login APi Login Failed " + t.getMessage(), Toast.LENGTH_LONG).show();
+                                final NiftyDialogBuilder dialogBuildercard = NiftyDialogBuilder.getInstance(Splash.this);
+                                dialogBuildercard
+                                        .withDuration(700)//def
+                                        .withEffect(Effectstype.Fall)
+                                        .withIcon(getResources().getDrawable(R.drawable.logo))
+                                        .withDialogColor(Color.BLACK)
+                                        .withTitleColor(Color.WHITE)
+                                        .withMessage(getResources().getString(R.string.connectionerr))
+                                        .withTitle(getResources().getString(R.string.connectionerror))
+                                        .isCancelableOnTouchOutside(false)
+                                        .withButton1Text(getResources().getString(R.string.dismiss))
+                                        .setButton1Click(new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                dialogBuildercard.dismiss();
+                                                Splash.this.finish();
+                                            }
+                                        }).show();
                             }
                         });
 
