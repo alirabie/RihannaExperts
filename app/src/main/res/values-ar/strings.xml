@@ -172,11 +172,12 @@
     <string name="completedorders">المنتهية</string>
     <string name="canceldorders">المرفوضة</string>
     <string name="timebusy">نأسف حيث ان هذا الوقت محجوز مسبقا من فضلك اختارى وقت اخر</string>
-    <string name="notifiction">لديك طلب جديد</string>
+    <string name="notifiction">لديك </string>
     <string name="newpasswillsend">سوف يتم ارسالة كلمة مرور افتراضية على جوالك لان</string>
     <string name="messagesent">تم ارسال رسالتك بنجاح</string>
     <string name="cannotsetzero">لا يمكن تحديد سعر الخدمة 0 </string>
     <string name="serviceexistes">انت مشترك فى هذه الخدمة بالفعل</string>
     <string name="vendorname">الاسم المستعار</string>
     <string name="nameerr">من فضلك قم باضافة اسمك المستعار</string>
+    <string name="ordersnot">طلبات جديدة</string>
 </resources>

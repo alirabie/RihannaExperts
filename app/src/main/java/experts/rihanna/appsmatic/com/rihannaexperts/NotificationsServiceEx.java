@@ -84,7 +84,7 @@ public class NotificationsServiceEx extends IntentService {
                                                                     .setSound(alarmSound)
                                                                     .setContentTitle(getResources().getString(R.string.app_name))
                                                                     .setAutoCancel(true)
-                                                                    .setContentText(getResources().getString(R.string.notifiction));
+                                                                    .setContentText(getResources().getString(R.string.notifiction)+" "+(response.body().getOrders().size()-ordersCount)+"  "+getResources().getString(R.string.ordersnot));
                                                     Intent notificationIntent = new Intent(getApplicationContext(),Home.class).putExtra("target","orders");
                                                     TaskStackBuilder taskStackBuilder=TaskStackBuilder.create(getApplicationContext());
                                                     taskStackBuilder.addParentStack(Home.class);

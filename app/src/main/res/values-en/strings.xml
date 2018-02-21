@@ -172,11 +172,12 @@
     <string name="completedorders">Completed</string>
     <string name="canceldorders">Canceled</string>
     <string name="timebusy">Sorry This Time Is Reserved Please Choose another time</string>
-    <string name="notifiction">You Have New Order</string>
+    <string name="notifiction">You Have New</string>
     <string name="newpasswillsend">New Default Password will send in SMS shortly</string>
     <string name="messagesent">Message has been Sent Successfully</string>
     <string name="cannotsetzero">Service Price can not be 0</string>
     <string name="serviceexistes">This service already Subscribed</string>
     <string name="vendorname">Nickname</string>
     <string name="nameerr">Please Add Nickname</string>
+    <string name="ordersnot">Orders</string>
 </resources>

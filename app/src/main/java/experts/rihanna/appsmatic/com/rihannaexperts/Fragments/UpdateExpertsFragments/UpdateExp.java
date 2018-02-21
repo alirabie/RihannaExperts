@@ -21,6 +21,7 @@ public class UpdateExp extends Fragment {
     ViewPager p;
     PagerSlidingTabStrip tabsStrip;
     CustomFragmentPagerAdapter adapter;
+    public static String vendorName="N/A";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

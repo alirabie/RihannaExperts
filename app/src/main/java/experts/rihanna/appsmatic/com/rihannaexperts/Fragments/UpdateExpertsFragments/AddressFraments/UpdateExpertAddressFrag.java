@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Experinces.PUT.UpdateExp;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Login.LoginResponse;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.UpdateExpertInfo.PUT.BillingAddress;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.UpdateExpertInfo.PUT.Customer;
@@ -198,6 +199,7 @@ public class UpdateExpertAddressFrag extends Fragment implements OnMapReadyCallb
                     billingAddress.setAddress2("");
                     billingAddress.setCity(city.getText().toString());
                     customer.setBillingAddress(billingAddress);
+                    customer.setVendorName(experts.rihanna.appsmatic.com.rihannaexperts.Fragments.UpdateExpertsFragments.UpdateExp.vendorName);
                     UpdateEpert updateEpert=new UpdateEpert();
                     updateEpert.setCustomer(customer);
                     Gson gson=new Gson();

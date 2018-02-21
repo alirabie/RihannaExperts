@@ -100,6 +100,7 @@ public class UpdateInfoFrag extends Fragment {
                         eMail.setText(response.body().getCustomers().get(0).getEmail());
                         eMail.setTextColor(getResources().getColor(R.color.colorAccent));
                         nickname.setText(response.body().getCustomers().get(0).getVendorName() + "");
+                        UpdateExp.vendorName=response.body().getCustomers().get(0).getVendorName() + "";
                         nickname.setTextColor(getResources().getColor(R.color.colorAccent));
                         phoneNum.setText(response.body().getCustomers().get(0).getBillingAddress().getPhoneNumber() + "");
                         phoneNum.setTextColor(getResources().getColor(R.color.colorAccent));
