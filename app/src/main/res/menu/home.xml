@@ -6,5 +6,6 @@
         android:orderInCategory="100"
         app:showAsAction="always"
         android:icon="@drawable/shopping_bag"
+        app:actionLayout="@layout/custom_order_notification_icon"
         android:title="notification"/>
 </menu>

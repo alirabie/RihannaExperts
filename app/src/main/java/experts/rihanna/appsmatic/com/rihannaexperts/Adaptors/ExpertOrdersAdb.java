@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Orders.OrderHeader.OrdersResponse;
+import experts.rihanna.appsmatic.com.rihannaexperts.Activities.Home;
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.OrderInfoFrag;
 import experts.rihanna.appsmatic.com.rihannaexperts.Prefs.SaveSharedPreference;
 import experts.rihanna.appsmatic.com.rihannaexperts.R;
@@ -105,11 +106,6 @@ public class ExpertOrdersAdb extends RecyclerView.Adapter<ExpertOrdersAdb.vh00> 
         }
 
 
-
-
-
-
-
         //Order List Item Btn Action
         holder.contaner.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,7 +113,8 @@ public class ExpertOrdersAdb extends RecyclerView.Adapter<ExpertOrdersAdb.vh00> 
                 Animation anim = AnimationUtils.loadAnimation(context, R.anim.alpha);
                 holder.contaner.clearAnimation();
                 holder.contaner.setAnimation(anim);
-
+                //put orders badge 0
+                Home.setupCartBadge(0);
                 //Go Order Info Fragment
                 OrderInfoFrag orderInfoFrag=new OrderInfoFrag();
                 Bundle bundle = new Bundle();

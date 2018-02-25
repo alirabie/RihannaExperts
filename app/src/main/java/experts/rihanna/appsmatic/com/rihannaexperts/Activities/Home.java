@@ -1,5 +1,6 @@
 package experts.rihanna.appsmatic.com.rihannaexperts.Activities;
 
+import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -15,6 +16,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -78,7 +80,10 @@ public class Home extends AppCompatActivity  {
     public static NotificationManager manager;
     static int notId=0;
     public static boolean IsExist;
+    public static TextView textCartItemCount;
+   // public static int mCartItemCount =2;
 
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
@@ -99,11 +104,9 @@ public class Home extends AppCompatActivity  {
         tittle=(TextView)findViewById(R.id.filtertitle);
 
 
+
+
         Log.e("xx",SaveSharedPreference.getCustId(getApplicationContext())+" "+SaveSharedPreference.getExpertId(getApplicationContext()));
-
-
-
-
 
 
 
@@ -116,6 +119,7 @@ public class Home extends AppCompatActivity  {
         fragmentTransaction.commit();
         //set title
         tittle.setText(getResources().getString(R.string.hometitle));
+
 
 
 
@@ -134,13 +138,6 @@ public class Home extends AppCompatActivity  {
             }
 
         }
-
-
-
-
-
-
-
 
 
 
@@ -189,6 +186,7 @@ public class Home extends AppCompatActivity  {
         homeSide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //setupCartBadge(3);
                 Animation anim = AnimationUtils.loadAnimation(Home.this, R.anim.alpha);
                 homeSide.clearAnimation();
                 homeSide.setAnimation(anim);
@@ -396,32 +394,6 @@ public class Home extends AppCompatActivity  {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         //Side menu toggle
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -490,8 +462,23 @@ public class Home extends AppCompatActivity  {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.home, menu);
+        final MenuItem menuItem = menu.findItem(R.id.action_notification);
+        View actionView = MenuItemCompat.getActionView(menuItem);
+        textCartItemCount = (TextView) actionView.findViewById(R.id.cart_badge);
+
+        //receive orders count from notifications
+        setupCartBadge(getIntent().getIntExtra("count",0));
+        actionView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onOptionsItemSelected(menuItem);
+                setupCartBadge(0);
+            }
+        });
         return true;
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -613,6 +600,23 @@ public class Home extends AppCompatActivity  {
     }
 
 
+
+    //Add Cart Messages badge count
+    public static void setupCartBadge(int count) {
+        if (textCartItemCount != null) {
+
+            if (count == 0) {
+                if (textCartItemCount.getVisibility() != View.GONE) {
+                    textCartItemCount.setVisibility(View.GONE);
+                }
+            } else {
+                textCartItemCount.setText(String.valueOf(Math.min(count, 99)));
+                if (textCartItemCount.getVisibility() != View.VISIBLE) {
+                    textCartItemCount.setVisibility(View.VISIBLE);
+                }
+            }
+        }
+    }
 
 
 

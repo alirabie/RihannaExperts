@@ -13,7 +13,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by Eng Ali on 11/12/2017.
  */
 public class Generator {
-    public static final String API_BASE_URL = URLs.API_BASE_URL;
+
+
+    //Switch to production mode
+
+    public static final String API_BASE_URL = URLs.DEV_API_BASE_URL;
 
     private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder()
 
