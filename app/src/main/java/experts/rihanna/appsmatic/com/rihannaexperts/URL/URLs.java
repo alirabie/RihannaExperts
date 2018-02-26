@@ -5,5 +5,5 @@ package experts.rihanna.appsmatic.com.rihannaexperts.URL;
  */
 public class URLs {
     public static final String DEV_API_BASE_URL="http://rihanna.appsmatic.net/";
-    public static final String PRODUCTION_BASE_URL="";
+    public static final String PRODUCTION_BASE_URL="http://rihannaproduction.appsmatic.net/";
 }
