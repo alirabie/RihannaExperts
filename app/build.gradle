@@ -8,8 +8,8 @@ android {
         applicationId "experts.rihanna.appsmatic.com.rihannaexperts"
         minSdkVersion 21
         targetSdkVersion 25
-        versionCode 15
-        versionName "1.14"
+        versionCode 16
+        versionName "1.15"
         multiDexEnabled true
         generatedDensities = []
     }

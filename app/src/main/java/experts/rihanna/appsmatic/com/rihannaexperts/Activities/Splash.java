@@ -145,6 +145,7 @@ public class Splash extends AppCompatActivity {
                                 } else {
                                     try {
                                         Toast.makeText(getApplicationContext(), response.errorBody().string(), Toast.LENGTH_LONG).show();
+                                        startActivity(new Intent(Splash.this,SignIn.class));
                                         Splash.this.finish();
                                     } catch (IOException e) {
                                         e.printStackTrace();
