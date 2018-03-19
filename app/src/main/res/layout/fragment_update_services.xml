@@ -19,33 +19,34 @@
         android:layout_alignParentStart="true"
         android:padding="3dp"
         android:id="@+id/indor_serv_check" />
+
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/frameLayout6"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.SaleMangeFrag"
-        android:layout_above="@+id/linearLayout8"
-        android:id="@+id/frameLayout6"
-        android:layout_below="@+id/indor_serv_check">
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/linearLayout23"
+        tools:context="experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.SaleMangeFrag">
 
         <!-- TODO: Update blank fragment layout -->
         <!-- TODO: Update blank fragment layout -->
 
         <TextView
+            android:id="@+id/empty_services_flag_frag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_gravity="center"
             android:text="@string/noservices"
-            android:id="@+id/empty_services_flag_frag"
-            android:layout_gravity="center" />
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <android.support.v7.widget.RecyclerView
+            android:id="@+id/sevecices_frag_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/sevecices_frag_list"
-            android:layout_below="@+id/remeberlogincheck"
-            android:layout_alignParentStart="true">
-        </android.support.v7.widget.RecyclerView>
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"></android.support.v7.widget.RecyclerView>
     </FrameLayout>
 
 
@@ -87,6 +88,46 @@
             android:textSize="15dp"
             android:gravity="center"
             android:textColor="@color/colorPrimary" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/indor_serv_check"
+        android:layout_marginBottom="3dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/extrafees_input"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/dropdwonlistbg"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="@string/extrafees"
+            android:inputType="number"
+            android:padding="5dp"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/save_extra_fess"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/save"
+            android:textColor="@color/cast_libraries_material_featurehighlight_text_body_color"
+            android:textSize="10sp"
+            android:visibility="visible" />
 
     </LinearLayout>
 

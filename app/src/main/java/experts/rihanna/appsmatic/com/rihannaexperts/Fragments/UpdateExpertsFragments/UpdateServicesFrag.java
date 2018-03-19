@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +18,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +26,8 @@ import android.widget.Toast;
 import java.io.IOException;
 
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Certificates.Get.CertificatesList;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.ExtraFees.ExtraFessRes;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.ExtraFees.PUT.ExtrafeesPuttingRes;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.IndoorServicesCntroal.IndoorGetRes;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.IndoorServicesCntroal.Put.ResChangeStatus;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Services.ExpertServices.ResExpertServices;
@@ -42,10 +48,12 @@ import retrofit2.Response;
 
 public class UpdateServicesFrag extends Fragment {
 
-    private TextView next,emptyFlag;
+    private TextView next,emptyFlag,savefees;
     private LinearLayout subscribe_btn;
     private RecyclerView servicesList;
     private CheckBox isIndoorServ;
+    private EditText extraFees;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,6 +67,10 @@ public class UpdateServicesFrag extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         emptyFlag=(TextView)view.findViewById(R.id.empty_services_flag_frag);
         isIndoorServ=(CheckBox)view.findViewById(R.id.indor_serv_check);
+        extraFees=(EditText)view.findViewById(R.id.extrafees_input);
+        savefees=(TextView)view.findViewById(R.id.save_extra_fess);
+        savefees.setVisibility(View.INVISIBLE);
+
 
 
         //check if expert B or A
@@ -255,8 +267,88 @@ public class UpdateServicesFrag extends Fragment {
 
 
 
+        //Extra fees
+       extraFees.addTextChangedListener(new TextWatcher() {
+           @Override
+           public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+           }
+
+           @Override
+           public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+           }
+
+           @Override
+           public void afterTextChanged(Editable s) {
+               savefees.setVisibility(View.VISIBLE);
+               if(s.length() == 0) {
+                   savefees.setVisibility(View.INVISIBLE);
+               }
+           }
+       });
 
 
+       //Get Extra Fees
+       Generator.createService(ExpertsApi.class).getExtraFees(SaveSharedPreference.getExpertId(getContext())).enqueue(new Callback<ExtraFessRes>() {
+           @Override
+           public void onResponse(Call<ExtraFessRes> call, Response<ExtraFessRes> response) {
+               if(response.isSuccessful()){
+                   if(response.body()!=null){
+                       extraFees.setText(response.body().getServiceFees());
+                       savefees.setVisibility(View.INVISIBLE);
+                   }else {
+                       extraFees.setText("");
+                       savefees.setVisibility(View.INVISIBLE);
+                   }
+               }else {
+
+                   try {
+                       Log.e("error","notSucsess"+response.errorBody().string());
+                   } catch (IOException e) {
+                       e.printStackTrace();
+                   }
+               }
+           }
+           @Override
+           public void onFailure(Call<ExtraFessRes> call, Throwable t) {
+               Log.e("error","notSucsess"+t.getMessage());
+           }
+       });
+
+
+       //Set Extra fees
+        savefees.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Animation anim = AnimationUtils.loadAnimation(getActivity(), R.anim.alpha);
+                savefees.clearAnimation();
+                savefees.setAnimation(anim);
+                Generator.createService(ExpertsApi.class).setExtraFees(SaveSharedPreference.getExpertId(getContext()),extraFees.getText().toString()).enqueue(new Callback<ExtrafeesPuttingRes>() {
+                    @Override
+                    public void onResponse(Call<ExtrafeesPuttingRes> call, Response<ExtrafeesPuttingRes> response) {
+                        if(response.isSuccessful()){
+                            if(response.body().getAttributes()!=null){
+                                Toast.makeText(getContext(),getResources().getString(R.string.save),Toast.LENGTH_LONG).show();
+                                savefees.setVisibility(View.INVISIBLE);
+                            }else {
+                                Toast.makeText(getContext(),"Null from add fees",Toast.LENGTH_LONG).show();
+                            }
+                        }else {
+                            try {
+                                Toast.makeText(getContext(),response.errorBody().string(),Toast.LENGTH_LONG).show();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<ExtrafeesPuttingRes> call, Throwable t) {
+                        Toast.makeText(getContext(),"Extra fees Add : "+t.getMessage(),Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+        });
 
     }
 

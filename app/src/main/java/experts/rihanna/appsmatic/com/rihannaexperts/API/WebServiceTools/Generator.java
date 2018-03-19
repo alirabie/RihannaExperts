@@ -17,7 +17,7 @@ public class Generator {
 
     //Switch to production mode
 
-    public static final String API_BASE_URL = URLs.PRODUCTION_BASE_URL;
+    public static final String API_BASE_URL = URLs.DEV_API_BASE_URL;
 
     private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder()
 

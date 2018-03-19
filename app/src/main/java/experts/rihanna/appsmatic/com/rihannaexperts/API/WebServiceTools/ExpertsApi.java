@@ -17,6 +17,8 @@ import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Experinces.GE
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Experinces.POST.ResPost;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Experinces.PUT.UpdateExp;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.ExpertRegistartaion.Response.ResExpertRegister;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.ExtraFees.ExtraFessRes;
+import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.ExtraFees.PUT.ExtrafeesPuttingRes;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.IndoorServicesCntroal.IndoorGetRes;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.IndoorServicesCntroal.Put.ResChangeStatus;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.IsBusy.IsBusyRes;
@@ -233,6 +235,15 @@ public interface ExpertsApi {
     //send message
     @POST("api/contactus")
     Call<MessegeSentRes>contactUs(@Body Object obj);
+
+    //Get Extra fees
+    @GET("api/expert/fees?")
+    Call<ExtraFessRes>getExtraFees(@Query("ExpertId") String id);
+
+    //Set Extra fees
+    @PUT("api/expert/fees/update?")
+    Call<ExtrafeesPuttingRes>setExtraFees(@Query("ExpertId") String id,
+                                          @Query("ServiceFees") String fees);
 
 
 
