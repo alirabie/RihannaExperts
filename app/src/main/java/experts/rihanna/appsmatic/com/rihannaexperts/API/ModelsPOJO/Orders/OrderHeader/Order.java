@@ -27,7 +27,7 @@ public class Order {
     private String customerCurrencyCode;
     @SerializedName("currency_rate")
     @Expose
-    private Integer currencyRate;
+    private Double currencyRate;
     @SerializedName("customer_tax_display_type_id")
     @Expose
     private Integer customerTaxDisplayTypeId;
@@ -142,6 +142,12 @@ public class Order {
     @SerializedName("order_items")
     @Expose
     private List<OrderItem> orderItems = null;
+    @SerializedName("customer_long")
+    @Expose
+    private String customerLong;
+    @SerializedName("customer_lat")
+    @Expose
+    private String customerLat;
     @SerializedName("order_status")
     @Expose
     private String orderStatus;
@@ -195,11 +201,11 @@ public class Order {
         this.customerCurrencyCode = customerCurrencyCode;
     }
 
-    public Integer getCurrencyRate() {
+    public Double getCurrencyRate() {
         return currencyRate;
     }
 
-    public void setCurrencyRate(Integer currencyRate) {
+    public void setCurrencyRate(Double currencyRate) {
         this.currencyRate = currencyRate;
     }
 
@@ -537,5 +543,21 @@ public class Order {
 
     public void setServiceType(String serviceType) {
         this.serviceType = serviceType;
+    }
+
+    public String getCustomerLong() {
+        return customerLong;
+    }
+
+    public void setCustomerLong(String customerLong) {
+        this.customerLong = customerLong;
+    }
+
+    public String getCustomerLat() {
+        return customerLat;
+    }
+
+    public void setCustomerLat(String customerLat) {
+        this.customerLat = customerLat;
     }
 }

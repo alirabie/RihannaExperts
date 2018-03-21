@@ -124,6 +124,7 @@
                 android:gravity="center"
                 android:text="@string/outservice" />
         </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout
@@ -347,6 +348,39 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/order_info_show_on_map"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="3dp">
+
+                <ImageView
+                    android:id="@+id/imageView14"
+                    android:layout_width="15dp"
+                    android:layout_height="match_parent"
+                    android:padding="2dp"
+                    android:src="@drawable/address_icon" />
+
+                <TextView
+                    android:id="@+id/textView14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="2dp"
+                    android:text="@string/showonmap"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="#000000"
+                    android:textSize="12dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -368,6 +402,8 @@
 
         </LinearLayout>
 
+
     </LinearLayout>
+
 
 </RelativeLayout>

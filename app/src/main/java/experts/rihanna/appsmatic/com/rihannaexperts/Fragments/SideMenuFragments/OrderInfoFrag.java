@@ -31,6 +31,7 @@ import experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.Orders.OrderH
 import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.ExpertsApi;
 import experts.rihanna.appsmatic.com.rihannaexperts.API.WebServiceTools.Generator;
 import experts.rihanna.appsmatic.com.rihannaexperts.Activities.Home;
+import experts.rihanna.appsmatic.com.rihannaexperts.Activities.MapsActivity;
 import experts.rihanna.appsmatic.com.rihannaexperts.Adaptors.OrderItemsAdb;
 import experts.rihanna.appsmatic.com.rihannaexperts.Fragments.SideMenuFragments.ManageOrdersFragments.OrdersFrag;
 import experts.rihanna.appsmatic.com.rihannaexperts.Prefs.SaveSharedPreference;
@@ -82,7 +83,7 @@ public class OrderInfoFrag extends Fragment  {
         CustomerstateTv=(TextView)view.findViewById(R.id.state_tv);
         paymentType=(TextView)view.findViewById(R.id.paymentstatus);
         totalPrice=(TextView)view.findViewById(R.id.totalprice);
-        //showOnmapBtn=(LinearLayout)view.findViewById(R.id.order_info_show_on_map);
+        showOnmapBtn=(LinearLayout)view.findViewById(R.id.order_info_show_on_map);
         orderConfirmedFlag=(FrameLayout)view.findViewById(R.id.orderconfirmed_flag);
         orderitemsList=(RecyclerView)view.findViewById(R.id.order_info_order_list);
         customerInfoPannel=(LinearLayout)view.findViewById(R.id.customer_info_pannel);
@@ -254,11 +255,15 @@ public class OrderInfoFrag extends Fragment  {
                         if(response.body().getOrders().get(0).getServiceType()!=null) {
                             if (response.body().getOrders().get(0).getServiceType().toString().equals("indoor")) {
                                 serviceTypeFlag.setText(getResources().getString(R.string.indor));
+                                showOnmapBtn.setVisibility(View.INVISIBLE);
                             } else {
                                 serviceTypeFlag.setText(getResources().getString(R.string.outdor));
+                                showOnmapBtn.setVisibility(View.VISIBLE);
                             }
                         }
-                        /*
+
+
+
                         //Show on map btn action
                         showOnmapBtn.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -268,16 +273,16 @@ public class OrderInfoFrag extends Fragment  {
                                 showOnmapBtn.setAnimation(anim1);
                                 try {
                                     startActivity(new Intent(getContext(), MapsActivity.class)
-                                            .putExtra("lat", Double.parseDouble(response.body().getCustomerLat()))
-                                            .putExtra("long", Double.parseDouble(response.body().getCustomerLong()))
-                                            .putExtra("name", response.body().getCustomer()));
+                                            .putExtra("lat", Double.parseDouble(response.body().getOrders().get(0).getCustomerLat()))
+                                            .putExtra("long", response.body().getOrders().get(0).getCustomerLong())
+                                            .putExtra("name", response.body().getOrders().get(0).getCustomer().getFirstName()+""));
                                 } catch (Exception e) {
                                 }
 
                             }
                         });
 
-*/
+
                         //Accept Btn Action
                         accept.setOnClickListener(new View.OnClickListener() {
                             @Override
