@@ -21,6 +21,12 @@ public class Customer {
     @SerializedName("vendor_name")
     @Expose
     private String vendorName;
+    @SerializedName("longtitude")
+    @Expose
+    private Object longtitude;
+    @SerializedName("latitude")
+    @Expose
+    private Object latitude;
     @SerializedName("password")
     @Expose
     private String password;
@@ -99,5 +105,21 @@ public class Customer {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public Object getLongtitude() {
+        return longtitude;
+    }
+
+    public void setLongtitude(Object longtitude) {
+        this.longtitude = longtitude;
+    }
+
+    public Object getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Object latitude) {
+        this.latitude = latitude;
     }
 }

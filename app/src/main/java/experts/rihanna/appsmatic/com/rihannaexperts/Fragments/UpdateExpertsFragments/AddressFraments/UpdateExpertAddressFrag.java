@@ -45,11 +45,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class UpdateExpertAddressFrag extends Fragment implements OnMapReadyCallback {
+public class UpdateExpertAddressFrag extends Fragment  {
 
     private TextView next;
     private GoogleMap mMap;
-    private Double lat, lang;
     private Marker marker;
     private MapView mapView;
     private GPSTracker gpsTracker;
@@ -59,6 +58,8 @@ public class UpdateExpertAddressFrag extends Fragment implements OnMapReadyCallb
     private Geocoder geocoder;
     private EditText addr1;
     private EditText city;
+    public static Double lat=0.0;
+    public static Double lang=0.0;
     BillingAddress billingAddress;
     experts.rihanna.appsmatic.com.rihannaexperts.API.ModelsPOJO.UpdateExpertInfo.PUT.Customer customer;
 
@@ -79,7 +80,7 @@ public class UpdateExpertAddressFrag extends Fragment implements OnMapReadyCallb
         mapView = (MapView) view.findViewById(R.id.map);
         mapView.onCreate(savedInstanceState);
         mapView.onResume();
-        mapView.getMapAsync(this);
+
         geocoder = new Geocoder(getContext(), Locale.getDefault());
         gpsTracker = new GPSTracker(getContext().getApplicationContext());
 
@@ -99,6 +100,83 @@ public class UpdateExpertAddressFrag extends Fragment implements OnMapReadyCallb
                     if (response.body().getCustomers() != null) {
                         city.setText(response.body().getCustomers().get(0).getBillingAddress().getCity());
                         addr1.setText(response.body().getCustomers().get(0).getBillingAddress().getAddress1());
+
+
+                        if(response.body().getCustomers().get(0).getLatitude()!=null){
+                            lat = Double.parseDouble(response.body().getCustomers().get(0).getLatitude().toString());
+                        }else {
+                            lat=gpsTracker.getLatitude();
+                        }
+
+                        if(response.body().getCustomers().get(0).getLongtitude()!=null){
+                            lang = Double.parseDouble(response.body().getCustomers().get(0).getLongtitude().toString());
+                        }else {
+                            lang = gpsTracker.getLongitude();
+                        }
+
+
+                        //Run Map
+                        mapView.getMapAsync(new OnMapReadyCallback() {
+                            @Override
+                            public void onMapReady(GoogleMap googleMap) {
+                                mMap = googleMap;
+                                LatLng currentLocation = new LatLng(lat, lang);
+                                marker = mMap.addMarker(new MarkerOptions().position(currentLocation).title("Location"));
+                                float zoomLevel = (float) 16.0; //This goes up to 21
+                                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, zoomLevel));
+                                mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+                                    @Override
+                                    public void onMapClick(LatLng latLng) {
+                                        if (marker != null) {
+                                            marker.remove();
+                                        }
+                                        marker = mMap.addMarker(new MarkerOptions()
+                                                .position(
+                                                        new LatLng(latLng.latitude, latLng.longitude))
+                                                .draggable(true).visible(true).title("Location det"));
+                                        lat = latLng.latitude;
+                                        lang = latLng.longitude;
+
+                                        List<Address> addresses = null;
+
+                                        try {
+                                            addresses = geocoder.getFromLocation(lat, lang, 1);
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
+
+                                        if (addresses != null) {
+                                            if (!addresses.isEmpty()) {
+                                                cityName = addresses.get(0).getAddressLine(0);
+                                                stateName = addresses.get(0).getAddressLine(1);
+                                                countryName = addresses.get(0).getAddressLine(2);
+                                                StringBuilder stringBuilder=new StringBuilder();
+                                                if(cityName!=null){
+                                                    stringBuilder.append(cityName+",");
+                                                }else if(stateName!=null){
+                                                    stringBuilder.append(stateName+",");
+                                                }else if (countryName!=null){
+                                                    stringBuilder.append(countryName);
+                                                }
+
+                                                addr1.setText(stringBuilder.toString());
+                                            }
+                                        }
+
+
+
+
+                                    }
+                                });
+                            }
+                        });
+
+
+
+
+
+
+
 
                         //Fill Adress from currunt
                         billingAddress = new BillingAddress();
@@ -198,8 +276,11 @@ public class UpdateExpertAddressFrag extends Fragment implements OnMapReadyCallb
                     billingAddress.setAddress1(addr1.getText().toString());
                     billingAddress.setAddress2("");
                     billingAddress.setCity(city.getText().toString());
+                    customer.setLatitude(lat+"");
+                    customer.setLongtitude(lang+"");
                     customer.setBillingAddress(billingAddress);
                     customer.setVendorName(experts.rihanna.appsmatic.com.rihannaexperts.Fragments.UpdateExpertsFragments.UpdateExp.vendorName);
+
                     UpdateEpert updateEpert=new UpdateEpert();
                     updateEpert.setCustomer(customer);
                     Gson gson=new Gson();
@@ -251,61 +332,7 @@ public class UpdateExpertAddressFrag extends Fragment implements OnMapReadyCallb
 
     }
 
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-        lat = gpsTracker.getLatitude();
-        lang = gpsTracker.getLongitude();
-        LatLng currentLocation = new LatLng(lat, lang);
-        marker = mMap.addMarker(new MarkerOptions().position(currentLocation).title("Location"));
-        float zoomLevel = (float) 16.0; //This goes up to 21
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, zoomLevel));
-        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-            @Override
-            public void onMapClick(LatLng latLng) {
-                if (marker != null) {
-                    marker.remove();
-                }
-                marker = mMap.addMarker(new MarkerOptions()
-                        .position(
-                                new LatLng(latLng.latitude, latLng.longitude))
-                        .draggable(true).visible(true).title("Location det"));
-                lat = latLng.latitude;
-                lang = latLng.longitude;
 
-                List<Address> addresses = null;
-
-                try {
-                    addresses = geocoder.getFromLocation(lat, lang, 1);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                if (addresses != null) {
-                    if (!addresses.isEmpty()) {
-                        cityName = addresses.get(0).getAddressLine(0);
-                        stateName = addresses.get(0).getAddressLine(1);
-                        countryName = addresses.get(0).getAddressLine(2);
-                        StringBuilder stringBuilder=new StringBuilder();
-                        if(cityName!=null){
-                            stringBuilder.append(cityName+",");
-                        }else if(stateName!=null){
-                            stringBuilder.append(stateName+",");
-                        }else if (countryName!=null){
-                            stringBuilder.append(countryName);
-                        }
-
-                        addr1.setText(stringBuilder.toString());
-                    }
-                }
-
-
-
-
-            }
-        });
-
-    }
 
 
 

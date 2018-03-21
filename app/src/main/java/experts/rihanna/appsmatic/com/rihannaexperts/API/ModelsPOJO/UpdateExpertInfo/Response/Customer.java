@@ -10,7 +10,6 @@ import java.util.List;
  */
 public class Customer {
 
-
     @SerializedName("shopping_cart_items")
     @Expose
     private List<Object> shoppingCartItems = null;
@@ -26,6 +25,15 @@ public class Customer {
     @SerializedName("id")
     @Expose
     private String id;
+    @SerializedName("longtitude")
+    @Expose
+    private String longtitude;
+    @SerializedName("latitude")
+    @Expose
+    private String latitude;
+    @SerializedName("images")
+    @Expose
+    private Object images;
     @SerializedName("username")
     @Expose
     private String username;
@@ -254,4 +262,44 @@ public class Customer {
         this.roleIds = roleIds;
     }
 
+
+    public String getLongtitude() {
+        return longtitude;
+    }
+
+    public void setLongtitude(String longtitude) {
+        this.longtitude = longtitude;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public Object getImages() {
+        return images;
+    }
+
+    public void setImages(Object images) {
+        this.images = images;
+    }
+
+    public Boolean getTaxExempt() {
+        return isTaxExempt;
+    }
+
+    public void setTaxExempt(Boolean taxExempt) {
+        isTaxExempt = taxExempt;
+    }
+
+    public Boolean getSystemAccount() {
+        return isSystemAccount;
+    }
+
+    public void setSystemAccount(Boolean systemAccount) {
+        isSystemAccount = systemAccount;
+    }
 }

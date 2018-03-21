@@ -117,4 +117,5 @@ public class BillingAddress {
     public void setZipPostalCode(String zipPostalCode) {
         this.zipPostalCode = zipPostalCode;
     }
+
 }
