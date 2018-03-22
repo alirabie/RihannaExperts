@@ -274,8 +274,8 @@ public class OrderInfoFrag extends Fragment  {
                                 try {
                                     startActivity(new Intent(getContext(), MapsActivity.class)
                                             .putExtra("lat", Double.parseDouble(response.body().getOrders().get(0).getCustomerLat()))
-                                            .putExtra("long", response.body().getOrders().get(0).getCustomerLong())
-                                            .putExtra("name", response.body().getOrders().get(0).getCustomer().getFirstName()+""));
+                                            .putExtra("long", Double.parseDouble(response.body().getOrders().get(0).getCustomerLong()))
+                                            .putExtra("name", response.body().getOrders().get(0).getBillingAddress().getFirstName() +""));
                                 } catch (Exception e) {
                                 }
 

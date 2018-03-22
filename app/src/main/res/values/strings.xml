@@ -204,5 +204,6 @@
     <string name="role1">Rihanna Application belongs to the Rihanna Company and does not allow to simulate or imitate it</string>
     <string name="role2">Ensure that all expert data are legally valid</string>
     <string name="role3">Dealing professionally with clients and keeping their privacy</string>
-    <string name="extrafees">Extra Fees</string>
+    <string name="extrafees">Outdoor Service Fees</string>
+    <string name="set">Additional Details</string>
 </resources>

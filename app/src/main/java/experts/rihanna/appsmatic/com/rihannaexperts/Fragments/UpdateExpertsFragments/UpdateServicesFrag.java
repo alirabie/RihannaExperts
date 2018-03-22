@@ -52,7 +52,7 @@ public class UpdateServicesFrag extends Fragment {
     private LinearLayout subscribe_btn;
     private RecyclerView servicesList;
     private CheckBox isIndoorServ;
-    private EditText extraFees;
+    private TextView extraFees;
 
 
     @Override
@@ -66,139 +66,17 @@ public class UpdateServicesFrag extends Fragment {
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         emptyFlag=(TextView)view.findViewById(R.id.empty_services_flag_frag);
-        isIndoorServ=(CheckBox)view.findViewById(R.id.indor_serv_check);
-        extraFees=(EditText)view.findViewById(R.id.extrafees_input);
+      //  isIndoorServ=(CheckBox)view.findViewById(R.id.indor_serv_check);
+    //    extraFees=(TextView) view.findViewById(R.id.extrafees_input);
         savefees=(TextView)view.findViewById(R.id.save_extra_fess);
-        savefees.setVisibility(View.INVISIBLE);
-
-
-
-        //check if expert B or A
-        if(SaveSharedPreference.getCustomerInfo(getContext()).getCustomers().get(0).getCustomerRoleName().equals("Expert B")){
-            isIndoorServ.setVisibility(View.INVISIBLE);
-        }else {
-            isIndoorServ.setVisibility(View.VISIBLE);
-        }
-
+        //savefees.setVisibility(View.INVISIBLE);
 
 
 
         emptyFlag.setVisibility(View.INVISIBLE);
 
 
-        //get Indoor status
-        Generator.createService(ExpertsApi.class).getIndoorStatus(SaveSharedPreference.getExpertId(getContext())).enqueue(new Callback<IndoorGetRes>() {
-            @Override
-            public void onResponse(Call<IndoorGetRes> call, Response<IndoorGetRes> response) {
-                if(response.isSuccessful()){
-                    if(response.body().getIndoorService()!=null){
-
-                        if(response.body().getIndoorService().equals("True")){
-                            isIndoorServ.setChecked(true);
-
-                        }else if(response.body().getIndoorService().equals("False")){
-                            isIndoorServ.setChecked(false);
-                        }
-
-                    }else {
-                       // Toast.makeText(getContext(),"Null from get indoor services status",Toast.LENGTH_SHORT).show();
-                    }
-                }else {
-                    try {
-                        Toast.makeText(getContext(),response.errorBody().string(),Toast.LENGTH_SHORT).show();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<IndoorGetRes> call, Throwable t) {
-                Toast.makeText(getContext(),"Connection error from get indoor services status "+t.getMessage(),Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
-
-        //Change Indoor status
-        isIndoorServ.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(isIndoorServ.isChecked()) {
-                    final ProgressDialog mProgressDialog = new ProgressDialog(getContext());
-                    mProgressDialog.setIndeterminate(true);
-                    mProgressDialog.setMessage(getContext().getResources().getString(R.string.loading));
-                    mProgressDialog.show();
-                    Generator.createService(ExpertsApi.class).updateIndoorServiceStatus(SaveSharedPreference.getExpertId(getContext()), "true").enqueue(new Callback<ResChangeStatus>() {
-                        @Override
-                        public void onResponse(Call<ResChangeStatus> call, Response<ResChangeStatus> response) {
-                            if (response.isSuccessful()) {
-                                if (mProgressDialog.isShowing())
-                                    mProgressDialog.dismiss();
-                                if (response.body().getAttributes() != null) {
-                                    if (response.body().getAttributes().get(0).getAttributeDefaultValue().equals("True")) {
-                                        Toast.makeText(getContext(), getResources().getString(R.string.indoortrue), Toast.LENGTH_SHORT).show();
-                                    }
-                                } else {
-                                    Toast.makeText(getContext(), "Null from change Indoor status API ", Toast.LENGTH_SHORT).show();
-                                }
-                            } else {
-                                if (mProgressDialog.isShowing())
-                                    mProgressDialog.dismiss();
-                                try {
-                                    Toast.makeText(getContext(), response.errorBody().string(), Toast.LENGTH_SHORT).show();
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<ResChangeStatus> call, Throwable t) {
-                            if (mProgressDialog.isShowing())
-                                mProgressDialog.dismiss();
-                            Toast.makeText(getContext(), "Connection error from change Indoor status API " + t.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }else if(!isIndoorServ.isChecked()) {
-                    final ProgressDialog mProgressDialog = new ProgressDialog(getContext());
-                    mProgressDialog.setIndeterminate(true);
-                    mProgressDialog.setMessage(getContext().getResources().getString(R.string.loading));
-                    mProgressDialog.show();
-                    Generator.createService(ExpertsApi.class).updateIndoorServiceStatus(SaveSharedPreference.getExpertId(getContext()), "false").enqueue(new Callback<ResChangeStatus>() {
-                        @Override
-                        public void onResponse(Call<ResChangeStatus> call, Response<ResChangeStatus> response) {
-                            if (response.isSuccessful()) {
-                                if (mProgressDialog.isShowing())
-                                    mProgressDialog.dismiss();
-                                if (response.body().getAttributes() != null) {
-                                    if (response.body().getAttributes().get(0).getAttributeDefaultValue().equals("False")) {
-                                        Toast.makeText(getContext(), getResources().getString(R.string.indoorfalse), Toast.LENGTH_SHORT).show();
-                                    }
-                                } else {
-                                    Toast.makeText(getContext(), "Null from change Indoor status API ", Toast.LENGTH_SHORT).show();
-                                }
-                            } else {
-                                if (mProgressDialog.isShowing())
-                                    mProgressDialog.dismiss();
-                                try {
-                                    Toast.makeText(getContext(), response.errorBody().string(), Toast.LENGTH_SHORT).show();
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<ResChangeStatus> call, Throwable t) {
-                            if (mProgressDialog.isShowing())
-                                mProgressDialog.dismiss();
-                            Toast.makeText(getContext(), "Connection error from change Indoor status API " + t.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
-            }
-        });
+//
 
 
 
@@ -265,58 +143,6 @@ public class UpdateServicesFrag extends Fragment {
         });
 
 
-
-
-        //Extra fees
-       extraFees.addTextChangedListener(new TextWatcher() {
-           @Override
-           public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-           }
-
-           @Override
-           public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-           }
-
-           @Override
-           public void afterTextChanged(Editable s) {
-               savefees.setVisibility(View.VISIBLE);
-               if(s.length() == 0) {
-                   savefees.setVisibility(View.INVISIBLE);
-               }
-           }
-       });
-
-
-       //Get Extra Fees
-       Generator.createService(ExpertsApi.class).getExtraFees(SaveSharedPreference.getExpertId(getContext())).enqueue(new Callback<ExtraFessRes>() {
-           @Override
-           public void onResponse(Call<ExtraFessRes> call, Response<ExtraFessRes> response) {
-               if(response.isSuccessful()){
-                   if(response.body()!=null){
-                       extraFees.setText(response.body().getServiceFees());
-                       savefees.setVisibility(View.INVISIBLE);
-                   }else {
-                       extraFees.setText("");
-                       savefees.setVisibility(View.INVISIBLE);
-                   }
-               }else {
-
-                   try {
-                       Log.e("error","notSucsess"+response.errorBody().string());
-                   } catch (IOException e) {
-                       e.printStackTrace();
-                   }
-               }
-           }
-           @Override
-           public void onFailure(Call<ExtraFessRes> call, Throwable t) {
-               Log.e("error","notSucsess"+t.getMessage());
-           }
-       });
-
-
        //Set Extra fees
         savefees.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -324,29 +150,8 @@ public class UpdateServicesFrag extends Fragment {
                 Animation anim = AnimationUtils.loadAnimation(getActivity(), R.anim.alpha);
                 savefees.clearAnimation();
                 savefees.setAnimation(anim);
-                Generator.createService(ExpertsApi.class).setExtraFees(SaveSharedPreference.getExpertId(getContext()),extraFees.getText().toString()).enqueue(new Callback<ExtrafeesPuttingRes>() {
-                    @Override
-                    public void onResponse(Call<ExtrafeesPuttingRes> call, Response<ExtrafeesPuttingRes> response) {
-                        if(response.isSuccessful()){
-                            if(response.body().getAttributes()!=null){
-                                Toast.makeText(getContext(),getResources().getString(R.string.save),Toast.LENGTH_LONG).show();
-                                savefees.setVisibility(View.INVISIBLE);
-                            }else {
-                                Toast.makeText(getContext(),"Null from add fees",Toast.LENGTH_LONG).show();
-                            }
-                        }else {
-                            try {
-                                Toast.makeText(getContext(),response.errorBody().string(),Toast.LENGTH_LONG).show();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-                    @Override
-                    public void onFailure(Call<ExtrafeesPuttingRes> call, Throwable t) {
-                        Toast.makeText(getContext(),"Extra fees Add : "+t.getMessage(),Toast.LENGTH_LONG).show();
-                    }
-                });
+                Dialogs.fireExtrafessDialog(getContext(),savefees,SaveSharedPreference.getExpertId(getContext()),true,UpdateServicesFrag.this);
+
             }
         });
 
