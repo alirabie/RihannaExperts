@@ -187,9 +187,15 @@ public class PhotoGalleryFrag extends Fragment {
                             customer.setEmail(SaveSharedPreference.getCustomerInfo(getContext()).getCustomers().get(0).getEmail());
                             customer.setId(Integer.parseInt(SaveSharedPreference.getCustId(getContext())));
                             List<Integer> role_ids = new ArrayList<Integer>();
-                            role_ids.add(3);
-                            role_ids.add(5);
-                            role_ids.add(6);
+                            if(SaveSharedPreference.getCustomerInfo(getContext()).getCustomers().get(0).getCustomerRoleName().equals("Expert B")) {
+                                role_ids.add(3);
+                                role_ids.add(5);
+                                role_ids.add(6);
+                            }else {
+                                role_ids.add(3);
+                                role_ids.add(5);
+                                role_ids.add(7);
+                            }
                             customer.setRoleIds(role_ids);
                             customer.setImages(images);
                             postImages.setCustomer(customer);
@@ -278,9 +284,15 @@ public class PhotoGalleryFrag extends Fragment {
                         customer.setEmail(SaveSharedPreference.getCustomerInfo(getContext()).getCustomers().get(0).getEmail());
                         customer.setId(Integer.parseInt(SaveSharedPreference.getCustId(getContext())));
                         List<Integer>role_ids=new ArrayList<Integer>();
-                        role_ids.add(3);
-                        role_ids.add(5);
-                        role_ids.add(6);
+                        if(SaveSharedPreference.getCustomerInfo(getContext()).getCustomers().get(0).getCustomerRoleName().equals("Expert B")) {
+                            role_ids.add(3);
+                            role_ids.add(5);
+                            role_ids.add(6);
+                        }else {
+                            role_ids.add(3);
+                            role_ids.add(5);
+                            role_ids.add(7);
+                        }
                         customer.setRoleIds(role_ids);
                         customer.setImages(images);
                         postImages.setCustomer(customer);

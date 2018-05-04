@@ -197,9 +197,15 @@ public class UpdateInfoFrag extends Fragment {
                         customer.setPhone("");
                         customer.setPassword(password.getText().toString());
                         List<Integer>role_ids=new ArrayList<Integer>();
-                        role_ids.add(3);
-                        role_ids.add(5);
-                        role_ids.add(6);
+                        if(SaveSharedPreference.getCustomerInfo(getContext()).getCustomers().get(0).getCustomerRoleName().equals("Expert B")) {
+                            role_ids.add(3);
+                            role_ids.add(5);
+                            role_ids.add(6);
+                        }else {
+                            role_ids.add(3);
+                            role_ids.add(5);
+                            role_ids.add(7);
+                        }
                         customer.setRoleIds(role_ids);
                         billingAddress.setFirstName(fName.getText().toString());
                         billingAddress.setLastName(lName.getText().toString());

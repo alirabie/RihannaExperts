@@ -174,10 +174,6 @@ public class UpdateExpertAddressFrag extends Fragment  {
 
 
 
-
-
-
-
                         //Fill Adress from currunt
                         billingAddress = new BillingAddress();
                         customer = new Customer();
@@ -186,9 +182,15 @@ public class UpdateExpertAddressFrag extends Fragment  {
                         customer.setEmail(response.body().getCustomers().get(0).getEmail());
                         customer.setPhone("");
                         List<Integer> role_ids = new ArrayList<Integer>();
-                        role_ids.add(3);
-                        role_ids.add(5);
-                        role_ids.add(6);
+                        if(SaveSharedPreference.getCustomerInfo(getContext()).getCustomers().get(0).getCustomerRoleName().equals("Expert B")) {
+                            role_ids.add(3);
+                            role_ids.add(5);
+                            role_ids.add(6);
+                        }else {
+                            role_ids.add(3);
+                            role_ids.add(5);
+                            role_ids.add(7);
+                        }
                         customer.setRoleIds(role_ids);
                         billingAddress.setFirstName(response.body().getCustomers().get(0).getFirstName());
                         billingAddress.setLastName(response.body().getCustomers().get(0).getLastName());
